@@ -2,4 +2,12 @@
 /* RED */
 @theme {
   --color-customRed-900: #d80027;
+  --color-background: #191919;
+  --color-tertiary: #727272;
+  --color-textInput: #f1f1f1;
+  --color-bgSurface1: #101010;
+  --color-secondary: #7b7b7b;
+  --color-primary: #f1f1f1;
+  --color-primary02: #00a656;
+  --color-stroke02: #282828;
 }
