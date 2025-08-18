@@ -5,7 +5,12 @@ export default defineNuxtConfig({
 
   modules: ["@nuxt/ui", "@pinia/nuxt", "@vueuse/nuxt", "@nuxt/icon"],
 
-  css: ["~/assets/css/main.css"],
+  css: [
+    "~/assets/css/main.css",
+    
+    
+    "~/assets/css/fonts.css"
+  ],
   ssr: true,
   future: {
     compatibilityVersion: 4,
@@ -15,4 +20,15 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: "2024-11-27",
+  app: {
+    head: {
+      meta: [
+        {
+          name: "viewport",
+          content:
+            "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
+        },
+      ],
+    },
+  },
 });
