@@ -7,8 +7,8 @@
 </template>
 
 <script setup>
-import ScheduledTitle from "~/components/title/ScheduledTittle.vue";
-import ScheduledTable from "~/components/table/ScheduledTable.vue";
+import ScheduledTitle from "~/components/title/products/ScheduledTittle.vue";
+import ScheduledTable from "~/components/table/products/ScheduledTable.vue";
 </script>
 
 <style lang="scss" scoped></style>

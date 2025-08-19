@@ -1,7 +1,7 @@
 <template>
   <div class="container pb-8 px-4">
     <ul
-      class="text-tertiary border-b-[1.5px] border-solid border-stroke-subtle grid grid-cols-7 items-center p-4"
+      class="text-tertiary grid grid-cols-7 items-center p-4"
       style="grid-template-columns: 24px 640px 144px 112px 144px 100px 96px"
     >
       <li class="w-6 h-6 cursor-pointer">
@@ -15,12 +15,8 @@
       <li class="">Views</li>
     </ul>
     <ul
-      class="align-middle hover:bg-background-pop border-solid border-stroke-subtle grid grid-cols-7 items-center p-4 hover:border-[1.5px] hover:border-[#313131] hover:rounded-2xl"
+      class="align-middle hover:bg-background-pop border-t-[1.5px] border-solid border-stroke-subtle grid grid-cols-7 items-center p-4 hover:border-[1.5px] hover:border-[#313131] hover:rounded-2xl"
       style="grid-template-columns: 24px 640px 144px 112px 144px 100px 96px"
-      :class="{
-        'border-b-[1.5px]': index !== releases.length - 1,
-        '': true,
-      }"
       v-for="(release, index) in releases"
       :key="index"
       @click="handleMouseEnter(release)"
@@ -68,7 +64,7 @@
           </div>
         </div>
       </li>
-      <li class="w-3/25">
+      <li class="">
         <div
           class="py-1.75 px-2 text-sm border border-solid rounded-lg inline"
           :class="{
@@ -81,10 +77,10 @@
           {{ release.status ? "Status" : "Offline" }}
         </div>
       </li>
-      <li class="w-3/25">
+      <li class="">
         <div class="text-primary">${{ release.price }}</div>
       </li>
-      <li class="w-3/25">
+      <li class="">
         <div class="flex items-center gap-2">
           <div class="text-primary text-xs">${{ release.salesPrice }}</div>
           <div
@@ -111,7 +107,7 @@
           </div>
         </div>
       </li>
-      <li class="w-3/25">
+      <li class="">
         <div class="flex items-center gap-2">
           <div>
             <icons-star v-if="!release.ratingsLike" />
@@ -124,7 +120,7 @@
           </div>
         </div>
       </li>
-      <li class="w-3/25">
+      <li class="">
         <div class="flex gap-2 items-center">
           <div class="text-xs text-primary">{{ release.viewsPeople }}m</div>
           <div class="w-9 bg-gray-200 rounded-xs h-1.5">
@@ -142,7 +138,7 @@
 <script setup>
 const releases = ref([
   {
-    img: "images/1.png",
+    img: "/images/1.png",
     product: "Bento Pro v.2",
     status: true,
     price: 98,
@@ -157,7 +153,7 @@ const releases = ref([
     activeIndex: false,
   },
   {
-    img: "images/2.png",
+    img: "/images/2.png",
     product: "Fleet – Travel UI Kit",
     status: true,
     price: 98,
@@ -172,7 +168,7 @@ const releases = ref([
     activeIndex: false,
   },
   {
-    img: "images/3.png",
+    img: "/images/3.png",
     product: "Bento Pro - Vol. 2",
     status: false,
     price: 98,
@@ -187,7 +183,7 @@ const releases = ref([
     activeIndex: false,
   },
   {
-    img: "images/4.png",
+    img: "/images/4.png",
     product: "Core Dashboard Builder v.1",
     status: true,
     price: 98,
@@ -202,7 +198,7 @@ const releases = ref([
     activeIndex: false,
   },
   {
-    img: "images/5.png",
+    img: "/images/5.png",
     product: "Paradox - Coded Template",
     status: false,
     price: 98,
@@ -217,7 +213,7 @@ const releases = ref([
     activeIndex: false,
   },
   {
-    img: "images/6.png",
+    img: "/images/6.png",
     product: "Bento UI Design Kit",
     status: true,
     price: 98,
@@ -232,7 +228,7 @@ const releases = ref([
     activeIndex: false,
   },
   {
-    img: "images/7.png",
+    img: "/images/7.png",
     product: "Bloom - 3D Illustrations",
     status: true,
     price: 98,
@@ -247,7 +243,7 @@ const releases = ref([
     activeIndex: false,
   },
   {
-    img: "images/8.png",
+    img: "/images/8.png",
     product: "Tiny - Avatar Builder",
     status: true,
     price: 98,
@@ -268,4 +264,8 @@ const handleMouseEnter = (release) => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+/* .item + .item {
+  border: transparent;
+} */
+</style>

@@ -7,8 +7,8 @@
 </template>
 
 <script setup>
-import CommentsTitle from "~/components/title/CommentsTitle.vue";
-import CommentsTable from "~/components/table/CommentsTable.vue";
+import CommentsTitle from "~/components/title/products/CommentsTitle.vue";
+import CommentsTable from "~/components/table/products/CommentsTable.vue";
 </script>
 
 <style lang="scss" scoped></style>

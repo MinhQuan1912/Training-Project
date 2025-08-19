@@ -158,7 +158,7 @@
 <script setup>
 import { ref } from "vue";
 
-import CommentsTitle from "~/components/title/CommentsTitle.vue";
+import CommentsTitle from "~/components/title/products/CommentsTitle.vue";
 
 const comments = ref([
   {
