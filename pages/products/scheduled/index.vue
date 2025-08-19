@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#191919] rounded-4xl flex flex-col gap-3">
+  <div class="bg-background-02 rounded-4xl flex flex-col gap-3">
     <ScheduledTitle />
 
     <ScheduledTable />
