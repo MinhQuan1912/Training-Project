@@ -2,7 +2,7 @@
   <div class="container">
     <div class="p-3 flex justify-between items-center h-18">
       <div class="flex items-center">
-        <div class="text-2xl font-medium leading-[1.45] text-primary pl-5 pr-6">
+        <div class="text-2xl font-medium leading-[145%] text-primary pl-5 pr-6">
           8 new comments
         </div>
         <div class="relative flex items-center">
