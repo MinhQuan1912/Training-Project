@@ -3,15 +3,4 @@
 @import "../theme/breakpoints.css";
 @import "../theme/color.css";
 /* ===== FONTS ===== */
-@theme {
-  --font-sans: "Public Sans", sans-serif;
-}
-
-.container {
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-@font-face {
-}
+@import "../css/main.scss";

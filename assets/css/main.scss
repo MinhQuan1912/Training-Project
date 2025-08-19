@@ -1,0 +1,33 @@
+* {
+  font-family: "Inter", sans-serif;
+}
+
+a {
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+.shadow-1 {
+  box-shadow: 0px 2px 24px 0px rgba(15, 60, 201, 0.12);
+}
+
+.shadow-2 {
+  box-shadow: 0px 12px 16px -4px rgba(12, 26, 36, 0.16);
+}
+.font-inter {
+  font-family: "Inter";
+}
