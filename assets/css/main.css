@@ -4,3 +4,7 @@
 @import "../theme/color.css";
 /* ===== FONTS ===== */
 @import "../css/main.scss";
+
+.container {
+  width: 100%;
+}

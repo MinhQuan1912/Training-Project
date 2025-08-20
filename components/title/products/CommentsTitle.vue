@@ -32,14 +32,6 @@
   </div>
 </template>
 
-<script setup>
-defineProps({
-  comments: {
-    type: Array,
-    required: true,
-    default: () => [],
-  },
-});
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss" scoped></style>
