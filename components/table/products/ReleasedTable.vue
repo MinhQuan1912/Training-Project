@@ -15,7 +15,7 @@
       <li class="">Views</li>
     </ul>
     <ul
-      class="align-middle hover:bg-background-pop border-t-[1.5px] border-solid border-stroke-subtle grid grid-cols-7 items-center p-4 hover:border-[1.5px] hover:border-[#313131] hover:rounded-2xl"
+      class="align-middle hover:bg-background-pop border-[1.5px] border-solid border-x-transparent border-b-transparent border-t-stroke-subtle grid grid-cols-7 items-center p-4 hover:border-primary/7.5 hover:rounded-2xl"
       style="grid-template-columns: 24px 640px 144px 112px 144px 100px 96px"
       v-for="(release, index) in releases"
       :key="index"
@@ -26,8 +26,12 @@
       </li>
       <li class="">
         <div class="flex items-center">
-          <div class="object-contain w-16 h-16 mx-5 rounded-xl">
-            <img :src="release.img" alt="" class="w-full h-full rounded-xl" />
+          <div class="w-16 h-16 mx-5 rounded-xl">
+            <img
+              :src="release.img"
+              alt=""
+              class="w-full h-full rounded-xl object-contain"
+            />
           </div>
           <div class="relative">
             <div class="font-semibold text-primary">

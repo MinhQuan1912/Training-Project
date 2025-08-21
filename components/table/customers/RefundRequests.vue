@@ -10,7 +10,7 @@
           Refund requests
         </div>
 
-        <div class="flex gap-5">
+        <div class="flex gap-5 items-center">
           <div class="bg-secondary-01 p-5 rounded-full">
             <icons-bags />
           </div>
@@ -29,7 +29,7 @@
       </div>
 
       <div
-        class="mx-3 py-3.5 px-7 rounded-full border-[1.5px] border-solid border-stroke-stroke2 flex justify-center text-sm font-semibold text-secondary"
+        class="mx-3 py-3.5 px-7 rounded-full border-[1.5px] border-solid border-stroke-stroke2 flex justify-center text-sm font-semibold text-secondary cursor-pointer"
       >
         Review refund requests
       </div>

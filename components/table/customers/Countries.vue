@@ -15,8 +15,12 @@
           v-for="(country, index) in countries"
           :key="index"
         >
-          <div class="w-9 h-9 rounded-full p-0.5 object-contain">
-            <img :src="country.img" alt="" class="w-full h-full rounded-full" />
+          <div class="w-9 h-9 rounded-full p-0.5">
+            <img
+              :src="country.img"
+              alt=""
+              class="w-full h-full rounded-full object-contain"
+            />
           </div>
 
           <div class="flex flex-col gap-2">
@@ -30,7 +34,7 @@
 
             <div class="w-94 bg-background-pop rounded-xs h-3">
               <div
-                class="bg-gradient-to-r from-stroke-subtle to-secondary h-full rounded-xs"
+                class="bg-gradient-to-r from-stroke-subtle to-secondary opacity-30 h-full rounded-xs"
                 :style="{ width: country.percent }"
               ></div>
             </div>

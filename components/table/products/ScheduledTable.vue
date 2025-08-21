@@ -1,7 +1,7 @@
 <template>
   <div class="container pb-8 px-4">
     <ul
-      class="text-tertiary border-b-[1.5px] border-solid border-stroke-subtle grid grid-cols-7 items-center p-4"
+      class="text-tertiary grid grid-cols-7 items-center p-4"
       style="grid-template-columns: 24px 620px 200px 200px"
     >
       <li class="w-6 h-6 cursor-pointer">
@@ -12,12 +12,8 @@
       <li>Scheduled for</li>
     </ul>
     <ul
-      class="grid grid-cols-7 align-middle hover:bg-background-pop border-solid border-stroke-subtle items-center p-4 hover:border-[1.5px] hover:border-[#313131] hover:rounded-2xl"
+      class="grid grid-cols-7 align-middle hover:bg-background-pop border-[1.5px] border-solid border-x-transparent border-b-transparent border-t-stroke-subtle items-center p-4 hover:border-primary/7.5 hover:rounded-2xl"
       style="grid-template-columns: 24px 620px 200px 200px"
-      :class="{
-        'border-b-[1.5px]': index !== schedules.length - 1,
-        '': true,
-      }"
       v-for="(schedule, index) in schedules"
       :key="index"
     >
@@ -26,8 +22,12 @@
       </li>
       <li class="" @click="handleMouseEnter(schedule)">
         <div class="flex items-center">
-          <div class="object-contain w-16 h-16 mx-5 rounded-xl">
-            <img :src="schedule.img" alt="" class="w-full h-full rounded-xl" />
+          <div class="w-16 h-16 mx-5 rounded-xl">
+            <img
+              :src="schedule.img"
+              alt=""
+              class="w-full h-full rounded-xl object-contain"
+            />
           </div>
           <div class="relative">
             <div class="font-semibold text-primary">

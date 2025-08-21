@@ -80,35 +80,35 @@
           <div class="flex gap-6 items-center">
             <div class="w-8 text-xs leading-[160%] text-tertiary">2k</div>
             <div
-              class="w-full border-t-[1.5px] border-dashed border-[#282828]"
+              class="w-full border-t-[1.5px] border-dashed border-stroke"
             ></div>
           </div>
 
           <div class="flex gap-6 items-center">
             <div class="w-8 text-xs leading-[160%] text-tertiary">1.5k</div>
             <div
-              class="w-full border-t-[1.5px] border-dashed border-[#282828]"
+              class="w-full border-t-[1.5px] border-dashed border-stroke"
             ></div>
           </div>
 
           <div class="flex gap-6 items-center">
             <div class="w-8 text-xs leading-[160%] text-tertiary">1k</div>
             <div
-              class="w-full border-t-[1.5px] border-dashed border-[#282828]"
+              class="w-full border-t-[1.5px] border-dashed border-stroke"
             ></div>
           </div>
 
           <div class="flex gap-6 items-center">
             <div class="w-8 text-xs leading-[160%] text-tertiary">500</div>
             <div
-              class="w-full border-t-[1.5px] border-dashed border-[#282828]"
+              class="w-full border-t-[1.5px] border-dashed border-stroke"
             ></div>
           </div>
 
           <div class="flex gap-6 items-center">
             <div class="w-8 text-xs leading-[160%] text-tertiary">0</div>
             <div
-              class="w-full border-t-[1.5px] border-dashed border-[#282828]"
+              class="w-full border-t-[1.5px] border-dashed border-stroke"
             ></div>
           </div>
 
@@ -163,11 +163,11 @@
             v-for="(newCustomer, index) in newCustomers"
             :key="index"
           >
-            <div class="w-16 h-16 object-contain">
+            <div class="w-16 h-16">
               <img
                 :src="newCustomer.img"
                 alt=""
-                class="w-full h-full rounded-full"
+                class="w-full h-full rounded-full object-contain"
               />
             </div>
 

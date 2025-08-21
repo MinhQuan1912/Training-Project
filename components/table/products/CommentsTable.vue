@@ -1,7 +1,7 @@
 <template>
   <div class="container pb-8 px-4">
     <ul
-      class="p-4 border-b-[1.5px] border-solid border-stroke-subtle grid grid-cols-3"
+      class="p-4 grid grid-cols-3"
       style="grid-template-columns: 24px 1fr 480px"
     >
       <li>
@@ -12,24 +12,21 @@
     </ul>
 
     <ul
-      class="p-4 grid grid-cols-3 relative border-solid border-stroke-subtle hover:rounded-2xl hover:bg-background-pop hover:border-[1.5px] hover:border-solid hover:border-[#313131]"
+      class="p-4 grid grid-cols-3 relative border-[1.5px] border-solid border-x-transparent border-b-transparent border-t-stroke-subtle hover:rounded-2xl hover:bg-background-pop hover:border-solid hover:border-primary/7.5"
       style="grid-template-columns: 24px 1fr 480px"
       v-for="(comment, index) in comments"
       :key="index"
-      :class="{
-        'border-b-[1.5px]': index !== comments.length - 1,
-      }"
       @click="handleFocusEnter(comment)"
     >
       <li>
         <icons-select-box />
       </li>
       <li class="flex">
-        <div class="w-12 h-12 object-contain mx-5 rounded-full flex-none">
+        <div class="w-12 h-12 mx-5 rounded-full flex-none">
           <img
             :src="comment.imgComment"
             alt=""
-            class="w-full h-full rounded-full"
+            class="w-full h-full rounded-full object-contain"
           />
         </div>
         <div class="flex flex-col gap-4">
@@ -131,11 +128,11 @@
         </div>
 
         <div class="flex gap-5 items-center" v-else>
-          <div class="w-16 h-16 rounded-xl object-contain">
+          <div class="w-16 h-16 rounded-xl">
             <img
               :src="comment.imgProduct"
               alt=""
-              class="w-full h-full rounded-xl"
+              class="w-full h-full rounded-xl object-contain"
             />
           </div>
           <div class="relative cursor-pointer">

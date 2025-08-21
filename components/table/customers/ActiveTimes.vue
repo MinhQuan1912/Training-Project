@@ -29,7 +29,7 @@
 
               <div class="grid grid-cols-7 gap-0.5">
                 <div
-                  class="w-32.5 h-5 rounded-sm bg-background-dark1 cursor-pointer"
+                  class="w-32.5 h-5 rounded-sm bg-background-dark1/70 cursor-pointer"
                   v-for="i in 112"
                   :key="i"
                 ></div>
@@ -82,11 +82,11 @@
           </div>
 
           <div class="flex gap-0.5 items-center">
-            <div class="w-12 h-2 rounded-xs bg-amber-500"></div>
+            <div class="w-12 h-2 rounded-xs bg-shade05-100/20"></div>
 
-            <div class="w-12 h-2 rounded-xs bg-amber-500"></div>
+            <div class="w-12 h-2 rounded-xs bg-shade05-100/35"></div>
 
-            <div class="w-12 h-2 rounded-xs bg-amber-500"></div>
+            <div class="w-12 h-2 rounded-xs bg-shade05-100/50"></div>
           </div>
 
           <div class="text-xs text-primary leading-[160%] opacity-80">
