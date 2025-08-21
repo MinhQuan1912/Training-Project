@@ -4,9 +4,9 @@
   --color-background-01: #101010;
   --color-background-02: #191919;
   --color-background-dark1: #e2e2e2;
-  --color-background-pop:#222222;
+  --color-background-pop: #222222;
 
-  --color-light:#141414;
+  --color-light: #141414;
 
   --color-primary: #f1f1f1;
   --color-primary-02: #00a656;
@@ -15,12 +15,13 @@
   --color-tertiary: #727272;
 
   --color-secondary: #7b7b7b;
-  --color-secondary-01:#ffbc99;
-  --color-secondary-04:#b5e4ca;
+  --color-secondary-01: #ffbc99;
+  --color-secondary-04: #b5e4ca;
 
   --color-chart-green: #00b512;
 
   --color-blue: #2a85ff;
 
   --color-stroke: #282828;
+  --color-stroke-subtle: #1e1e1e;
 }

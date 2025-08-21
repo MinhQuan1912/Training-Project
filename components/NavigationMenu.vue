@@ -6,7 +6,7 @@
         <li v-for="(item, idx) in menu" :key="idx" class="cursor-pointer transition-all duration-300 ease">
            <div v-if="item.subMenu"
                 class="flex items-center justify-between gap-3 p-3 transition-all duration-300 ease"
-                @click="handleOpenSubmenu(idx); handleClickTitle(item)" :class="{
+                @click="handleOpenSubmenu(idx); " :class="{
                     'text-primary': activeIndex === idx,
                     'hover:text-primary': activeIndex !== idx
                 }">
@@ -23,7 +23,7 @@
                 class="flex items-center gap-3 p-3 transition-all duration-300 ease rounded-xl" :class="{
                     'text-primary': activeIndex === idx,
                     'hover:text-primary': activeIndex !== idx
-                }" @click="handleClickTitle(item)">
+                }">
                 <component :is="item.icon" class="w-6 h-6" />
                 {{ item.label }}
             </nuxt-link>
@@ -31,7 +31,7 @@
                 <div v-show="item.subMenu && openIndexs.includes(idx)" class="pl-9">
                     <nuxt-link :to="drop.to" v-for="(drop, dropIdx) in item.subMenu" :key="dropIdx"
                         class="h-11 px-3 flex items-center rounded-xl transition-all duration-300 ease hover:text-primary hover:bg-background-pop"
-                        @click="handleClickTitle(drop)">
+                        >
                         {{ drop.label }}
                     </nuxt-link>
                 </div>
@@ -44,7 +44,7 @@
 <script setup lang="ts">
 import { IconsCustomer, IconsDashboard, IconsIncome, IconsProduct, IconsPromote, IconsShop } from '#components';
 const colorMode = useColorMode()
-interface Menu {
+type Menu = {
     label: string,
     icon?: Component,
     to?: string,
@@ -75,7 +75,7 @@ const menu = ref<Menu[]>([
     { label: 'Income', icon: markRaw(IconsIncome) },
     { label: 'Promote', icon: markRaw(IconsPromote) }
 ])
-const emit = defineEmits(["title"])
+
 const openIndexs = ref<number[]>([]);
 const activeIndex = ref<number | null>(null);
 const handleOpenSubmenu = (index: number) => {
@@ -91,9 +91,7 @@ const handleOpenSubmenu = (index: number) => {
         activeIndex.value = index
     }
 }
-const handleClickTitle = (drop: Menu) => {
-    emit("title", drop.title)
-}
+
 </script>
 
 <style lang="scss" scoped>
