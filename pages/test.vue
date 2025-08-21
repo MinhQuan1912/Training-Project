@@ -1,82 +1,63 @@
-<script setup>
-const data = [
-  { label: "Mobile", value: 15.2, color: "#D3D3D3" },
-  { label: "Tablet", value: 17.1, color: "#D3D3D3" },
-  { label: "Desktop", value: 66.62, color: "#D3D3D3" },
-];
-
-const hoverColor = "#00B512";
-</script>
-
 <template>
-  <UCard class="w-full max-w-sm mx-auto">
-    <div class="relative flex items-center justify-center p-8">
-      <svg class="w-72 h-72" viewBox="0 0 36 36">
-        <circle
-          class="text-gray-700"
-          stroke="currentColor"
-          stroke-width="3"
-          fill="none"
-          r="16"
-          cx="18"
-          cy="18"
-        />
-        <circle
-          v-for="(item, index) in data"
-          :key="item.label"
-          :class="[
-            item.label === 'Mobile' ? 'text-green-500' : 'text-gray-400',
-            'transition-colors duration-200 ease-in-out',
-            'hover:cursor-pointer',
-          ]"
-          :style="{
-            strokeDasharray: item.value + ' 100',
-            strokeDashoffset:
-              100 -
-              data
-                .slice(0, index)
-                .reduce((acc, current) => acc + current.value, 0),
-            transform: 'rotate(-90deg)',
-            transformOrigin: '18px 18px',
-            stroke: item.label === 'Mobile' ? hoverColor : item.color,
-          }"
-          stroke-width="3"
-          fill="none"
-          r="16"
-          cx="18"
-          cy="18"
-        />
-        <text
-          x="18"
-          y="18"
-          text-anchor="middle"
-          class="fill-white text-xs font-bold"
-        >
-          {{ data[0].value }}%
-        </text>
-        <text
-          x="18"
-          y="24"
-          text-anchor="middle"
-          class="fill-gray-400 text-[8px]"
-        >
-          Mobile
-        </text>
-        <div></div>
-      </svg>
-    </div>
+  <div class="flex items-center justify-center">
+    <div
+      class="relative w-69 h-69 rounded-full overflow-hidden"
+      :style="conicGradientStyle"
+    >
+      <div class="absolute inset-0 m-3 rounded-full bg-black"></div>
 
-    <div class="flex justify-around p-4">
-      <div v-for="item in data" :key="item.label" class="flex items-center">
+      <div
+        class="absolute inset-0 flex flex-col items-center justify-center text-center z-10"
+      >
+        <div class="text-primary text-5xl font-medium leading-15">
+          {{ chartData[0].value.toFixed(2) }}%
+        </div>
         <div
-          class="w-4 h-4 rounded-full mr-2"
-          :style="{ backgroundColor: item.color }"
-        ></div>
-        <div>
-          <div class="text-sm font-semibold">{{ item.label }}</div>
-          <div class="text-xs text-gray-400">{{ item.value }}%</div>
+          class="text-secondary font-semibold leading-4 overflow-hidden text-ellipsis"
+        >
+          {{ chartData[0].name }}
         </div>
       </div>
+
+      <div
+        class="absolute top-[10%] right-[10%] p-2 bg-gray-800 text-white rounded-lg shadow-lg hidden group-hover:block"
+      >
+        <span class="font-bold">{{ chartData[0].name }}</span>
+        <br />
+        <span>1,485</span>
+      </div>
     </div>
-  </UCard>
+  </div>
 </template>
+
+<script setup>
+import { computed, ref } from "vue";
+
+const chartData = ref([
+  { name: "Mobile", value: 15.2, color: "#00B512" },
+  { name: "Tablet", value: 17.1, color: "#D3D3D3" },
+  { name: "Desktop", value: 66.62, color: "#7B7B7B" },
+]);
+
+const conicGradientStyle = computed(() => {
+  let gradientString = "conic-gradient(";
+  let currentPercentage = 0;
+
+  chartData.value.forEach((item, index) => {
+    const nextPercentage = currentPercentage + item.value;
+    gradientString += `${item.color} ${currentPercentage}% ${nextPercentage}%`;
+
+    if (index < chartData.value.length - 1) {
+      gradientString += ", ";
+    }
+    currentPercentage = nextPercentage;
+  });
+
+  gradientString += ")";
+  return {
+    background: gradientString,
+  };
+});
+</script>
+
+<style scoped></style>

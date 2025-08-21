@@ -9,7 +9,7 @@
             Active times
           </div>
 
-          <div class="flex flex-col gap-2.5">
+          <div class="flex flex-col gap-2">
             <div class="flex gap-7.75 px-5 justify-between">
               <div
                 class="flex flex-col justify-between text-xs leading-[160%] text-tertiary"
