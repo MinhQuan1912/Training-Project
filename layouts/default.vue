@@ -18,8 +18,8 @@
     </div>
     <div class="flex flex-col gap-5 w-full">
       <layout-header/>
-      <div>
-        <nuxt-page />
+      <div class="flex-1 overflow-y-auto custom-scroll">
+        <slot />
       </div>
     </div>
   </div>
