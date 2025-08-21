@@ -1,4 +1,4 @@
-<template>
+``<template>
   <div class="container">
     <div class="flex justify-between items-center">
       <div class="flex gap-6 items-center">
@@ -252,6 +252,9 @@ const columns: TableColumn<any>[] = [
     cell: ({ row }) => row.original.views,
   },
 ];
+definePageMeta({
+  title:'Released'
+})
 </script>
 
 <style lang="scss" scoped>

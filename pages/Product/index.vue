@@ -18,7 +18,7 @@
       </div>
       <div class="p-5 text-primary flex gap-8">
         <div v-for="(item, idx) in overViewList" :key="idx" class="overview-item">
-          <div class="w-16 h-16 bg-background-01 flex justify-center items-center rounded-full">
+          <div class="w-16 h-16 bg-background-surface1 flex justify-center items-center rounded-full">
             <component :is="item.icon" />
           </div>
           <div class="flex gap-4">

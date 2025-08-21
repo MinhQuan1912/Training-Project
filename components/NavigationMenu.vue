@@ -13,7 +13,6 @@
         class="flex items-center justify-between gap-3 p-3 transition-all duration-300 ease"
         @click="
           handleOpenSubmenu(idx);
-          handleClickTitle(item);
         "
         :class="{
           'text-primary': activeIndex === idx,
@@ -39,7 +38,6 @@
           'text-primary': activeIndex === idx,
           'hover:text-primary': activeIndex !== idx,
         }"
-        @click="handleClickTitle(item)"
       >
         <component :is="item.icon" class="w-6 h-6" />
         {{ item.label }}
@@ -51,7 +49,6 @@
             v-for="(drop, dropIdx) in item.subMenu"
             :key="dropIdx"
             class="h-11 px-3 flex items-center rounded-xl transition-all duration-300 ease hover:text-primary hover:bg-background-pop"
-            @click="handleClickTitle(drop)"
           >
             {{ drop.label }}
           </nuxt-link>
@@ -119,9 +116,7 @@ const handleOpenSubmenu = (index: number) => {
     activeIndex.value = index;
   }
 };
-const handleClickTitle = (drop: Menu) => {
-  emit("title", drop.title);
-};
+
 </script>
 
 <style lang="scss" scoped>
