@@ -1,6 +1,5 @@
 * {
   font-family: "Inter", sans-serif;
-  color: var(--color-primary)
 }
 
 a {
@@ -16,6 +15,11 @@ body {
 
 ul li {
   list-style-type: none;
+}
+
+input {
+  border: none;
+  outline: none;
 }
 
 img {
