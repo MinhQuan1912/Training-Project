@@ -9,7 +9,7 @@
           <input
             type="search"
             placeholder="Search products"
-            class="py-3 pl-10 pr-5 text-sm text-secondary rounded-full border-[1.5px] border-solid border-stroke-subtle w-70 bg-background-01 focus:outline-none"
+            class="py-3 pl-10 pr-5 text-sm text-secondary rounded-full border-[1.5px] border-solid border-stroke-subtle w-70 bg-background-surface1 focus:outline-none"
           />
           <div
             class="absolute inset-y-0 left-0 flex items-center pl-3 cursor-pointer"
@@ -25,7 +25,7 @@
         </NuxtLink>
 
         <NuxtLink
-          class="p-3 cursor-pointer rounded-full border-[1.5px] solid border-stroke-stroke2"
+          class="p-3 cursor-pointer rounded-full border-[1.5px] solid border-stroke"
         >
           <icons-bulletlist />
         </NuxtLink>

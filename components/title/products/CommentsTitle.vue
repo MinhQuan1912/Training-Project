@@ -19,15 +19,23 @@
         </div>
       </div>
 
-      <select
-        name=""
-        id=""
-        class="w-45 py-3 pl-5 pr-3 rounded-full border-[1.5px] border-solid border-stroke-stroke2 bg-background-02 text-secondary focus:outline-none"
-      >
-        <option value="" class="text-sm">Newest first</option>
-        <option value=""></option>
-        <option value=""></option>
-      </select>
+      <div class="relative">
+        <select
+          name=""
+          id=""
+          class="appearance-none w-45 py-3 pl-5 pr-3 rounded-full border-[1.5px] border-solid border-stroke-stroke2 bg-background-02 text-secondary focus:outline-none"
+        >
+          <option value="" class="text-sm">Newest first</option>
+          <option value=""></option>
+          <option value=""></option>
+        </select>
+
+        <div
+          class="pointer-events-none absolute inset-y-0 flex items-center right-3 px-2 py-2.5 cursor-pointer"
+        >
+          <icons-chev-down />
+        </div>
+      </div>
     </div>
   </div>
 </template>
