@@ -2,10 +2,19 @@
   <div class="container pb-8 px-4">
     <ul
       class="text-tertiary grid grid-cols-7 items-center p-4"
-      style="grid-template-columns: 24px 40% 30% 25%"
+      style="grid-template-columns: 24px 2fr 1fr 1fr"
     >
       <li class="w-6 h-6 cursor-pointer">
-        <icons-select-box />
+        <div class="custom-checkbox-container">
+          <input
+            type="checkbox"
+            id="myCheckbox"
+            class="original-checkbox"
+            v-model="allSelected"
+            @change="toggleAll"
+          />
+          <label for="myCheckbox" class="custom-checkbox"></label>
+        </div>
       </li>
       <li class="pl-5">Products</li>
       <li>Price</li>
@@ -13,12 +22,21 @@
     </ul>
     <ul
       class="grid grid-cols-7 align-middle hover:bg-background-pop border-[1.5px] border-solid border-x-transparent border-b-transparent border-t-stroke-subtle items-center p-4 hover:border-primary/7.5 hover:rounded-2xl"
-      style="grid-template-columns: 24px 40% 30% 25%"
+      style="grid-template-columns: 24px 2fr 1fr 1fr"
       v-for="(schedule, index) in schedules"
       :key="index"
     >
       <li class="w-6 h-6 cursor-pointer">
-        <icons-select-box />
+        <div class="custom-checkbox-container">
+          <input
+            type="checkbox"
+            :id="'checkbox-' + index"
+            class="original-checkbox"
+            v-model="schedule.checkboxIndex"
+            @change="updateMasterCheckbox"
+          />
+          <label :for="'checkbox-' + index" class="custom-checkbox"></label>
+        </div>
       </li>
       <li class="" @click="handleMouseEnter(schedule)">
         <div class="flex items-center">
@@ -112,6 +130,7 @@ const schedules = ref([
     price: "98.00",
     priceStatus: true,
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    checkboxIndex: false,
   },
   {
     img: "/images/2.png",
@@ -120,6 +139,7 @@ const schedules = ref([
     price: "98.00",
     priceStatus: true,
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    checkboxIndex: false,
   },
   {
     img: "/images/3.png",
@@ -128,6 +148,7 @@ const schedules = ref([
     price: "98.00",
     priceStatus: false,
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    checkboxIndex: false,
   },
   {
     img: "/images/4.png",
@@ -135,6 +156,7 @@ const schedules = ref([
     activeIndex: false,
     price: "98.00",
     priceStatus: true,
+    checkboxIndex: false,
   },
   {
     img: "/images/5.png",
@@ -143,6 +165,7 @@ const schedules = ref([
     price: "98.00",
     priceStatus: true,
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    checkboxIndex: false,
   },
   {
     img: "/images/6.png",
@@ -151,6 +174,7 @@ const schedules = ref([
     price: "98.00",
     priceStatus: true,
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    checkboxIndex: false,
   },
   {
     img: "/images/7.png",
@@ -159,6 +183,7 @@ const schedules = ref([
     price: "98.00",
     priceStatus: true,
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    checkboxIndex: false,
   },
   {
     img: "/images/8.png",
@@ -167,12 +192,55 @@ const schedules = ref([
     price: "98.00",
     priceStatus: true,
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    checkboxIndex: false,
   },
 ]);
 
 const handleMouseEnter = (schedule) => {
   schedule.activeIndex = !schedule.activeIndex;
 };
+
+const allSelected = ref(false);
+
+const toggleAll = () => {
+  const isChecked = allSelected.value;
+  schedules.value.forEach((schedule) => {
+    schedule.checkboxIndex = isChecked;
+  });
+};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.original-checkbox {
+  display: none;
+}
+
+.custom-checkbox {
+  @extend .original-checkbox;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #282828;
+  background-color: #222222;
+  cursor: pointer;
+  position: relative;
+  border-radius: 4px;
+}
+
+.original-checkbox:checked + .custom-checkbox {
+  background: white;
+  border-color: white;
+}
+
+.original-checkbox:checked + .custom-checkbox::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 12px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+</style>

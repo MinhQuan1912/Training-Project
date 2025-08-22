@@ -5,17 +5,15 @@
         <div class="text-2xl font-medium leading-[145%] text-primary pl-5 pr-6">
           5 scheduled products
         </div>
-        <div class="relative flex items-center">
+        <div
+          class="flex bg-background-surface1 border-[1.5px] border-stroke-subtle w-70 rounded-full p-3 pr-5 gap-2 text-secondary"
+        >
+          <icons-search />
           <input
-            type="search"
-            placeholder="Search comments"
-            class="py-3 pl-10 pr-5 text-sm text-secondary rounded-full border-[1.5px] border-solid border-stroke-subtle w-70 bg-background-surface1 focus:outline-none"
+            type="text"
+            placeholder="Search products"
+            class="text-sm leading-[150%] w-full"
           />
-          <div
-            class="absolute inset-y-0 left-0 flex items-center pl-3 cursor-pointer"
-          >
-            <icons-search />
-          </div>
         </div>
       </div>
 
