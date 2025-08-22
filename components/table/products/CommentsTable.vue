@@ -1,27 +1,36 @@
 <template>
   <div class="container pb-8 px-4">
     <ul
-      class="p-4 grid grid-cols-3"
-      style="grid-template-columns: 24px 972px 480px"
+      class="p-4 grid grid-cols-3 items-center"
+      style="grid-template-columns: 24px 2fr 1fr"
     >
       <li>
-        <icons-select-box />
+        <div class="custom-checkbox-container">
+          <input type="checkbox" id="myCheckbox" class="original-checkbox" />
+          <label for="myCheckbox" class="custom-checkbox"></label>
+        </div>
       </li>
       <li class="text-sm text-tertiary ml-5">Comment</li>
       <li class="text-sm text-tertiary">Product</li>
     </ul>
 
     <ul
-      class="p-4 grid grid-cols-3 relative border-[1.5px] border-solid border-x-transparent border-b-transparent border-t-stroke-subtle hover:rounded-2xl hover:bg-background-pop hover:border-solid hover:border-primary/7.5"
-      style="grid-template-columns: 24px 972px 480px"
+      class="p-4 grid grid-cols-3 items-center relative border-[1.5px] border-solid border-x-transparent border-b-transparent border-t-stroke-subtle hover:rounded-2xl hover:bg-background-pop hover:border-solid hover:border-primary/7.5"
+      style="grid-template-columns: 24px 2fr 1fr"
       v-for="(comment, index) in comments"
       :key="index"
-      @click="handleFocusEnter(comment)"
     >
       <li>
-        <icons-select-box />
+        <div class="custom-checkbox-container">
+          <input
+            type="checkbox"
+            :id="'checkbox-' + index"
+            class="original-checkbox"
+          />
+          <label :for="'checkbox-' + index" class="custom-checkbox"></label>
+        </div>
       </li>
-      <li class="flex">
+      <li class="flex mr-6" @click="handleFocusEnter(comment)">
         <div class="w-12 h-12 mx-5 rounded-full flex-none">
           <img
             :src="comment.imgComment"
@@ -106,7 +115,7 @@
           </div>
         </div>
       </li>
-      <li class="flex items-center">
+      <li class="flex items-center" @click="handleFocusEnter(comment)">
         <div
           class="flex gap-5 items-center text-secondary mt-2"
           v-if="comment.activeIndex === true"
@@ -147,6 +156,7 @@
       </li>
       <div
         class="w-2 h-2 bg-primary-02 rounded-full flex-none absolute top-4 right-4"
+        v-if="comment.on === true"
       ></div>
     </ul>
   </div>
@@ -174,6 +184,8 @@ const comments = ref([
     contentAnswer:
       "Hey @samstoo! 😊 We're working on cool stuff in the cybersecurity space. Stay tuned, and thanks for the awesome idea! 🔍✨",
     activeIndex: false,
+    on: true,
+    checked: false,
   },
   {
     imgComment: "/images/avatar02.png",
@@ -191,6 +203,8 @@ const comments = ref([
     contentAnswer:
       "Hey @samstoo! 😊 We're working on cool stuff in the cybersecurity space. Stay tuned, and thanks for the awesome idea! 🔍✨",
     activeIndex: false,
+    on: true,
+    checked: false,
   },
   {
     imgComment: "/images/avatar03.png",
@@ -208,6 +222,8 @@ const comments = ref([
     contentAnswer:
       "Hey @samstoo! 😊 We're working on cool stuff in the cybersecurity space. Stay tuned, and thanks for the awesome idea! 🔍✨",
     activeIndex: false,
+    on: true,
+    checked: false,
   },
   {
     imgComment: "/images/avatar04.png",
@@ -225,6 +241,8 @@ const comments = ref([
     contentAnswer:
       "Hey @samstoo! 😊 We're working on cool stuff in the cybersecurity space. Stay tuned, and thanks for the awesome idea! 🔍✨",
     activeIndex: false,
+    on: false,
+    checked: false,
   },
   {
     imgComment: "/images/avatar05.png",
@@ -242,6 +260,8 @@ const comments = ref([
     contentAnswer:
       "Hey @samstoo! 😊 We're working on cool stuff in the cybersecurity space. Stay tuned, and thanks for the awesome idea! 🔍✨",
     activeIndex: false,
+    on: false,
+    checked: false,
   },
   {
     imgComment: "/images/avatar06.png",
@@ -259,6 +279,8 @@ const comments = ref([
     contentAnswer:
       "Hey @samstoo! 😊 We're working on cool stuff in the cybersecurity space. Stay tuned, and thanks for the awesome idea! 🔍✨",
     activeIndex: false,
+    on: false,
+    checked: false,
   },
   {
     imgComment: "/images/avatar07.png",
@@ -276,6 +298,8 @@ const comments = ref([
     contentAnswer:
       "Hey @samstoo! 😊 We're working on cool stuff in the cybersecurity space. Stay tuned, and thanks for the awesome idea! 🔍✨",
     activeIndex: false,
+    on: false,
+    checked: false,
   },
   {
     imgComment: "/images/avatar08.png",
@@ -293,6 +317,8 @@ const comments = ref([
     contentAnswer:
       "Hey @samstoo! 😊 We're working on cool stuff in the cybersecurity space. Stay tuned, and thanks for the awesome idea! 🔍✨",
     activeIndex: false,
+    on: true,
+    checked: false,
   },
 ]);
 
@@ -301,4 +327,37 @@ const handleFocusEnter = (comment) => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.original-checkbox {
+  display: none;
+}
+
+.custom-checkbox {
+  @extend .original-checkbox;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #282828;
+  background-color: #222222;
+  cursor: pointer;
+  position: relative;
+  border-radius: 4px;
+}
+
+.original-checkbox:checked + .custom-checkbox {
+  background: white;
+  border-color: white;
+}
+
+.original-checkbox:checked + .custom-checkbox::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 12px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+</style>

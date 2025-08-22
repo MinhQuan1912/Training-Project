@@ -111,14 +111,6 @@
               class="w-full border-t-[1.5px] border-dashed border-stroke"
             ></div>
           </div>
-
-          <div class="absolute">
-            <icons-curved-graph1 />
-          </div>
-
-          <div class="absolute">
-            <icons-curved-graph2 />
-          </div>
         </div>
 
         <div

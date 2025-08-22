@@ -1,5 +1,5 @@
 <template>
-  <div class="px-3 pt-3 flex flex-col gap-3 bg-background-02 w-114 rounded-4xl">
+  <div class="px-3 pt-3 flex flex-col gap-3 bg-background-02 rounded-4xl">
     <div class="py-2.5 px-3 text-lg font-semibold leading-[145%] text-primary">
       Gender
     </div>

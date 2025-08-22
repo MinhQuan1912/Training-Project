@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div
-      class="bg-background-02 pt-3 px-3 pb-6 flex flex-col gap-8 rounded-4xl w-114"
+      class="bg-background-02 pt-3 px-3 pb-6 flex flex-col gap-8 rounded-4xl"
     >
       <div class="flex flex-col gap-3">
         <div

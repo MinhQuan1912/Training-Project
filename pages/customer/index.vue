@@ -1,6 +1,7 @@
 <template>
   <div class="flex gap-3">
-    <div class="flex flex-col gap-3 w-[58vw]">
+    <!--  lg:w-142 xl:w-261 -->
+    <div class="flex flex-col gap-3">
       <div class="bg-background-02 rounded-4xl flex flex-col gap-4 p-3">
         <OverviewTitle />
 
@@ -14,6 +15,7 @@
       <ShareProducts />
     </div>
 
+    <!--  lg:w-72 xl:w-114 -->
     <div class="flex flex-col gap-3">
       <RefundRequests />
 
