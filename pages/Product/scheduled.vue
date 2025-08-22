@@ -9,6 +9,9 @@
 <script setup>
 import ScheduledTitle from "~/components/title/products/ScheduledTittle.vue";
 import ScheduledTable from "~/components/table/products/ScheduledTable.vue";
+definePageMeta({
+  title: 'Scheduled'
+})
 </script>
 
 <style lang="scss" scoped></style>
