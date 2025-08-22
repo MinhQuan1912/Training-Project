@@ -1,6 +1,6 @@
 <template>
   <div class="flex gap-3">
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-3 w-[58vw]">
       <div class="bg-background-02 rounded-4xl flex flex-col gap-4 p-3">
         <OverviewTitle />
 

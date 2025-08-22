@@ -11,7 +11,7 @@
           :class="{ 'pr-8': index !== overviews.length - 1 }"
         >
           <div
-            class="bg-background-01 p-5 rounded-full inline w-fit h-fit flex-none"
+            class="bg-background-surface1 p-5 rounded-full inline w-fit h-fit flex-none"
           >
             <component :is="iconComponents[overview.iconName]" />
           </div>
@@ -180,7 +180,7 @@
 
           <div class="py-8 px-6 flex flex-col gap-4 items-center">
             <div
-              class="w-16 h-16 flex justify-center items-center p-5 border-[1.5px] border-solid border-stroke-stroke2 rounded-full cursor-pointer"
+              class="w-16 h-16 flex justify-center items-center p-5 border-[1.5px] border-solid border-stroke rounded-full cursor-pointer"
             >
               <icons-arrow-right />
             </div>

@@ -19,7 +19,7 @@
             <img
               :src="country.img"
               alt=""
-              class="w-full h-full rounded-full object-contain"
+              class="w-full h-full rounded-full object-cover"
             />
           </div>
 
