@@ -80,11 +80,11 @@ const menu = ref<Menu[]>([
     label: "Product",
     icon: markRaw(IconsProduct),
     subMenu: [
-      { label: "Overview", title: "Product Overview", to: "/product" },
+      { label: "Overview", title: "Product Overview", to: "/products" },
       { label: "Drafts", title: "Drafts", to: "/" },
-      { label: "Released", title: "Released", to: "/product/released" },
-      { label: "Comments", title: "Comments", to: "" },
-      { label: "Scheduled", title: "Scheduled", to: "" },
+      { label: "Released", title: "Released", to: "/products/released" },
+      { label: "Comments", title: "Comments", to: "/products/comments" },
+      { label: "Scheduled", title: "Scheduled", to: "/products/scheduled" },
     ],
   },
   {
