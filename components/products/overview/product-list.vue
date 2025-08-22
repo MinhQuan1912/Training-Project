@@ -66,7 +66,6 @@
                 </div>
             </div>
         </div>
-      </div>
     </div>
 </template>
 
@@ -207,11 +206,11 @@ const productList = ref<productList[]>([
 
 <style lang="scss" scoped>
 .product-list {
-  background-color: var(--color-background-02);
-  border-radius: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+    background-color: var(--color-background-02);
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .checkbox {

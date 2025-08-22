@@ -6,13 +6,7 @@
     >
       <li class="w-6 h-6 cursor-pointer">
         <div class="custom-checkbox-container">
-          <input
-            type="checkbox"
-            id="myCheckbox"
-            class="original-checkbox"
-            v-model="allSelected"
-            @change="toggleAll"
-          />
+          <input type="checkbox" id="myCheckbox" class="original-checkbox" />
           <label for="myCheckbox" class="custom-checkbox"></label>
         </div>
       </li>
@@ -32,8 +26,6 @@
             type="checkbox"
             :id="'checkbox-' + index"
             class="original-checkbox"
-            v-model="schedule.checkboxIndex"
-            @change="updateMasterCheckbox"
           />
           <label :for="'checkbox-' + index" class="custom-checkbox"></label>
         </div>
@@ -198,15 +190,6 @@ const schedules = ref([
 
 const handleMouseEnter = (schedule) => {
   schedule.activeIndex = !schedule.activeIndex;
-};
-
-const allSelected = ref(false);
-
-const toggleAll = () => {
-  const isChecked = allSelected.value;
-  schedules.value.forEach((schedule) => {
-    schedule.checkboxIndex = isChecked;
-  });
 };
 </script>
 
