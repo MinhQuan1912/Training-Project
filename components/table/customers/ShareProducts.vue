@@ -7,7 +7,7 @@
     <div class="flex flex-col gap-6">
       <div class="flex gap-3">
         <div
-          class="flex gap-3 p-3 items-center border-[1.5px] border-solid border-transparent hover:border-primary/7.5 hover:bg-background-pop rounded-[20px]"
+          class="flex gap-3 p-3 items-center border-[1.5px] border-solid border-transparent hover:border-primary/7.5 hover:bg-background-pop rounded-[20px] w-1/3"
           v-for="(shareProduct, index) in shareProducts"
           :key="index"
         >
@@ -19,8 +19,8 @@
             />
           </div>
 
-          <div class="flex flex-col gap-1">
-            <div class="flex justify-between items-center w-52.5">
+          <div class="flex flex-col gap-1 flex-grow">
+            <div class="flex justify-between items-center w-full">
               <div class="text-primary font-semibold leading-[150%]">
                 {{ shareProduct.title }}
               </div>

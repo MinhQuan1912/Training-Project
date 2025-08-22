@@ -5,7 +5,7 @@
         class="flex gap-8 divide-x-[1.5px] divide-solid divide-stroke-subtle"
       >
         <div
-          class="flex flex-col gap-10"
+          class="flex flex-col gap-10 w-1/3"
           v-for="(overview, index) in overviews"
           :key="index"
           :class="{ 'pr-8': index !== overviews.length - 1 }"
@@ -16,7 +16,7 @@
             <component :is="iconComponents[overview.iconName]" />
           </div>
 
-          <div class="flex items-center">
+          <div class="flex items-center justify-between">
             <div class="">
               <div class="flex gap-2">
                 <div
@@ -157,7 +157,7 @@
           <div class="p-3.5 w-6 h-6"></div>
         </div>
 
-        <div class="flex">
+        <div class="flex justify-between">
           <div
             class="py-8 px-6 flex flex-col gap-4 items-center"
             v-for="(newCustomer, index) in newCustomers"
