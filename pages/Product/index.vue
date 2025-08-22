@@ -33,7 +33,7 @@
               </h2>
               <div class="flex gap-2 items-center">
                 <products-overview-trend :tooltip-text="item.label" :increase="item.increase"
-                  :decrease="!item.increase" />
+                  :decrease="!item.increase" :growth-rate="item.growthRate"/>
                 <span class="text-tertiary text-sm leading-[150%]">vs last year</span>
               </div>
             </div>
@@ -70,7 +70,7 @@
             <div class="flex-1" v-for="(data, dataIdx) in item" :key="dataIdx">
               <div class="flex items-center gap-2">{{ data.value }}
                 <span v-if="data.increase || data.decrease">
-                  <products-overview-trend :decrease="data.decrease" :increase="data.increase" />
+                  <products-overview-trend :decrease="data.decrease" :increase="data.increase" :growth-rate="data.growthRate"/>
                 </span>
               </div>
             </div>
@@ -98,30 +98,35 @@ const overViewList = ref([
     icon: markRaw(IconsFolder),
     revenue: '128k',
     increase: true,
+    growthRate: 14
   },
   {
     label: 'Customer',
     icon: markRaw(IconsPerson),
     revenue: '512',
     increase: false,
+    growthRate: 41
   },
   {
     label: 'Sales',
     icon: markRaw(IconsProduct),
     revenue: '6812',
     increase: true,
+    growthRate: 32
   },
   {
     label: 'Payout',
     icon: markRaw(IconsArrow2),
     revenue: '256k',
     increase: true,
+    growthRate: 5
   },
 ])
 type activityCol = {
   value: string,
   increase?: boolean,
-  decrease?: boolean
+  decrease?: boolean,
+  growthRate?: number
 }
 type activityRow = {
   week: activityCol,
@@ -136,18 +141,22 @@ const productActivityList = ref < activityRow[] > ([
     product: {
       value: '24k',
       increase: true,
+      growthRate: 31
     },
     view: {
       value: '24k',
       increase: true,
+      growthRate: 32
     },
     like: {
       value: '48',
-      decrease: true
+      decrease: true,
+      growthRate: 12
     },
     comment: {
       value: '16',
-      increase: true
+      increase: true,
+      growthRate: 18
     }
   },
   {
@@ -155,7 +164,8 @@ const productActivityList = ref < activityRow[] > ([
     product: { value: '40k' },
     view: {
       value: '16k',
-      decrease: true
+      decrease: true,
+      growthRate: 29
     },
     like: { value: '64' },
     comment: { value: '32' }

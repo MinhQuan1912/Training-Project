@@ -8,7 +8,7 @@
             '!rotate-180': decrease
         }" />
 
-        <p class="text-sm font-semibold leading-[100%]">36.8%</p>
+        <p class="text-sm font-semibold leading-[100%]">{{ growthRate }}%</p>
     </div>
 </template>
 
@@ -22,7 +22,9 @@ defineProps({
         type: Boolean,
         default: false
     },
-    
+    growthRate: {
+        type: Number
+    }
 })
 </script>
 
