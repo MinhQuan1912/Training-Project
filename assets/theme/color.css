@@ -1,11 +1,10 @@
 /* ===== COLORS ===== */
 /* RED */
 @theme {
+  --color-background-01: #101010;
   --color-background-02: #191919;
   --color-background-dark1: #e2e2e2;
   --color-background-pop: #222222;
-  --color-background-surface1: #101010;
-  --color-background-highlight: #222;
 
   --color-light: #141414;
 
@@ -25,6 +24,12 @@
   --color-blue: #2a85ff;
 
   --color-stroke: #282828;
+
   --color-stroke-subtle: #1e1e1e;
-  --color-stroke-card-hover-dark: #f1f1f1;
+  --color-stroke-stroke2: #282828;
+
+  --color-primary-04: #ff6a55;
+
+  --color-primary-gray: #313131;
+  --color-shade05-100: #4c4c4c;
 }

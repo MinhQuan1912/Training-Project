@@ -23,8 +23,6 @@
     "pinia": "^3.0.3"
   },
   "devDependencies": {
-    "@iconify-json/lucide": "^1.2.63",
-    "@iconify-json/material-symbols": "^1.2.32",
     "@types/node": "^24.0.1",
     "sass-embedded": "^1.90.0",
     "scss": "^0.2.4",
