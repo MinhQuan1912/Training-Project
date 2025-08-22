@@ -2,7 +2,7 @@
   <div class="w-12 h-12">
     <img src="/images/logo.png" class="w-full h-full object-contain" />
   </div>
-  <ul class="flex flex-col text-sm font-semibold">
+  <ul class="flex flex-col text-sm font-semibold overflow-y-auto custom-scroll">
     <li
       v-for="(item, idx) in menu"
       :key="idx"
@@ -11,10 +11,7 @@
       <div
         v-if="item.subMenu"
         class="flex items-center justify-between gap-3 p-3 transition-all duration-300 ease"
-        @click="
-          handleOpenSubmenu(idx);
-          handleClickTitle(item);
-        "
+        @click="handleOpenSubmenu(idx)"
         :class="{
           'text-primary': activeIndex === idx,
           'hover:text-primary': activeIndex !== idx,
@@ -39,7 +36,6 @@
           'text-primary': activeIndex === idx,
           'hover:text-primary': activeIndex !== idx,
         }"
-        @click="handleClickTitle(item)"
       >
         <component :is="item.icon" class="w-6 h-6" />
         {{ item.label }}
@@ -51,7 +47,6 @@
             v-for="(drop, dropIdx) in item.subMenu"
             :key="dropIdx"
             class="h-11 px-3 flex items-center rounded-xl transition-all duration-300 ease hover:text-primary hover:bg-background-pop"
-            @click="handleClickTitle(drop)"
           >
             {{ drop.label }}
           </nuxt-link>
@@ -87,7 +82,7 @@ const menu = ref<Menu[]>([
     subMenu: [
       { label: "Overview", title: "Product Overview", to: "/product" },
       { label: "Drafts", title: "Drafts", to: "/" },
-      { label: "Released", title: "Released", to: "" },
+      { label: "Released", title: "Released", to: "/released" },
       { label: "Comments", title: "Comments", to: "" },
       { label: "Scheduled", title: "Scheduled", to: "" },
     ],
@@ -96,7 +91,7 @@ const menu = ref<Menu[]>([
     label: "Customers",
     icon: markRaw(IconsCustomer),
     subMenu: [
-      { label: "Overview", title: "Customers", to: "/" },
+      { label: "Overview", title: "Customers", to: "/customers/overview" },
       { label: "Customer list" },
     ],
   },
@@ -118,9 +113,6 @@ const handleOpenSubmenu = (index: number) => {
     openIndexs.value.push(index);
     activeIndex.value = index;
   }
-};
-const handleClickTitle = (drop: Menu) => {
-  emit("title", drop.title);
 };
 </script>
 
