@@ -9,6 +9,9 @@
 <script setup>
 import CommentsTitle from "~/components/title/products/CommentsTitle.vue";
 import CommentsTable from "~/components/table/products/CommentsTable.vue";
+definePageMeta({
+  title: 'Comments'
+})
 </script>
 
 <style lang="scss" scoped></style>

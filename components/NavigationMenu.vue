@@ -3,52 +3,35 @@
     <img src="/images/logo.png" class="w-full h-full object-contain" />
   </div>
   <ul class="flex flex-col text-sm font-semibold">
-    <li
-      v-for="(item, idx) in menu"
-      :key="idx"
-      class="cursor-pointer transition-all duration-300 ease"
-    >
-      <div
-        v-if="item.subMenu"
-        class="flex items-center justify-between gap-3 p-3 transition-all duration-300 ease"
-        @click="handleOpenSubmenu(idx)"
-        :class="{
+    <li v-for="(item, idx) in menu" :key="idx" class="cursor-pointer transition-all duration-300 ease">
+      <div v-if="item.subMenu"
+        class="flex items-center justify-between gap-3 px-3 lg:px-0 xl:px-3 p-3 transition-all duration-300 ease"
+        @click="handleOpenSubmenu(idx)" :class="{
           'text-primary': activeIndex === idx,
           'hover:text-primary': activeIndex !== idx,
-        }"
-      >
+        }">
         <div class="flex items-center gap-3">
           <component :is="item.icon" class="w-6 h-6" />
-          {{ item.label }}
+          <span class="hidden lg:inline">{{ item.label }}</span>
         </div>
-        <icons-arrow1
-          :class="[
-            'transition-transform duration-300 ease',
-            openIndexs.includes(idx) ? '-rotate-180' : 'rotate-0',
-          ]"
-        />
+        <icons-arrow1 :class="[
+          'transition-transform duration-300 ease',
+          openIndexs.includes(idx) ? '-rotate-180' : 'rotate-0',
+        ]" />
       </div>
-      <nuxt-link
-        v-else
-        :to="item.to"
-        class="flex items-center gap-3 p-3 transition-all duration-300 ease rounded-xl"
-        :class="{
+      <nuxt-link v-else :to="item.to"
+        class="flex items-center gap-3 px-3 lg:px-0 xl:px-3 p-3 transition-all duration-300 ease rounded-xl" :class="{
           'text-primary': activeIndex === idx,
           'hover:text-primary': activeIndex !== idx,
-        }"
-      >
+        }">
         <component :is="item.icon" class="w-6 h-6" />
-        {{ item.label }}
+        <span class="hidden lg:inline">{{ item.label }}</span>
       </nuxt-link>
       <transition name="collapse">
         <div v-show="item.subMenu && openIndexs.includes(idx)" class="pl-9">
-          <nuxt-link
-            :to="drop.to"
-            v-for="(drop, dropIdx) in item.subMenu"
-            :key="dropIdx"
-            class="h-11 px-3 flex items-center rounded-xl transition-all duration-300 ease hover:text-primary hover:bg-background-pop"
-          >
-            {{ drop.label }}
+          <nuxt-link :to="drop.to" v-for="(drop, dropIdx) in item.subMenu" :key="dropIdx"
+            class="h-11 px-3 flex items-center rounded-xl transition-all duration-300 ease hover:text-primary hover:bg-background-pop">
+            <span class="hidden lg:inline">{{ drop.label }}</span>
           </nuxt-link>
         </div>
       </transition>

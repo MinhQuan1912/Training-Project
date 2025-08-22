@@ -33,9 +33,35 @@
                     <div class="w-15">Price</div>
                     <div class="w-36">Sales</div>
                     <div class="w-24">Views</div>
-                    <div class="w-24">Likes</div>
+                    <div class="w-24 hidden lg:block">Likes</div>
                 </div>
-                <div class="">
+            </div>
+            <div v-for="(product) in productList" :key="product.id" class="h-24 p-4 flex gap-6">
+                <div class="w-128 h-16 flex gap-5 items-center">
+                    <input type="checkbox" class="checkbox"></input>
+                    <img :src="product.image" class="h-16 w-16 object-contain">
+                    <div class="flex flex-col">
+                        <p class="leading-[160%] text-primary font-semibold">{{ product.name }}</p>
+                        <p class="text-sm leading-[150%] text-secondary">{{ product.type }}</p>
+                    </div>
+                </div>
+                <div class="h-11 flex justify-between items-center text-sm leading-[150%] text-primary flex-1">
+                    <div class="w-20">
+                        <products-overview-status :status="product.status" />
+                    </div>
+                    <div class="w-15">${{ product.price.toFixed(2) }}</div>
+                    <div class="w-36 flex gap-2 items-center">
+                        <span class="text-sm leading-[150%]">${{ product.sales.value?.toLocaleString('en-US') }}</span>
+                        <products-overview-trend :growth-rate="product.sales.growthRate" />
+                    </div>
+                    <div class="w-24 flex gap-2 items-center">
+                        <span class="text-sm leading-[150%]">{{ product.views.current }}m</span>
+                        <products-overview-progress-bar :current="product.views.current" :kpi="product.views.kpi" />
+                    </div>
+                    <div class="w-24 hidden lg:flex gap-2 items-center">
+                        <span class="text-sm leading-[150%]">{{ product.likes.current }}m</span>
+                        <products-overview-progress-bar :current="product.likes.current" :kpi="product.likes.kpi" />
+                    </div>
 
                 </div>
             </div>
@@ -43,7 +69,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const activeTab = ref('Market')
 const tabs = ref([
     {
@@ -56,17 +82,34 @@ const tabs = ref([
         label: 'Viewers'
     }
 ])
-const productList = ref([
+type productData = {
+    value?: number,
+    growthRate?: number,
+    current?: number,
+    kpi?: number
+}
+type productList = {
+    id: number,
+    image: string,
+    name: string,
+    type: string,
+    status: boolean,
+    price: number,
+    sales: productData,
+    views: productData,
+    likes: productData
+}
+const productList = ref<productList[]>([
     {
         id: 1,
-        image: '/images/6.png',
+        image: '/images/1.png',
         name: 'Tasteful Bento 3D Graphics',
         type: 'UI Design Kit',
-        status: 'Active',
-        price: 98.00,
+        status: true,
+        price: 98,
         sales: {
             value: 3200,
-            change: 'increase',
+            growthRate: 42,
         },
         views: {
             current: 48,
@@ -79,14 +122,14 @@ const productList = ref([
     },
     {
         id: 2,
-        image: '/images/6.png',
+        image: '/images/2.png',
         name: 'Flavor Fusion 3D Collection',
         type: 'UI Design Kit',
-        status: 'Active',
+        status: true,
         price: 75.41,
         sales: {
             value: 6381,
-            change: 'decrease',
+            growthRate: -14,
         },
         views: {
             current: 75,
@@ -99,17 +142,17 @@ const productList = ref([
     },
     {
         id: 3,
-        image: '/images/6.png',
+        image: '/images/3.png',
         name: 'Artisan Meal 3D Visuals',
         type: 'UI Design Kit',
-        status: 'Offline',
+        status: false,
         price: 93.12,
         sales: {
             value: 4494,
-            change: 'decrease',
+            growthRate: 32,
         },
         views: {
-            current:89,
+            current: 89,
             kpi: 100
         },
         likes: {
@@ -119,14 +162,14 @@ const productList = ref([
     },
     {
         id: 4,
-        image: '/images/6.png',
+        image: '/images/4.png',
         name: 'Culinary  Creations 3D Illustration',
         type: 'UI Design Kit',
-        status: 'Active',
+        status: true,
         price: 58.41,
         sales: {
             value: 8645,
-            change: 'increase',
+            growthRate: -20,
         },
         views: {
             current: 14,
@@ -139,14 +182,14 @@ const productList = ref([
     },
     {
         id: 5,
-        image: '/images/6.png',
+        image: '/images/5.png',
         name: 'Savory Bento 3D Design Kit',
         type: 'UI Design Kit',
-        status: 'Offline',
+        status: false,
         price: 69.53,
         sales: {
             value: 5140,
-            change: 'increase',
+            growthRate: 51,
         },
         views: {
             current: 66,
