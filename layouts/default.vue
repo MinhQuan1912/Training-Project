@@ -1,5 +1,5 @@
 <template>
-  <div class="p-5 flex gap-5 bg-black h-screen">
+  <div class="p-5 flex gap-5 bg-black min-h-screen">
     <div class="min-w-75 flex flex-col gap-5 text-secondary relative">
       <navigation-menu />
       <div class="w-12 flex flex-col gap-3 absolute bottom-0 left-0">
