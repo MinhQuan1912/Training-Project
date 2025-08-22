@@ -83,8 +83,8 @@ const menu = ref<Menu[]>([
       { label: "Overview", title: "Product Overview", to: "/product" },
       { label: "Drafts", title: "Drafts", to: "/" },
       { label: "Released", title: "Released", to: "/released" },
-      { label: "Comments", title: "Comments", to: "" },
-      { label: "Scheduled", title: "Scheduled", to: "" },
+      { label: "Comments", title: "Comments", to: "/products/comments" },
+      { label: "Scheduled", title: "Scheduled", to: "/products/scheduled" },
     ],
   },
   {

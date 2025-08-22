@@ -2,7 +2,7 @@
   <div class="container pb-8 px-4">
     <ul
       class="text-tertiary grid grid-cols-7 items-center p-4"
-      style="grid-template-columns: 24px 620px 200px 200px"
+      style="grid-template-columns: 24px 40% 30% 25%"
     >
       <li class="w-6 h-6 cursor-pointer">
         <icons-select-box />
@@ -13,7 +13,7 @@
     </ul>
     <ul
       class="grid grid-cols-7 align-middle hover:bg-background-pop border-[1.5px] border-solid border-x-transparent border-b-transparent border-t-stroke-subtle items-center p-4 hover:border-primary/7.5 hover:rounded-2xl"
-      style="grid-template-columns: 24px 620px 200px 200px"
+      style="grid-template-columns: 24px 40% 30% 25%"
       v-for="(schedule, index) in schedules"
       :key="index"
     >
@@ -38,28 +38,47 @@
                 class="flex gap-2 items-center"
                 v-if="schedule.activeIndex === true"
               >
-                <NuxtLink to="" class="flex items-center gap-1 py-1 pr-1.5">
-                  <icons-edit />
-                  <div class="text-sm font-semibold">Edit</div>
-                </NuxtLink>
+                <div class="group">
+                  <NuxtLink
+                    to=""
+                    class="flex items-center gap-1 py-1 pl-1 pr-1.5 border-[1.5px] border-solid border-transparent group-hover:border-stroke rounded-md"
+                  >
+                    <icons-edit />
+                    <div
+                      class="text-sm font-semibold group-hover:text-primary/80"
+                    >
+                      Edit
+                    </div>
+                  </NuxtLink>
+                </div>
 
-                <NuxtLink
-                  to="#"
-                  class="flex items-center gap-1 py-1 pl-1 pr-1.5"
-                >
-                  <icons-trash />
-                  <div class="text-sm font-semibold">Delete</div>
-                </NuxtLink>
+                <div class="group">
+                  <NuxtLink
+                    to="#"
+                    class="flex items-center gap-1 py-1 pl-1 pr-1.5 border-[1.5px] border-solid border-transparent group-hover:border-stroke rounded-md"
+                  >
+                    <icons-trash />
+                    <div
+                      class="text-sm font-semibold group-hover:text-primary/80"
+                    >
+                      Delete
+                    </div>
+                  </NuxtLink>
+                </div>
 
-                <NuxtLink
-                  to="#"
-                  class="flex items-center gap-1 py-1 pl-1 pr-1.5 border-[1.5px] border-solid border-stroke-stroke2 rounded-md"
-                >
-                  <icons-calendar-check />
-                  <div class="text-sm font-semibold text-primary/80">
-                    Reschedule
-                  </div>
-                </NuxtLink>
+                <div class="group">
+                  <NuxtLink
+                    to="#"
+                    class="flex items-center gap-1 py-1 pl-1 pr-1.5 group border-[1.5px] border-solid border-transparent group-hover:border-stroke rounded-md"
+                  >
+                    <icons-calendar-check />
+                    <div
+                      class="text-sm font-semibold group-hover:text-primary/80"
+                    >
+                      Reschedule
+                    </div>
+                  </NuxtLink>
+                </div>
               </div>
               <div v-else>ui8.net/product-link</div>
             </div>

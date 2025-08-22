@@ -2,7 +2,7 @@
   <div class="container pb-8 px-4">
     <ul
       class="p-4 grid grid-cols-3"
-      style="grid-template-columns: 24px 1fr 480px"
+      style="grid-template-columns: 24px 972px 480px"
     >
       <li>
         <icons-select-box />
@@ -13,7 +13,7 @@
 
     <ul
       class="p-4 grid grid-cols-3 relative border-[1.5px] border-solid border-x-transparent border-b-transparent border-t-stroke-subtle hover:rounded-2xl hover:bg-background-pop hover:border-solid hover:border-primary/7.5"
-      style="grid-template-columns: 24px 1fr 480px"
+      style="grid-template-columns: 24px 972px 480px"
       v-for="(comment, index) in comments"
       :key="index"
       @click="handleFocusEnter(comment)"
@@ -77,7 +77,7 @@
               </div>
 
               <div class="text-primary/80">
-                {{ comment.contentComment }}
+                {{ comment.contentAnswer }}
               </div>
 
               <div class="flex gap-5 items-center text-secondary mt-2">
