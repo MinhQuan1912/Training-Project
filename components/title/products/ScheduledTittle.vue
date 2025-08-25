@@ -1,3 +1,4 @@
+import { searchQuery } from '~/components/title/products/ScheduledTittle.vue';
 <template>
   <div class="container">
     <div class="p-3 flex justify-between items-center h-18">
@@ -13,6 +14,7 @@
             type="text"
             placeholder="Search products"
             class="text-sm leading-[150%] w-full"
+            v-model="searchQuery"
           />
         </div>
       </div>
@@ -38,6 +40,8 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup>
+const searchQuery = ref("");
+</script>
 
 <style lang="scss" scoped></style>
