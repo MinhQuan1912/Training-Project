@@ -56,13 +56,20 @@
                     </div>
                     <div class="w-24 flex gap-2 items-center">
                         <span class="text-sm leading-[150%]">{{ product.views.current }}m</span>
-                        <products-overview-progress-bar :current="product.views.current" :kpi="product.views.kpi" />
+                        <div class="w-8 h-1.5 rounded-xs bg-[#7B7B7B66]">
+                            <div class="h-1.5 rounded-xs bg-chart-green"
+                                :style="{ width: product.views.current && product.views.kpi ? (product.views.current / product.views.kpi * 100) + '%' : '0%' }">
+                            </div>
+                        </div>
                     </div>
                     <div class="w-24 hidden lg:flex gap-2 items-center">
                         <span class="text-sm leading-[150%]">{{ product.likes.current }}m</span>
-                        <products-overview-progress-bar :current="product.likes.current" :kpi="product.likes.kpi" />
+                        <div class="w-8 h-1.5 rounded-xs bg-[#7B7B7B66]">
+                            <div class="h-1.5 rounded-xs bg-chart-green"
+                                :style="{ width: product.likes.current && product.likes.kpi ? (product.likes.current / product.likes.kpi * 100) + '%' : '0%' }">
+                            </div>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
