@@ -48,19 +48,19 @@
         <div
           class="mt-2 ml-11 flex justify-between gap-3 text-xs text-tertiary/80 leading-[160%]"
         >
-          <div class="w-31.5 flex justify-center">22</div>
+          <div class="w-full flex justify-center">22</div>
 
-          <div class="w-31.5 flex justify-center">23</div>
+          <div class="w-full flex justify-center">23</div>
 
-          <div class="w-31.5 flex justify-center">24</div>
+          <div class="w-full flex justify-center">24</div>
 
-          <div class="w-31.5 flex justify-center">25</div>
+          <div class="w-full flex justify-center">25</div>
 
-          <div class="w-31.5 flex justify-center">26</div>
+          <div class="w-full flex justify-center">26</div>
 
-          <div class="w-31.5 flex justify-center">27</div>
+          <div class="w-full flex justify-center">27</div>
 
-          <div class="w-31.5 flex justify-center">28</div>
+          <div class="w-full flex justify-center">28</div>
         </div>
       </div>
 

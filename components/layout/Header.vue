@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute();
 const pageTitle = computed(() => {
     return route.meta.title
 })
@@ -46,6 +46,7 @@ const pageTitle = computed(() => {
     height: 48px;
     cursor: pointer;
 }
+
 .header-button {
     background: linear-gradient(#2a2a2a,#202020);
     width:48px;

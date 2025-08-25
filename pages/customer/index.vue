@@ -1,31 +1,33 @@
 <template>
-  <div class="flex gap-3">
-    <!--  lg:w-142 xl:w-261 -->
-    <div class="flex flex-col gap-3">
-      <div class="bg-background-02 rounded-4xl flex flex-col gap-4 p-3">
-        <OverviewTitle />
+  <div class="container">
+    <div class="flex gap-3 w-full">
+      <!--  lg:w-142 xl:w-261 -->
+      <div class="flex flex-col gap-3 flex-1">
+        <div class="bg-background-02 rounded-4xl flex flex-col gap-4 p-3">
+          <OverviewTitle />
 
-        <OverviewTable />
+          <OverviewTable />
+        </div>
+
+        <TrafficChannel />
+
+        <ActiveTimes />
+
+        <ShareProducts />
       </div>
 
-      <TrafficChannel />
+      <!--  lg:w-72 xl:w-114 -->
+      <div class="flex flex-col gap-3 w-3/10 lg:w-1/4">
+        <RefundRequests />
 
-      <ActiveTimes />
+        <Devices />
 
-      <ShareProducts />
-    </div>
+        <Countries />
 
-    <!--  lg:w-72 xl:w-114 -->
-    <div class="flex flex-col gap-3">
-      <RefundRequests />
+        <Messages />
 
-      <Devices />
-
-      <Countries />
-
-      <Messages />
-
-      <Gender />
+        <Gender />
+      </div>
     </div>
   </div>
 </template>

@@ -10,29 +10,25 @@
           </div>
 
           <div class="flex flex-col gap-2">
-            <div class="flex gap-7.75 px-5 justify-between">
+            <div class="flex flex-col gap-0.5">
               <div
-                class="flex flex-col justify-between text-xs leading-[160%] text-tertiary"
+                class="flex gap-7.75 px-5"
+                v-for="(timeSetDay, index) in timeSetDays"
+                :key="index"
               >
-                <div>12:00 am</div>
-
-                <div>4:00 am</div>
-
-                <div>8:00 am</div>
-
-                <div>12.00 pm</div>
-
-                <div>4:00 pm</div>
-
-                <div>8:00 pm</div>
-              </div>
-
-              <div class="grid grid-cols-7 gap-0.5">
                 <div
-                  class="w-32.5 h-5 rounded-sm bg-background-dark1/70 cursor-pointer"
-                  v-for="i in 112"
-                  :key="i"
-                ></div>
+                  class="flex flex-col justify-between text-xs leading-[160%] text-tertiary w-13"
+                >
+                  <div>{{ timeSetDay.time }}</div>
+                </div>
+
+                <div class="grid grid-cols-7 gap-0.5">
+                  <div
+                    class="w-15.5 lg:w-32.5 h-5 rounded-sm bg-background-dark1/70 cursor-pointer"
+                    v-for="i in 21"
+                    :key="i"
+                  ></div>
+                </div>
               </div>
             </div>
 
@@ -98,6 +94,27 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const timeSetDays = ref([
+  {
+    time: "12.00 am",
+  },
+  {
+    time: "8.00 am",
+  },
+  {
+    time: "4.00 am",
+  },
+  {
+    time: "12.00 pm",
+  },
+  {
+    time: "8.00 am",
+  },
+  {
+    time: "4.00 am",
+  },
+]);
+</script>
 
 <style lang="scss" scoped></style>
