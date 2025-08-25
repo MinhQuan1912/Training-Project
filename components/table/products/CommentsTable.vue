@@ -6,7 +6,12 @@
     >
       <li>
         <div class="custom-checkbox-container">
-          <input type="checkbox" id="myCheckbox" class="original-checkbox" />
+          <input
+            type="checkbox"
+            id="myCheckbox"
+            class="original-checkbox"
+            v-model="allChecked"
+          />
           <label for="myCheckbox" class="custom-checkbox"></label>
         </div>
       </li>
@@ -26,6 +31,7 @@
             type="checkbox"
             :id="'checkbox-' + index"
             class="original-checkbox"
+            v-model="comment.checked"
           />
           <label :for="'checkbox-' + index" class="custom-checkbox"></label>
         </div>
@@ -166,6 +172,7 @@
 import { ref } from "vue";
 
 import CommentsTitle from "~/components/title/products/CommentsTitle.vue";
+import { select } from "#build/ui";
 
 const comments = ref([
   {
@@ -325,6 +332,22 @@ const comments = ref([
 const handleFocusEnter = (comment) => {
   comment.activeIndex = !comment.activeIndex;
 };
+
+const allChecked = computed({
+  // đọc giá trị checked, trả về boolean
+  // get được dùng để tính toán và trả về một giá trị dựa trên các dữ liệu phụ thuộc
+  // phg thức every kiểm tra xem tất cả các phần tử trong mảng có vượt qua bái kiểm tra đc triển khai bởi hàm đc cung cấp hay k, trả về boolean
+  get() {
+    return comments.value.every((comment) => comment.checked);
+  },
+  // hàm này đổi giá trị khi nó chuyển thành true, nếu tất cả chuyển thành true, allChecked cũng là true, ngc lai
+  // set để gán giá trị dữ liệu phụ thuộc
+  set(value) {
+    comments.value.forEach((comment) => {
+      comment.checked = value;
+    });
+  },
+});
 </script>
 
 <style lang="scss" scoped>

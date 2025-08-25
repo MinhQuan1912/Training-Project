@@ -17,14 +17,14 @@
                 :key="index"
               >
                 <div
-                  class="flex flex-col justify-between text-xs leading-[160%] text-tertiary w-13"
+                  class="flex flex-col justify-between text-xs leading-[160%] text-tertiary w-14"
                 >
                   <div>{{ timeSetDay.time }}</div>
                 </div>
 
-                <div class="grid grid-cols-7 gap-0.5">
+                <div class="grid grid-cols-7 gap-0.5 w-full">
                   <div
-                    class="w-15.5 lg:w-32.5 h-5 rounded-sm bg-background-dark1/70 cursor-pointer"
+                    class="w-full h-5 rounded-sm bg-background-dark1/70 cursor-pointer"
                     v-for="i in 21"
                     :key="i"
                   ></div>

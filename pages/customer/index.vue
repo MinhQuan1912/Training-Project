@@ -17,7 +17,7 @@
       </div>
 
       <!--  lg:w-72 xl:w-114 -->
-      <div class="flex flex-col gap-3 w-3/10 lg:w-1/4">
+      <div class="flex flex-col gap-3 max-w-75 lg:max-w-117">
         <RefundRequests />
 
         <Devices />
