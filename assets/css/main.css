@@ -5,7 +5,14 @@
 /* ===== FONTS ===== */
 @import "../css/main.scss";
 
-.container {
-  width: 100%;
-  min-width: 100%;
+@media (min-width: 1024px) {
+  .container {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    width: 100%;
+  }
 }

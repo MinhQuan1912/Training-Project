@@ -1,101 +1,137 @@
 <template>
   <div class="container pb-8 px-4">
-    <ul
-      class="p-4 grid grid-cols-3 items-center"
-      style="grid-template-columns: 24px 2fr 1fr"
-    >
-      <li>
-        <div class="custom-checkbox-container">
-          <input
-            type="checkbox"
-            id="myCheckbox"
-            class="original-checkbox"
-            v-model="allChecked"
-          />
-          <label for="myCheckbox" class="custom-checkbox"></label>
-        </div>
-      </li>
-      <li class="text-sm text-tertiary ml-5">Comment</li>
-      <li class="text-sm text-tertiary">Product</li>
-    </ul>
-
-    <ul
-      class="p-4 grid grid-cols-3 items-center relative border-[1.5px] border-solid border-x-transparent border-b-transparent border-t-stroke-subtle hover:rounded-2xl hover:bg-background-pop hover:border-solid hover:border-primary/7.5"
-      style="grid-template-columns: 24px 2fr 1fr"
-      v-for="(comment, index) in comments"
-      :key="index"
-    >
-      <li>
-        <div class="custom-checkbox-container">
-          <input
-            type="checkbox"
-            :id="'checkbox-' + index"
-            class="original-checkbox"
-            v-model="comment.checked"
-          />
-          <label :for="'checkbox-' + index" class="custom-checkbox"></label>
-        </div>
-      </li>
-      <li class="flex mr-6" @click="handleFocusEnter(comment)">
-        <div class="w-12 h-12 mx-5 rounded-full flex-none">
-          <img
-            :src="comment.imgComment"
-            alt=""
-            class="w-full h-full rounded-full object-contain"
-          />
-        </div>
-        <div class="flex flex-col gap-4">
-          <div>
-            <div class="flex items-center gap-3">
-              <div class="font-semibold text-primary">
-                {{ comment.titleComment }}
-              </div>
-              <div class="flex gap-2 items-center">
-                <div class="text-secondary text-sm">
-                  {{ comment.instaComment }}
-                </div>
-                <icons-status_indicator />
-                <div class="text-secondary text-sm">
-                  {{ comment.timeComment }}
-                </div>
-              </div>
-            </div>
-
-            <div class="text-primary/80">
-              {{ comment.contentComment }}
-            </div>
-          </div>
-
-          <div class="flex gap-4" v-if="comment.activeIndex === true">
-            <div class="w-8 h-8 rounded-full flex flex-none">
-              <img
-                src="https://media1.thrillophilia.com/filestore/n2ib9inwzcilxpg3aumbigvq4jus_IMG_World_Dubai_Fun_38a0986c1a.jpg?w=400&dpr=2"
-                alt=""
-                class="w-full h-full rounded-full object-cover"
+    <table class="table-auto w-full">
+      <thead>
+        <tr class="text-left">
+          <th class="w-6 pl-4 py-4">
+            <div class="custom-checkbox-container">
+              <input
+                type="checkbox"
+                id="myCheckbox"
+                class="original-checkbox"
+                v-model="allChecked"
               />
+              <label for="myCheckbox" class="custom-checkbox"></label>
             </div>
+          </th>
+          <th class="text-sm text-tertiary pl-6 w-7/12 py-4">Comment</th>
+          <th class="text-sm text-tertiary w-4/12 pr-4 py-4">Product</th>
+        </tr>
+      </thead>
 
-            <div>
-              <div class="flex items-center gap-3">
-                <div class="font-semibold text-primary">
-                  {{ comment.titleComment }}
-                </div>
-                <div class="flex gap-2 items-center">
-                  <div class="text-secondary text-sm">
-                    {{ comment.instaComment }}
+      <tbody>
+        <tr
+          class="relative border-[1.5px] border-solid border-x-transparent border-b-transparent border-t-stroke-subtle hover:bg-background-pop hover:border-solid hover:border-primary/7.5 w-full"
+          v-for="(comment, index) in comments"
+          :key="index"
+        >
+          <td class="w-6 pl-4 py-4 rounded-l-2xl">
+            <div class="custom-checkbox-container">
+              <input
+                type="checkbox"
+                :id="'checkbox-' + index"
+                class="original-checkbox"
+                v-model="comment.checked"
+              />
+              <label :for="'checkbox-' + index" class="custom-checkbox"></label>
+            </div>
+          </td>
+          <td class="w-7/12 py-4">
+            <div class="flex mr-6">
+              <div class="w-12 h-12 mx-5 rounded-full flex-none">
+                <img
+                  :src="comment.imgComment"
+                  alt=""
+                  class="w-full h-full rounded-full object-contain"
+                />
+              </div>
+              <div class="flex flex-col gap-4">
+                <div>
+                  <div class="flex items-center gap-3">
+                    <div class="font-semibold text-primary">
+                      {{ comment.titleComment }}
+                    </div>
+                    <div class="flex gap-2 items-center">
+                      <div class="text-secondary text-sm">
+                        {{ comment.instaComment }}
+                      </div>
+                      <icons-status_indicator />
+                      <div class="text-secondary text-sm">
+                        {{ comment.timeComment }}
+                      </div>
+                    </div>
                   </div>
-                  <icons-status_indicator />
-                  <div class="text-secondary text-sm">
-                    {{ comment.timeComment }}
+
+                  <div class="text-primary/80">
+                    {{ comment.contentComment }}
+                  </div>
+                </div>
+
+                <div class="flex gap-4" v-if="comment.activeIndex === true">
+                  <div class="w-8 h-8 rounded-full flex flex-none">
+                    <img
+                      src="https://media1.thrillophilia.com/filestore/n2ib9inwzcilxpg3aumbigvq4jus_IMG_World_Dubai_Fun_38a0986c1a.jpg?w=400&dpr=2"
+                      alt=""
+                      class="w-full h-full rounded-full object-cover"
+                    />
+                  </div>
+
+                  <div>
+                    <div class="flex items-center gap-3">
+                      <div class="font-semibold text-primary">
+                        {{ comment.titleComment }}
+                      </div>
+                      <div class="flex gap-2 items-center">
+                        <div class="text-secondary text-sm">
+                          {{ comment.instaComment }}
+                        </div>
+                        <icons-status_indicator />
+                        <div class="text-secondary text-sm">
+                          {{ comment.timeComment }}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="text-primary/80">
+                      {{ comment.contentAnswer }}
+                    </div>
+
+                    <div class="flex gap-5 items-center text-secondary mt-2">
+                      <NuxtLink
+                        to="#"
+                        class="flex items-center gap-1 py-1 pr-1.5"
+                      >
+                        <icons-edit />
+                        <div class="text-sm font-semibold">Reply</div>
+                      </NuxtLink>
+
+                      <NuxtLink
+                        to="#"
+                        class="flex items-center gap-1 py-1 pl-1 pr-1.5"
+                      >
+                        <icons-heart />
+                        <div class="text-sm font-semibold">Like</div>
+                      </NuxtLink>
+
+                      <NuxtLink
+                        to="#"
+                        class="flex items-center gap-1 py-1 pl-1 pr-1.5"
+                      >
+                        <icons-trash />
+                        <div class="text-sm font-semibold">Remove</div>
+                      </NuxtLink>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              <div class="text-primary/80">
-                {{ comment.contentAnswer }}
-              </div>
-
-              <div class="flex gap-5 items-center text-secondary mt-2">
+            </div>
+          </td>
+          <td class="w-4/12 py-4 pr-4">
+            <div class="flex items-center">
+              <div
+                class="flex gap-5 items-center text-secondary mt-2"
+                v-if="comment.activeIndex === true"
+              >
                 <NuxtLink to="#" class="flex items-center gap-1 py-1 pr-1.5">
                   <icons-edit />
                   <div class="text-sm font-semibold">Reply</div>
@@ -105,7 +141,7 @@
                   to="#"
                   class="flex items-center gap-1 py-1 pl-1 pr-1.5"
                 >
-                  <icons-heart />
+                  <icons-heartRed />
                   <div class="text-sm font-semibold">Like</div>
                 </NuxtLink>
 
@@ -117,54 +153,33 @@
                   <div class="text-sm font-semibold">Remove</div>
                 </NuxtLink>
               </div>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="flex items-center" @click="handleFocusEnter(comment)">
-        <div
-          class="flex gap-5 items-center text-secondary mt-2"
-          v-if="comment.activeIndex === true"
-        >
-          <NuxtLink to="#" class="flex items-center gap-1 py-1 pr-1.5">
-            <icons-edit />
-            <div class="text-sm font-semibold">Reply</div>
-          </NuxtLink>
 
-          <NuxtLink to="#" class="flex items-center gap-1 py-1 pl-1 pr-1.5">
-            <icons-heartRed />
-            <div class="text-sm font-semibold">Like</div>
-          </NuxtLink>
-
-          <NuxtLink to="#" class="flex items-center gap-1 py-1 pl-1 pr-1.5">
-            <icons-trash />
-            <div class="text-sm font-semibold">Remove</div>
-          </NuxtLink>
-        </div>
-
-        <div class="flex gap-5 items-center" v-else>
-          <div class="w-16 h-16 rounded-xl">
-            <img
-              :src="comment.imgProduct"
-              alt=""
-              class="w-full h-full rounded-xl object-contain"
-            />
-          </div>
-          <div class="relative cursor-pointer">
-            <div class="font-semibold text-primary">
-              {{ comment.titleProduct }}
+              <div class="flex gap-5 items-center">
+                <div class="w-16 h-16 rounded-xl">
+                  <img
+                    :src="comment.imgProduct"
+                    alt=""
+                    class="w-full h-full rounded-xl object-contain"
+                  />
+                </div>
+                <div class="relative cursor-pointer">
+                  <div class="font-semibold text-primary">
+                    {{ comment.titleProduct }}
+                  </div>
+                  <div class="font-normal text-secondary">
+                    <div>UI Design Kit</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="font-normal text-secondary">
-              <div>UI Design Kit</div>
-            </div>
-          </div>
-        </div>
-      </li>
-      <div
-        class="w-2 h-2 bg-primary-02 rounded-full flex-none absolute top-4 right-4"
-        v-if="comment.on === true"
-      ></div>
-    </ul>
+          </td>
+          <div
+            class="w-2 h-2 bg-primary-02 rounded-full flex-none absolute top-4 right-4"
+            v-if="comment.on === true"
+          ></div>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 

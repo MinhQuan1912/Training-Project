@@ -1,127 +1,125 @@
 <template>
   <div class="container pb-8 px-4">
-    <ul
-      class="text-tertiary grid grid-cols-7 items-center p-4"
-      style="grid-template-columns: 24px 2fr 1fr 1fr"
-    >
-      <li class="w-6 h-6 cursor-pointer">
-        <div class="custom-checkbox-container">
-          <input
-            type="checkbox"
-            id="myCheckbox"
-            class="original-checkbox"
-            v-model="allChecked"
-          />
-          <label for="myCheckbox" class="custom-checkbox"></label>
-        </div>
-      </li>
-      <li class="pl-5">Products</li>
-      <li>Price</li>
-      <li>Scheduled for</li>
-    </ul>
-    <template v-if="filteredSchedule && filteredSchedule.length > 0">
-      <ul
-        class="grid grid-cols-7 align-middle hover:bg-background-pop border-[1.5px] border-solid border-x-transparent border-b-transparent border-t-stroke-subtle items-center p-4 hover:border-primary/7.5 hover:rounded-2xl"
-        style="grid-template-columns: 24px 2fr 1fr 1fr"
-        v-for="(schedule, index) in filteredSchedule"
-        :key="index"
-      >
-        <li class="w-6 h-6 cursor-pointer">
-          <div class="custom-checkbox-container">
-            <input
-              type="checkbox"
-              :id="'checkbox-' + index"
-              class="original-checkbox"
-              v-model="schedule.checked"
-            />
-            <label :for="'checkbox-' + index" class="custom-checkbox"></label>
-          </div>
-        </li>
-        <li class="" @click="handleMouseEnter(schedule)">
-          <div class="flex items-center">
-            <div class="w-16 h-16 mx-5 rounded-xl">
-              <img
-                :src="schedule.img"
-                alt=""
-                class="w-full h-full rounded-xl object-contain"
+    <table class="table-auto w-full">
+      <thead>
+        <tr class="text-tertiary items-center p-4 text-left">
+          <th class="w-6 cursor-pointer pl-4 py-4">
+            <div class="custom-checkbox-container">
+              <input
+                type="checkbox"
+                id="myCheckbox"
+                class="original-checkbox"
+                v-model="allChecked"
               />
+              <label for="myCheckbox" class="custom-checkbox"></label>
             </div>
-            <div class="relative">
-              <div class="font-semibold text-primary">
-                {{ schedule.product }}
+          </th>
+          <th class="pl-5 w-1/2 py-4">Products</th>
+          <th class="w-1/4 py-4">Price</th>
+          <th class="w-1/4 py-4 pr-4">Scheduled for</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="align-middle hover:bg-background-pop border-[1.5px] border-solid border-x-transparent border-b-transparent border-t-stroke-subtle items-center p-4 hover:border-primary/7.5 hover:rounded-2xl"
+          v-for="(schedule, index) in filteredSchedule"
+          :key="index"
+        >
+          <td class="w-6 cursor-pointer pl-4 py-4">
+            <div class="custom-checkbox-container">
+              <input
+                type="checkbox"
+                :id="'checkbox-' + index"
+                class="original-checkbox"
+                v-model="schedule.checked"
+              />
+              <label :for="'checkbox-' + index" class="custom-checkbox"></label>
+            </div>
+          </td>
+          <td class="w-1/2 py-4">
+            <div class="flex items-center">
+              <div class="w-16 h-16 mx-5 rounded-xl">
+                <img
+                  :src="schedule.img"
+                  alt=""
+                  class="w-full h-full rounded-xl object-contain"
+                />
               </div>
-              <div class="font-normal text-secondary">
-                <div
-                  class="flex gap-2 items-center"
-                  v-if="schedule.activeIndex === true"
-                >
-                  <div class="group">
-                    <NuxtLink
-                      to=""
-                      class="flex items-center gap-1 py-1 pl-1 pr-1.5 border-[1.5px] border-solid border-transparent group-hover:border-stroke rounded-md"
-                    >
-                      <icons-edit />
-                      <div
-                        class="text-sm font-semibold group-hover:text-primary/80"
-                      >
-                        Edit
-                      </div>
-                    </NuxtLink>
-                  </div>
-
-                  <div class="group">
-                    <NuxtLink
-                      to="#"
-                      class="flex items-center gap-1 py-1 pl-1 pr-1.5 border-[1.5px] border-solid border-transparent group-hover:border-stroke rounded-md"
-                    >
-                      <icons-trash />
-                      <div
-                        class="text-sm font-semibold group-hover:text-primary/80"
-                      >
-                        Delete
-                      </div>
-                    </NuxtLink>
-                  </div>
-
-                  <div class="group">
-                    <NuxtLink
-                      to="#"
-                      class="flex items-center gap-1 py-1 pl-1 pr-1.5 group border-[1.5px] border-solid border-transparent group-hover:border-stroke rounded-md"
-                    >
-                      <icons-calendar-check />
-                      <div
-                        class="text-sm font-semibold group-hover:text-primary/80"
-                      >
-                        Reschedule
-                      </div>
-                    </NuxtLink>
-                  </div>
+              <div class="relative">
+                <div class="font-semibold text-primary">
+                  {{ schedule.product }}
                 </div>
-                <div v-else>ui8.net/product-link</div>
+                <div class="font-normal text-secondary">
+                  <div
+                    class="flex gap-2 items-center"
+                    v-if="schedule.activeIndex === true"
+                  >
+                    <div class="group">
+                      <NuxtLink
+                        to=""
+                        class="flex items-center gap-1 py-1 pl-1 pr-1.5 border-[1.5px] border-solid border-transparent group-hover:border-stroke rounded-md"
+                      >
+                        <icons-edit />
+                        <div
+                          class="text-sm font-semibold group-hover:text-primary/80"
+                        >
+                          Edit
+                        </div>
+                      </NuxtLink>
+                    </div>
+
+                    <div class="group">
+                      <NuxtLink
+                        to="#"
+                        class="flex items-center gap-1 py-1 pl-1 pr-1.5 border-[1.5px] border-solid border-transparent group-hover:border-stroke rounded-md"
+                      >
+                        <icons-trash />
+                        <div
+                          class="text-sm font-semibold group-hover:text-primary/80"
+                        >
+                          Delete
+                        </div>
+                      </NuxtLink>
+                    </div>
+
+                    <div class="group">
+                      <NuxtLink
+                        to="#"
+                        class="flex items-center gap-1 py-1 pl-1 pr-1.5 group border-[1.5px] border-solid border-transparent group-hover:border-stroke rounded-md"
+                      >
+                        <icons-calendar-check />
+                        <div
+                          class="text-sm font-semibold group-hover:text-primary/80"
+                        >
+                          Reschedule
+                        </div>
+                      </NuxtLink>
+                    </div>
+                  </div>
+                  <div v-else>ui8.net/product-link</div>
+                </div>
               </div>
             </div>
-          </div>
-        </li>
-        <li>
-          <div
-            class="text-sm font-semibold px-2 py-1.75 border-[1.5px] border-solid rounded-lg inline"
-            :class="{
-              'text-primary-03 bg-primary-03/5 border-primary-03/15':
-                !schedule.priceStatus,
-              'text-primary-02  bg-primary-02/5  border-primary-02/15':
-                schedule.priceStatus,
-            }"
-          >
-            ${{ schedule.price }}
-          </div>
-        </li>
-        <li class="text-secondary">{{ schedule.scheduleFor }}</li>
-      </ul>
-    </template>
-
-    <ul v-else class="text-primary text-center">
-      Không có dữ liệu
-    </ul>
+          </td>
+          <td class="w-1/4 py-4">
+            <div
+              class="text-sm font-semibold px-2 py-1.75 border-[1.5px] border-solid rounded-lg inline"
+              :class="{
+                'text-primary-03 bg-primary-03/5 border-primary-03/15':
+                  !schedule.priceStatus,
+                'text-primary-02  bg-primary-02/5  border-primary-02/15':
+                  schedule.priceStatus,
+              }"
+            >
+              ${{ schedule.price }}
+            </div>
+          </td>
+          <td class="text-secondary w-1/4 py-4 pr-4">
+            {{ schedule.scheduleFor }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
