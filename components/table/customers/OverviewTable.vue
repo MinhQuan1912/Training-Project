@@ -2,13 +2,16 @@
   <div class="container">
     <div class="pt-4 px-5 pb-5 flex flex-col">
       <div
-        class="flex gap-8 divide-x-[1.5px] divide-solid divide-stroke-subtle"
+        class="grid grid-cols-2 xl:grid-cols-3 gap-8 divide-x-[1.5px] divide-solid divide-stroke-subtle"
       >
         <div
-          class="flex flex-col gap-10 w-1/3"
+          class="flex flex-col gap-10"
           v-for="(overview, index) in overviews"
           :key="index"
-          :class="{ 'pr-8': index !== overviews.length - 1 }"
+          :class="{
+            'pr-8': index !== overviews.length - 1,
+            'hidden lg:flex': index === overviews.length - 1,
+          }"
         >
           <div
             class="bg-background-surface1 p-5 rounded-full inline w-fit h-fit flex-none"
@@ -154,6 +157,7 @@
             class="py-8 px-6 flex flex-col gap-4 items-center"
             v-for="(newCustomer, index) in newCustomers"
             :key="index"
+            :class="{ 'hidden lg:flex': index >= 3 }"
           >
             <div class="w-16 h-16">
               <img

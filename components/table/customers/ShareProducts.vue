@@ -5,11 +5,12 @@
     </div>
 
     <div class="flex flex-col gap-6">
-      <div class="flex gap-3">
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-3">
         <div
-          class="flex gap-3 p-3 items-center border-[1.5px] border-solid border-transparent hover:border-primary/7.5 hover:bg-background-pop rounded-[20px] w-1/3"
+          class="flex gap-3 p-3 items-center border-[1.5px] border-solid border-transparent hover:border-primary/7.5 hover:bg-background-pop rounded-[20px]"
           v-for="(shareProduct, index) in shareProducts"
           :key="index"
+          :class="{ 'hidden lg:flex': index === shareProducts.length - 1 }"
         >
           <div class="w-16 h-16">
             <img
@@ -47,25 +48,25 @@
 
       <div class="flex gap-3 justify-between">
         <div
-          class="w-1/4 py-3 px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full"
+          class="w-1/4 py-3 px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full cursor-pointer"
         >
           <icons-x-twitter1 />
         </div>
 
         <div
-          class="w-1/4 py-3 px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full"
+          class="w-1/4 py-3 px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full cursor-pointer"
         >
           <icons-facebook1 />
         </div>
 
         <div
-          class="w-1/4 py-3 px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full"
+          class="w-1/4 py-3 px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full cursor-pointer"
         >
           <icons-instalgram1 />
         </div>
 
         <div
-          class="w-1/4 py-3 px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full"
+          class="w-1/4 py-3 px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full cursor-pointer"
         >
           <icons-threads />
         </div>

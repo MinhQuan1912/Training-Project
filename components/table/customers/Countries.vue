@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <div
-      class="bg-background-02 pt-3 px-3 pb-8 flex flex-col gap-4 rounded-4xl items-center"
+      class="bg-background-02 pt-3 px-3 pb-8 flex flex-col gap-4 rounded-4xl"
     >
       <div
-        class="py-2.5 px-3 w-86 text-xl font-semibold leading-[145%] text-primary"
+        class="py-2.5 px-3 text-xl font-semibold leading-[145%] text-primary"
       >
         Countries
       </div>
