@@ -10,9 +10,9 @@
                 </div>
                 <input type="text" placeholder="Search anything... ">
             </div>
-            <button class="create-button">
+            <nuxt-link to="/product/create-product" class="create-button">
                 <p class="text-sm font-semibold leading-[100%]">Create</p>
-            </button>
+            </nuxt-link>
             <div class="header-button">
                 <icons-bell/>
             </div>

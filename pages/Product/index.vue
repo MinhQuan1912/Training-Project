@@ -26,15 +26,14 @@
             <div class="flex flex-col max-w-41.5">
               <div class="flex gap-2 items-center h-6 mb-2">
                 <p class="font-semibold leading-[150%]">{{ item.label }}</p>
-                <icons-helping />
+                <u-tooltip :text="item.label"><icons-helping /></u-tooltip>
               </div>
               <h2 class="flex text-[60px] font-medium leading-[125%] mb-3">
                 <span class="text-tertiary text-[32px] font-semibold leading-[145%] mr-2.5 pt-2">$</span>
                 {{ item.revenue }}
               </h2>
               <div class="flex gap-2 items-center">
-                <products-overview-trend
-                  :growth-rate="item.growthRate" />
+                <products-overview-trend :growth-rate="item.growthRate" />
                 <span class="text-tertiary text-sm leading-[150%]">vs last year</span>
               </div>
             </div>
@@ -72,8 +71,7 @@
               :class="{ 'hidden lg:block': data === item.comment }">
               <div class="flex items-center gap-2">{{ data.value }}
                 <span v-if="data.growthRate">
-                  <products-overview-trend
-                    :growth-rate="data.growthRate" />
+                  <products-overview-trend :growth-rate="data.growthRate" />
                 </span>
               </div>
             </div>
