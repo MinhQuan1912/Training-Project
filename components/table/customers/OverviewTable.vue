@@ -19,7 +19,7 @@
             <component :is="iconComponents[overview.iconName]" />
           </div>
 
-          <div class="flex items-center justify-between">
+          <div class="flex justify-between">
             <div class="">
               <div class="flex gap-2">
                 <div
@@ -71,7 +71,7 @@
               </div>
             </div>
 
-            <div class="pt-8 pb-11 px-6 mb-4.75">
+            <div class="pt-8 pb-11 pr-6 mb-4.75">
               <component :is="iconGraphComponents[overview.iconGraph]" />
             </div>
           </div>

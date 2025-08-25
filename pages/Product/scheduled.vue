@@ -12,6 +12,8 @@ import ScheduledTable from "~/components/table/products/ScheduledTable.vue";
 definePageMeta({
   title: "Scheduled",
 });
+
+const searchQuery = ref("");
 </script>
 
 <style lang="scss" scoped></style>
