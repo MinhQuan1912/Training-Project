@@ -49,7 +49,7 @@ import {
   IconsShop,
 } from "#components";
 const colorMode = useColorMode();
-interface Menu {
+type Menu = {
   label: string;
   icon?: Component;
   to?: string;
@@ -100,21 +100,5 @@ const handleOpenSubmenu = (index: number) => {
 </script>
 
 <style lang="scss" scoped>
-.collapse-enter-active,
-.collapse-leave-active {
-  transition: max-height 0.3s ease, opacity 0.3s ease;
-  overflow: hidden;
-}
 
-.collapse-enter-from,
-.collapse-leave-to {
-  max-height: 0;
-  opacity: 0;
-}
-
-.collapse-enter-to,
-.collapse-leave-from {
-  max-height: 270px;
-  opacity: 1;
-}
 </style>
