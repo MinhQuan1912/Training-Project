@@ -7,7 +7,7 @@
     <div class="py-6 px-3 flex flex-col gap-8">
       <div></div>
 
-      <div class="flex justify-between">
+      <div class="grid grid-cols-3">
         <div class="flex gap-2">
           <icons-mobile />
 

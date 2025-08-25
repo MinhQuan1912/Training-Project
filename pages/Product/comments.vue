@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-background-02 rounded-4xl flex flex-col gap-3">
+  <div class="bg-background-02 rounded-4xl flex flex-col gap-3 flex-1">
     <CommentsTitle />
 
     <CommentsTable />
@@ -10,8 +10,8 @@
 import CommentsTitle from "~/components/title/products/CommentsTitle.vue";
 import CommentsTable from "~/components/table/products/CommentsTable.vue";
 definePageMeta({
-  title: 'Comments'
-})
+  title: "Comments",
+});
 </script>
 
 <style lang="scss" scoped></style>
