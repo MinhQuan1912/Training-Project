@@ -3,6 +3,9 @@
 @import "../theme/breakpoints.css";
 @import "../theme/color.css";
 /* ===== FONTS ===== */
-@import "../css/main.scss"
+@import "../css/main.scss";
 
-
+.container {
+  width: 100%;
+  min-width: 100%;
+}
