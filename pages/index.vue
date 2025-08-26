@@ -1,6 +1,6 @@
 <template>
-    <div>
-        Hello
+    <div class="text-primary text-6xl">
+       Welcome
     </div>
 </template>
 

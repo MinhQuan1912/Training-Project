@@ -1,6 +1,6 @@
 <template>
   <div class="p-5 flex gap-5 bg-black min-h-screen">
-    <div class="w-12 lg:!w-75 flex flex-col gap-5 text-secondary relative">
+    <div class="w-12 2xl:!w-75 flex flex-col gap-5 text-secondary relative">
       <navigation-menu />
       <div class="w-12 flex flex-col gap-3 absolute bottom-0 left-0">
         <div class="w-12 h-12 rounded-full bg-linear flex justify-center items-center cursor-pointer">

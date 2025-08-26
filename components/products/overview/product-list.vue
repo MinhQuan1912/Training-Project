@@ -22,72 +22,85 @@
         </div>
         <!-- Table -->
         <div class="px-4 pb-8">
-            <div class="flex gap-6 px-4 justify-between items-center">
-                <div class="w-128 h-6 flex gap-5 text-tertiary items-center">
-                    <input type="checkbox" class="checkbox"></input>
-                    <div class="text-xs leading-[160%] opacity-80">Product</div>
-                </div>
-                <div
-                    class="flex py-2 justify-between items-center text-xs text-tertiary leading-[160%] opacity-80 flex-1">
-                    <div class="w-20">Status</div>
-                    <div class="w-15">Price</div>
-                    <div class="w-36">Sales</div>
-                    <div class="w-24">Views</div>
-                    <div class="w-24 hidden lg:block">Likes</div>
-                </div>
-            </div>
-            <div v-for="(product) in productList" :key="product.id" class="h-24 p-4 flex gap-6">
-                <div class="w-128 h-16 flex gap-5 items-center">
-                    <input type="checkbox" class="checkbox"></input>
-                    <img :src="product.image" class="h-16 w-16 object-contain">
-                    <div class="flex flex-col">
-                        <p class="leading-[160%] text-primary font-semibold">{{ product.name }}</p>
-                        <p class="text-sm leading-[150%] text-secondary">{{ product.type }}</p>
-                    </div>
-                </div>
-                <div class="h-11 flex justify-between items-center text-sm leading-[150%] text-primary flex-1">
-                    <div class="w-20">
-                        <products-overview-status :status="product.status" />
-                    </div>
-                    <div class="w-15">${{ product.price.toFixed(2) }}</div>
-                    <div class="w-36 flex gap-2 items-center">
-                        <span class="text-sm leading-[150%]">${{ product.sales.value?.toLocaleString('en-US') }}</span>
-                        <products-overview-trend :growth-rate="product.sales.growthRate" />
-                    </div>
-                    <div class="w-24 flex gap-2 items-center">
-                        <span class="text-sm leading-[150%]">{{ product.views.current }}m</span>
-                        <div class="w-8 h-1.5 rounded-xs bg-[#7B7B7B66]">
-                            <div class="h-1.5 rounded-xs bg-chart-green"
-                                :style="{ width: product.views.current && product.views.kpi ? (product.views.current / product.views.kpi * 100) + '%' : '0%' }">
+            <table class="w-full text-sm text-primary leading-[150%]">
+                <thead>
+                    <tr class="justify-between items-center gap-6 px-4 text-xs text-tertiary opacity-80 h-16.75">
+                        <th class="w-94 2xl:w-128">
+                            <div class="flex gap-5 items-center px-4">
+                                <input type="checkbox" class="checkbox" @change="chooseAll" :checked="selectedAll" />
+                                Product
                             </div>
-                        </div>
-                    </div>
-                    <div class="w-24 hidden lg:flex gap-2 items-center">
-                        <span class="text-sm leading-[150%]">{{ product.likes.current }}m</span>
-                        <div class="w-8 h-1.5 rounded-xs bg-[#7B7B7B66]">
-                            <div class="h-1.5 rounded-xs bg-chart-green"
-                                :style="{ width: product.likes.current && product.likes.kpi ? (product.likes.current / product.likes.kpi * 100) + '%' : '0%' }">
+                        </th>
+                        <th class="w-26 xl:w-50 text-left">Status</th>
+                        <th class="w-21 xl:w-45 text-left">Price</th>
+                        <th class="w-42 xl:w-66 text-left">Sales</th>
+                        <th class="xl:w-54 text-left">Views</th>
+                        <th class="w-24 text-left hidden 2xl:table-cell">Likes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="product in productList" :key="product.id" class="h-24 hover:bg-background-highlight">
+                        <!-- Product -->
+                        <td class="rounded-l-xl hover:border-white">
+                            <div class="flex gap-5 items-center">
+                                <input type="checkbox" class="checkbox" v-model="selectedId" :value="product.id"/>
+                                <img :src="product.image" class="h-16 w-16 object-contain" />
+                                <div class="flex flex-col">
+                                    <p class="font-semibold ">{{ product.name }}</p>
+                                    <p class="text-sm text-secondary">{{ product.type }}</p>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        </td>
+                        <!-- Status -->
+                        <td >
+                            <products-overview-status :status="product.status" class="w-20"/>
+                        </td>
+                        <!-- Price -->
+                        <td>${{ product.price.toFixed(2) }}</td>
+                        <!-- Sales -->
+                        <td>
+                            <div class="flex gap-2 items-center">
+                                <span>${{ product.sales.value?.toLocaleString('en-US') }}</span>
+                                <products-overview-trend :growth-rate="product.sales.growthRate" />
+                            </div>
+                        </td>
+                        <!-- Views -->
+                        <td class="w-24 rounded-r-xl">
+                            <div class="flex gap-2 items-center">
+                                <span>{{ product.views.current }}m</span>
+                                <div class="w-8 h-1.5 rounded-xs bg-[#7B7B7B66]">
+                                    <div class="h-1.5 rounded-xs bg-chart-green"
+                                        :style="{ width: product.views.current && product.views.kpi ? (product.views.current / product.views.kpi * 100) + '%' : '0%' }">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <!-- Likes -->
+                        <td class="w-24 hidden 2xl:table-cell rounded-r-xl">
+                            <div class="flex gap-2 items-center">
+                                <span>{{ product.likes.current }}m</span>
+                                <div class="w-8 h-1.5 rounded-xs bg-[#7B7B7B66]">
+                                    <div class="h-1.5 rounded-xs bg-chart-green"
+                                        :style="{ width: product.likes.current && product.likes.kpi ? (product.likes.current / product.likes.kpi * 100) + '%' : '0%' }">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { select } from '#build/ui'
+
 const activeTab = ref('Market')
 const tabs = ref([
-    {
-        label: 'Market'
-    },
-    {
-        label: 'Traffic sources'
-    },
-    {
-        label: 'Viewers'
-    }
+    { label: 'Market' },
+    { label: 'Traffic sources' },
+    { label: 'Viewers' }
 ])
 type productData = {
     value?: number,
@@ -208,7 +221,20 @@ const productList = ref<productList[]>([
         }
     },
 ])
-
+const selectedId = ref<number[]>([])
+const selectedAll = computed(() => {
+    return selectedId.value.length === productList.value.length
+})
+const chooseAll = (event: Event) => {
+    const target = event.target as HTMLInputElement || null
+    if (!target) return
+    if (target.checked) {
+        selectedId.value = productList.value.map(p=>p.id)
+    }
+    else {
+        selectedId.value = []
+    }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -227,5 +253,16 @@ const productList = ref<productList[]>([
     border-radius: 6px;
     width: 24px;
     height: 24px;
+    &:checked {
+        background-color: var(--color-chart-green);
+        background-image: url('/images/tick.png');
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}
+
+td:first-child {
+    padding-left: 16px;
+    padding-right: 24px
 }
 </style>

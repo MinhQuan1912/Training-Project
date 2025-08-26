@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-3 w-full">
     <!-- Overview -->
-    <div class="product-overview">
+    <div class="product-overview ">
       <div class="w-full flex justify-between h-12">
         <div class="px-5 flex items-center text-primary text-xl leading-[145%] font-semibold ">
           <p>Overview</p>
@@ -16,14 +16,14 @@
             1Y</div>
         </div>
       </div>
-      <div class="p-5 text-primary flex gap-8 flex-wrap">
+      <div class="p-5 text-primary gap-8 flex flex-wrap">
         <div v-for="(item, idx) in overViewList" :key="idx" class="overview-item"
-          :class="{ '!hidden lg:!flex': item.label === 'Sales' }">
+          :class="{ '!hidden xl:!flex': item.label === 'Sales' }">
           <div class="w-16 h-16 bg-background-surface1 flex justify-center items-center rounded-full">
             <component :is="item.icon" />
           </div>
-          <div class="flex gap-4">
-            <div class="flex flex-col max-w-41.5">
+          <div class="flex gap-2 xl:gap-3.5">
+            <div class="flex flex-col w-38.75 2xl:w-41.5">
               <div class="flex gap-2 items-center h-6 mb-2">
                 <p class="font-semibold leading-[150%]">{{ item.label }}</p>
                 <u-tooltip :text="item.label"><icons-helping /></u-tooltip>
@@ -37,8 +37,8 @@
                 <span class="text-tertiary text-sm leading-[150%]">vs last year</span>
               </div>
             </div>
-            <div class="w-[136px]">
-              <img src="/images/chart1.png" class="w-full h-full object-cover" alt="">
+            <div class="w-16 xl:w-[136px] pt-11 xl:pt-5 xl:pl-6">
+              <img src="/images/chart1.png" class="w-16 h-14 xl:w-23.5 xl:h-20 object-contain">
             </div>
           </div>
         </div>
@@ -68,7 +68,7 @@
           <div v-for="(item, idx) in productActivityList" :key="idx"
             class="flex items-center gap-6 h-17 text-primary text-sm leading-[150%]">
             <div class="flex-1" v-for="(data, dataIdx) in item" :key="dataIdx"
-              :class="{ 'hidden lg:block': data === item.comment }">
+              :class="{ 'hidden 2xl:block': data === item.comment }">
               <div class="flex items-center gap-2">{{ data.value }}
                 <span v-if="data.growthRate">
                   <products-overview-trend :growth-rate="data.growthRate" />
@@ -79,7 +79,7 @@
         </div>
       </div>
       <!-- Product Views -->
-      <div class="product-overview !gap-3 w-78 lg:w-135 h-76">
+      <div class="product-overview !gap-3 w-78 3xl:w-135 h-76">
         <h6 class="h-12 px-3 py-2.5 text-xl leading-[145%] text-primary font-semibold">Product Views</h6>
 
       </div>
