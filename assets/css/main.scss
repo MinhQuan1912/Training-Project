@@ -61,6 +61,11 @@ table
   outline: 1.5px solid var(--color-stroke-card-hover-dark, #f1f1f1);
   background: var(--color-background-highlight, #222);
 }
+.border-cus-3 {
+  border-radius: 16px;
+  border-color: #f1f1f1;
+  background: #222;
+}
 .font-inter {
   font-family: "Inter";
 }
