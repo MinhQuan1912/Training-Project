@@ -1,41 +1,34 @@
 <template>
-  <div class="custom-checkbox-container">
-    <input type="checkbox" id="myCheckbox" class="original-checkbox" />
-    <label for="myCheckbox" class="custom-checkbox"></label>
+  <div class="flex">
+    <div class="bottom">FLEX 1</div>
+
+    <div class="bottom">FLEX 2</div>
+
+    <div class="bottom">FLEX 3</div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-.original-checkbox {
-  display: none;
+<script setup></script>
+
+<style>
+.flex {
+  display: flex; /* Bật flexbox cho container */
 }
 
-.custom-checkbox {
-  @extend .original-checkbox;
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  border: 2px solid #333;
-  background-color: black;
-  cursor: pointer;
-  position: relative;
-  border-radius: 4px;
+.bottom {
+  background-color: aqua; /* Màu nền mặc định cho tất cả các flex item */
+  padding: 20px;
+  margin: 5px;
+  transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển đổi mượt mà */
 }
 
-.original-checkbox:checked + .custom-checkbox {
-  background: white;
-  border-color: white;
+/* Khi di chuột vào .bottom, phần tử .bottom liền kề ngay sau nó sẽ mất background */
+.bottom:hover + .bottom {
+  background-color: transparent;
 }
 
-.original-checkbox:checked + .custom-checkbox::after {
-  content: "";
-  position: absolute;
-  top: 50%; // Dùng top: 50% để dịch chuyển xuống giữa
-  left: 50%; // Dùng left: 50% để dịch chuyển sang giữa
-  width: 6px;
-  height: 12px;
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  transform: translate(-50%, -50%) rotate(45deg); // Sử dụng transform để dịch chuyển lại cho chính xác
-}
+/* Khi di chuột vào .bottom, tất cả các phần tử .bottom sau nó sẽ mất background */
+/* .bottom:hover ~ .bottom {
+  background-color: transparent;
+} */
 </style>

@@ -1,4 +1,3 @@
-import { searchQuery } from '~/components/title/products/ScheduledTittle.vue';
 <template>
   <div class="container">
     <div class="p-3 flex justify-between items-center h-18">
@@ -14,7 +13,8 @@ import { searchQuery } from '~/components/title/products/ScheduledTittle.vue';
             type="text"
             placeholder="Search products"
             class="text-sm leading-[150%] w-full"
-            v-model="searchQuery"
+            :value="searchQuery"
+            @input="$emit('update:searchQuery', $event.target.value)"
           />
         </div>
       </div>
@@ -41,7 +41,16 @@ import { searchQuery } from '~/components/title/products/ScheduledTittle.vue';
 </template>
 
 <script setup>
-const searchQuery = ref("");
+import { defineProps, defineEmits } from "vue";
+
+const props = defineProps({
+  searchQuery: {
+    type: String,
+    required: true,
+  },
+});
+
+const emit = defineEmits(["update:searchQuery"]);
 </script>
 
 <style lang="scss" scoped></style>

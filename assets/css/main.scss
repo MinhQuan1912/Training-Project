@@ -68,6 +68,14 @@ table {
   border-color: #f1f1f1;
   background: #222;
 }
+.border-cus-4 {
+  border-radius: 32px;
+  border: 1.5px solid #fff;
+  background: var(--color-background-02);
+
+  box-shadow: 0 5px 1.5px -4px rgba(8, 8, 8, 0.5),
+    0 6px 4px -4px rgba(8, 8, 8, 0.05);
+}
 .font-inter {
   font-family: "Inter";
 }
