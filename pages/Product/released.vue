@@ -1,4 +1,3 @@
-
 <template>
   <div class="container overflow-hidden">
     <div class="w-full flex justify-between items-center">
@@ -10,7 +9,6 @@
           v-model="value"
           placeholder="Search products"
           icon="i-lucide-search"
-
           color="success"
           :ui="{
             root: 'text-secondary',
@@ -123,7 +121,7 @@
             </td>
             <td class="p-4 hidden sm:table-cell">${{ item.price }}</td>
             <td class="p-4 hidden md:table-cell">
-              <div class="flex flex-nowrap items-center gap-2 ">
+              <div class="flex flex-nowrap items-center gap-2">
                 <span>${{ item.sales.toLocaleString() }}</span>
                 <span
                   class="text-xs whitespace-nowrap hidden md:inline-block"
@@ -151,7 +149,12 @@
             <td class="p-4 rounded-r-[16px] hidden lg:table-cell">
               <div class="flex items-center gap-2">
                 {{ item.views }}m
-                <UProgress v-model="item.views" :max="300" color="success" class="hidden lg:block" />
+                <UProgress
+                  v-model="item.views"
+                  :max="300"
+                  color="success"
+                  class="hidden lg:block"
+                />
               </div>
             </td>
           </tr>
@@ -170,7 +173,9 @@
           <h2 class="text-lg font-semibold">Edit Item</h2>
         </template>
 
-        <div class="flex flex-col gap-4 overflow-y-auto max-h-[50vh] custom-scroll">
+        <div
+          class="flex flex-col gap-4 overflow-y-auto max-h-[50vh] custom-scroll"
+        >
           <UFormField label="Name">
             <UInput
               v-model="currentItem.name"
@@ -360,12 +365,12 @@ const currentItem = ref({
 });
 
 const onEdit = (item: any) => {
-  currentItem.value = item;
+  currentItem.value = { ...item };
   showEditModal.value = true;
 };
 
 const onDelete = (item: any) => {
-  currentItem.value = item;
+  currentItem.value = { ...item };
   showDeleteConfirm.value = true;
 };
 
@@ -374,7 +379,12 @@ const confirmDelete = () => {
   showDeleteConfirm.value = false;
 };
 const saveEdit = () => {
-  data.value[currentItem.value.id] = { ...currentItem.value };
+  const index = data.value.findIndex(
+    (item) => item.id === currentItem.value.id
+  );
+  if (index !== -1) {
+    data.value[index] = { ...currentItem.value };
+  }
   showEditModal.value = false;
 };
 </script>
