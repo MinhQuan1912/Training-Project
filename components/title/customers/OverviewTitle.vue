@@ -14,9 +14,9 @@
           <select
             name=""
             id=""
-            class="appearance-none w-45 py-3 pl-5 pr-3 rounded-full border-[1.5px] border-solid border-stroke bg-background-02 text-secondary focus:outline-none"
+            class="appearance-none w-40 py-3 pl-5 pr-3 rounded-full border-[1.5px] border-solid border-stroke bg-background-02 text-secondary focus:outline-none"
           >
-            <option value="" class="text-sm">Newest first</option>
+            <option value="" class="text-sm">Last 28 days</option>
             <option value=""></option>
             <option value=""></option>
           </select>

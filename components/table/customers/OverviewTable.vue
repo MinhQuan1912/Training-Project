@@ -152,7 +152,9 @@
           <div class="p-3.5 w-6 h-6"></div>
         </div>
 
-        <div class="flex justify-between">
+        <div
+          class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8"
+        >
           <div
             class="py-8 px-6 flex flex-col gap-4 items-center"
             v-for="(newCustomer, index) in newCustomers"
