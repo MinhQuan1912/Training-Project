@@ -1,101 +1,137 @@
 <template>
   <div class="container pb-8 px-4">
-    <ul
-      class="p-4 grid grid-cols-3 items-center"
-      style="grid-template-columns: 24px 2fr 1fr"
-    >
-      <li>
-        <div class="custom-checkbox-container">
-          <input
-            type="checkbox"
-            id="myCheckbox"
-            class="original-checkbox"
-            v-model="allChecked"
-          />
-          <label for="myCheckbox" class="custom-checkbox"></label>
-        </div>
-      </li>
-      <li class="text-sm text-tertiary ml-5">Comment</li>
-      <li class="text-sm text-tertiary">Product</li>
-    </ul>
+    <table class="table-auto w-full">
+      <thead>
+        <tr class="text-left">
+          <th class="w-6 pl-4 py-4">
+            <input
+              type="checkbox"
+              id="myCheckbox"
+              class="original-checkbox"
+              v-model="allChecked"
+            />
+            <label for="myCheckbox" class="custom-checkbox"></label>
+          </th>
+          <th class="text-sm text-tertiary pl-6 w-13/20 py-4">Comment</th>
+          <th class="text-sm text-tertiary w-3/10 pr-4 py-4">Product</th>
+        </tr>
+      </thead>
 
-    <ul
-      class="p-4 grid grid-cols-3 items-center relative border-[1.5px] border-solid border-x-transparent border-b-transparent border-t-stroke-subtle hover:rounded-2xl hover:bg-background-pop hover:border-solid hover:border-primary/7.5"
-      style="grid-template-columns: 24px 2fr 1fr"
-      v-for="(comment, index) in comments"
-      :key="index"
-    >
-      <li>
-        <div class="custom-checkbox-container">
-          <input
-            type="checkbox"
-            :id="'checkbox-' + index"
-            class="original-checkbox"
-            v-model="comment.checked"
-          />
-          <label :for="'checkbox-' + index" class="custom-checkbox"></label>
-        </div>
-      </li>
-      <li class="flex mr-6" @click="handleFocusEnter(comment)">
-        <div class="w-12 h-12 mx-5 rounded-full flex-none">
-          <img
-            :src="comment.imgComment"
-            alt=""
-            class="w-full h-full rounded-full object-contain"
-          />
-        </div>
-        <div class="flex flex-col gap-4">
-          <div>
-            <div class="flex items-center gap-3">
-              <div class="font-semibold text-primary">
-                {{ comment.titleComment }}
-              </div>
-              <div class="flex gap-2 items-center">
-                <div class="text-secondary text-sm">
-                  {{ comment.instaComment }}
+      <tbody>
+        <tr
+          class="bottomHover relative group outline-[1.5px] outline-solid outline-transparent hover:outline-primary/7.5 hover:bg-background-pop w-full rounded-2xl border-t-[1.5px] hover:border-none border-solid border-stroke-subtle"
+          v-for="(comment, index) in comments"
+          :key="index"
+          @mouseover="hoveredRowIndex = index"
+          @mouseleave="hoveredRowIndex = null"
+        >
+          <td class="w-6 pl-4 py-4 rounded-l-2xl">
+            <input
+              type="checkbox"
+              :id="'checkbox-' + index"
+              class="original-checkbox"
+              v-model="comment.checked"
+            />
+            <label :for="'checkbox-' + index" class="custom-checkbox"></label>
+          </td>
+          <td class="w-13/20 py-4">
+            <div class="flex mr-6 flex-col gap-4.5">
+              <div class="flex items-center">
+                <div class="w-12 h-12 mx-5 rounded-full flex-none">
+                  <img
+                    :src="comment.imgComment"
+                    alt=""
+                    class="w-full h-full rounded-full object-contain"
+                  />
                 </div>
-                <icons-status_indicator />
-                <div class="text-secondary text-sm">
-                  {{ comment.timeComment }}
-                </div>
-              </div>
-            </div>
+                <div class="flex flex-col gap-4">
+                  <div>
+                    <div class="flex items-center gap-3">
+                      <div class="font-semibold text-primary">
+                        {{ comment.titleComment }}
+                      </div>
+                      <div class="flex gap-2 items-center">
+                        <div class="text-secondary text-sm">
+                          {{ comment.instaComment }}
+                        </div>
+                        <icons-status_indicator />
+                        <div class="text-secondary text-sm">
+                          {{ comment.timeComment }}
+                        </div>
+                      </div>
+                    </div>
 
-            <div class="text-primary/80">
-              {{ comment.contentComment }}
-            </div>
-          </div>
-
-          <div class="flex gap-4" v-if="comment.activeIndex === true">
-            <div class="w-8 h-8 rounded-full flex flex-none">
-              <img
-                src="https://media1.thrillophilia.com/filestore/n2ib9inwzcilxpg3aumbigvq4jus_IMG_World_Dubai_Fun_38a0986c1a.jpg?w=400&dpr=2"
-                alt=""
-                class="w-full h-full rounded-full object-cover"
-              />
-            </div>
-
-            <div>
-              <div class="flex items-center gap-3">
-                <div class="font-semibold text-primary">
-                  {{ comment.titleComment }}
-                </div>
-                <div class="flex gap-2 items-center">
-                  <div class="text-secondary text-sm">
-                    {{ comment.instaComment }}
-                  </div>
-                  <icons-status_indicator />
-                  <div class="text-secondary text-sm">
-                    {{ comment.timeComment }}
+                    <div class="text-primary/80">
+                      {{ comment.contentComment }}
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div class="text-primary/80">
-                {{ comment.contentAnswer }}
-              </div>
+              <div class="flex gap-4 ml-22" v-if="hoveredRowIndex === index">
+                <div class="w-8 h-8 rounded-full flex flex-none">
+                  <img
+                    :src="comment.imgAnswer"
+                    alt=""
+                    class="w-full h-full rounded-full object-cover"
+                  />
+                </div>
 
-              <div class="flex gap-5 items-center text-secondary mt-2">
+                <div>
+                  <div class="flex items-center gap-3">
+                    <div class="font-semibold text-primary">
+                      {{ comment.titleComment }}
+                    </div>
+                    <div class="flex gap-2 items-center">
+                      <div class="text-secondary text-sm">
+                        {{ comment.instaComment }}
+                      </div>
+                      <icons-status_indicator />
+                      <div class="text-secondary text-sm">
+                        {{ comment.timeComment }}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="text-primary/80">
+                    {{ comment.contentAnswer }}
+                  </div>
+
+                  <div class="flex gap-5 items-center text-secondary mt-2">
+                    <NuxtLink
+                      to="#"
+                      class="flex items-center gap-1 py-1 pr-1.5"
+                    >
+                      <icons-edit />
+                      <div class="text-sm font-semibold">Reply</div>
+                    </NuxtLink>
+
+                    <NuxtLink
+                      to="#"
+                      class="flex items-center gap-1 py-1 pl-1 pr-1.5"
+                    >
+                      <icons-heart />
+                      <div class="text-sm font-semibold">Like</div>
+                    </NuxtLink>
+
+                    <NuxtLink
+                      to="#"
+                      class="flex items-center gap-1 py-1 pl-1 pr-1.5"
+                    >
+                      <icons-trash />
+                      <div class="text-sm font-semibold">Remove</div>
+                    </NuxtLink>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="w-3/10 py-4 pr-4">
+            <div class="flex items-center">
+              <div
+                class="flex gap-5 items-center text-secondary mt-2"
+                v-if="hoveredRowIndex === index"
+              >
                 <NuxtLink to="#" class="flex items-center gap-1 py-1 pr-1.5">
                   <icons-edit />
                   <div class="text-sm font-semibold">Reply</div>
@@ -105,7 +141,7 @@
                   to="#"
                   class="flex items-center gap-1 py-1 pl-1 pr-1.5"
                 >
-                  <icons-heart />
+                  <icons-heartRed />
                   <div class="text-sm font-semibold">Like</div>
                 </NuxtLink>
 
@@ -117,54 +153,38 @@
                   <div class="text-sm font-semibold">Remove</div>
                 </NuxtLink>
               </div>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="flex items-center" @click="handleFocusEnter(comment)">
-        <div
-          class="flex gap-5 items-center text-secondary mt-2"
-          v-if="comment.activeIndex === true"
-        >
-          <NuxtLink to="#" class="flex items-center gap-1 py-1 pr-1.5">
-            <icons-edit />
-            <div class="text-sm font-semibold">Reply</div>
-          </NuxtLink>
 
-          <NuxtLink to="#" class="flex items-center gap-1 py-1 pl-1 pr-1.5">
-            <icons-heartRed />
-            <div class="text-sm font-semibold">Like</div>
-          </NuxtLink>
-
-          <NuxtLink to="#" class="flex items-center gap-1 py-1 pl-1 pr-1.5">
-            <icons-trash />
-            <div class="text-sm font-semibold">Remove</div>
-          </NuxtLink>
-        </div>
-
-        <div class="flex gap-5 items-center" v-else>
-          <div class="w-16 h-16 rounded-xl">
-            <img
-              :src="comment.imgProduct"
-              alt=""
-              class="w-full h-full rounded-xl object-contain"
-            />
-          </div>
-          <div class="relative cursor-pointer">
-            <div class="font-semibold text-primary">
-              {{ comment.titleProduct }}
+              <div
+                class="flex gap-5 items-center"
+                v-if="hoveredRowIndex !== index"
+              >
+                <div class="w-16 h-16 rounded-xl">
+                  <img
+                    :src="comment.imgProduct"
+                    alt=""
+                    class="w-full h-full rounded-xl object-contain"
+                  />
+                </div>
+                <div class="relative cursor-pointer">
+                  <div class="font-semibold text-primary">
+                    {{ comment.titleProduct }}
+                  </div>
+                  <div class="font-normal text-secondary">
+                    <div>UI Design Kit</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="font-normal text-secondary">
-              <div>UI Design Kit</div>
-            </div>
-          </div>
-        </div>
-      </li>
-      <div
-        class="w-2 h-2 bg-primary-02 rounded-full flex-none absolute top-4 right-4"
-        v-if="comment.on === true"
-      ></div>
-    </ul>
+          </td>
+          <td class="rounded-r-2xl">
+            <div
+              class="w-2 h-2 rounded-full flex-none absolute top-4 right-4"
+              :class="{ 'bg-primary-02': comment.on === true }"
+            ></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -181,10 +201,10 @@ const comments = ref([
     instaComment: "@samstoo",
     timeComment: "1m",
     contentComment:
-      "Can you make a version for automated penetration testing and cybersecurity?",
+      "Can you make a version for automated penetration testing and cybersecurity?iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
     imgProduct: "/images/1.png",
     titleProduct: "123123Bento Pro v.2",
-    imgAnswer: "",
+    imgAnswer: "/images/1.png",
     titleAnswer: "Dash",
     instaAnswer: "@dash",
     timeAnswer: "1s",
@@ -203,7 +223,7 @@ const comments = ref([
     contentComment:
       "Can you make a version for automated penetration testing and cybersecurity?",
     titleProduct: "123123",
-    imgAnswer: "",
+    imgAnswer: "/images/1.png",
     titleAnswer: "Dash",
     instaAnswer: "@dash",
     timeAnswer: "1s",
@@ -222,7 +242,7 @@ const comments = ref([
     contentComment:
       "Can you make a version for automated penetration testing and cybersecurity?",
     titleProduct: "123123",
-    imgAnswer: "",
+    imgAnswer: "/images/1.png",
     titleAnswer: "Dash",
     instaAnswer: "@dash",
     timeAnswer: "1s",
@@ -241,7 +261,7 @@ const comments = ref([
     contentComment:
       "Can you make a version for automated penetration testing and cybersecurity?",
     titleProduct: "123123",
-    imgAnswer: "",
+    imgAnswer: "/images/1.png",
     titleAnswer: "Dash",
     instaAnswer: "@dash",
     timeAnswer: "1s",
@@ -260,7 +280,7 @@ const comments = ref([
     contentComment:
       "Can you make a version for automated penetration testing and cybersecurity?",
     titleProduct: "123123",
-    imgAnswer: "",
+    imgAnswer: "/images/1.png",
     titleAnswer: "Dash",
     instaAnswer: "@dash",
     timeAnswer: "1s",
@@ -279,7 +299,7 @@ const comments = ref([
     contentComment:
       "Can you make a version for automated penetration testing and cybersecurity?",
     titleProduct: "123123",
-    imgAnswer: "",
+    imgAnswer: "/images/1.png",
     titleAnswer: "Dash",
     instaAnswer: "@dash",
     timeAnswer: "1s",
@@ -298,7 +318,7 @@ const comments = ref([
     contentComment:
       "Can you make a version for automated penetration testing and cybersecurity?",
     titleProduct: "123123",
-    imgAnswer: "",
+    imgAnswer: "/images/1.png",
     titleAnswer: "Dash",
     instaAnswer: "@dash",
     timeAnswer: "1s",
@@ -317,7 +337,7 @@ const comments = ref([
     contentComment:
       "Can you make a version for automated penetration testing and cybersecurity?",
     titleProduct: "123123",
-    imgAnswer: "",
+    imgAnswer: "/images/1.png",
     titleAnswer: "Dash",
     instaAnswer: "@dash",
     timeAnswer: "1s",
@@ -338,9 +358,9 @@ const allChecked = computed({
   // get được dùng để tính toán và trả về một giá trị dựa trên các dữ liệu phụ thuộc
   // phg thức every kiểm tra xem tất cả các phần tử trong mảng có vượt qua bái kiểm tra đc triển khai bởi hàm đc cung cấp hay k, trả về boolean
   get() {
-    return comments.value.every((comment) => comment.checked);
+    return comments.value.every((comment) => comment.checked === true);
   },
-  // hàm này đổi giá trị khi nó chuyển thành true, nếu tất cả chuyển thành true, allChecked cũng là true, ngc lai
+  // gán giá trị cho allChecked (chạy khi thay đổi giá trị allChecked)
   // set để gán giá trị dữ liệu phụ thuộc
   set(value) {
     comments.value.forEach((comment) => {
@@ -348,6 +368,8 @@ const allChecked = computed({
     });
   },
 });
+
+const hoveredRowIndex = ref(null);
 </script>
 
 <style lang="scss" scoped>
@@ -382,5 +404,9 @@ const allChecked = computed({
   border: solid black;
   border-width: 0 3px 3px 0;
   transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.bottomHover:hover + .bottomHover {
+  border-top: transparent;
 }
 </style>

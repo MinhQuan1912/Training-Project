@@ -1,8 +1,8 @@
 <template>
   <div class="bg-background-02 rounded-4xl flex flex-col gap-3 w-full">
-    <ScheduledTitle />
+    <ScheduledTitle v-model:searchQuery="searchQueryScheduled" />
 
-    <ScheduledTable />
+    <ScheduledTable :searchQuery="searchQueryScheduled" />
   </div>
 </template>
 
@@ -13,7 +13,7 @@ definePageMeta({
   title: "Scheduled",
 });
 
-const searchQuery = ref("");
+const searchQueryScheduled = ref("");
 </script>
 
 <style lang="scss" scoped></style>

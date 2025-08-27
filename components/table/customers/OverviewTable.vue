@@ -2,7 +2,7 @@
   <div class="container">
     <div class="pt-4 px-5 pb-5 flex flex-col">
       <div
-        class="grid grid-cols-2 xl:grid-cols-3 gap-8 divide-x-[1.5px] divide-solid divide-stroke-subtle"
+        class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 divide-x-[1.5px] divide-solid divide-stroke-subtle"
       >
         <div
           class="flex flex-col gap-10"
@@ -152,7 +152,9 @@
           <div class="p-3.5 w-6 h-6"></div>
         </div>
 
-        <div class="flex justify-between">
+        <div
+          class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8"
+        >
           <div
             class="py-8 px-6 flex flex-col gap-4 items-center"
             v-for="(newCustomer, index) in newCustomers"
