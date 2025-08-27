@@ -78,13 +78,13 @@ type Menu = {
   subMenu?: Menu[];
 }
 const menu = ref<Menu[]>([
-  { label: "Dashboard", icon: markRaw(IconsDashboard), to: "/" },
+  { label: "Dashboard", icon: markRaw(IconsDashboard), to: "/dashboard" },
   {
     label: "Product",
     icon: markRaw(IconsProduct),
     subMenu: [
       { label: "Overview", title: "Product Overview", to: "/product" },
-      { label: "Drafts", title: "Drafts", to: "/product/draft" },
+      { label: "Drafts", title: "Drafts", to: "/" },
       { label: "Released", title: "Released", to: "/product/released" },
       { label: "Comments", title: "Comments", to: "/product/comments" },
       { label: "Scheduled", title: "Scheduled", to: "/product/scheduled" },
@@ -102,13 +102,13 @@ const menu = ref<Menu[]>([
   { label: "Income", icon: markRaw(IconsIncome) },
   { label: "Promote", icon: markRaw(IconsPromote) },
 ]);
-const isTablet = useMediaQuery('(max-width:1023px)')
+const isTablet = useMediaQuery('(max-width:1439px)')
 const route = useRoute()
 const openIndexs = ref<number[]>([]);
 
 const handleOpenSubmenu = (index: number) => {
   const isOpen = openIndexs.value.includes(index);
-  if (isTablet) {
+  if (isTablet.value) {
     openIndexs.value = isOpen ? [] : [index]
   }
   else {
@@ -137,6 +137,17 @@ watch(
     }
   }
 )
+watch(isTablet, (val) => {
+  if (val) {
+    openIndexs.value = []
+  }
+  else {
+    const index = menu.value.findIndex(m =>
+      m.subMenu?.some(sub => sub.to === route.path)
+    )
+    openIndexs.value = [index]; 
+  }
+})
 </script>
 
 <style lang="scss" scoped></style>
