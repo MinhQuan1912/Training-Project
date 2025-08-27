@@ -27,15 +27,18 @@
     <div
       class="mt-2 text-xs text-gray-400 hidden group-hover:flex gap-2 items-center duration-200 cursor-pointer"
     >
-      <div class="flex items-end gap-1" @click.stop="$emit('edit')">
+      <div class="flex items-center gap-1" @click.stop="$emit('edit')">
         <UIcon name="prime:pen-to-square" class="size-4" />
         <span>Edit</span>
       </div>
-      <div class="flex items-end gap-1" @click.stop.prevent="$emit('delete')">
+      <div
+        class="flex items-center gap-1"
+        @click.stop.prevent="$emit('delete')"
+      >
         <UIcon name="prime:trash" class="size-4" />
         <span>Delete</span>
       </div>
-      <div class="flex items-end gap-1" @click.stop>
+      <div class="flex items-center gap-1" @click.stop>
         <UIcon name="prime:eye-slash" class="size-4" />
         <span>Unpublish</span>
       </div>
