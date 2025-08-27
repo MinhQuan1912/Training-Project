@@ -21,7 +21,7 @@
         <select
           name=""
           id=""
-          class="appearance-none w-45 py-3 pl-5 pr-3 rounded-full border-[1.5px] border-solid border-stroke-stroke2 bg-background-02 text-secondary focus:outline-none"
+          class="appearance-none w-45 py-3 pl-5 pr-3 rounded-full border-[1.5px] border-solid border-stroke bg-background-02 text-secondary focus:outline-none"
         >
           <option value="" class="text-sm">Newest first</option>
           <option value=""></option>

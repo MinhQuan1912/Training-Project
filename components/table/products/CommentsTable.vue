@@ -2,8 +2,8 @@
   <div class="container pb-8 px-4">
     <table class="table-auto w-full">
       <thead>
-        <tr class="text-left">
-          <th class="w-6 pl-4 py-4">
+        <tr class="text-left flex">
+          <th class="w-10 pl-4 py-4">
             <input
               type="checkbox"
               id="myCheckbox"
@@ -12,20 +12,23 @@
             />
             <label for="myCheckbox" class="custom-checkbox"></label>
           </th>
-          <th class="text-sm text-tertiary pl-6 w-13/20 py-4">Comment</th>
-          <th class="text-sm text-tertiary w-3/10 pr-4 py-4">Product</th>
+          <th class="max-lg:w-13/20 text-sm text-tertiary pl-5 py-4 flex-1">
+            Comment
+          </th>
+          <th class="text-sm text-tertiary w-1/4 lg:w-3/10 pr-4 py-4">
+            Product
+          </th>
         </tr>
       </thead>
 
       <tbody>
         <tr
-          class="bottomHover relative group outline-[1.5px] outline-solid outline-transparent hover:outline-primary/7.5 hover:bg-background-pop w-full rounded-2xl border-t-[1.5px] hover:border-none border-solid border-stroke-subtle"
+          class="bottomHover flex relative group outline-[1.5px] outline-solid outline-transparent hover:outline-primary/7.5 hover:bg-background-pop transition-all duration-500 w-full hover:rounded-2xl border-t-[1.5px] hover:border-transparent border-solid border-stroke-subtle"
           v-for="(comment, index) in comments"
           :key="index"
-          @mouseover="hoveredRowIndex = index"
-          @mouseleave="hoveredRowIndex = null"
+          @click="toggleContent(index)"
         >
-          <td class="w-6 pl-4 py-4 rounded-l-2xl">
+          <td class="w-10 pl-4 py-4 rounded-l-2xl h-12">
             <input
               type="checkbox"
               :id="'checkbox-' + index"
@@ -34,10 +37,13 @@
             />
             <label :for="'checkbox-' + index" class="custom-checkbox"></label>
           </td>
-          <td class="w-13/20 py-4">
-            <div class="flex mr-6 flex-col gap-4.5">
+          <td
+            class="w-13/20 max-lg:group-hover:w-full py-4 ml-5 flex-1"
+            colspan="2"
+          >
+            <div class="flex mr-6 flex-col">
               <div class="flex items-center">
-                <div class="w-12 h-12 mx-5 rounded-full flex-none">
+                <div class="w-12 h-12 mr-5 rounded-full flex-none">
                   <img
                     :src="comment.imgComment"
                     alt=""
@@ -68,120 +74,131 @@
                 </div>
               </div>
 
-              <div class="flex gap-4 ml-22" v-if="hoveredRowIndex === index">
-                <div class="w-8 h-8 rounded-full flex flex-none">
-                  <img
-                    :src="comment.imgAnswer"
-                    alt=""
-                    class="w-full h-full rounded-full object-cover"
-                  />
-                </div>
-
-                <div>
-                  <div class="flex items-center gap-3">
-                    <div class="font-semibold text-primary">
-                      {{ comment.titleComment }}
-                    </div>
-                    <div class="flex gap-2 items-center">
-                      <div class="text-secondary text-sm">
-                        {{ comment.instaComment }}
-                      </div>
-                      <icons-status_indicator />
-                      <div class="text-secondary text-sm">
-                        {{ comment.timeComment }}
-                      </div>
-                    </div>
+              <div
+                :class="[
+                  'transition-all ml-18 duration-500 ease-in-out',
+                  hoveredRowIndex[index]
+                    ? 'max-h-100 opacity-100 visible'
+                    : 'max-h-0 opacity-0 invisible',
+                ]"
+              >
+                <div class="flex gap-4 mt-4.5">
+                  <div class="w-8 h-8 rounded-full flex flex-none">
+                    <img
+                      :src="comment.imgAnswer"
+                      alt=""
+                      class="w-full h-full rounded-full object-cover"
+                    />
                   </div>
 
-                  <div class="text-primary/80">
-                    {{ comment.contentAnswer }}
-                  </div>
+                  <div>
+                    <div class="flex items-center gap-3">
+                      <div class="font-semibold text-primary">
+                        {{ comment.titleComment }}
+                      </div>
+                      <div class="flex gap-2 items-center">
+                        <div class="text-secondary text-sm">
+                          {{ comment.instaComment }}
+                        </div>
+                        <icons-status_indicator />
+                        <div class="text-secondary text-sm">
+                          {{ comment.timeComment }}
+                        </div>
+                      </div>
+                    </div>
 
-                  <div class="flex gap-5 items-center text-secondary mt-2">
-                    <NuxtLink
-                      to="#"
-                      class="flex items-center gap-1 py-1 pr-1.5"
-                    >
-                      <icons-edit />
-                      <div class="text-sm font-semibold">Reply</div>
-                    </NuxtLink>
+                    <div class="text-primary/80">
+                      {{ comment.contentAnswer }}
+                    </div>
 
-                    <NuxtLink
-                      to="#"
-                      class="flex items-center gap-1 py-1 pl-1 pr-1.5"
-                    >
-                      <icons-heart />
-                      <div class="text-sm font-semibold">Like</div>
-                    </NuxtLink>
+                    <div class="flex gap-5 items-center text-secondary mt-2">
+                      <NuxtLink
+                        to="#"
+                        class="flex items-center gap-1 py-1 pr-1.5"
+                      >
+                        <icons-edit />
+                        <div class="text-sm font-semibold">Reply</div>
+                      </NuxtLink>
 
-                    <NuxtLink
-                      to="#"
-                      class="flex items-center gap-1 py-1 pl-1 pr-1.5"
-                    >
-                      <icons-trash />
-                      <div class="text-sm font-semibold">Remove</div>
-                    </NuxtLink>
+                      <NuxtLink
+                        to="#"
+                        class="flex items-center gap-1 py-1 pl-1 pr-1.5"
+                      >
+                        <icons-heart />
+                        <div class="text-sm font-semibold">Like</div>
+                      </NuxtLink>
+
+                      <NuxtLink
+                        to="#"
+                        class="flex items-center gap-1 py-1 pl-1 pr-1.5"
+                      >
+                        <icons-trash />
+                        <div class="text-sm font-semibold">Remove</div>
+                      </NuxtLink>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </td>
-          <td class="w-3/10 py-4 pr-4">
+          <td
+            class="w-1/4 lg:w-3/10 max-lg:group-hover:w-auto py-4 pr-4 rounded-r-2xl flex items-center"
+          >
             <div class="flex items-center">
-              <div
-                class="flex gap-5 items-center text-secondary mt-2"
-                v-if="hoveredRowIndex === index"
-              >
-                <NuxtLink to="#" class="flex items-center gap-1 py-1 pr-1.5">
-                  <icons-edit />
-                  <div class="text-sm font-semibold">Reply</div>
-                </NuxtLink>
-
-                <NuxtLink
-                  to="#"
-                  class="flex items-center gap-1 py-1 pl-1 pr-1.5"
+              <div class="grid transition-all">
+                <div
+                  class="hidden lg:flex gap-5 items-center text-secondary mt-2"
+                  v-if="hoveredRowIndex[index]"
                 >
-                  <icons-heartRed />
-                  <div class="text-sm font-semibold">Like</div>
-                </NuxtLink>
+                  <NuxtLink to="#" class="flex items-center gap-1 py-1 pr-1.5">
+                    <icons-edit />
+                    <div class="text-sm font-semibold">Reply</div>
+                  </NuxtLink>
 
-                <NuxtLink
-                  to="#"
-                  class="flex items-center gap-1 py-1 pl-1 pr-1.5"
-                >
-                  <icons-trash />
-                  <div class="text-sm font-semibold">Remove</div>
-                </NuxtLink>
-              </div>
+                  <NuxtLink
+                    to="#"
+                    class="flex items-center gap-1 py-1 pl-1 pr-1.5"
+                  >
+                    <icons-heartRed />
+                    <div class="text-sm font-semibold">Like</div>
+                  </NuxtLink>
 
-              <div
-                class="flex gap-5 items-center"
-                v-if="hoveredRowIndex !== index"
-              >
-                <div class="w-16 h-16 rounded-xl">
-                  <img
-                    :src="comment.imgProduct"
-                    alt=""
-                    class="w-full h-full rounded-xl object-contain"
-                  />
+                  <NuxtLink
+                    to="#"
+                    class="flex items-center gap-1 py-1 pl-1 pr-1.5"
+                  >
+                    <icons-trash />
+                    <div class="text-sm font-semibold">Remove</div>
+                  </NuxtLink>
                 </div>
-                <div class="relative cursor-pointer">
-                  <div class="font-semibold text-primary">
-                    {{ comment.titleProduct }}
+
+                <div
+                  class="flex gap-5 items-center"
+                  v-if="!hoveredRowIndex[index]"
+                >
+                  <div class="w-16 h-16 rounded-xl flex-none">
+                    <img
+                      :src="comment.imgProduct"
+                      alt=""
+                      class="w-full h-full rounded-xl object-contain"
+                    />
                   </div>
-                  <div class="font-normal text-secondary">
-                    <div>UI Design Kit</div>
+                  <div class="relative cursor-pointer">
+                    <div class="font-semibold text-primary">
+                      {{ comment.titleProduct }}
+                    </div>
+                    <div class="font-normal text-secondary">
+                      <div>UI Design Kit</div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </td>
-          <td class="rounded-r-2xl">
-            <div
-              class="w-2 h-2 rounded-full flex-none absolute top-4 right-4"
-              :class="{ 'bg-primary-02': comment.on === true }"
-            ></div>
-          </td>
+          <div
+            class="w-2 h-2 rounded-full flex-none absolute top-4 right-4"
+            :class="{ 'bg-primary-02': comment.on === true }"
+          ></div>
         </tr>
       </tbody>
     </table>
@@ -369,7 +386,11 @@ const allChecked = computed({
   },
 });
 
-const hoveredRowIndex = ref(null);
+const hoveredRowIndex = ref(false);
+
+const toggleContent = (index) => {
+  hoveredRowIndex.value[index] = !hoveredRowIndex.value[index];
+};
 </script>
 
 <style lang="scss" scoped>

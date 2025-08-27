@@ -15,7 +15,7 @@
             </div>
           </th>
           <th class="py-4 pl-5">Products</th>
-          <th class="w-3/10 py-4">Price</th>
+          <th class="w-3/20 lg:w-3/10 py-4">Price</th>
           <th class="w-1/4 py-4 pr-4">Scheduled for</th>
         </tr>
       </thead>
@@ -104,7 +104,7 @@
               </div>
             </div>
           </td>
-          <td class="w-3/10 py-4">
+          <td class="w-3/20 lg:w-3/10 py-4">
             <div
               class="text-sm font-semibold px-2 py-1.75 border-[1.5px] border-solid rounded-lg inline"
               :class="{
