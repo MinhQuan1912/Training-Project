@@ -3,16 +3,8 @@
         <h6 class="px-5 flex items-center text-xl leading-[145%] font-semibold text-primary">
             Product activity
         </h6>
-        <div class="cursor-pointer w-40 max-w-45 flex justify-between items-center p-3 pl-5 rounded-full border-[1.5px] border-stroke text-secondary"
-            @click="open = !open">
-            <p class="text-sm leading-[150%] ">{{ selectedOption }}</p>
-            <icons-arrow1 />
-        </div>
-        <ul v-if="open" class="w-12 absolute top-[calc(100%+8px)] left-0 flex flex-col bg-background-surface1 text-secondary rounded-full ">
-            <li v-for="(opt,opId) in options" :key="opId" class="">
-                {{ opt }}
-            </li>
-        </ul>
+        <select-dropdown v-model:selected-option="selectedOption" :data="options" addition-class="w-40"
+            text-class="text-secondary" />
     </div>
     <div class="px-5 pt-4">
         <table class="w-full text-sm leading-[150%] text-primary border-collapse">
@@ -163,15 +155,13 @@ const productActivityList = ref<activityRow[]>([
     },
 
 ])
-const options = ref([
+const options = ref<string[]>([
     'Last 1 week',
     'Last 2 week',
     'Last 3 week',
     'Last 4 week',
 ])
-const selectedOption = ref('Last 2 week')
-const open = ref(false)
-
+const selectedOption = ref<string>(options.value[1] || '')
 </script>
 
 <style lang="scss" scoped></style>

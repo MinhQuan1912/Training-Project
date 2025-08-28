@@ -103,23 +103,8 @@
                                 <icons-helping class="h-4 w-4 text-tertiary hover:text-blue cursor-pointer" />
                             </u-tooltip>
                         </div>
-                        <div class="relative">
-                            <div class="h-12 rounded-full border border-stroke-subtle pl-5 pr-3 flex justify-between items-center text-primary text-sm leading-[150%] cursor-pointer"
-                                @click="handleOpenCategory">
-                                <p>{{ selectedCategory ? selectedCategory : 'Select category' }}</p>
-                                <icons-arrow1 class="text-secondary rotate-0 transition-transform duration-300"
-                                    :class="{ '!-rotate-180': openCate === true }" />
-                            </div>
-                            <transition name="collapse">
-                                <ul v-if="openCate" class="absolute top-full left-0 z-2 flex flex-col w-full">
-                                    <li v-for="(cate, cateIdx) in categoryList" :key="cateIdx"
-                                        @click="handleChooseCate(cate)"
-                                        class="h-10 pl-5 flex items-center text-primary cursor-pointer bg-background-02 hover:bg-stroke">
-                                        {{ cate }}
-                                    </li>
-                                </ul>
-                            </transition>
-                        </div>
+                        <select-dropdown v-model:selected-category="selectedCategory" :data="categoryList"
+                            addition-class="h-12" />
                     </div>
                     <div class="flex flex-col gap-4">
                         <div class="h-4 flex">
@@ -164,11 +149,10 @@
 </template>
 
 <script setup lang="ts">
+
 definePageMeta({
     title: 'New Product'
 })
-const activeCompatibilitys = ref<number[]>([])
-const selectedCategory = ref('')
 const tagList = ref([
     'Dashboard',
     'Light',
@@ -180,7 +164,7 @@ const tagList = ref([
     'Illustration',
     'Menu'
 ])
-const categoryList = ref([
+const categoryList = ref<string[]>([
     'Illustrations',
     '1',
     '2',
@@ -201,7 +185,9 @@ const compatibilityList = ref([
     { icon: '/images/compatibility/Spline.png', name: 'Spline' },
     { icon: '/images/compatibility/HTML.png', name: 'HTML' },
 ])
-const openCate = ref(false)
+const activeCompatibilitys = ref<number[]>([])
+const selectedCategory = ref<string>('')
+
 const preview = ref<string | null>(null)
 const previewFull = ref<string | null>(null)
 const onPreviewChange = (event: Event) => {
@@ -224,13 +210,7 @@ const removePreviewImage = () => {
 const removePreviewFullImage = () => {
     previewFull.value = null
 }
-const handleOpenCategory = () => {
-    openCate.value = !openCate.value
-}
-const handleChooseCate = (cate: string) => {
-    selectedCategory.value = cate
-    openCate.value = false
-}
+
 const handleClickCompa = (index: number) => {
     if (activeCompatibilitys.value.includes(index)) {
         activeCompatibilitys.value = activeCompatibilitys.value.filter(i => i !== index)
@@ -239,6 +219,7 @@ const handleClickCompa = (index: number) => {
         activeCompatibilitys.value.push(index)
     }
 }
+
 </script>
 
 <style lang="scss" scoped>
