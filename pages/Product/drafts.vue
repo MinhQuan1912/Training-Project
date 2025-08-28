@@ -20,7 +20,7 @@
       </div>
     </div>
     <div
-      class="mt-6 p-1 grid md:grid-cols-[1fr_2fr_1fr] lg:grid-cols-4 xxl:grid-cols-5 gap-6"
+      class="mt-6 p-1 grid md:grid-cols-[1fr_2fr_1fr] lg:grid-cols-4 xxl:grid-cols-5 gap-4 md:gap-6"
     >
       <ProductsDraftCard
         v-for="(item, index) in data"
@@ -32,6 +32,19 @@
         :date="item.date"
         @edit="onEdit(item)"
         @delete="onDelete(item)"
+        @editBefore="onEdit(data[index - 1])"
+        @editAfter="onEdit(data[index + 1])"
+        @deleteBefore="onDelete(data[index - 1])"
+        @deleteAfter="onDelete(data[index + 1])"
+        :class="index % 3 !== 1 ? 'md:opacity-0 lg:opacity-100' : ''"
+        v-bind="
+          index % 3 === 1
+            ? {
+                'item-before': data[index - 1] || null,
+                'item-after': data[index + 1] || null,
+              }
+            : {}
+        "
       />
     </div>
   </div>

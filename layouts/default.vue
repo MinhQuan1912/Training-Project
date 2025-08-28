@@ -22,7 +22,7 @@
     </div>
     <div class="flex flex-col gap-5 flex-1">
       <layout-header />
-      <div class="flex-1 custom-scroll">
+      <div class="flex-1">
         <slot />
       </div>
     </div>
