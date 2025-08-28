@@ -19,7 +19,7 @@
       </div>
       <div class="p-5 text-primary gap-8 flex flex-wrap">
         <div v-for="(item, idx) in overViewList" :key="idx" class="overview-item"
-          :class="{ '!hiddenxl:!flex': item.label === 'Sales' }">
+          :class="{ '!hidden xl:!flex': item.label === 'Sales' }">
           <div class="w-16 h-16 bg-background-surface1 flex justify-center items-center rounded-full">
             <component :is="item.icon" />
           </div>
@@ -27,7 +27,7 @@
             <div class="flex flex-col w-38.75 2xl:w-41.5">
               <div class="flex gap-2 items-center h-6 mb-2">
                 <p class="font-semibold leading-[150%]">{{ item.label }}</p>
-                <u-tooltip :text="item.label"><icons-helping /></u-tooltip>
+                <tooltip :text="item.label"><icons-helping /></tooltip>
               </div>
               <h2 class="flex text-[60px] font-medium leading-[125%] mb-3">
                 <span class="text-tertiary text-[32px] font-semibold leading-[145%] mr-2.5 pt-2">$</span>
@@ -48,7 +48,7 @@
     <div class="flex gap-3 w-full">
       <!-- Product activity -->
       <div class="product-overview !gap-4 flex-1">
-        <products-overview-product-activity/>
+        <products-overview-product-activity />
       </div>
       <!-- Product Views -->
       <div class="product-overview !gap-3 w-78 3xl:w-135 h-76">

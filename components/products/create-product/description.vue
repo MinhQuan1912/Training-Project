@@ -2,9 +2,9 @@
     <div class="flex flex-col gap-4">
         <div class="h-4 flex items-center py-1 ">
             <span class="text-primary text-sm leading-[100%] font-semibold">Description</span>
-            <u-tooltip class="ml-1.5" text="Description" :delay-duration="0" :content="{ side: 'right' }">
+            <tooltip>
                 <icons-helping class="h-4 w-4 text-tertiary hover:text-blue cursor-pointer" />
-            </u-tooltip>
+            </tooltip>
         </div>
         <div class="h-60 flex flex-col rounded-2xl border-[1.5px] border-stroke">
             <div class="flex items-center bg-[#10101080] border-b-[1.5px] border-stroke-subtle">

@@ -9,10 +9,10 @@
                     <div class="flex flex-col gap-4">
                         <div class="h-5.5 flex items-center py-1 ">
                             <span class="text-primary text-sm leading-[100%] font-semibold">Product title</span>
-                            <u-tooltip class="ml-1.5" text="Maximum 100 characters. No HTML or emoji allowed"
+                            <tooltip class="ml-1.5" text="Maximum 100 characters. No HTML or emoji allowed"
                                 :delay-duration="0" :content="{ side: 'right' }">
                                 <icons-helping class="h-4 w-4 text-tertiary hover:text-blue cursor-pointer" />
-                            </u-tooltip>
+                            </tooltip>
                         </div>
                         <div
                             class="h-12 flex justify-between items-center py-3 px-5 border-[1.5px] border-stroke rounded-[48px]">
@@ -31,14 +31,14 @@
                     <div class="flex flex-col gap-4">
                         <div class="h-4 flex">
                             <span class="text-primary text-sm leading-[100%] font-semibold">Previews</span>
-                            <u-tooltip class="ml-1.5" text="Previews" :delay-duration="0" :content="{ side: 'right' }">
+                            <tooltip class="ml-1.5" text="Previews" :delay-duration="0" :content="{ side: 'right' }">
                                 <icons-helping class="h-4 w-4 text-tertiary hover:text-blue cursor-pointer" />
-                            </u-tooltip>
+                            </tooltip>
                         </div>
-                        <div class="h-78 w-full rounded-4xl bg-black  relative">
+                        <div class="h-78 w-full rounded-4xl bg-black relative">
                             <div v-if="!preview"
-                                class="absolute top-1/2 left-1/2 -translate-1/2 flex flex-col gap-2 items-center text-secondary group">
-                                <label for="upload1" class="flex flex-col items-center cursor-pointer ">
+                                class="absolute inset-0 flex flex-col gap-2 items-center justify-center text-secondary group">
+                                <label for="upload1" class="flex flex-col items-center  cursor-pointer">
                                     <icons-upload
                                         class="w-20 h-20 group-hover:text-primary transition-all duration-300" />
                                     <span class="text-4xl group-hover:text-primary transition-all duration-300">Upload
@@ -61,14 +61,13 @@
                     <div class="flex flex-col gap-4">
                         <div class="h-4 flex">
                             <span class="text-primary text-sm leading-[100%] font-semibold">Full previews</span>
-                            <u-tooltip class="ml-1.5" text="Full previews" :delay-duration="0"
-                                :content="{ side: 'right' }">
+                            <tooltip>
                                 <icons-helping class="h-4 w-4 text-tertiary hover:text-blue cursor-pointer" />
-                            </u-tooltip>
+                            </tooltip>
                         </div>
                         <div class="h-270 w-full rounded-4xl bg-black  relative">
                             <div v-if="!previewFull"
-                                class="absolute top-1/2 left-1/2 -translate-1/2 flex flex-col gap-2 items-center text-secondary group">
+                                class="absolute inset-0 flex flex-col gap-2 items-center justify-center text-secondary group">
                                 <label for="upload2" class="flex flex-col items-center cursor-pointer ">
                                     <icons-upload
                                         class="w-20 h-20 group-hover:text-primary transition-all duration-300" />
@@ -99,9 +98,9 @@
                     <div class="flex flex-col gap-4">
                         <div class="h-4 flex">
                             <span class="text-primary text-sm leading-[100%] font-semibold">Category</span>
-                            <u-tooltip class="ml-1.5" text="Category" :delay-duration="0" :content="{ side: 'right' }">
+                            <tooltip >
                                 <icons-helping class="h-4 w-4 text-tertiary hover:text-blue cursor-pointer" />
-                            </u-tooltip>
+                            </tooltip>
                         </div>
                         <select-dropdown v-model:selected-category="selectedCategory" :data="categoryList"
                             addition-class="h-12" />
@@ -109,10 +108,9 @@
                     <div class="flex flex-col gap-4">
                         <div class="h-4 flex">
                             <span class="text-primary text-sm leading-[100%] font-semibold">Compatibility</span>
-                            <u-tooltip class="ml-1.5" text="Compatibility" :delay-duration="0"
-                                :content="{ side: 'right' }">
+                            <tooltip>
                                 <icons-helping class="h-4 w-4 text-tertiary hover:text-blue cursor-pointer" />
-                            </u-tooltip>
+                            </tooltip>
                         </div>
                         <div class="grid grid-cols-4 gap-3">
                             <button v-for="(item, idx) in compatibilityList" :key="idx"
@@ -129,9 +127,9 @@
                     <div class="flex flex-col gap-4">
                         <div class="h-4 flex">
                             <span class="text-primary text-sm leading-[100%] font-semibold">Tags</span>
-                            <u-tooltip class="ml-1.5" text="Tag" :delay-duration="0" :content="{ side: 'right' }">
+                            <tooltip>
                                 <icons-helping class="h-4 w-4 text-tertiary hover:text-blue cursor-pointer" />
-                            </u-tooltip>
+                            </tooltip>
                         </div>
                         <div class="flex p-2 rounded-[20px] border-[1.5px] border-stroke gap-1.5 flex-wrap">
                             <div v-for="(tag, tagIdx) in tagList" :key="tagIdx"

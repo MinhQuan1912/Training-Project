@@ -3,26 +3,27 @@
         <h6 class="px-5 flex items-center text-xl leading-[145%] font-semibold text-primary">
             Product activity
         </h6>
-        <select-dropdown v-model:selected-option="selectedOption" :data="options" addition-class="w-40"
-            text-class="text-secondary" />
+        <select-dropdown v-model:selected-option="selectedOption" :data="options"
+            addition-class="w-40 h-12 border-[1.5px] border-stroke" text-class="text-secondary"
+            option-class="!top-[calc(100%+8px)] !border-[1.5px] !border-stroke !rounded-xl overflow-hidden" />
     </div>
     <div class="px-5 pt-4">
-        <table class="w-full text-sm leading-[150%] text-primary border-collapse">
-            <thead>
-                <tr class="text-xs leading-[160%] text-tertiary">
-                    <th class="py-5 text-left">Week</th>
-                    <th class="py-5 text-left">Products</th>
-                    <th class="py-5 text-left">Views</th>
-                    <th class="py-5 text-left">Likes</th>
-                    <th class="py-5 text-left hidden 2xl:table-cell">Comments</th>
+        <table class="w-full text-sm leading-[150%] text-primary">
+            <thead class="block">
+                <tr class="text-xs leading-[160%] text-tertiary flex gap-6">
+                    <th class="flex-1 py-5 text-left">Week</th>
+                    <th class="flex-1 py-5 text-left">Products</th>
+                    <th class="flex-1 py-5 text-left">Views</th>
+                    <th class="flex-1 py-5 text-left">Likes</th>
+                    <th class="flex-1 py-5 text-left hidden 2xl:table-cell">Comments</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr v-for="(item, idx) in productActivityList" :key="idx" class="h-17 border-t border-stroke-subtle">
+            <tbody class="block overflow-y-auto max-h-34">
+                <tr v-for="(item, idx) in filterActivities" :key="idx" class="flex gap-6 h-17 border-t border-stroke-subtle w-full">
                     <!-- Week -->
-                    <td class="py-4">{{ item.week }}</td>
+                    <td class="py-4 flex-1">{{ item.week }}</td>
                     <!-- Product -->
-                    <td class="py-4">
+                    <td class="py-4 flex-1">
                         <div class="flex items-center gap-2">
                             {{ item.product.value }}
                             <span v-if="item.product.growthRate">
@@ -31,7 +32,7 @@
                         </div>
                     </td>
                     <!-- View -->
-                    <td class="py-4">
+                    <td class="py-4 flex-1">
                         <div class="flex items-center gap-2">
                             {{ item.view.value }}
                             <span v-if="item.view.growthRate">
@@ -40,7 +41,7 @@
                         </div>
                     </td>
                     <!-- Like -->
-                    <td class="py-4">
+                    <td class="py-4 flex-1">
                         <div class="flex items-center gap-2">
                             {{ item.like.value }}
                             <span v-if="item.like.growthRate">
@@ -49,7 +50,7 @@
                         </div>
                     </td>
                     <!-- Comment -->
-                    <td class="py-4 hidden 2xl:table-cell">
+                    <td class="py-4 hidden 2xl:table-cell flex-1">
                         <div class="flex items-center gap-2">
                             {{ item.comment.value }}
                             <span v-if="item.comment.growthRate">
@@ -155,13 +156,19 @@ const productActivityList = ref<activityRow[]>([
     },
 
 ])
-const options = ref<string[]>([
-    'Last 1 week',
-    'Last 2 week',
-    'Last 3 week',
-    'Last 4 week',
-])
+const options = computed(() => {
+    const opt = []
+    for (let i = 1; i <= productActivityList.value.length; i++) {
+        opt.push(`Last ${i} week`)
+    }
+    return opt
+})
 const selectedOption = ref<string>(options.value[1] || '')
+const filterActivities = computed(() => {
+    const week = parseInt(selectedOption.value.match(/\d+/)?.[0] || '1')
+    const filterList = productActivityList.value.slice(-week)
+    return filterList
+})
 </script>
 
 <style lang="scss" scoped></style>
