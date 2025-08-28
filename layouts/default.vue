@@ -1,6 +1,6 @@
 <template>
   <div class="p-5 flex gap-5 bg-black min-h-screen">
-    <div class="w-12 2xl:!w-75 flex flex-col gap-5 text-secondary relative">
+    <div class="w-12 2xl:!w-75 flex flex-col gap-5 text-secondary relative min-w-0">
       <navigation-menu />
       <div class="w-12 flex flex-col gap-3 absolute bottom-0 left-0">
         <div
@@ -20,9 +20,9 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col gap-5 flex-1">
+    <div class="flex flex-col gap-5 flex-1 min-w-0">
       <layout-header />
-      <div class="flex-1">
+      <div class="flex-1 min-w-0">
         <slot />
       </div>
     </div>

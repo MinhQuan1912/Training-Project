@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="border-cus-4 min-h-[85dvh] w-full">
+    <div class="border-cus-4 min-h-[85dvh] min-w-full ">
       <div class="p-3 w-full flex justify-between items-center">
         <div class="flex gap-6 items-center">
           <h2 class="text-primary text-6 leading-[145%] tracking-[0.06px]">
@@ -24,9 +24,9 @@
           <icons-list class="cursor-pointer hover:opacity-40" />
         </div>
       </div>
-      <div class="mt-3 p-4">
+      <div class="mt-3 p-4 overflow-x-auto custom-scroll">
         <table
-          class="border-separate border-spacing-0 text-sm text-gray-200 p-1"
+          class="border-separate border-spacing-0 text-sm text-gray-200 p-1  min-w-full"
         >
           <thead
             class="w-full table-fixed rounded-xl text-tertiary text-xs font-normal leading-[160%] tracking-[0.048px]"
@@ -442,12 +442,12 @@ input[type="checkbox"] {
   color: white;
 }
 
-table {
+/* table {
   display: block;
   max-width: -moz-fit-content;
   max-width: fit-content;
   margin: 0 auto;
   overflow-x: auto;
   white-space: nowrap;
-}
+} */
 </style>
