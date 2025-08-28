@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="border-cus-4 min-h-[85dvh]">
+    <div class="border-cus-4 min-h-[85dvh] w-full">
       <div class="p-3 w-full flex justify-between items-center">
         <div class="flex gap-6 items-center">
           <h2 class="text-primary text-6 leading-[145%] tracking-[0.06px]">
@@ -26,10 +26,10 @@
       </div>
       <div class="mt-3 p-4">
         <table
-          class="min-w-full border-separate border-spacing-0 text-sm text-gray-200"
+          class="border-separate border-spacing-0 text-sm text-gray-200 p-1"
         >
           <thead
-            class="rounded-xl text-tertiary text-xs font-normal leading-[160%] tracking-[0.048px]"
+            class="w-full table-fixed rounded-xl text-tertiary text-xs font-normal leading-[160%] tracking-[0.048px]"
           >
             <tr
               class="rounded-[16px] p-4 hover:!bg-background-highlight border-b-[2px] border-stroke-subtle"
@@ -49,12 +49,14 @@
                   ></span>
                 </label>
               </th>
-              <th class="p-6 pl-4 text-left w-50 md:w-120">Product</th>
-              <th class="p-6 pl-4 text-left hidden md:table-cell">Status</th>
-              <th class="p-6 pl-4 text-left hidden sm:table-cell">Price</th>
-              <th class="p-6 pl-4 text-left hidden md:table-cell">Sales</th>
-              <th class="p-6 pl-4 text-left hidden sm:table-cell">Rating</th>
-              <th class="p-6 pl-4 text-left rounded-r-[16px] hidden lg:table-cell">
+              <th class="p-6 pl-4 text-left min-w-80 md:w-120">Product</th>
+              <th class="p-6 pl-4 text-left">Status</th>
+              <th class="p-6 pl-4 text-left">Price</th>
+              <th class="p-6 pl-4 text-left">Sales</th>
+              <th class="p-6 pl-4 text-left">Rating</th>
+              <th
+                class="p-6 pl-4 text-left rounded-r-[16px] hidden lg:table-cell"
+              >
                 Views
               </th>
             </tr>
@@ -63,7 +65,7 @@
             <tr
               v-for="(item, index) in data"
               :key="index"
-              class="rounded-[16px] outline outline-solid outline-transparent hover:outline-stroke-card-hover-dark hover:bg-background-highlight group cursor-pointer"
+              class="rounded-[16px] outline-[1.5px] outline-solid outline-transparent hover:outline-[#313131] hover:bg-background-highlight group cursor-pointer"
               :class="{
                 'bg-background-highlight': selected.includes(item),
               }"
@@ -85,7 +87,7 @@
                   ></span>
                 </label>
               </td>
-              <td class="p-4 w-full min-w-65 md:w-120">
+              <td class="p-4 w-full min-w-80 md:w-120">
                 <div class="flex items-center gap-3">
                   <img
                     :src="item.image"
@@ -105,28 +107,31 @@
                       class="text-sm text-gray-400 hidden group-hover:flex gap-2 items-center duration-100 cursor-pointer"
                     >
                       <div
-                        class="flex items-center gap-1"
+                        class="flex items-center gap-1 hover:text-white"
                         @click.stop="onEdit(item)"
                       >
-                        <UIcon name="prime:pen-to-square" class="size-4" />
+                        <icons-edit-2 />
                         <span>Edit</span>
                       </div>
                       <div
-                        class="flex items-center gap-1"
+                        class="flex items-center gap-1 hover:text-white"
                         @click.stop.prevent="onDelete(item)"
                       >
-                        <UIcon name="prime:trash" class="size-4" />
+                        <icons-trash-2 />
                         <span>Delete</span>
                       </div>
-                      <div class="flex items-center gap-1" @click.stop>
-                        <UIcon name="prime:eye-slash" class="size-4" />
+                      <div
+                        class="flex items-center gap-1 hover:text-white"
+                        @click.stop
+                      >
+                        <icons-eye-2 />
                         <span>Unpublish</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </td>
-              <td class="p-4 hidden md:table-cell">
+              <td class="p-4">
                 <span
                   class="px-2 py-1 text-sm rounded-md border font-medium"
                   :class="
@@ -138,8 +143,8 @@
                   {{ item.status }}
                 </span>
               </td>
-              <td class="p-4 hidden sm:table-cell">${{ item.price }}</td>
-              <td class="p-4 hidden md:table-cell">
+              <td class="p-4">${{ item.price }}</td>
+              <td class="p-4">
                 <div class="flex flex-nowrap items-center gap-2">
                   <span>${{ item.sales.toLocaleString() }}</span>
                   <div
@@ -152,7 +157,7 @@
                   </div>
                 </div>
               </td>
-              <td class="p-4 hidden sm:table-cell">
+              <td class="p-4">
                 <div class="flex items-center flex-nowrap gap-1">
                   <UIcon
                     name="ant-design:star-outlined"
@@ -435,5 +440,14 @@ const saveEdit = () => {
 input[type="checkbox"] {
   accent-color: var(--color-primary-02);
   color: white;
+}
+
+table {
+  display: block;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin: 0 auto;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 </style>

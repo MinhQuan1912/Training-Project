@@ -1,46 +1,167 @@
 <template>
-  <div class="overflow-hidden group" :id="`draft-${id}`">
-    <div class="h-auto overflow-hidden rounded-4xl">
-      <img
-        :src="image"
-        alt=""
-        class="h-[230px] w-full object-cover md:!w-[460px]"
-      />
-    </div>
-    <div class="flex gap-1 mt-3.5 font-semibold">
-      <span
-        class="flex-1 items-center text-base leading-[1.5] tracking-[0.024px] text-primary line-clamp-1"
-        >{{ title }}</span
-      >
+  <div class="md:relative lg:static w-full" :id="`draft-${id}`" :class="class">
+    <div class="group">
+      <div class="h-auto w-full overflow-hidden rounded-4xl">
+        <img
+          :src="image"
+          alt=""
+          class="h-[230px] w-full object-cover md:!w-[460px]"
+        />
+      </div>
+      <div class="flex gap-1 mt-3.5 font-semibold">
+        <span
+          class="flex-1 items-center text-base leading-[1.5] tracking-[0.024px] text-primary line-clamp-1"
+          >{{ title }}</span
+        >
+        <div
+          class="border border-solid rounded-[999px] bg-green-500/10 border-green-500/30 leading-[1] tracking-[0.175px] text-primary-02 text-sm py-1.75 px-3"
+        >
+          ${{ price }}
+        </div>
+      </div>
+      <div class="flex items-center gap-2 mt-2 group-hover:hidden h-4">
+        <UIcon name="fa6-regular:clock" class="size-4 text-secondary" />
+        <span class="text-secondary text-xs leading-[1.6] tracking-[0.048px]">{{
+          formatDate(date)
+        }}</span>
+      </div>
       <div
-        class="border border-solid rounded-[999px] bg-green-500/10 border-green-500/30 leading-[1] tracking-[0.175px] text-primary-02 text-sm py-1.75 px-3"
+        class="text-xs text-gray-400 hidden group-hover:flex gap-2 items-center duration-200 cursor-pointer"
       >
-        ${{ price }}
+        <div
+          class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
+          @click.stop="$emit('edit')"
+        >
+          <icons-edit-2 />
+          <span>Edit</span>
+        </div>
+        <div
+          class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
+          @click.stop.prevent="$emit('delete')"
+        >
+          <icons-trash-2 />
+          <span>Delete</span>
+        </div>
+        <div
+          class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
+          @click.stop
+        >
+          <icons-calendar-2 />
+          <span>Schedule</span>
+        </div>
       </div>
     </div>
-    <div class="flex items-center gap-2 mt-2 group-hover:hidden h-4">
-      <UIcon name="fa6-regular:clock" class="size-4 text-secondary" />
-      <span class="text-secondary text-xs leading-[1.6] tracking-[0.048px]">{{
-        formatDate(date)
-      }}</span>
+
+    <div
+      v-if="itemBefore"
+      class="absolute z-2 top-0 left-full h-full ml-6 w-full groupBefore lg:hidden"
+      :id="`draft-${itemBefore.id}`"
+      :class="class"
+    >
+      <div class="h-auto w-full overflow-hidden rounded-4xl">
+        <img
+          :src="itemBefore.image"
+          alt=""
+          class="h-[230px] w-full object-cover md:!w-[460px]"
+        />
+      </div>
+      <div class="flex gap-1 mt-3.5 font-semibold">
+        <span
+          class="flex-1 items-center text-base leading-[1.5] tracking-[0.024px] text-primary line-clamp-1"
+          >{{ itemBefore.title }}</span
+        >
+        <div
+          class="border border-solid rounded-[999px] bg-green-500/10 border-green-500/30 leading-[1] tracking-[0.175px] text-primary-02 text-sm py-1.75 px-3"
+        >
+          ${{ itemBefore.price }}
+        </div>
+      </div>
+      <div class="flex time items-center gap-2 mt-2 h-4">
+        <UIcon name="fa6-regular:clock" class="size-4 text-secondary" />
+        <span class="text-secondary text-xs leading-[1.6] tracking-[0.048px]">{{
+          formatDate(itemBefore.date)
+        }}</span>
+      </div>
+      <div
+        class="option text-xs text-gray-400 hidden gap-2 items-center duration-200 cursor-pointer"
+      >
+        <div
+          class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-solid hover:outline-[1.5px] hover:outline-stroke p-1"
+          @click.stop="$emit('editBefore')"
+        >
+          <icons-edit-2 />
+          <span>Edit</span>
+        </div>
+        <div
+          class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
+          @click.stop.prevent="$emit('deleteBefore')"
+        >
+          <icons-trash-2 />
+          <span>Delete</span>
+        </div>
+        <div
+          class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
+          @click.stop
+        >
+          <icons-calendar-2 />
+          <span>Schedule</span>
+        </div>
+      </div>
     </div>
     <div
-      class="mt-2 text-xs text-gray-400 hidden group-hover:flex gap-2 items-center duration-200 cursor-pointer"
+      v-if="itemAfter"
+      class="absolute z-2 top-0 right-full h-full mr-6 w-full group lg:hidden"
+      :id="`draft-${itemAfter.id}`"
+      :class="class"
     >
-      <div class="flex items-center gap-1" @click.stop="$emit('edit')">
-        <UIcon name="prime:pen-to-square" class="size-4" />
-        <span>Edit</span>
+      <div class="h-auto w-full overflow-hidden rounded-4xl">
+        <img
+          :src="itemAfter.image"
+          alt=""
+          class="h-[230px] w-full object-cover md:!w-[460px]"
+        />
+      </div>
+      <div class="flex gap-1 mt-3.5 font-semibold">
+        <span
+          class="flex-1 items-center text-base leading-[1.5] tracking-[0.024px] text-primary line-clamp-1"
+          >{{ itemAfter.title }}</span
+        >
+        <div
+          class="border border-solid rounded-[999px] bg-green-500/10 border-green-500/30 leading-[1] tracking-[0.175px] text-primary-02 text-sm py-1.75 px-3"
+        >
+          ${{ itemAfter.price }}
+        </div>
+      </div>
+      <div class="time flex items-center gap-2 mt-2 h-4">
+        <UIcon name="fa6-regular:clock" class="size-4 text-secondary" />
+        <span class="text-secondary text-xs leading-[1.6] tracking-[0.048px]">{{
+          formatDate(itemAfter.date)
+        }}</span>
       </div>
       <div
-        class="flex items-center gap-1"
-        @click.stop.prevent="$emit('delete')"
+        class="option text-xs text-gray-400 hidden gap-2 items-center duration-200 cursor-pointer"
       >
-        <UIcon name="prime:trash" class="size-4" />
-        <span>Delete</span>
-      </div>
-      <div class="flex items-center gap-1" @click.stop>
-        <UIcon name="prime:eye-slash" class="size-4" />
-        <span>Unpublish</span>
+        <div
+          class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
+          @click.stop="$emit('editAfter')"
+        >
+          <icons-edit-2 />
+          <span>Edit</span>
+        </div>
+        <div
+          class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
+          @click.stop.prevent="$emit('deleteAfter')"
+        >
+          <icons-trash-2 />
+          <span>Delete</span>
+        </div>
+        <div
+          class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
+          @click.stop
+        >
+          <icons-calendar-2 />
+          <span>Schedule</span>
+        </div>
       </div>
     </div>
   </div>
@@ -75,8 +196,24 @@ defineProps({
     type: Number,
     default: 0,
   },
+  itemBefore: {
+    type: Object || null,
+  },
+  itemAfter: {
+    type: Object || null,
+  },
 });
-defineEmits(["edit", "delete", "unpublish"]);
+defineEmits([
+  "edit",
+  "delete",
+  "unpublish",
+  "editBefore",
+  "editAfter",
+  "deleteBefore",
+  "deleteAfter",
+  "unpublishBefore",
+  "unpublishAfter",
+]);
 function formatDate(value) {
   const d = new Date(value);
   return new Intl.DateTimeFormat("en-US", {
@@ -91,3 +228,13 @@ function formatDate(value) {
     .replace(",", " at");
 }
 </script>
+<style scoped>
+.groupBefore:hover .option,
+.groupAfter:hover .option {
+  display: flex;
+}
+.groupBefore:hover .time,
+.groupAfter:hover .time {
+  display: none;
+}
+</style>
