@@ -267,10 +267,6 @@ const handleSelectRow = (id: number) => {
     }
 }
 const handleSearchProduct = () => {
-    if (!searchInput.value) {
-        searchResult.value = productList.value
-        return
-    }
     searchResult.value = productList.value.filter(p =>
         p.name.toLowerCase().includes(searchInput.value.toLowerCase())
     )
