@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-19.5 flex px-2 py-1.5 items-center rounded-lg border-[1.5px] " :class="{
+    <div class="flex px-2 py-1.5 justify-center items-center rounded-lg border-[1.5px] gap-1" :class="{
         '!bg-[#00a6560d] !border-[#00a65626] !text-primary-02': growthRate > 0,
         '!border-[#ff6a5526] !bg-[#ff6a550d] !text-[#ff6a55]': growthRate < 0
     }">
@@ -7,7 +7,6 @@
             '!rotate-0': growthRate > 0,
             '!rotate-180': growthRate < 0
         }" />
-
         <p class="text-sm font-semibold leading-[100%]">{{ growthRate > 0 ? growthRate : -growthRate }}%</p>
     </div>
 </template>

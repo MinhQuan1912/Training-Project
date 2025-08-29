@@ -1,10 +1,9 @@
 <template>
     <div>
-        Hello
+
     </div>
 </template>
 
-<script setup>
-
+<script setup lang="ts">
+navigateTo('/product')
 </script>
-
