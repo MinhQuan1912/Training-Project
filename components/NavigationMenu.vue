@@ -138,7 +138,7 @@ const handleOpenSubmenu = (index: number) => {
   }
   else {
     if (isOpen) {
-      openIndexs.value = openIndexs.value.filter((i) => i !== index);
+      openIndexs.value = openIndexs.value.filter(i => i !== index);
     } else {
       openIndexs.value.push(index);
     }
@@ -161,15 +161,14 @@ watch(
     }
   }
 )
-watch(isTablet, (val) => {
-  if (val) {
+watchEffect(() => {
+  if (isTablet.value) {
     openIndexs.value = []
-  }
-  else {
+  } else {
     const index = menu.value.findIndex(m =>
       m.subMenu?.some(sub => sub.to === route.path)
     )
-    openIndexs.value = [index]; 
+    openIndexs.value = [index]
   }
 })
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-3 w-full">
+  <div v-if="!showCreateProduct" class="flex flex-col gap-3 w-full">
     <!-- Overview -->
     <div class="product-overview ">
       <div class="w-full flex justify-between h-12">
@@ -59,13 +59,15 @@
     <!-- Products -->
     <products-overview-product-list />
   </div>
+  <products-create-product v-else/>
 </template>
 <script setup lang="ts">
 import { IconsArrow2, IconsFolder, IconsPerson, IconsProduct } from '#components';
+import { useCreateProduct } from '~/composable/useCreateProduct';
 definePageMeta({
   title: 'Product Overview'
 })
-
+const { showCreateProduct } = useCreateProduct()
 const overViewList = ref([
   {
     label: 'Earning',

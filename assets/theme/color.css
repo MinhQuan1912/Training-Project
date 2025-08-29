@@ -28,7 +28,11 @@
   --color-stroke-subtle: #1e1e1e;
   --color-stroke-card-hover-dark: #f1f1f1;
   --color-stroke-focus: #2a85ff;
+  --color-stroke-highlight: #72727280;
 
   --color-shade05-100: #4c4c4c;
-  --color-shade05-50: #4c4c4c80
+  --color-shade05-50: #4c4c4c80;
+
+  --color-neutral-01: #fcfcfc;
+
 }

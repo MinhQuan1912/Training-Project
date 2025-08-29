@@ -4,8 +4,7 @@
             Product activity
         </h6>
         <select-dropdown v-model:selected-option="selectedOption" :data="options"
-            addition-class="w-40 h-12 border-[1.5px] border-stroke" text-class="text-secondary"
-            option-class="!top-[calc(100%+8px)] !border-[1.5px] !border-stroke !rounded-xl overflow-hidden" />
+            addition-class="w-40 h-12" text-class="text-secondary" />
     </div>
     <div class="px-5 pt-4">
         <table class="w-full text-sm leading-[150%] text-primary">

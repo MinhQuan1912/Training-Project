@@ -21,11 +21,16 @@ input,
 textarea {
   border: none;
   outline: none;
-  text-decoration: none;
+  caret-color: var(--color-blue);
 }
 
 input[type="search"]::-webkit-search-cancel-button {
   display: none;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 select,
 option {
@@ -70,7 +75,7 @@ table {
 }
 .border-cus-4 {
   border-radius: 32px;
-  border: 1.5px solid #1D1D1D;
+  border: 1.5px solid #1d1d1d;
   background: var(--color-background-02);
 
   box-shadow: 0 5px 1.5px -4px rgba(8, 8, 8, 0.5),

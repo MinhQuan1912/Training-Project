@@ -1,15 +1,15 @@
 <template>
-    <div class="relative">
-        <div class="rounded-full pl-5 pr-3 flex justify-between items-center text-primary text-sm leading-[150%] cursor-pointer"
-            @click="handleOpenCategory" :class="additionClass, textClass">
-            <p>{{ selectedOption ? selectedOption : '---Select---' }}</p>
+    <div class="relative" >
+        <div class="rounded-full pl-5 pr-3 flex justify-between items-center text-primary text-sm leading-[150%] cursor-pointer border-[1.5px] border-stroke    "
+            @click="handleOpenOption" :class="[additionClass, textClass]">
+            <p>{{ selectedOpt ? selectedOpt : '---Select---' }}</p>
             <icons-arrow1 class="text-secondary rotate-0 transition-transform duration-300"
                 :class="{ '!-rotate-180': openOption === true }" />
         </div>
         <transition name="collapse">
-            <ul v-if="openOption" class="absolute top-full left-0 z-2 flex flex-col w-full"
-                :class="optionClass">
-                <li v-for="(option, optionIdx) in data" :key="optionIdx" @click="handleChooseCate(option)"
+            <ul v-if="openOption"
+                class="absolute top-[calc(100%+8px)] left-0 z-2 flex flex-col w-full border-[1.5px] border-stroke rounded-xl overflow-hidden">
+                <li v-for="(option, optionIdx) in data" :key="optionIdx" @click="handleChooseOpt(option)"
                     class="h-10 pl-5 flex items-center text-primary cursor-pointer bg-background-02 hover:bg-stroke"
                     :class="textClass">
                     {{ option }}
@@ -39,20 +39,14 @@ defineProps({
         type: String,
         default: ''
     },
-    optionClass: {
-        type: String,
-        default: ''
-    }
 })
 const openOption = ref(false)
-const emit = defineEmits<{
-    (e: 'update:selectedOption', value: string): void
-}>()
-const handleOpenCategory = () => {
+let selectedOpt = defineModel<string>('selectedOption')
+const handleOpenOption = () => {
     openOption.value = !openOption.value
 }
-const handleChooseCate = (cate: string) => {
-    emit('update:selectedOption', cate)
+const handleChooseOpt = (opt: string) => {
+    selectedOpt.value = opt
     openOption.value = false
 }
 </script>
