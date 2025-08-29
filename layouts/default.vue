@@ -22,13 +22,15 @@
     </div>
     <div class="flex flex-col gap-5 flex-1">
       <layout-header />
-      <div class="flex-1">
+      <div class="flex-1 ">
         <slot />
       </div>
     </div>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+</script>
 <style lang="scss" scoped>
 .bg-linear {
   background: linear-gradient(#2a2a2a, #202020);
