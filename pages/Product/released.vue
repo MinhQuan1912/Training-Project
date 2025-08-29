@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="border-cus-4 min-h-[85dvh] w-full">
+    <div class="border-cus-4 min-h-[85dvh] min-w-full">
       <div class="p-3 w-full flex justify-between items-center">
         <div class="flex gap-6 items-center">
           <h2 class="text-primary text-6 leading-[145%] tracking-[0.06px]">
@@ -24,9 +24,9 @@
           <icons-list class="cursor-pointer hover:opacity-40" />
         </div>
       </div>
-      <div class="mt-3 p-4">
+      <div class="mt-3 p-4 overflow-x-auto custom-scroll">
         <table
-          class="border-separate border-spacing-0 text-sm text-gray-200 p-1"
+          class="border-separate border-spacing-0 text-sm text-gray-200 p-1 min-w-full"
         >
           <thead
             class="w-full table-fixed rounded-xl text-tertiary text-xs font-normal leading-[160%] tracking-[0.048px]"
@@ -150,7 +150,9 @@
                   <div
                     class="text-sm whitespace-nowrap hidden md:inline-block border border-solid rounded-[8px] bg-green-500/10 border-green-500/30 leading-[1] tracking-[0.175px] text-primary-02 py-1.5 px-2"
                     :class="
-                      item.growth >= 0 ? 'text-green-400' : 'text-red-400'
+                      item.growth >= 0
+                        ? 'text-green-400'
+                        : 'text-red-400 bg-red-500/10  border-red-500/30'
                     "
                   >
                     {{ item.growth >= 0 ? "↑" : "↓" }} {{ item.growth }}%
@@ -190,68 +192,62 @@
     </div>
   </div>
 
-  <Transition name="fade-zoom">
-    <div
-      v-if="showEditModal"
-      class="fixed h-[100dvh] overflow-hidden scroll-contain inset-0 bg-black/50 flex items-center justify-center z-50"
-    >
-      <UCard class="w-[50dvw]">
-        <template #header>
-          <h2 class="text-lg font-semibold">Edit Item</h2>
-        </template>
+  <UModal
+    v-model:open="showEditModal"
+    :overlay="true"
+    title="Edit Item"
+    :ui="{
+      footer: 'flex !justify-end gap-2',
+    }"
+  >
+    <template #body
+      ><div
+        class="flex flex-col gap-4 overflow-y-auto max-h-[50vh] custom-scroll"
+      >
+        <UFormField label="Name">
+          <UInput
+            v-model="currentItem.name"
+            placeholder="Enter name"
+            class="w-full"
+          />
+        </UFormField>
 
-        <div
-          class="flex flex-col gap-4 overflow-y-auto max-h-[50vh] custom-scroll"
+        <UFormField label="Description">
+          <UTextarea
+            v-model="currentItem.description"
+            placeholder="Enter description"
+            class="w-full"
+          />
+        </UFormField>
+
+        <div class="flex gap-2 w-full">
+          <UFormField label="Status" class="flex-1">
+            <USelect
+              v-model="currentItem.status"
+              :items="statusOptions"
+              class="w-full overflow-visible"
+              :popper="{ strategy: 'absolute' }"
+            />
+          </UFormField>
+
+          <UFormField label="Price" class="flex-1">
+            <UInput v-model="currentItem.price" type="number" class="w-full" />
+          </UFormField>
+        </div></div
+    ></template>
+    <template #footer>
+      <div class="flex gap-2">
+        <UButton
+          color="neutral"
+          variant="outline"
+          @click="showEditModal = false"
         >
-          <UFormField label="Name">
-            <UInput
-              v-model="currentItem.name"
-              placeholder="Enter name"
-              class="w-full"
-            />
-          </UFormField>
-
-          <UFormField label="Description">
-            <UTextarea
-              v-model="currentItem.description"
-              placeholder="Enter description"
-              class="w-full"
-            />
-          </UFormField>
-
-          <div class="flex gap-2 w-full">
-            <UFormField label="Status" class="flex-1">
-              <USelect
-                v-model="currentItem.status"
-                :items="statusOptions"
-                class="w-full overflow-visible"
-              />
-            </UFormField>
-
-            <UFormField label="Price" class="flex-1">
-              <UInput
-                v-model="currentItem.price"
-                type="number"
-                class="w-full"
-              />
-            </UFormField>
-          </div>
-        </div>
-
-        <template #footer>
-          <div class="flex justify-end gap-2">
-            <UButton
-              color="neutral"
-              variant="outline"
-              @click="showEditModal = false"
-              >Cancel</UButton
-            >
-            <UButton color="success" @click="saveEdit">Save</UButton>
-          </div>
-        </template>
-      </UCard>
-    </div>
-  </Transition>
+          Cancel
+        </UButton>
+        <UButton color="success" @click="saveEdit">Save</UButton>
+      </div>
+    </template>
+  </UModal>
   <Transition name="fade-zoom">
     <div
       v-if="showDeleteConfirm"
@@ -442,12 +438,12 @@ input[type="checkbox"] {
   color: white;
 }
 
-table {
+/* table {
   display: block;
   max-width: -moz-fit-content;
   max-width: fit-content;
   margin: 0 auto;
   overflow-x: auto;
   white-space: nowrap;
-}
+} */
 </style>
