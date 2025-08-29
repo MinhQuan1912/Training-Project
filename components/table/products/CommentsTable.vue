@@ -28,7 +28,7 @@
           :key="index"
           @click="toggleContent(index)"
         >
-          <td class="w-10 pl-4 py-4 rounded-l-2xl h-12">
+          <td class="w-10 pl-4 py-4 rounded-l-2xl h-12 flex items-center">
             <input
               type="checkbox"
               :id="'checkbox-' + index"
@@ -38,104 +38,102 @@
             <label :for="'checkbox-' + index" class="custom-checkbox"></label>
           </td>
           <td
-            class="w-13/20 max-lg:group-hover:w-full py-4 ml-5 flex-1"
+            class="w-13/20 max-lg:group-hover:w-full py-4 ml-5 flex-1 flex mr-6 flex-col"
             colspan="2"
           >
-            <div class="flex mr-6 flex-col">
-              <div class="flex items-center">
-                <div class="w-12 h-12 mr-5 rounded-full flex-none">
-                  <img
-                    :src="comment.imgComment"
-                    alt=""
-                    class="w-full h-full rounded-full object-contain"
-                  />
-                </div>
-                <div class="flex flex-col gap-4">
-                  <div>
-                    <div class="flex items-center gap-3">
-                      <div class="font-semibold text-primary">
-                        {{ comment.titleComment }}
+            <div class="flex items-center">
+              <div class="w-12 h-12 mr-5 rounded-full flex-none">
+                <img
+                  :src="comment.imgComment"
+                  alt=""
+                  class="w-full h-full rounded-full object-contain"
+                />
+              </div>
+              <div class="flex flex-col gap-4">
+                <div>
+                  <div class="flex items-center gap-3">
+                    <div class="font-semibold text-primary">
+                      {{ comment.titleComment }}
+                    </div>
+                    <div class="flex gap-2 items-center">
+                      <div class="text-secondary text-sm">
+                        {{ comment.instaComment }}
                       </div>
-                      <div class="flex gap-2 items-center">
-                        <div class="text-secondary text-sm">
-                          {{ comment.instaComment }}
-                        </div>
-                        <icons-status_indicator />
-                        <div class="text-secondary text-sm">
-                          {{ comment.timeComment }}
-                        </div>
+                      <icons-status_indicator />
+                      <div class="text-secondary text-sm">
+                        {{ comment.timeComment }}
                       </div>
                     </div>
+                  </div>
 
-                    <div class="text-primary/80">
-                      {{ comment.contentComment }}
-                    </div>
+                  <div class="text-primary/80">
+                    {{ comment.contentComment }}
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div
-                :class="[
-                  'transition-all ml-18 duration-500 ease-in-out',
-                  hoveredRowIndex[index]
-                    ? 'max-h-100 opacity-100 visible'
-                    : 'max-h-0 opacity-0 invisible',
-                ]"
-              >
-                <div class="flex gap-4 mt-4.5">
-                  <div class="w-8 h-8 rounded-full flex flex-none">
-                    <img
-                      :src="comment.imgAnswer"
-                      alt=""
-                      class="w-full h-full rounded-full object-cover"
-                    />
+            <div
+              :class="[
+                'transition-all ml-18 duration-500 ease-in-out',
+                hoveredRowIndex[index]
+                  ? 'max-h-100 opacity-100 visible'
+                  : 'max-h-0 opacity-0 invisible',
+              ]"
+            >
+              <div class="flex gap-4 mt-4.5">
+                <div class="w-8 h-8 rounded-full flex flex-none">
+                  <img
+                    :src="comment.imgAnswer"
+                    alt=""
+                    class="w-full h-full rounded-full object-cover"
+                  />
+                </div>
+
+                <div>
+                  <div class="flex items-center gap-3">
+                    <div class="font-semibold text-primary">
+                      {{ comment.titleComment }}
+                    </div>
+                    <div class="flex gap-2 items-center">
+                      <div class="text-secondary text-sm">
+                        {{ comment.instaComment }}
+                      </div>
+                      <icons-status_indicator />
+                      <div class="text-secondary text-sm">
+                        {{ comment.timeComment }}
+                      </div>
+                    </div>
                   </div>
 
-                  <div>
-                    <div class="flex items-center gap-3">
-                      <div class="font-semibold text-primary">
-                        {{ comment.titleComment }}
-                      </div>
-                      <div class="flex gap-2 items-center">
-                        <div class="text-secondary text-sm">
-                          {{ comment.instaComment }}
-                        </div>
-                        <icons-status_indicator />
-                        <div class="text-secondary text-sm">
-                          {{ comment.timeComment }}
-                        </div>
-                      </div>
-                    </div>
+                  <div class="text-primary/80">
+                    {{ comment.contentAnswer }}
+                  </div>
 
-                    <div class="text-primary/80">
-                      {{ comment.contentAnswer }}
-                    </div>
+                  <div class="flex gap-5 items-center text-secondary mt-2">
+                    <NuxtLink
+                      to="#"
+                      class="flex items-center gap-1 py-1 pr-1.5 hover:text-primary/80"
+                    >
+                      <icons-edit />
+                      <div class="text-sm font-semibold">Reply</div>
+                    </NuxtLink>
 
-                    <div class="flex gap-5 items-center text-secondary mt-2">
-                      <NuxtLink
-                        to="#"
-                        class="flex items-center gap-1 py-1 pr-1.5"
-                      >
-                        <icons-edit />
-                        <div class="text-sm font-semibold">Reply</div>
-                      </NuxtLink>
+                    <NuxtLink
+                      to="#"
+                      class="flex items-center gap-1 py-1 pl-1 pr-1.5 hover:text-primary/80"
+                    >
+                      <icons-heart />
+                      <div class="text-sm font-semibold">Like</div>
+                    </NuxtLink>
 
-                      <NuxtLink
-                        to="#"
-                        class="flex items-center gap-1 py-1 pl-1 pr-1.5"
-                      >
-                        <icons-heart />
-                        <div class="text-sm font-semibold">Like</div>
-                      </NuxtLink>
-
-                      <NuxtLink
-                        to="#"
-                        class="flex items-center gap-1 py-1 pl-1 pr-1.5"
-                      >
-                        <icons-trash />
-                        <div class="text-sm font-semibold">Remove</div>
-                      </NuxtLink>
-                    </div>
+                    <NuxtLink
+                      to="#"
+                      class="flex items-center gap-1 py-1 pl-1 pr-1.5 hover:text-primary/80"
+                    >
+                      <icons-trash />
+                      <div class="text-sm font-semibold">Remove</div>
+                    </NuxtLink>
                   </div>
                 </div>
               </div>
@@ -150,14 +148,17 @@
                   class="hidden lg:flex gap-5 items-center text-secondary mt-2"
                   v-if="hoveredRowIndex[index]"
                 >
-                  <NuxtLink to="#" class="flex items-center gap-1 py-1 pr-1.5">
+                  <NuxtLink
+                    to="#"
+                    class="flex items-center gap-1 py-1 pr-1.5 hover:text-primary/80"
+                  >
                     <icons-edit />
                     <div class="text-sm font-semibold">Reply</div>
                   </NuxtLink>
 
                   <NuxtLink
                     to="#"
-                    class="flex items-center gap-1 py-1 pl-1 pr-1.5"
+                    class="flex items-center gap-1 py-1 pl-1 pr-1.5 hover:text-primary/80"
                   >
                     <icons-heartRed />
                     <div class="text-sm font-semibold">Like</div>
@@ -165,7 +166,7 @@
 
                   <NuxtLink
                     to="#"
-                    class="flex items-center gap-1 py-1 pl-1 pr-1.5"
+                    class="flex items-center gap-1 py-1 pl-1 pr-1.5 hover:text-primary/80"
                   >
                     <icons-trash />
                     <div class="text-sm font-semibold">Remove</div>
