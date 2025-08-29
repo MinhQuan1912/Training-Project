@@ -26,7 +26,7 @@
                         <div class="flex items-center gap-2">
                             {{ item.product.value }}
                             <span v-if="item.product.growthRate">
-                                <products-overview-trend :growth-rate="item.product.growthRate" />
+                                <badge-trend :growth-rate="item.product.growthRate" />
                             </span>
                         </div>
                     </td>
@@ -35,7 +35,7 @@
                         <div class="flex items-center gap-2">
                             {{ item.view.value }}
                             <span v-if="item.view.growthRate">
-                                <products-overview-trend :growth-rate="item.view.growthRate" />
+                                <badge-trend :growth-rate="item.view.growthRate" />
                             </span>
                         </div>
                     </td>
@@ -44,7 +44,7 @@
                         <div class="flex items-center gap-2">
                             {{ item.like.value }}
                             <span v-if="item.like.growthRate">
-                                <products-overview-trend :growth-rate="item.like.growthRate" />
+                                <badge-trend :growth-rate="item.like.growthRate" />
                             </span>
                         </div>
                     </td>
@@ -53,7 +53,7 @@
                         <div class="flex items-center gap-2">
                             {{ item.comment.value }}
                             <span v-if="item.comment.growthRate">
-                                <products-overview-trend :growth-rate="item.comment.growthRate" />
+                                <badge-trend :growth-rate="item.comment.growthRate" />
                             </span>
                         </div>
                     </td>
