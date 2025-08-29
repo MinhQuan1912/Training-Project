@@ -1,9 +1,10 @@
 <template>
   <div class="md:relative lg:static w-full" :id="`draft-${id}`" :class="class">
-    <div class="group">
+    <div class="group relative">
       <div class="h-auto w-full overflow-hidden rounded-4xl">
         <img
           :src="image"
+          :srcset="`${image} 1x, ${image.replace('.jpg', '@2x.jpg')} 2x`"
           alt=""
           class="h-[230px] w-full object-cover md:!w-[460px]"
         />
@@ -19,14 +20,14 @@
           ${{ price }}
         </div>
       </div>
-      <div class="flex items-center gap-2 mt-2 group-hover:hidden h-4">
+      <div class="flex items-center gap-2 mb-2 group-hover:opacity-0 py-1">
         <UIcon name="fa6-regular:clock" class="size-4 text-secondary" />
         <span class="text-secondary text-xs leading-[1.6] tracking-[0.048px]">{{
-          formatDate(date)
+          formatDate(date || "2044-04-09T15:55:00Z")
         }}</span>
       </div>
       <div
-        class="text-xs text-gray-400 hidden group-hover:flex gap-2 items-center duration-200 cursor-pointer"
+        class="absolute bottom-0 left-0 text-xs text-gray-400 hidden group-hover:flex gap-2 items-center duration-200 cursor-pointer"
       >
         <div
           class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
@@ -54,7 +55,7 @@
 
     <div
       v-if="itemBefore"
-      class="absolute z-2 top-0 left-full h-full ml-6 w-full groupBefore lg:hidden"
+      class="absolute z-2 top-0 left-full h-full ml-6 w-full groupBefore hidden md:block lg:hidden"
       :id="`draft-${itemBefore.id}`"
       :class="class"
     >
@@ -68,7 +69,7 @@
       <div class="flex gap-1 mt-3.5 font-semibold">
         <span
           class="flex-1 items-center text-base leading-[1.5] tracking-[0.024px] text-primary line-clamp-1"
-          >{{ itemBefore.title }}</span
+          >{{ itemBefore.title || itemBefore.name }}</span
         >
         <div
           class="border border-solid rounded-[999px] bg-green-500/10 border-green-500/30 leading-[1] tracking-[0.175px] text-primary-02 text-sm py-1.75 px-3"
@@ -76,10 +77,10 @@
           ${{ itemBefore.price }}
         </div>
       </div>
-      <div class="flex time items-center gap-2 mt-2 h-4">
+      <div class="flex time items-center gap-2 py-1">
         <UIcon name="fa6-regular:clock" class="size-4 text-secondary" />
         <span class="text-secondary text-xs leading-[1.6] tracking-[0.048px]">{{
-          formatDate(itemBefore.date)
+          formatDate(itemBefore.date || "2044-04-09T15:55:00Z")
         }}</span>
       </div>
       <div
@@ -110,7 +111,7 @@
     </div>
     <div
       v-if="itemAfter"
-      class="absolute z-2 top-0 right-full h-full mr-6 w-full group lg:hidden"
+      class="absolute z-2 top-0 right-full h-full mr-6 w-full groupAfter hidden md:block lg:hidden"
       :id="`draft-${itemAfter.id}`"
       :class="class"
     >
@@ -124,7 +125,7 @@
       <div class="flex gap-1 mt-3.5 font-semibold">
         <span
           class="flex-1 items-center text-base leading-[1.5] tracking-[0.024px] text-primary line-clamp-1"
-          >{{ itemAfter.title }}</span
+          >{{ itemAfter.title || itemAfter.name }}</span
         >
         <div
           class="border border-solid rounded-[999px] bg-green-500/10 border-green-500/30 leading-[1] tracking-[0.175px] text-primary-02 text-sm py-1.75 px-3"
@@ -132,10 +133,10 @@
           ${{ itemAfter.price }}
         </div>
       </div>
-      <div class="time flex items-center gap-2 mt-2 h-4">
+      <div class="time flex items-center gap-2 p-1">
         <UIcon name="fa6-regular:clock" class="size-4 text-secondary" />
         <span class="text-secondary text-xs leading-[1.6] tracking-[0.048px]">{{
-          formatDate(itemAfter.date)
+          formatDate(itemAfter.date || "2044-04-09T15:55:00Z")
         }}</span>
       </div>
       <div
