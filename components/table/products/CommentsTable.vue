@@ -386,11 +386,13 @@ const allChecked = computed({
   },
 });
 
-const hoveredRowIndex = ref(false);
+const hoveredRowIndex = ref(comments.value.map(() => false));
 
 const toggleContent = (index) => {
   hoveredRowIndex.value[index] = !hoveredRowIndex.value[index];
 };
+
+console.log(hoveredRowIndex);
 </script>
 
 <style lang="scss" scoped>

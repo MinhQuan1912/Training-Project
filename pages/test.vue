@@ -1,34 +1,27 @@
 <template>
-  <div class="flex">
-    <div class="bottom">FLEX 1</div>
-
-    <div class="bottom">FLEX 2</div>
-
-    <div class="bottom">FLEX 3</div>
-  </div>
+  <DataTable :items="items" :columns="columns">
+    <template #cell-name="{ item }">
+      <div class="font-bold text-lg">{{ item.name }}</div>
+      <div class="text-sm text-gray-500">Mã: {{ item.code }}</div>
+    </template>
+  </DataTable>
 </template>
 
-<script setup></script>
+<script setup>
+const items = ref([
+  { id: 1, name: "Sản phẩm A", code: "SP001", price: 100 },
+  { id: 2, name: "Sản phẩm B", code: "SP002", price: 200 },
+]);
 
-<style>
-.flex {
-  display: flex; /* Bật flexbox cho container */
-}
+const columns = ref([
+  {
+    field: "name",
+    label: "Tên & Mã sản phẩm",
+    headerClass: "w-1/2",
+    cellClass: "w-1/2",
+  },
+  { field: "price", label: "Giá", headerClass: "w-1/2", cellClass: "w-1/2" },
+]);
+</script>
 
-.bottom {
-  background-color: aqua; /* Màu nền mặc định cho tất cả các flex item */
-  padding: 20px;
-  margin: 5px;
-  transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển đổi mượt mà */
-}
-
-/* Khi di chuột vào .bottom, phần tử .bottom liền kề ngay sau nó sẽ mất background */
-.bottom:hover + .bottom {
-  background-color: transparent;
-}
-
-/* Khi di chuột vào .bottom, tất cả các phần tử .bottom sau nó sẽ mất background */
-/* .bottom:hover ~ .bottom {
-  background-color: transparent;
-} */
-</style>
+<style lang="scss" scoped></style>

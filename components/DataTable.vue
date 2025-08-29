@@ -8,7 +8,9 @@
             :key="column.field"
             :class="column.headerClass"
           >
-            {{ column.label }}
+            <slot :name="`header-${column.field}`">
+              {{ column.label }}
+            </slot>
           </th>
         </tr>
       </thead>
