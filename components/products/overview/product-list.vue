@@ -78,7 +78,7 @@
                         </td>
                         <!-- Status -->
                         <td>
-                            <products-overview-status :status="product.status" class="w-20" />
+                            <badge-status :status="product.status" class="w-20" />
                         </td>
                         <!-- Price -->
                         <td>${{ product.price.toFixed(2) }}</td>
@@ -86,7 +86,7 @@
                         <td>
                             <div class="flex gap-2 items-center">
                                 <span>${{ product.sales.value?.toLocaleString('en-US') }}</span>
-                                <products-overview-trend :growth-rate="product.sales.growthRate" />
+                                <badge-trend :growth-rate="product.sales.growthRate" />
                             </div>
                         </td>
                         <!-- Views -->

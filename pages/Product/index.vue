@@ -34,7 +34,7 @@
                 {{ item.revenue }}
               </h2>
               <div class="flex gap-2 items-center">
-                <products-overview-trend :growth-rate="item.growthRate" />
+                <badge-trend :growth-rate="item.growthRate" />
                 <span class="text-tertiary text-sm leading-[150%]">vs last year</span>
               </div>
             </div>
