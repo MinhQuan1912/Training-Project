@@ -1,10 +1,15 @@
 <template>
-  <div class="container pb-8 px-4">
+  <div class="container pb-8 px-4 overflow-auto">
     <table class="table-auto w-full">
       <thead>
         <tr :class="classTableTr.header">
           <th class="w-10 pl-4 py-4">
-            <input type="checkbox" id="myCheckbox" class="original-checkbox" />
+            <input
+              type="checkbox"
+              id="myCheckbox"
+              class="original-checkbox"
+              v-model="allChecked"
+            />
             <label for="myCheckbox" class="custom-checkbox"></label>
           </th>
           <th
@@ -20,26 +25,33 @@
       </thead>
       <tbody>
         <tr
-          v-for="(item, index) in items"
-          :key="index"
+          v-for="(item, itemIndex) in items"
+          :key="itemIndex"
           :class="classTableTr.body"
-          @mouseover="$emit('row-hover', index)"
-          @mouseleave="$emit('row-hover', null)"
+          :index="index"
+          @click="$emit('row-click', itemIndex)"
         >
           <td class="w-10 pl-4 py-4 rounded-l-2xl h-12">
             <input
               type="checkbox"
               :id="'checkbox-' + index"
               class="original-checkbox"
+              v-model="checked"
+              :value="item"
             />
             <label :for="'checkbox-' + index" class="custom-checkbox"></label>
           </td>
           <td
-            v-for="(column, index) in columns"
-            :key="index"
+            v-for="(column, columIndex) in columns"
+            :key="columIndex"
             :class="column.cellClass"
+            :colspan="column.colspan"
           >
-            <slot :name="`cell-${column.field}`" :item="item">
+            <slot
+              :name="`cell-${column.field}`"
+              :item="item"
+              :index="itemIndex"
+            >
               {{ item[column.field] }}
             </slot>
           </td>
@@ -50,7 +62,8 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import { ref, defineProps, watch } from "vue";
+const emit = defineEmits(["row-click"]);
 
 const props = defineProps({
   items: {
@@ -70,13 +83,25 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits(["row-hover"]);
+const checked = ref([]);
 
-const hoveredRowIndex = ref(null);
+// const allChecked = computed({
+//   // đọc giá trị checked, trả về boolean
+//   // get được dùng để tính toán và trả về một giá trị dựa trên các dữ liệu phụ thuộc
+//   // phg thức every kiểm tra xem tất cả các phần tử trong mảng có vượt qua bái kiểm tra đc triển khai bởi hàm đc cung cấp hay k, trả về boolean
+//   get() {
+//     return comments.value.every((comment) => comment.checked === true);
+//   },
+//   // gán giá trị cho allChecked (chạy khi thay đổi giá trị allChecked)
+//   // set để gán giá trị dữ liệu phụ thuộc
+//   set(value) {
+//     comments.value.forEach((comment) => {
+//       comment.checked = value;
+//     });
+//   },
+// });
 
-watch(hoveredRowIndex, (newIndex) => {
-  emits("row-hover", newIndex);
-});
+const allChecked = ref(false);
 </script>
 
 <style scoped lang="scss">
