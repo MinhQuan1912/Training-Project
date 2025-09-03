@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ScheduledTitle from "~/components/title/products/ScheduledTittle.vue";
 import ScheduledTable from "~/components/table/products/ScheduledTable.vue";
 definePageMeta({

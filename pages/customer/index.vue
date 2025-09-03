@@ -2,7 +2,7 @@
   <div class="container">
     <div class="flex max-xl:grid grid-cols-2 gap-3 w-full">
       <!--  lg:w-142 xl:w-261 -->
-      <div class="flex flex-col gap-3 flex-1 max-lg:max-w-142">
+      <div class="flex flex-col gap-3 flex-1">
         <div class="bg-background-02 rounded-4xl flex flex-col gap-4 p-3">
           <OverviewTitle />
 
@@ -17,7 +17,7 @@
       </div>
 
       <!--  lg:w-72 xl:w-114 -->
-      <div class="flex flex-col gap-3 min-w-78 lg:max-w-120">
+      <div class="flex flex-col gap-3 max-w-78 lg:max-w-120">
         <RefundRequests />
 
         <Devices />
@@ -32,7 +32,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import OverviewTitle from "~/components/title/customers/OverviewTitle.vue";
 import OverviewTable from "~/components/table/customers/OverviewTable.vue";
 import TrafficChannel from "~/components/table/customers/TrafficChannel.vue";

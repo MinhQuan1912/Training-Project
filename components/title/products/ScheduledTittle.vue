@@ -6,7 +6,6 @@
           class="text-xl lg:text-2xl font-medium leading-[145%] text-primary pl-5 pr-6"
         >
           5 scheduled products
-          <p>Giá trị search: {{ searchScheduled }}</p>
         </div>
         <SearchData :placeholder="placeholder" v-model="searchScheduled" />
       </div>
