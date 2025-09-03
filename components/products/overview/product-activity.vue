@@ -20,7 +20,7 @@
             <tbody class="block overflow-y-auto max-h-34">
                 <tr v-for="(item, idx) in filterActivities" :key="idx" class="flex gap-6 h-17 border-t border-stroke-subtle w-full">
                     <!-- Week -->
-                    <td class="py-4 flex-1">{{ item.week }}</td>
+                    <td class="py-4 flex-1 flex items-center">{{ item.week }}</td>
                     <!-- Product -->
                     <td class="py-4 flex-1">
                         <div class="flex items-center gap-2">
