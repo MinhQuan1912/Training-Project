@@ -1,7 +1,7 @@
 <template>
   <div class="p-5 flex lg:gap-5 bg-black min-h-screen">
 
-    <div class="w-0 lg:w-12 2xl:!w-75 flex flex-col gap-5 text-secondary relative overflow-hidden lg:overflow-visible">
+    <div class="w-0 lg:w-12 2xl:!w-75 flex flex-col gap-5 text-secondary fixed overflow-hidden lg:overflow-visible h-screen">
       <navigation-menu />
       <div class="w-12 flex flex-col gap-3 absolute bottom-0 left-0">
         <div class="w-12 h-12 rounded-full bg-linear flex justify-center items-center cursor-pointer">
@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col gap-5 flex-1 min-w-0">
+    <div class="flex flex-col gap-5 flex-1 ml-80">
       <layout-header />
       <div class="flex-1 min-w-0">
         <slot />

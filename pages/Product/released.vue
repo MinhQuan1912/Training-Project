@@ -222,16 +222,16 @@
           :price="item.price"
           @edit="onEdit(item)"
           @delete="onDelete(item)"
-          @editBefore="onEdit(data[index - 1])"
-          @editAfter="onEdit(data[index + 1])"
-          @deleteBefore="onDelete(data[index - 1])"
-          @deleteAfter="onDelete(data[index + 1])"
+          @editBefore="onEdit(results[index - 1])"
+          @editAfter="onEdit(results[index + 1])"
+          @deleteBefore="onDelete(results[index - 1])"
+          @deleteAfter="onDelete(results[index + 1])"
           :class="index % 3 !== 1 ? 'md:opacity-0 lg:opacity-100' : ''"
           v-bind="
             index % 3 === 1
               ? {
-                  'item-before': data[index - 1] || null,
-                  'item-after': data[index + 1] || null,
+                  'item-before': results[index - 1] || null,
+                  'item-after': results[index + 1] || null,
                 }
               : {}
           "
@@ -409,17 +409,16 @@ const data = ref([
     views: 89,
   },
 ]);
-const results = ref([...data.value]);
+const keyword = ref("");
+const results = computed(() => {
+  const kw = keyword.value.trim().toLowerCase();
+  return kw
+    ? data.value.filter(i => i.name.toLowerCase().includes(kw))
+    : data.value;
+});
 
 const handleSearch = () => {
-  const keyword = value.value.trim().toLowerCase();
-  if (!keyword) {
-    results.value = data.value;
-  } else {
-    results.value = data.value.filter((item) =>
-      item.name.toLowerCase().includes(keyword)
-    );
-  }
+  keyword.value = value.value;
 };
 const statusOptions = ref(["Active", "Offline"]);
 const selected = ref<any[]>([]);

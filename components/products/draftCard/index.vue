@@ -4,7 +4,6 @@
       <div class="h-auto w-full overflow-hidden rounded-4xl">
         <img
           :src="image"
-          :srcset="`${image} 1x, ${image.replace('.jpg', '@2x.jpg')} 2x`"
           alt=""
           class="h-[230px] w-full object-cover md:!w-[460px]"
         />
@@ -55,7 +54,7 @@
 
     <div
       v-if="itemBefore"
-      class="absolute z-2 top-0 left-full h-full ml-6 w-full groupBefore hidden md:block lg:hidden"
+      class="absolute z-2 top-0 right-full h-full mr-6 w-full groupBefore hidden md:block lg:hidden"
       :id="`draft-${itemBefore.id}`"
       :class="class"
     >
@@ -111,7 +110,7 @@
     </div>
     <div
       v-if="itemAfter"
-      class="absolute z-2 top-0 right-full h-full mr-6 w-full groupAfter hidden md:block lg:hidden"
+      class="absolute z-2 top-0 left-full h-full ml-6 w-full groupAfter hidden md:block lg:hidden"
       :id="`draft-${itemAfter.id}`"
       :class="class"
     >
