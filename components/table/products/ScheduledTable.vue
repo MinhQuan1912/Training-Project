@@ -1,5 +1,9 @@
 <template>
-  <DataTable :items="schedules" :columns="columns" :classTableTr="classTableTr">
+  <DataTable
+    :items="schedulesFilter"
+    :columns="columns"
+    :classTableTr="classTableTr"
+  >
     <template #cell-product="{ item, index }">
       <div class="flex items-center">
         <div class="w-16 h-16 mr-5 rounded-xl">
@@ -85,36 +89,30 @@
         <div
           class="flex flex-col gap-4 overflow-y-auto max-h-[50vh] custom-scroll"
         >
-          <UFormField label="Name">
+          <UFormField label="Products">
             <UInput
-              v-model="currentItem.name"
-              placeholder="Enter name"
-              class="w-full"
-            />
-          </UFormField>
-
-          <UFormField label="Description">
-            <UTextarea
-              v-model="currentItem.description"
-              placeholder="Enter description"
+              v-model="currentItem.product"
+              placeholder="Enter product"
               class="w-full"
             />
           </UFormField>
 
           <div class="flex gap-2 w-full">
-            <UFormField label="Status" class="flex-1">
-              <USelect
-                v-model="currentItem.status"
-                :items="statusOptions"
-                class="w-full overflow-visible"
-              />
-            </UFormField>
-
             <UFormField label="Price" class="flex-1">
               <UInput
                 v-model="currentItem.price"
                 type="number"
                 class="w-full"
+              />
+            </UFormField>
+
+            <UFormField label="Price" class="flex-1">
+              <UInput
+                v-maska="'##/##/##'"
+                placeholder="DD/MM/YY"
+                icon="i-lucide-calendar"
+                class="w-full"
+                v-model="currentItem.scheduleFor"
               />
             </UFormField>
           </div>
@@ -144,7 +142,7 @@
         <div class="p-3 space-y-4">
           <h3 class="text-lg font-medium">Confirm Delete</h3>
           <p>
-            Bạn có chắc chắn muốn xóa <b>{{ currentItem?.name }}</b> không?
+            Bạn có chắc chắn muốn xóa <b>{{ currentItem?.product }}</b> không?
           </p>
           <div class="flex justify-end gap-3">
             <UButton
@@ -161,7 +159,7 @@
   </Transition>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from "vue";
 import DataTable from "~/components/DataTable.vue";
 import ScheduledTitle from "~/components/title/products/ScheduledTittle.vue";
@@ -178,7 +176,7 @@ const columns = [
   {
     field: "price",
     label: "Price",
-    headerClass: "w-3/20 lg:w-3/10 py-4",
+    headerClass: "w-3/20 lg:w-3/10 py-4 pl-8 pr-12.5",
     cellClass: "w-3/20 lg:w-3/10 py-4 pl-8 pr-12.5",
   },
   {
@@ -196,6 +194,7 @@ const classTableTr = {
 
 const schedules = ref([
   {
+    id: 1,
     img: "/images/1.png",
     product: "Bento Pro v.2",
     activeIndex: false,
@@ -204,14 +203,16 @@ const schedules = ref([
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
   },
   {
+    id: 2,
     img: "/images/2.png",
     product: "Fleet – Travel UI Kit",
     activeIndex: false,
-    price: "98.00",
+    price: "980000.00",
     priceStatus: true,
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
   },
   {
+    id: 3,
     img: "/images/3.png",
     product: "Bento Pro - Vol. 2",
     activeIndex: false,
@@ -220,6 +221,7 @@ const schedules = ref([
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
   },
   {
+    id: 4,
     img: "/images/4.png",
     product: "Core Dashboard Builder v.1",
     activeIndex: false,
@@ -227,6 +229,7 @@ const schedules = ref([
     priceStatus: true,
   },
   {
+    id: 5,
     img: "/images/5.png",
     product: "Paradox - Coded Template",
     activeIndex: false,
@@ -235,6 +238,7 @@ const schedules = ref([
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
   },
   {
+    id: 6,
     img: "/images/6.png",
     product: "Bento UI Design Kit",
     activeIndex: false,
@@ -243,6 +247,7 @@ const schedules = ref([
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
   },
   {
+    id: 7,
     img: "/images/7.png",
     product: "Bloom - 3D Illustrations",
     activeIndex: false,
@@ -251,6 +256,7 @@ const schedules = ref([
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
   },
   {
+    id: 8,
     img: "/images/8.png",
     product: "Tiny - Avatar Builder",
     activeIndex: false,
@@ -260,21 +266,19 @@ const schedules = ref([
   },
 ]);
 
-const showModalEdit = ref(false);
-
 const props = defineProps({
-  searchQuery: {
+  search: {
     type: String,
     required: true,
   },
 });
 
-const filteredSchedule = computed(() => {
-  if (!props.searchQuery) {
+const schedulesFilter = computed(() => {
+  if (!props.search) {
     return schedules.value;
   }
 
-  const query = props.searchQuery.toLowerCase();
+  const query = props.search.toLowerCase();
 
   return schedules.value.filter((schedule) =>
     schedule.product.toLowerCase().includes(query)
@@ -286,16 +290,9 @@ const showEditModal = ref(false);
 const showDeleteConfirm = ref(false);
 const currentItem = ref({
   id: 0,
-  image: "",
-  name: "",
-  description: "",
-  status: "",
+  product: "",
   price: 0,
-  sales: 0,
-  growth: 0,
-  rating: 0,
-  reviews: 0,
-  views: 0,
+  scheduleFor: "",
 });
 
 const onEdit = (item) => {
@@ -312,5 +309,12 @@ const onDelete = (item) => {
     ...item,
   };
   showDeleteConfirm.value = true;
+};
+
+const confirmDelete = () => {
+  schedules.value = schedules.value.filter(
+    (d) => d.id !== currentItem.value.id
+  );
+  showDeleteConfirm.value = false;
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <DataTable
-    :items="comments"
+    :items="commentsFilter"
     :columns="columns"
     :classTableTr="classTableTr"
     @row-click="handleRowClick"
@@ -192,8 +192,8 @@ const columns = [
 ];
 
 const classTableTr = {
-  header: "text-left flex",
-  body: "bottomHover flex items-center relative group outline-[1.5px] outline-solid outline-transparent hover:outline-primary/7.5 hover:bg-background-pop transition-all duration-500 w-full hover:rounded-2xl border-t-[1.5px] hover:border-transparent border-solid border-stroke-subtle",
+  header: "text-left flex items-center",
+  body: "bottomHover flex items-center relative group outline-[1.5px] outline-solid outline-transparent hover:outline-primary/7.5 hover:bg-background-pop transition-all duration-500 w-full rounded-2xl border-t-[1.5px] hover:border-transparent border-solid border-stroke-subtle",
 };
 
 const comments = ref([
@@ -203,7 +203,7 @@ const comments = ref([
     instaComment: "@samstoo",
     timeComment: "1m",
     contentComment:
-      "Can you make a version for automated penetration testing and cybersecurity?iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+      "Can you make a version for automated penetration testing and cybersecurity?",
     imgProduct: "/images/1.png",
     titleProduct: "123123Bento Pro v.2",
     imgAnswer: "/images/1.png",
@@ -343,8 +343,6 @@ const comments = ref([
   },
 ]);
 
-const hoveredRowIndex = ref(null);
-
 const handleRowClick = (index) => {
   comments.value.forEach((comment, i) => {
     if (i === index) {
@@ -352,6 +350,25 @@ const handleRowClick = (index) => {
     }
   });
 };
+
+const props = defineProps({
+  search: {
+    type: String,
+    require: true,
+  },
+});
+
+const commentsFilter = computed(() => {
+  const key = props.search.trim().toLowerCase();
+
+  if (!key) {
+    return comments.value;
+  } else {
+    return (comments.value = comments.value.filter((item) => {
+      item.titleComment.toLowerCase().includes(key);
+    }));
+  }
+});
 </script>
 
 <style>
