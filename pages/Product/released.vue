@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="border-cus-4 min-h-[85dvh] min-w-full ">
+  <div class="container overflow-hidden">
+    <div class="border-cus-4 min-h-[85dvh] min-w-full">
       <div class="p-3 w-full flex justify-between items-center">
         <div class="flex gap-6 items-center">
           <h2 class="text-primary text-6 leading-[145%] tracking-[0.06px]">
@@ -16,17 +16,37 @@
               base: 'p-3 pl-9 border-1 !text-secondary shadow-3 w-40 sm:w-62 text-sm leading-[150%] tracking-[0.035px] cursor-pointer',
               leadingIcon: 'text-secondary',
             }"
+            @keydown.enter="handleSearch"
           >
           </UInput>
         </div>
         <div class="gap-2 items-center hidden sm:flex">
-          <icons-sort class="cursor-pointer hover:opacity-40" />
-          <icons-list class="cursor-pointer hover:opacity-40" />
+          <div
+            @click="layout = 'grid'"
+            :class="{
+              'border border-solid border-[#282828]': layout === 'grid',
+            }"
+            class="rounded-full"
+          >
+            <icons-sort class="cursor-pointer hover:opacity-40" />
+          </div>
+          <div
+            @click="layout = 'list'"
+            :class="{
+              'border border-solid border-[#282828]': layout === 'list',
+            }"
+            class="rounded-full"
+          >
+            <icons-list class="cursor-pointer hover:opacity-40" />
+          </div>
         </div>
       </div>
-      <div class="mt-3 p-4 overflow-x-auto custom-scroll">
+      <div
+        v-if="layout === 'list'"
+        class="mt-3 p-4 overflow-x-auto custom-scroll"
+      >
         <table
-          class="border-separate border-spacing-0 text-sm text-gray-200 p-1  min-w-full"
+          class="border-separate border-spacing-0 text-sm text-gray-200 p-1 min-w-full"
         >
           <thead
             class="w-full table-fixed rounded-xl text-tertiary text-xs font-normal leading-[160%] tracking-[0.048px]"
@@ -63,7 +83,7 @@
           </thead>
           <tbody>
             <tr
-              v-for="(item, index) in data"
+              v-for="(item, index) in results"
               :key="index"
               class="rounded-[16px] outline-[1.5px] outline-solid outline-transparent hover:outline-[#313131] hover:bg-background-highlight group cursor-pointer"
               :class="{
@@ -150,7 +170,9 @@
                   <div
                     class="text-sm whitespace-nowrap hidden md:inline-block border border-solid rounded-[8px] bg-green-500/10 border-green-500/30 leading-[1] tracking-[0.175px] text-primary-02 py-1.5 px-2"
                     :class="
-                      item.growth >= 0 ? 'text-green-400' : 'text-red-400'
+                      item.growth >= 0
+                        ? 'text-green-400'
+                        : 'text-red-400 bg-red-500/10  border-red-500/30'
                     "
                   >
                     {{ item.growth >= 0 ? "↑" : "↓" }} {{ item.growth }}%
@@ -187,71 +209,93 @@
           </tbody>
         </table>
       </div>
+      <div
+        v-if="layout === 'grid'"
+        class="p-8 pt-5 grid md:grid-cols-[1fr_2fr_1fr] lg:grid-cols-4 xxl:grid-cols-5 gap-4 md:gap-6 overflow-hidden"
+      >
+        <ProductsDraftCard
+          v-for="(item, index) in results"
+          :key="item.id"
+          :id="item.id"
+          :title="item.name"
+          :image="item.image"
+          :price="item.price"
+          @edit="onEdit(item)"
+          @delete="onDelete(item)"
+          @editBefore="onEdit(data[index - 1])"
+          @editAfter="onEdit(data[index + 1])"
+          @deleteBefore="onDelete(data[index - 1])"
+          @deleteAfter="onDelete(data[index + 1])"
+          :class="index % 3 !== 1 ? 'md:opacity-0 lg:opacity-100' : ''"
+          v-bind="
+            index % 3 === 1
+              ? {
+                  'item-before': data[index - 1] || null,
+                  'item-after': data[index + 1] || null,
+                }
+              : {}
+          "
+        />
+      </div>
     </div>
   </div>
 
-  <Transition name="fade-zoom">
-    <div
-      v-if="showEditModal"
-      class="fixed h-[100dvh] overflow-hidden scroll-contain inset-0 bg-black/50 flex items-center justify-center z-50"
-    >
-      <UCard class="w-[50dvw]">
-        <template #header>
-          <h2 class="text-lg font-semibold">Edit Item</h2>
-        </template>
+  <UModal
+    v-model:open="showEditModal"
+    :overlay="true"
+    title="Edit Item"
+    :ui="{
+      footer: 'flex !justify-end gap-2',
+    }"
+  >
+    <template #body
+      ><div
+        class="flex flex-col gap-4 overflow-y-auto max-h-[50vh] custom-scroll"
+      >
+        <UFormField label="Name">
+          <UInput
+            v-model="currentItem.name"
+            placeholder="Enter name"
+            class="w-full"
+          />
+        </UFormField>
 
-        <div
-          class="flex flex-col gap-4 overflow-y-auto max-h-[50vh] custom-scroll"
+        <UFormField label="Description">
+          <UTextarea
+            v-model="currentItem.description"
+            placeholder="Enter description"
+            class="w-full"
+          />
+        </UFormField>
+
+        <div class="flex gap-2 w-full">
+          <UFormField label="Status" class="flex-1">
+            <USelect
+              v-model="currentItem.status"
+              :items="statusOptions"
+              class="w-full overflow-visible"
+              :popper="{ strategy: 'absolute' }"
+            />
+          </UFormField>
+
+          <UFormField label="Price" class="flex-1">
+            <UInput v-model="currentItem.price" type="number" class="w-full" />
+          </UFormField>
+        </div></div
+    ></template>
+    <template #footer>
+      <div class="flex gap-2">
+        <UButton
+          color="neutral"
+          variant="outline"
+          @click="showEditModal = false"
         >
-          <UFormField label="Name">
-            <UInput
-              v-model="currentItem.name"
-              placeholder="Enter name"
-              class="w-full"
-            />
-          </UFormField>
-
-          <UFormField label="Description">
-            <UTextarea
-              v-model="currentItem.description"
-              placeholder="Enter description"
-              class="w-full"
-            />
-          </UFormField>
-
-          <div class="flex gap-2 w-full">
-            <UFormField label="Status" class="flex-1">
-              <USelect
-                v-model="currentItem.status"
-                :items="statusOptions"
-                class="w-full overflow-visible"
-              />
-            </UFormField>
-
-            <UFormField label="Price" class="flex-1">
-              <UInput
-                v-model="currentItem.price"
-                type="number"
-                class="w-full"
-              />
-            </UFormField>
-          </div>
-        </div>
-
-        <template #footer>
-          <div class="flex justify-end gap-2">
-            <UButton
-              color="neutral"
-              variant="outline"
-              @click="showEditModal = false"
-              >Cancel</UButton
-            >
-            <UButton color="success" @click="saveEdit">Save</UButton>
-          </div>
-        </template>
-      </UCard>
-    </div>
-  </Transition>
+          Cancel
+        </UButton>
+        <UButton color="success" @click="saveEdit">Save</UButton>
+      </div>
+    </template>
+  </UModal>
   <Transition name="fade-zoom">
     <div
       v-if="showDeleteConfirm"
@@ -365,10 +409,22 @@ const data = ref([
     views: 89,
   },
 ]);
+const results = ref([...data.value]);
+
+const handleSearch = () => {
+  const keyword = value.value.trim().toLowerCase();
+  if (!keyword) {
+    results.value = data.value;
+  } else {
+    results.value = data.value.filter((item) =>
+      item.name.toLowerCase().includes(keyword)
+    );
+  }
+};
 const statusOptions = ref(["Active", "Offline"]);
 const selected = ref<any[]>([]);
 const selectAll = ref(false);
-
+const layout = ref("list");
 const toggleAll = () => {
   if (selectAll.value) {
     selected.value = [...data.value];

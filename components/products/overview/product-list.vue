@@ -25,19 +25,135 @@
             <icons-close class="w-4 h-4" />
           </div>
         </div>
-      </div>
-      <div class="flex gap-1 text-sm leading-[100%] font-semibold h-12">
-        <div
-          v-for="(tab, idx) in tabs"
-          :key="idx"
-          class="flex justify-center items-center p-6 rounded-[48px] cursor-pointer transition-all duration-300"
-          @click="activeTab = tab"
-          :class="{
-            'text-primary border-[1.5px] border-stroke': activeTab === tab,
-            'text-secondary border border-transparent': activeTab !== tab,
-          }"
-        >
-          {{ tab }}
+        <!-- Table -->
+        <div class="px-4 pb-8">
+          <table class="w-full text-sm text-primary leading-[150%]">
+            <thead>
+              <tr
+                class="justify-between items-center gap-6 px-4 text-xs text-tertiary opacity-80 h-16.75"
+              >
+                <th
+                  class="w-94 2xl:min-w-128 cursor-pointer group"
+                  @click="chooseAll"
+                >
+                  <div class="flex gap-5 items-center px-4">
+                    <input
+                      type="checkbox"
+                      class="checkbox group-hover:!border-shade05-50"
+                      :checked="selectedAll"
+                    />
+                    Product
+                  </div>
+                </th>
+                <th class="w-26 2xl:w-50 text-left">Status</th>
+                <th class="w-21 2xl:w-45 text-left">Price</th>
+                <th class="w-42 2xl:w-66 text-left">Sales</th>
+                <th class="2xl:w-54 text-left">Views</th>
+                <th class="w-24 text-left hidden 2xl:table-cell">Likes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="product in searchResult"
+                :key="product.id"
+                class="h-24 rounded-xl hover:bg-background-highlight outline outline-solid outline-transparent hover:outline-shade05-50 group transition-all duration-200 ease"
+                @click="handleSelectRow(product.id)"
+              >
+                <!-- Product -->
+                <td class="rounded-l-xl group/setting">
+                  <div class="flex gap-5 items-center">
+                    <input
+                      type="checkbox"
+                      class="checkbox group-hover:!border-shade05-50"
+                      v-model="selectedId"
+                      :value="product.id"
+                    />
+                    <img
+                      :src="product.image"
+                      class="h-16 w-16 object-contain"
+                    />
+                    <div class="flex flex-col justify-center">
+                      <p class="font-semibold">{{ product.name }}</p>
+                      <p
+                        class="min-h-6 text-sm text-secondary group-hover/setting:hidden transition-all duration-200 ease line-clamp-2"
+                      >
+                        {{ product.type }}
+                      </p>
+                      <div
+                        class="hidden group-hover/setting:flex gap-2 h-6 relative -left-1 text-sm leading-[100%] font-semibold text-secondary transition-all duration-200 ease"
+                      >
+                        <button class="setting-button">
+                          <icons-edit />
+                          <p class="">Edit</p>
+                        </button>
+                        <button class="setting-button">
+                          <icons-trash />
+                          <p class="">Delete</p>
+                        </button>
+                        <button class="setting-button">
+                          <icons-share />
+                          <p class="">Share</p>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <!-- Status -->
+                <td>
+                  <badge-status :status="product.status" class="w-20" />
+                </td>
+                <!-- Price -->
+                <td>${{ product.price.toFixed(2) }}</td>
+                <!-- Sales -->
+                <td>
+                  <div class="flex gap-2 items-center">
+                    <span
+                      >${{ product.sales.value?.toLocaleString("en-US") }}</span
+                    >
+                    <badge-trend :growth-rate="product.sales.growthRate" />
+                  </div>
+                </td>
+                <!-- Views -->
+                <td class="w-24">
+                  <div class="flex gap-2 items-center">
+                    <span>{{ product.views.current }}m</span>
+                    <div class="w-8 h-1.5 rounded-xs bg-[#7B7B7B66]">
+                      <div
+                        class="h-1.5 rounded-xs bg-chart-green"
+                        :style="{
+                          width:
+                            product.views.current && product.views.kpi
+                              ? (product.views.current / product.views.kpi) *
+                                  100 +
+                                '%'
+                              : '0%',
+                        }"
+                      ></div>
+                    </div>
+                  </div>
+                </td>
+                <!-- Likes -->
+                <td class="w-24 hidden 2xl:table-cell rounded-r-xl">
+                  <div class="flex gap-2 items-center">
+                    <span>{{ product.likes.current }}m</span>
+                    <div class="w-8 h-1.5 rounded-xs bg-[#7B7B7B66]">
+                      <div
+                        class="h-1.5 rounded-xs bg-chart-green"
+                        :style="{
+                          width:
+                            product.likes.current && product.likes.kpi
+                              ? (product.likes.current / product.likes.kpi) *
+                                  100 +
+                                '%'
+                              : '0%',
+                        }"
+                      ></div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

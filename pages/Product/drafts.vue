@@ -1,51 +1,58 @@
 <template>
-  <div class="container overflow-hidden">
-    <div class="w-full flex justify-between items-center">
-      <div class="flex gap-6 items-center">
-        <h2 class="text-primary text-6 leading-[145%] tracking-[0.06px]">
-          Products
-        </h2>
-        <UInput
-          v-model="value"
-          placeholder="Search products"
-          icon="i-lucide-search"
-          color="success"
-          :ui="{
-            root: 'text-secondary',
-            base: 'p-3 pl-9 border-1 !text-secondary shadow-3 w-40 sm:w-62 text-sm leading-[150%] tracking-[0.035px] cursor-pointer',
-            leadingIcon: 'text-secondary',
-          }"
-        >
-        </UInput>
+  <div class="container">
+    <div class="overflow-hidden border-cus-4">
+      <div class="w-full flex justify-between items-center py-3 px-3">
+        <div class="flex gap-6 items-center">
+          <h2 class="text-primary text-6 leading-[145%] tracking-[0.06px] pl-5">
+            Products
+          </h2>
+          <UInput
+            v-model="value"
+            placeholder="Search products"
+            icon="i-lucide-search"
+            color="success"
+            :ui="{
+              root: 'text-secondary',
+              base: 'p-3 pl-9 border-1 !text-secondary shadow-3 w-40 sm:w-62 text-sm leading-[150%] tracking-[0.035px] cursor-pointer',
+              leadingIcon: 'text-secondary',
+            }"
+            @keydown.enter="handleSearch"
+          >
+          </UInput>
+        </div>
+        <div class="gap-2 items-center hidden sm:flex">
+          <icons-sort class="cursor-pointer hover:opacity-40" />
+          <icons-list class="cursor-pointer hover:opacity-40" />
+        </div>
       </div>
-    </div>
-    <div
-      class="mt-6 p-1 grid md:grid-cols-[1fr_2fr_1fr] lg:grid-cols-4 xxl:grid-cols-5 gap-4 md:gap-6"
-    >
-      <ProductsDraftCard
-        v-for="(item, index) in data"
-        :key="item.id"
-        :id="item.id"
-        :title="item.title"
-        :image="item.image"
-        :price="item.price"
-        :date="item.date"
-        @edit="onEdit(item)"
-        @delete="onDelete(item)"
-        @editBefore="onEdit(data[index - 1])"
-        @editAfter="onEdit(data[index + 1])"
-        @deleteBefore="onDelete(data[index - 1])"
-        @deleteAfter="onDelete(data[index + 1])"
-        :class="index % 3 !== 1 ? 'md:opacity-0 lg:opacity-100' : ''"
-        v-bind="
-          index % 3 === 1
-            ? {
-                'item-before': data[index - 1] || null,
-                'item-after': data[index + 1] || null,
-              }
-            : {}
-        "
-      />
+      <div
+        class="p-8 pt-5 grid md:grid-cols-[1fr_2fr_1fr] lg:grid-cols-4 xxl:grid-cols-5 gap-4 md:gap-6"
+      >
+        <ProductsDraftCard
+          v-for="(item, index) in results"
+          :key="item.id"
+          :id="item.id"
+          :title="item.title"
+          :image="item.image"
+          :price="item.price"
+          :date="item.date"
+          @edit="onEdit(item)"
+          @delete="onDelete(item)"
+          @editBefore="onEdit(data[index - 1])"
+          @editAfter="onEdit(data[index + 1])"
+          @deleteBefore="onDelete(data[index - 1])"
+          @deleteAfter="onDelete(data[index + 1])"
+          :class="index % 3 !== 1 ? 'md:opacity-0 lg:opacity-100' : ''"
+          v-bind="
+            index % 3 === 1
+              ? {
+                  'item-before': data[index - 1] || null,
+                  'item-after': data[index + 1] || null,
+                }
+              : {}
+          "
+        />
+      </div>
     </div>
   </div>
   <Transition name="fade-zoom">
@@ -207,6 +214,18 @@ const data = ref([
     date: "2044-04-09T15:55:00Z",
   },
 ]);
+const results = ref([...data.value]);
+
+const handleSearch = () => {
+  const keyword = value.value.trim().toLowerCase();
+  if (!keyword) {
+    results.value = data.value;
+  } else {
+    results.value = data.value.filter((item) =>
+      item.title.toLowerCase().includes(keyword)
+    );
+  }
+};
 const showEditModal = ref(false);
 const showDeleteConfirm = ref(false);
 const currentItem = ref({

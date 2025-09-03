@@ -28,7 +28,9 @@
     </div>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+</script>
 <style lang="scss" scoped>
 .bg-linear {
   background: linear-gradient(#2a2a2a, #202020);
