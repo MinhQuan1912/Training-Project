@@ -168,7 +168,7 @@
   </DataTable>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from "vue";
 import DataTable from "~/components/DataTable.vue";
 import ScheduledTitle from "~/components/title/products/ScheduledTittle.vue";
@@ -359,16 +359,27 @@ const props = defineProps({
 });
 
 const commentsFilter = computed(() => {
-  const key = props.search.trim().toLowerCase();
+  const key = props.search.toLowerCase();
 
-  if (!key) {
+  if (!props.search) {
     return comments.value;
-  } else {
-    return (comments.value = comments.value.filter((item) => {
-      item.titleComment.toLowerCase().includes(key);
-    }));
   }
+
+  return comments.value.filter((comment) =>
+    comment.titleComment.toLowerCase().includes(key)
+  );
 });
+
+// const handleSearch = () => {
+//   const keyword = value.value.trim().toLowerCase();
+//   if (!keyword) {
+//     results.value = data.value;
+//   } else {
+//     results.value = data.value.filter((item) =>
+//       item.name.toLowerCase().includes(keyword)
+//     );
+//   }
+// };
 </script>
 
 <style>

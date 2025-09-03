@@ -165,7 +165,6 @@ import DataTable from "~/components/DataTable.vue";
 import ScheduledTitle from "~/components/title/products/ScheduledTittle.vue";
 import { defineProps } from "vue";
 
-// Trong script setup của bạn
 const columns = [
   {
     field: "product",
