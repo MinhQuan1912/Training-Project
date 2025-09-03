@@ -58,7 +58,7 @@
     </li>
   </ul>
   <transition name="slide-right" mode="out-in">
-    <side-bar-mobile v-if="showSideBar"/>
+    <side-bar-mobile v-if="showSideBar" :menu-list="menu" />
   </transition>
 </template>
 
