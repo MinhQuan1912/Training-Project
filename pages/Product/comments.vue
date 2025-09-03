@@ -1,8 +1,10 @@
 <template>
-  <div class="bg-background-02 rounded-4xl flex flex-col gap-3 flex-1">
-    <CommentsTitle />
+  <div class="container">
+    <div class="bg-background-02 rounded-4xl flex flex-col gap-3 flex-1">
+      <CommentsTitle v-model="searchComment" />
 
-    <CommentsTable />
+      <CommentsTable :search="searchComment" />
+    </div>
   </div>
 </template>
 
@@ -12,6 +14,8 @@ import CommentsTable from "~/components/table/products/CommentsTable.vue";
 definePageMeta({
   title: "Comments",
 });
+
+const searchComment = ref("");
 </script>
 
 <style lang="scss" scoped></style>

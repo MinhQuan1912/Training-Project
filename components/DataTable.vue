@@ -1,6 +1,6 @@
 <template>
-  <div class="container pb-8 px-4 overflow-auto">
-    <table class="table-auto w-full">
+  <div class="pb-8 px-4 overflow-x-auto overflow-y-hidden">
+    <table class="table-auto w-full overflow-x-auto">
       <thead>
         <tr :class="classTableTr.header">
           <th class="w-10 pl-4 py-4">
@@ -27,25 +27,33 @@
         <tr
           v-for="(item, itemIndex) in items"
           :key="itemIndex"
-          :class="classTableTr.body"
+          :class="[
+            classTableTr.body,
+            checked.includes(item)
+              ? 'bg-background-pop rounded-2xl outline-[1.5px] outline-solid outline-stroke-card-hover-dark'
+              : '',
+          ]"
           :index="index"
-          @click="$emit('row-click', itemIndex)"
         >
-          <td class="w-10 pl-4 py-4 rounded-l-2xl h-12">
+          <td class="w-10 pl-4 py-4 rounded-l-2xl">
             <input
               type="checkbox"
-              :id="'checkbox-' + index"
+              :id="'checkbox-' + itemIndex"
               class="original-checkbox"
               v-model="checked"
               :value="item"
             />
-            <label :for="'checkbox-' + index" class="custom-checkbox"></label>
+            <label
+              :for="'checkbox-' + itemIndex"
+              class="custom-checkbox"
+            ></label>
           </td>
           <td
             v-for="(column, columIndex) in columns"
             :key="columIndex"
             :class="column.cellClass"
             :colspan="column.colspan"
+            @click="$emit('row-click', itemIndex)"
           >
             <slot
               :name="`cell-${column.field}`"
@@ -61,8 +69,8 @@
   </div>
 </template>
 
-<script setup>
-import { ref, defineProps, watch } from "vue";
+<script setup lang="ts">
+import { ref, defineProps, watch, computed } from "vue";
 const emit = defineEmits(["row-click"]);
 
 const props = defineProps({
@@ -83,8 +91,6 @@ const props = defineProps({
   },
 });
 
-const checked = ref([]);
-
 // const allChecked = computed({
 //   // đọc giá trị checked, trả về boolean
 //   // get được dùng để tính toán và trả về một giá trị dựa trên các dữ liệu phụ thuộc
@@ -101,7 +107,23 @@ const checked = ref([]);
 //   },
 // });
 
-const allChecked = ref(false);
+const checked = ref<Array<any>>([]);
+
+const allChecked = computed({
+  get() {
+    if (props.items.length > 0) {
+      return checked.value.length === props.items.length;
+    }
+  },
+
+  set(value: boolean) {
+    if (value) {
+      checked.value = [...props.items];
+    } else {
+      checked.value = [];
+    }
+  },
+});
 </script>
 
 <style scoped lang="scss">
@@ -118,7 +140,7 @@ const allChecked = ref(false);
   background-color: #222222;
   cursor: pointer;
   position: relative;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .original-checkbox:checked + .custom-checkbox {

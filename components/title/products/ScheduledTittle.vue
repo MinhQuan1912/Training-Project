@@ -6,53 +6,45 @@
           class="text-xl lg:text-2xl font-medium leading-[145%] text-primary pl-5 pr-6"
         >
           5 scheduled products
+          <p>Giá trị search: {{ searchScheduled }}</p>
         </div>
-        <div
-          class="flex bg-background-surface1 border-[1.5px] border-stroke-subtle w-70 rounded-full p-3 pr-5 gap-2 text-secondary"
-        >
-          <icons-search />
-          <input
-            type="text"
-            placeholder="Search products"
-            class="text-sm leading-[150%] w-full"
-            :value="searchQuery"
-            @input="$emit('update:searchQuery', $event.target.value)"
-          />
-        </div>
+        <SearchData :placeholder="placeholder" v-model="searchScheduled" />
       </div>
 
-      <div class="relative">
-        <select
-          name=""
-          id=""
-          class="appearance-none w-45 py-3 pl-5 pr-3 rounded-full border-[1.5px] border-solid border-stroke-stroke2 bg-background-02 text-secondary focus:outline-none"
-        >
-          <option value="" class="text-sm">Newest first</option>
-          <option value=""></option>
-          <option value=""></option>
-        </select>
-
-        <div
-          class="pointer-events-none absolute inset-y-0 flex items-center right-3 px-2 py-2.5 cursor-pointer"
-        >
-          <icons-chev-down />
-        </div>
-      </div>
+      <select-dropdown
+        v-model:selected-option="selectedOption"
+        :data="options"
+        addition-class="w-40 h-12 border-[1.5px] border-stroke"
+        text-class="text-secondary"
+        option-class="!top-[calc(100%+8px)] !border-[1.5px] !border-stroke !rounded-xl overflow-hidden"
+      />
     </div>
   </div>
 </template>
 
-<script setup>
-import { defineProps, defineEmits } from "vue";
+<script setup lang="ts">
+import { defineProps, defineEmits, ref, watch, computed } from "vue";
+
+const placeholder = ref("Search comments");
 
 const props = defineProps({
-  searchQuery: {
+  modelValue: {
     type: String,
-    required: true,
+    default: "",
   },
 });
 
-const emit = defineEmits(["update:searchQuery"]);
+const emit = defineEmits(["update:modelValue"]);
+
+// Sử dụng computed property để đồng bộ giá trị với v-model
+const searchScheduled = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(value) {
+    emit("update:modelValue", value);
+  },
+});
 </script>
 
 <style lang="scss" scoped></style>
