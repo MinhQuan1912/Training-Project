@@ -1,17 +1,14 @@
 <template>
-  <div class="p-5 flex gap-5 bg-black min-h-screen">
-    <div class="w-12 2xl:!w-75 flex flex-col gap-5 text-secondary relative min-w-0">
+  <div class="p-5 flex lg:gap-5 bg-black min-h-screen">
+
+    <div class="w-0 lg:w-12 2xl:!w-75 flex flex-col gap-5 text-secondary relative overflow-hidden lg:overflow-visible">
       <navigation-menu />
       <div class="w-12 flex flex-col gap-3 absolute bottom-0 left-0">
-        <div
-          class="w-12 h-12 rounded-full bg-linear flex justify-center items-center cursor-pointer"
-        >
+        <div class="w-12 h-12 rounded-full bg-linear flex justify-center items-center cursor-pointer">
           <icons-chat />
         </div>
         <div class="rounded-full bg-linear flex flex-col items-center p-1.5">
-          <div
-            class="w-9 h-9 rounded-full bg-[#363636] flex items-center justify-center cursor-pointer"
-          >
+          <div class="w-9 h-9 rounded-full bg-[#363636] flex items-center justify-center cursor-pointer">
             <icons-night-mode />
           </div>
           <div class="w-9 h-9 flex items-center justify-center cursor-pointer">
@@ -29,10 +26,10 @@
   </div>
 </template>
 <script setup lang="ts">
-
 </script>
 <style lang="scss" scoped>
 .bg-linear {
   background: linear-gradient(#2a2a2a, #202020);
 }
+
 </style>

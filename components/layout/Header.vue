@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-2 md:gap-4 justify-start md:justify-between">
+  <div class="flex gap-4 justify-between">
     <h4 class="text-[32px] font-semibold text-primary leading-[145%]">
       <span v-if="!showCreateProduct">{{ pageTitle }}</span>
       <span v-else>New product</span>
@@ -8,10 +8,10 @@
       <button @click="showCreateProduct = false"
         class="h-12 py-3.5 px-7 flex justify-center items-center rounded-full text-[15px] leading-6 text-secondary font-semibold bg-background-02 cursor-pointer">Save
         draft</button>
-        <products-create-product-selection-button/>
+      <products-create-product-selection-button />
     </div>
-    <div v-else class="hidden sm:flex justify-evenly items-center h-12 gap-3">
-      <div class="w-50 md:w-60 lg:w-78.75 rounded-full bg-background-02 hidden md:flex items-center text-secondary">
+    <div v-else class="hidden lg:flex justify-evenly items-center h-12 gap-2 xl:gap-3">
+      <div class="w-78.75 rounded-full bg-background-02 hidden lg:flex items-center text-secondary">
         <div class="p-3 pr-2">
           <icons-search />
         </div>
@@ -32,21 +32,29 @@
         </div>
       </div>
     </div>
+    <button
+      class="w-12 h-12 flex lg:hidden justify-center items-center text-white cursor-pointer bg-background-02 rounded-xl hover:bg-white hover:text-black transition-colors duration-200 ease"
+      @click="openSideBar">
+      <icons-menu-header />
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useCreateProduct } from '~/composable/useCreateProduct';
-
+import { useSideBar } from '~/composable/useSideBar';
 const route = useRoute();
 const pageTitle = computed(() => {
   return route.meta.title;
 });
 const { showCreateProduct } = useCreateProduct()
+const { showSideBar } = useSideBar()
 const toCreateProduct = () => {
   showCreateProduct.value = true
   navigateTo('/product')
-
+}
+const openSideBar = () => {
+  showSideBar.value = true
 }
 </script>
 
