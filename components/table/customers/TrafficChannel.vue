@@ -64,7 +64,7 @@
         </div>
       </div>
 
-      <div class="my-4 flex gap-10 items-center">
+      <div class="my-4 flex gap-5 sm:gap-10 items-center">
         <div class="flex gap-1.5 items-center">
           <div
             class="w-3.5 h-3.5 bg-secondary/40 rounded-sm cursor-pointer"

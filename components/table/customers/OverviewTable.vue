@@ -1,14 +1,16 @@
 <template>
   <div class="pt-4 px-5 pb-5 flex flex-col">
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-8 divide-x-[1.5px] divide-solid divide-stroke-subtle"
-    >
+    <div class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-8">
       <div
-        class="flex flex-col gap-10"
+        class="flex flex-col gap-5 lg:gap-10"
         v-for="(overview, index) in overviews"
         :key="index"
         :class="{
-          'pr-8': index !== overviews.length - 1,
+          'sm:pr-8': index !== overviews.length - 1,
+          'sm:border-r-[1.5px] border-solid border-stroke-subtle':
+            index === overviews.length - 3,
+          '2xl:border-r-[1.5px] border-solid border-stroke-subtle':
+            index === overviews.length - 2,
           'hidden 2xl:flex': index === overviews.length - 1,
         }"
       >
@@ -18,11 +20,11 @@
           <component :is="iconComponents[overview.iconName]" />
         </div>
 
-        <div class="flex justify-between">
-          <div class="">
+        <div class="flex justify-between items-center w-full gap-4">
+          <div class="w-3/4">
             <div class="flex gap-2">
               <div
-                class="text-primary font-semibold overflow-hidden cursor-pointer"
+                class="text-primary font-semibold overflow-hidden cursor-pointer whitespace-nowrap"
               >
                 {{ overview.title }}
               </div>
@@ -35,7 +37,7 @@
             </div>
 
             <div
-              class="text-6xl font-medium text-primary leading-[125%] mt-2 mb-3"
+              class="text-5xl md:text-6xl font-medium text-primary leading-[125%] mt-2 mb-3"
             >
               {{ overview.content }}
             </div>
@@ -64,14 +66,19 @@
                 </div>
               </div>
 
-              <div class="text-tertiary text-sm leading-[150%]">
+              <div
+                class="text-tertiary text-sm leading-[150%] whitespace-nowrap"
+              >
                 vs last year
               </div>
             </div>
           </div>
 
-          <div class="pt-8 pb-11 pr-6 mb-4.75">
-            <component :is="iconGraphComponents[overview.iconGraph]" />
+          <div class="object-contain w-1/4">
+            <component
+              :is="iconGraphComponents[overview.iconGraph]"
+              class="w-full h-full"
+            />
           </div>
         </div>
       </div>
@@ -151,18 +158,13 @@
         <div class="p-3.5 w-6 h-6"></div>
       </div>
 
-      <div
-        class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8"
-      >
+      <div class="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8">
         <div
-          class="py-8 px-6 flex flex-col gap-4 items-center"
+          class="py-4 px-3 sm:py-8 sm:px-6 flex flex-col gap-4 items-center"
           v-for="(newCustomer, index) in newCustomers"
           :key="index"
           :class="{
-            'hidden m-0': index >= newCustomers.length - 2,
-            'lg:flex': index < newCustomers.length - 4,
-            'xl:flex': index < newCustomers.length - 2,
-            'hidden lg:flex': index >= newCustomers.length - 4,
+            'hidden xl:flex': index >= newCustomers.length - 4,
           }"
         >
           <div class="w-16 h-16">
@@ -180,7 +182,7 @@
           </div>
         </div>
 
-        <div class="py-8 px-6 flex flex-col gap-4 items-center">
+        <div class="py-4 px-3 sm:py-8 sm:px-6 flex flex-col gap-4 items-center">
           <div
             class="w-16 h-16 flex justify-center items-center p-5 border-[1.5px] border-solid border-stroke rounded-full cursor-pointer"
           >

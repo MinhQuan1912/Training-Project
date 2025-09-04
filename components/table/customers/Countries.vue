@@ -4,13 +4,13 @@
       Countries
     </div>
 
-    <div class="px-3 flex flex-col gap-5 w-full">
+    <div class="px-3 flex flex-col gap-2.5 sm:gap-5 w-full">
       <div
-        class="flex gap-4 items-center"
+        class="flex gap-1 sm:gap-4 items-center flex-col sm:flex-row"
         v-for="(country, index) in countries"
         :key="index"
       >
-        <div class="w-9 h-9 rounded-full p-0.5">
+        <div class="w-9 h-9 rounded-full p-0.5 flex-none">
           <img
             :src="country.img"
             alt=""
@@ -20,7 +20,7 @@
 
         <div class="flex flex-col gap-2 flex-grow">
           <div
-            class="flex justify-between font-semibold text-primary leading-[150%]"
+            class="flex justify-between flex-col sm:flex-row font-semibold text-primary leading-[150%] text-xs sm:text-base"
           >
             <div>{{ country.content }}</div>
 

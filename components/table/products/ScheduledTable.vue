@@ -4,7 +4,7 @@
     :columns="columns"
     :classTableTr="classTableTr"
   >
-    <template #cell-product="{ item, index }">
+    <template v-slot:column-product="{ item, index }">
       <div class="flex items-center">
         <div class="w-16 h-16 mr-5 rounded-xl">
           <img
@@ -23,7 +23,7 @@
                 <NuxtLink
                   to=""
                   class="flex items-center gap-1 py-1 pl-1 pr-1.5 border-[1.5px] border-solid border-transparent group-hover/button:border-stroke rounded-md group-hover/button:text-primary/80"
-                  @click.stop="onEdit(item)"
+                  @click="handleModalEdit(item)"
                 >
                   <icons-edit />
                   <div class="text-sm font-semibold">Edit</div>
@@ -34,7 +34,7 @@
                 <NuxtLink
                   to="#"
                   class="flex items-center gap-1 py-1 pl-1 pr-1.5 border-[1.5px] border-solid border-transparent group-hover/button:border-stroke rounded-md group-hover/button:text-primary/80"
-                  @click.stop.prevent="onDelete(item)"
+                  @click="handleModalDelete(item)"
                 >
                   <icons-trash />
                   <div class="text-sm font-semibold">Delete</div>
@@ -57,7 +57,7 @@
       </div>
     </template>
 
-    <template #cell-price="{ item, index }">
+    <template v-slot:column-price="{ item, index }">
       <div
         class="text-sm font-semibold px-2 py-1.75 border-[1.5px] border-solid rounded-lg inline"
         :class="{
@@ -71,92 +71,195 @@
       </div>
     </template>
 
-    <template #cell-scheduledFor="{ item, index }">
+    <template v-slot:column-scheduledFor="{ item, index }">
       {{ item.scheduleFor }}
     </template>
   </DataTable>
 
-  <Transition name="fade-zoom">
-    <div
-      v-if="showEditModal"
-      class="fixed h-[100dvh] overflow-hidden scroll-contain inset-0 bg-black/50 flex items-center justify-center z-50"
-    >
-      <UCard class="w-[50dvw]">
-        <template #header>
-          <h2 class="text-lg font-semibold">Edit Item</h2>
-        </template>
-
-        <div
-          class="flex flex-col gap-4 overflow-y-auto max-h-[50vh] custom-scroll"
+  <div
+    v-if="deleteModal"
+    tabindex="-1"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 overflow-y-auto"
+  >
+    <div class="relative p-4 w-full max-w-md max-h-full">
+      <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+        <button
+          type="button"
+          class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+          data-modal-hide="popup-modal"
+          @click="handleModalDelete()"
         >
-          <UFormField label="Products">
-            <UInput
-              v-model="currentItem.product"
-              placeholder="Enter product"
-              class="w-full"
+          <svg
+            class="w-3 h-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 14"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
             />
-          </UFormField>
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+        <div class="p-4 md:p-5 text-center">
+          <svg
+            class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 20 20"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          </svg>
+          <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+            Are you sure you want to delete
+            <span class="font-bold">{{ selectItem.product }}</span> this
+            product?
+          </h3>
+          <button
+            @click="handleDeleteProduct(item)"
+            data-modal-hide="popup-modal"
+            type="button"
+            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center cursor-pointer"
+          >
+            Yes, I'm sure
+          </button>
+          <button
+            @click="handleModalDelete()"
+            data-modal-hide="popup-modal"
+            type="button"
+            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 cursor-pointer"
+          >
+            No, cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-          <div class="flex gap-2 w-full">
-            <UFormField label="Price" class="flex-1">
-              <UInput
-                v-model="currentItem.price"
+  <div
+    v-if="editModal"
+    tabindex="-1"
+    aria-hidden="true"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 overflow-y-auto"
+  >
+    <div class="relative p-4 w-full max-w-md max-h-full">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+        <!-- Modal header -->
+        <div
+          class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200"
+        >
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            Edit Product
+          </h3>
+          <button
+            type="button"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            data-modal-toggle="crud-modal"
+            @click="handleModalEdit(item)"
+          >
+            <svg
+              class="w-3 h-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+              />
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <!-- Modal body -->
+        <form class="p-4 md:p-5">
+          <div class="grid gap-4 mb-4 grid-cols-2">
+            <div class="col-span-2">
+              <label
+                for="name"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Products</label
+              >
+              <input
+                type="text"
+                name="name"
+                id="name"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Product Name"
+                v-model="selectItem.product"
+              />
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+              <label
+                for="price"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Price</label
+              >
+              <input
                 type="number"
-                class="w-full"
+                name="price"
+                id="price"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="$2999"
+                v-model="selectItem.price"
               />
-            </UFormField>
-
-            <UFormField label="Price" class="flex-1">
-              <UInput
-                v-maska="'##/##/##'"
-                placeholder="DD/MM/YY"
-                icon="i-lucide-calendar"
-                class="w-full"
-                v-model="currentItem.scheduleFor"
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+              <label
+                for="price"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Schedule For</label
+              >
+              <input
+                type="datetime"
+                name="schedulefor"
+                id="schedulefor"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="datetime"
+                v-model="selectItem.scheduleFor"
               />
-            </UFormField>
+            </div>
           </div>
-        </div>
-
-        <template #footer>
-          <div class="flex justify-end gap-2">
-            <UButton
-              color="neutral"
-              variant="outline"
-              @click="showEditModal = false"
-              >Cancel</UButton
+          <button
+            @click="handleSaveProduct()"
+            type="submit"
+            class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            <svg
+              class="me-1 -ms-1 w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
             >
-            <UButton color="success" @click="saveEdit">Save</UButton>
-          </div>
-        </template>
-      </UCard>
+              <path
+                fill-rule="evenodd"
+                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+            Save product
+          </button>
+        </form>
+      </div>
     </div>
-  </Transition>
-
-  <Transition name="fade-zoom">
-    <div
-      v-if="showDeleteConfirm"
-      class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-    >
-      <UCard class="w-[30dvw]">
-        <div class="p-3 space-y-4">
-          <h3 class="text-lg font-medium">Confirm Delete</h3>
-          <p>
-            Bạn có chắc chắn muốn xóa <b>{{ currentItem?.product }}</b> không?
-          </p>
-          <div class="flex justify-end gap-3">
-            <UButton
-              color="neutral"
-              variant="outline"
-              @click="showDeleteConfirm = false"
-              >Cancel</UButton
-            >
-            <UButton color="success" @click="confirmDelete">Delete</UButton>
-          </div>
-        </div>
-      </UCard>
-    </div>
-  </Transition>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -167,19 +270,19 @@ import { defineProps } from "vue";
 
 const columns = [
   {
-    field: "product",
+    slot: "product",
     label: "Products",
     headerClass: "py-4 pl-5 flex-1",
     cellClass: "py-4 pl-5 flex-1 whitespace-nowrap",
   },
   {
-    field: "price",
+    slot: "price",
     label: "Price",
     headerClass: "w-3/20 lg:w-3/10 py-4 pl-8 pr-12.5",
     cellClass: "w-3/20 lg:w-3/10 py-4 pl-8 pr-12.5",
   },
   {
-    field: "scheduledFor",
+    slot: "scheduledFor",
     label: "Scheduled for",
     headerClass: "w-1/4 py-4 pr-4",
     cellClass: "text-secondary w-1/4 py-4 pr-4 rounded-r-2xl whitespace-nowrap",
@@ -273,47 +376,50 @@ const props = defineProps({
 });
 
 const schedulesFilter = computed(() => {
+  const query = props.search.toLowerCase();
   if (!props.search) {
     return schedules.value;
+  } else {
+    return schedules.value.filter(function (schedule) {
+      return schedule.product.toLowerCase().includes(query);
+    });
   }
-
-  const query = props.search.toLowerCase();
-
-  return schedules.value.filter((schedule) =>
-    schedule.product.toLowerCase().includes(query)
-  );
 });
 
 // them sua xoa
-const showEditModal = ref(false);
-const showDeleteConfirm = ref(false);
-const currentItem = ref({
+const selectItem = ref({
   id: 0,
   product: "",
-  price: 0,
+  price: "",
   scheduleFor: "",
 });
+const deleteModal = ref(false);
+const editModal = ref(false);
 
-const onEdit = (item) => {
-  currentItem.value = {
-    name: item.titleComment,
-    ...item,
-  };
-  showEditModal.value = true;
+const handleModalDelete = (item) => {
+  selectItem.value = { ...item };
+  deleteModal.value = !deleteModal.value;
 };
 
-const onDelete = (item) => {
-  currentItem.value = {
-    name: item.titleComment,
-    ...item,
-  };
-  showDeleteConfirm.value = true;
+const handleDeleteProduct = () => {
+  schedules.value = schedules.value.filter(function (d) {
+    return d.id !== selectItem.value.id;
+  });
+  deleteModal.value = false;
 };
 
-const confirmDelete = () => {
-  schedules.value = schedules.value.filter(
-    (d) => d.id !== currentItem.value.id
-  );
-  showDeleteConfirm.value = false;
+const handleModalEdit = (item) => {
+  selectItem.value = { ...item };
+  editModal.value = !editModal.value;
+};
+
+const handleSaveProduct = () => {
+  const index = schedules.value.findIndex(function (e) {
+    return e.id === selectItem.value.id;
+  });
+  if (index !== -1) {
+    schedules.value[index] = { ...selectItem.value };
+  }
+  editModal.value = false;
 };
 </script>

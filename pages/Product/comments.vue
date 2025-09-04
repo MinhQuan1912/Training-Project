@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <div class="bg-background-02 rounded-4xl flex flex-col gap-3 flex-1">
+    <div
+      class="bg-background-02 rounded-4xl flex flex-col gap-3 flex-1 overflow-y-auto h-screen"
+    >
       <CommentsTitle v-model="searchComment" />
 
       <CommentsTable :search="searchComment" />

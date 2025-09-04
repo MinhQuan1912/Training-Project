@@ -17,7 +17,7 @@
             :key="index"
             :class="column.headerClass"
           >
-            <slot :name="`header-${column.field}`">
+            <slot :name="`header-${column.slot}`">
               {{ column.label }}
             </slot>
           </th>
@@ -27,15 +27,18 @@
         <tr
           v-for="(item, itemIndex) in items"
           :key="itemIndex"
-          :class="classTableTr.body"
-          :index="index"
+          :class="[
+            classTableTr.body,
+            { 'bg-background-pop': item.checked === true },
+          ]"
+          :index="itemIndex"
         >
           <td class="w-10 pl-4 py-4 rounded-l-2xl">
             <input
               type="checkbox"
               :id="'checkbox-' + itemIndex"
               class="original-checkbox"
-              v-model="checked"
+              v-model="item.checked"
               :value="item"
             />
             <label
@@ -50,7 +53,7 @@
             :colspan="column.colspan"
             @click="$emit('row-click', itemIndex)"
           >
-            <slot :name="`cell-${column.field}`" :item="item"> </slot>
+            <slot :name="`column-${column.slot}`" :item="item"> </slot>
           </td>
         </tr>
       </tbody>
@@ -77,40 +80,6 @@ const props = defineProps({
       header: "",
       body: "",
     }),
-  },
-});
-
-// const allChecked = computed({
-//   // đọc giá trị checked, trả về boolean
-//   // get được dùng để tính toán và trả về một giá trị dựa trên các dữ liệu phụ thuộc
-//   // phg thức every kiểm tra xem tất cả các phần tử trong mảng có vượt qua bái kiểm tra đc triển khai bởi hàm đc cung cấp hay k, trả về boolean
-//   get() {
-//     return comments.value.every((comment) => comment.checked === true);
-//   },
-//   // gán giá trị cho allChecked (chạy khi thay đổi giá trị allChecked)
-//   // set để gán giá trị dữ liệu phụ thuộc
-//   set(value) {
-//     comments.value.forEach((comment) => {
-//       comment.checked = value;
-//     });
-//   },
-// });
-
-const checked = ref<Array<any>>([]);
-
-const allChecked = computed({
-  get() {
-    if (props.items.length > 0) {
-      return checked.value.length === props.items.length;
-    }
-  },
-
-  set(value: boolean) {
-    if (value) {
-      checked.value = [...props.items];
-    } else {
-      checked.value = [];
-    }
   },
 });
 </script>
