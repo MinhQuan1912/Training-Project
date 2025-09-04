@@ -1,43 +1,37 @@
 <template>
-  <div class="container">
-    <div
-      class="bg-background-02 pt-3 px-3 pb-8 flex flex-col gap-4 rounded-4xl"
-    >
-      <div
-        class="py-2.5 px-3 text-xl font-semibold leading-[145%] text-primary"
-      >
-        Countries
-      </div>
+  <div class="bg-background-02 pt-3 px-3 pb-8 flex flex-col gap-4 rounded-4xl">
+    <div class="py-2.5 px-3 text-xl font-semibold leading-[145%] text-primary">
+      Countries
+    </div>
 
-      <div class="px-3 flex flex-col gap-5 w-full">
-        <div
-          class="flex gap-4 items-center"
-          v-for="(country, index) in countries"
-          :key="index"
-        >
-          <div class="w-9 h-9 rounded-full p-0.5">
-            <img
-              :src="country.img"
-              alt=""
-              class="w-full h-full rounded-full object-cover"
-            />
+    <div class="px-3 flex flex-col gap-5 w-full">
+      <div
+        class="flex gap-4 items-center"
+        v-for="(country, index) in countries"
+        :key="index"
+      >
+        <div class="w-9 h-9 rounded-full p-0.5">
+          <img
+            :src="country.img"
+            alt=""
+            class="w-full h-full rounded-full object-cover"
+          />
+        </div>
+
+        <div class="flex flex-col gap-2 flex-grow">
+          <div
+            class="flex justify-between font-semibold text-primary leading-[150%]"
+          >
+            <div>{{ country.content }}</div>
+
+            <div>{{ country.percent }}</div>
           </div>
 
-          <div class="flex flex-col gap-2 flex-grow">
+          <div class="bg-background-pop rounded-xs h-3 w-full">
             <div
-              class="flex justify-between font-semibold text-primary leading-[150%]"
-            >
-              <div>{{ country.content }}</div>
-
-              <div>{{ country.percent }}</div>
-            </div>
-
-            <div class="bg-background-pop rounded-xs h-3 w-full">
-              <div
-                class="bg-gradient-to-r from-stroke-subtle to-secondary opacity-30 h-full rounded-xs"
-                :style="{ width: country.percent }"
-              ></div>
-            </div>
+              class="bg-gradient-to-r from-stroke-subtle to-secondary opacity-30 h-full rounded-xs"
+              :style="{ width: country.percent }"
+            ></div>
           </div>
         </div>
       </div>

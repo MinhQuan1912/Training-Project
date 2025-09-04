@@ -180,7 +180,6 @@ const columns = [
     headerClass: "max-lg:w-13/20 text-sm text-tertiary pl-5 py-4 flex-1",
     cellClass:
       "w-13/20 max-lg:group-hover:w-full py-4 ml-5 flex-1 flex mr-6 flex-col",
-    colspan: 2,
   },
   {
     field: "product",

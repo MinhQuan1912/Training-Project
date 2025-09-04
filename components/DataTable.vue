@@ -27,12 +27,7 @@
         <tr
           v-for="(item, itemIndex) in items"
           :key="itemIndex"
-          :class="[
-            classTableTr.body,
-            checked.includes(item)
-              ? 'bg-background-pop rounded-2xl outline-[1.5px] outline-solid outline-stroke-card-hover-dark'
-              : '',
-          ]"
+          :class="classTableTr.body"
           :index="index"
         >
           <td class="w-10 pl-4 py-4 rounded-l-2xl">
@@ -55,13 +50,7 @@
             :colspan="column.colspan"
             @click="$emit('row-click', itemIndex)"
           >
-            <slot
-              :name="`cell-${column.field}`"
-              :item="item"
-              :index="itemIndex"
-            >
-              {{ item[column.field] }}
-            </slot>
+            <slot :name="`cell-${column.field}`" :item="item"> </slot>
           </td>
         </tr>
       </tbody>
