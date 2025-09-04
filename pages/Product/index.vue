@@ -17,7 +17,7 @@
           </div>
         </div>
       </div>
-      <div class="p-5 text-primary gap-8 flex flex-wrap">
+      <div class="p-5 text-primary gap-16 flex flex-wrap">
         <div v-for="(item, idx) in overViewList" :key="idx" class="overview-item"
           :class="{ '!hidden xl:!flex': item.label === 'Sales' }">
           <div class="w-16 h-16 bg-background-surface1 flex justify-center items-center rounded-full">
@@ -117,7 +117,6 @@ const activeOverviewTab = ref("1Y");
 .overview-item {
   display: flex;
   flex-direction: column;
-  padding-right: 32px;
   border-right: 1.5px solid rgba(123, 123, 123, 0.1);
   gap: 40px;
   flex-grow: 0;
