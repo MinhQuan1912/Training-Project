@@ -1,5 +1,7 @@
 <template>
-  <div class="px-3 pt-3 pb-6 flex flex-col gap-3 bg-background-02 rounded-4xl">
+  <div
+    class="px-3 pt-3 pb-6 flex flex-col gap-3 bg-background-02 rounded-4xl @container"
+  >
     <div class="py-2.5 px-3 text-lg font-semibold leading-[145%] text-primary">
       Messages
     </div>
@@ -17,7 +19,7 @@
 
           <div>
             <div
-              class="flex flex-col sm:flex-row gap-1 font-semibold leading-[150%]"
+              class="flex flex-col @3xs:flex-row gap-1 font-semibold leading-[150%]"
             >
               <div class="text-primary">{{ message.title }}</div>
 
@@ -36,7 +38,7 @@
       </div>
 
       <div
-        class="px-3 py-2 sm:px-7 sm:py-3.5 mx-3 border-[1.5px] border-solid border-stroke text-xs sm:text-sm font-semibold text-secondary rounded-full cursor-pointer flex-none w-fit h-fit"
+        class="px-3 py-2 sm:px-7 sm:py-3.5 sm:mx-3 border-[1.5px] border-solid border-stroke text-xs sm:text-sm font-semibold text-secondary rounded-full cursor-pointer flex-none w-fit h-fit"
       >
         View all message
       </div>
