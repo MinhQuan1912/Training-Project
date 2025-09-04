@@ -5,7 +5,7 @@
     :classTableTr="classTableTr"
     @row-click="handleRowClick"
   >
-    <template #cell-comments="{ item, index }">
+    <template v-slot:column-comments="{ item, index }">
       <div class="flex items-center">
         <div class="w-12 h-12 mr-5 rounded-full flex-none">
           <img
@@ -105,7 +105,7 @@
       </div>
     </template>
 
-    <template #cell-product="{ item, index }">
+    <template v-slot:column-product="{ item, index }">
       <div class="flex items-center">
         <div class="grid transition-all">
           <div
@@ -175,15 +175,14 @@ import ScheduledTitle from "~/components/title/products/ScheduledTittle.vue";
 import { defineProps } from "vue";
 const columns = [
   {
-    field: "comments",
+    slot: "comments",
     label: "Comments",
     headerClass: "max-lg:w-13/20 text-sm text-tertiary pl-5 py-4 flex-1",
     cellClass:
       "w-13/20 max-lg:group-hover:w-full py-4 ml-5 flex-1 flex mr-6 flex-col",
-    colspan: 2,
   },
   {
-    field: "product",
+    slot: "product",
     label: "Product",
     headerClass: "text-sm text-tertiary w-1/4 lg:w-3/10 pr-4 py-4",
     cellClass:
@@ -363,11 +362,11 @@ const commentsFilter = computed(() => {
 
   if (!props.search) {
     return comments.value;
+  } else {
+    return comments.value.filter(function (comment) {
+      return comment.titleComment.toLowerCase().includes(key);
+    });
   }
-
-  return comments.value.filter((comment) =>
-    comment.titleComment.toLowerCase().includes(key)
-  );
 });
 
 // const handleSearch = () => {
@@ -380,6 +379,8 @@ const commentsFilter = computed(() => {
 //     );
 //   }
 // };
+
+// THÊM SỬA XÓA
 </script>
 
 <style>

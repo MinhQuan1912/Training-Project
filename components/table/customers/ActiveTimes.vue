@@ -12,7 +12,7 @@
           <div class="flex flex-col gap-2">
             <div class="flex flex-col gap-0.5">
               <div
-                class="flex gap-7.75 px-5"
+                class="flex gap-3 sm:gap-7.75 px-5"
                 v-for="(timeSetDay, index) in timeSetDays"
                 :key="index"
               >

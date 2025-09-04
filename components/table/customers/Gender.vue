@@ -7,23 +7,31 @@
     <div class="py-6 px-3 flex flex-col gap-8">
       <div></div>
 
-      <div class="flex gap-4 justify-between">
+      <div
+        class="flex gap-1 sm:gap-4 justify-between flex-col sm:flex-row max-sm:items-center"
+      >
         <div class="flex flex-col gap-1">
           <div class="text-xs leading-[160%] text-tertiary">Female</div>
 
-          <div class="leading-[150%] text-primary">30.16%</div>
+          <div class="leading-[150%] text-primary text-xs sm:text-base">
+            30.16%
+          </div>
         </div>
 
         <div class="flex flex-col gap-1">
           <div class="text-xs leading-[160%] text-tertiary">Female</div>
 
-          <div class="leading-[150%] text-primary">30.16%</div>
+          <div class="leading-[150%] text-primary text-xs sm:text-base">
+            30.16%
+          </div>
         </div>
 
         <div class="flex flex-col gap-1">
           <div class="text-xs leading-[160%] text-tertiary">Female</div>
 
-          <div class="leading-[150%] text-primary">30.16%</div>
+          <div class="leading-[150%] text-primary text-xs sm:text-base">
+            30.16%
+          </div>
         </div>
       </div>
     </div>
