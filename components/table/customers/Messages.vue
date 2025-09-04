@@ -4,23 +4,21 @@
       Messages
     </div>
 
-    <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-3 sm:gap-6">
       <div class="flex flex-col gap-1">
         <div
-          class="flex gap-5 py-5 px-3 rounded-[20px] border-solid border-transparent hover:border-primary/7.5 hover:bg-background-pop border-[1.5px]"
+          class="flex flex-col lg:flex-row gap-5 py-2.5 px-1.5 sm:py-5 sm:px-3 rounded-[20px] border-solid border-transparent hover:border-primary/7.5 hover:bg-background-pop border-[1.5px]"
           v-for="(message, index) in messages"
           :key="index"
         >
-          <div class="w-11 h-11 rounded-full flex-none">
-            <img
-              :src="message.img"
-              alt=""
-              class="w-full h-full object-contain rounded-full"
-            />
+          <div class="w-11 h-11 rounded-full flex-none object-contain">
+            <img :src="message.img" alt="" class="w-full h-full rounded-full" />
           </div>
 
           <div>
-            <div class="flex gap-1 font-semibold leading-[150%]">
+            <div
+              class="flex flex-col sm:flex-row gap-1 font-semibold leading-[150%]"
+            >
               <div class="text-primary">{{ message.title }}</div>
 
               <div class="text-secondary">{{ message.insta }}</div>
@@ -38,7 +36,7 @@
       </div>
 
       <div
-        class="px-7 py-3.5 mx-3 border-[1.5px] border-solid border-stroke text-sm font-semibold text-secondary rounded-full cursor-pointer flex-none w-fit h-fit"
+        class="px-3 py-2 sm:px-7 sm:py-3.5 mx-3 border-[1.5px] border-solid border-stroke text-xs sm:text-sm font-semibold text-secondary rounded-full cursor-pointer flex-none w-fit h-fit"
       >
         View all message
       </div>

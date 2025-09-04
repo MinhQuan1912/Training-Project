@@ -10,13 +10,15 @@
         <SearchData :placeholder="placeholder" v-model="searchScheduled" />
       </div>
 
-      <select-dropdown
-        v-model:selected-option="selectedOption"
-        :data="options"
-        addition-class="w-40 h-12 border-[1.5px] border-stroke"
-        text-class="text-secondary"
-        option-class="!top-[calc(100%+8px)] !border-[1.5px] !border-stroke !rounded-xl overflow-hidden"
-      />
+      <div class="hidden md:block">
+        <select-dropdown
+          v-model:selected-option="selectedOption"
+          :data="options"
+          addition-class="w-40 h-12 border-[1.5px] border-stroke"
+          text-class="text-secondary"
+          option-class="!top-[calc(100%+8px)] !border-[1.5px] !border-stroke !rounded-xl overflow-hidden"
+        />
+      </div>
     </div>
   </div>
 </template>
