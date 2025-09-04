@@ -9,7 +9,7 @@
                                 </label> -->
             <div class="flex flex-col gap-2 items-center justify-center w-full h-full">
                 <icons-upload :class="imageClass"/>
-                <div class="text-4xl" :class="textClass">Drag and drop product file, or
+                <div class="text-2xl text-center" :class="textClass">Drag and drop product file, or
                     <label :for="imageId" class="font-bold text-primary cursor-pointer hover:underline">Browse</label>
                 </div>
             </div>

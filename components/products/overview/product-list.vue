@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="hidden sm:flex m:hidden items-center">
-        <select-dropdown :data="tabs" v-model:selected-option="activeTab" addition-class="h-12 "/>
+        <select-dropdown :data="tabs" v-model:selected-option="activeTab" addition-class="h-12 " />
       </div>
     </div>
     <!-- Table -->
@@ -80,20 +80,22 @@
               </div>
             </td>
             <!-- Status -->
-            <td>
+            <td class="min-w-26">
               <badge-status :status="product.status" class="w-20" />
             </td>
             <!-- Price -->
-            <td>${{ product.price.toFixed(2) }}</td>
-            <!-- Sales -->
             <td>
+              <div class="min-w-21">${{ product.price.toFixed(2) }}</div>
+            </td>
+            <!-- Sales -->
+            <td class="min-w-42">
               <div class="flex gap-2 items-center">
                 <span>${{ product.sales.value?.toLocaleString('en-US') }}</span>
                 <badge-trend :growth-rate="product.sales.growthRate" />
               </div>
             </td>
             <!-- Views -->
-            <td class="w-24 ">
+            <td class="min-w-24 ">
               <div class="flex gap-2 items-center">
                 <span>{{ product.views.current }}m</span>
                 <div class="w-8 h-1.5 rounded-xs bg-[#7B7B7B66]">

@@ -1,11 +1,11 @@
 <template>
-  <div class="flex gap-4 justify-between items-center">
+  <div class="fixed top-0 right-5 left-5 lg:left-22 2xl:left-85 z-10 bg-black flex gap-4 justify-between items-center py-5">
     <h4 class="text-2xl xs:text-[32px] font-semibold text-primary leading-[145%]">
       <span v-if="!showCreateProduct">{{ pageTitle }}</span>
       <span v-else>New product</span>
     </h4>
     <div v-if="showCreateProduct" class="flex gap-3">
-      <button @click="showCreateProduct = false"
+      <button @click="saveDraft"
         class="h-12 py-3.5 px-7 flex justify-center items-center rounded-full text-[15px] leading-6 text-secondary font-semibold bg-background-02 cursor-pointer">Save
         draft</button>
       <products-create-product-selection-button />
@@ -28,7 +28,7 @@
       </div>
       <div class="header-button">
         <div class="w-10 h-10">
-          <img src="/images/avatar.png" class="w-full h-full object-contain" alt="" />
+          <img src="/images/avatar.png" class="w-full h-full object-contain"/>
         </div>
       </div>
     </div>
@@ -55,6 +55,9 @@ const toCreateProduct = () => {
 }
 const openSideBar = () => {
   showSideBar.value = true
+}
+const saveDraft = () => {
+  showCreateProduct.value = false
 }
 </script>
 

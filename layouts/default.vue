@@ -1,7 +1,7 @@
 <template>
   <div class="p-3 md:p-5 flex lg:gap-5 bg-black min-h-screen relative">
     <transition name="fade" >
-      <div v-if="showSideBar" class="fixed inset-0 bg-white opacity-40 z-10"></div>
+      <div v-if="showSideBar" class="fixed inset-0 bg-white opacity-40 z-15"></div>
     </transition>
     <div class="w-0 lg:w-12 2xl:!w-75 flex flex-col gap-5 text-secondary fixed overflow-hidden lg:overflow-visible min-h-screen z-20">
       <navigation-menu />
@@ -20,8 +20,10 @@
       </div>
     </div>
     <div class="flex flex-col gap-3 md:gap-5 w-[calc(100%-340px)] flex-1 lg:ml-17 2xl:ml-80">
-      <layout-header />
-      <div class="flex-1 min-w-0">
+      
+        <layout-header />
+      
+      <div class="flex-1 min-w-0 mt-17">
         <slot />
       </div>
     </div>
