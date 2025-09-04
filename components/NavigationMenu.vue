@@ -2,7 +2,7 @@
   <div class="w-12 h-12">
     <img src="/images/logo.png" class="w-full h-full object-contain" />
   </div>
-  <ul class="flex flex-col text-sm font-semibold">
+  <ul class="nav">
     <li v-for="(item, idx) in menu" :key="idx" class="cursor-pointer transition-all duration-300 ease relative">
       <div v-if="item.subMenu"
         class="flex items-center justify-between gap-3 px-3 2xl:px-0 p-3 transition-all duration-300 ease"
@@ -151,18 +151,22 @@ watchEffect(() => {
     )
     openIndexs.value = [index]
   }
-  
+
 })
 </script>
 
 <style lang="scss" scoped>
-.slide-right-enter-from,
-.slide-right-leave-to {
-  transform: translateX(100%);
+.nav {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 600;
+  overflow-y: auto;
+  overflow-x: hidden;
+  @media (height < 850px) {
+    max-height: 400px;
+  }
 }
 
-.slide-right-enter-active,
-.slide-right-leave-active {
-  transition: transform 0.3s ease;
-}
+
 </style>
