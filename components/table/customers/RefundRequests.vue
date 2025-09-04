@@ -26,7 +26,7 @@
     </div>
 
     <div
-      class="mx-3 py-2 px-3 sm:py-3.5 sm:px-7 rounded-full border-[1.5px] border-solid border-stroke flex justify-center text-xs sm:text-sm font-semibold text-secondary cursor-pointer"
+      class="sm:mx-3 py-2 px-3 sm:py-3.5 sm:px-7 rounded-full border-[1.5px] border-solid border-stroke flex justify-center text-xs sm:text-sm font-semibold text-secondary cursor-pointer"
     >
       Review refund requests
     </div>

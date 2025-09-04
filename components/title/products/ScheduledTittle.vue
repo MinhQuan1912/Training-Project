@@ -1,24 +1,22 @@
 <template>
-  <div class="container">
-    <div class="p-3 flex justify-between items-center h-18">
-      <div class="flex items-center">
-        <div
-          class="text-xl lg:text-2xl font-medium leading-[145%] text-primary pl-5 pr-6"
-        >
-          5 scheduled products
-        </div>
-        <SearchData :placeholder="placeholder" v-model="searchScheduled" />
+  <div class="p-3 flex justify-between items-center h-18">
+    <div class="flex items-center">
+      <div
+        class="text-xl lg:text-2xl font-medium leading-[145%] text-primary pl-5 pr-6"
+      >
+        5 scheduled products
       </div>
+      <SearchData :placeholder="placeholder" v-model="searchScheduled" />
+    </div>
 
-      <div class="hidden md:block">
-        <select-dropdown
-          v-model:selected-option="selectedOption"
-          :data="options"
-          addition-class="w-40 h-12 border-[1.5px] border-stroke"
-          text-class="text-secondary"
-          option-class="!top-[calc(100%+8px)] !border-[1.5px] !border-stroke !rounded-xl overflow-hidden"
-        />
-      </div>
+    <div class="hidden md:block">
+      <select-dropdown
+        v-model:selected-option="selectedOption"
+        :data="options"
+        addition-class="w-40 h-12 border-[1.5px] border-stroke"
+        text-class="text-secondary"
+        option-class="!top-[calc(100%+8px)] !border-[1.5px] !border-stroke !rounded-xl overflow-hidden"
+      />
     </div>
   </div>
 </template>

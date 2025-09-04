@@ -77,7 +77,7 @@
             Least engaged
           </div>
 
-          <div class="flex gap-0.5 items-center">
+          <div class="flex flex-col sm:flex-row gap-0.5 items-center">
             <div class="w-12 h-2 rounded-xs bg-shade05-100/20"></div>
 
             <div class="w-12 h-2 rounded-xs bg-shade05-100/35"></div>

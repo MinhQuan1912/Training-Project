@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div
-      class="bg-background-02 rounded-4xl flex flex-col gap-3 flex-1 overflow-y-auto h-screen"
+      class="bg-background-02 rounded-4xl flex flex-col gap-3 flex-1 overflow-y-auto h-full"
     >
       <CommentsTitle v-model="searchComment" />
 
