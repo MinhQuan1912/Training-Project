@@ -3,12 +3,12 @@
         <h6 class="px-5 flex items-center text-xl leading-[145%] font-semibold text-primary">
             Product activity
         </h6>
-        <select-dropdown v-model:selected-option="selectedOption" :data="options"
-            addition-class="w-40 h-12" text-class="text-secondary" />
+        <select-dropdown v-model:selected-option="selectedOption" :data="options" addition-class="w-40 h-12"
+            text-class="text-secondary" />
     </div>
-    <div class="px-5 pt-4">
+    <div class="px-5 sm:pt-4 overflow-x-auto min-w-full">
         <table class="w-full text-sm leading-[150%] text-primary">
-            <thead class="block">
+            <thead class="block ">
                 <tr class="text-xs leading-[160%] text-tertiary flex gap-6">
                     <th class="flex-1 py-5 text-left">Week</th>
                     <th class="flex-1 py-5 text-left">Products</th>
@@ -17,12 +17,13 @@
                     <th class="flex-1 py-5 text-left hidden 2xl:table-cell">Comments</th>
                 </tr>
             </thead>
-            <tbody class="block overflow-y-auto max-h-34">
-                <tr v-for="(item, idx) in filterActivities" :key="idx" class="flex gap-6 h-17 border-t border-stroke-subtle w-full">
+            <tbody class="block overflow-y-auto max-h-34 min-w-150 overflow-x-auto">
+                <tr v-for="(item, idx) in filterActivities" :key="idx"
+                    class="flex gap-6 h-17 border-t border-stroke-subtle w-full">
                     <!-- Week -->
                     <td class="py-4 flex-1 flex items-center">{{ item.week }}</td>
                     <!-- Product -->
-                    <td class="py-4 flex-1">
+                    <td class="py-4 flex-1 flex items-center">
                         <div class="flex items-center gap-2">
                             {{ item.product.value }}
                             <span v-if="item.product.growthRate">
@@ -31,7 +32,7 @@
                         </div>
                     </td>
                     <!-- View -->
-                    <td class="py-4 flex-1">
+                    <td class="py-4 flex-1 flex items-center">
                         <div class="flex items-center gap-2">
                             {{ item.view.value }}
                             <span v-if="item.view.growthRate">
@@ -40,7 +41,7 @@
                         </div>
                     </td>
                     <!-- Like -->
-                    <td class="py-4 flex-1">
+                    <td class="py-4 flex-1 flex items-center    ">
                         <div class="flex items-center gap-2">
                             {{ item.like.value }}
                             <span v-if="item.like.growthRate">

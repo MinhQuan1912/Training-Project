@@ -1,6 +1,6 @@
 <template>
-  <div class="flex gap-4 justify-between">
-    <h4 class="text-[32px] font-semibold text-primary leading-[145%]">
+  <div class="flex gap-4 justify-between items-center">
+    <h4 class="text-2xl xs:text-[32px] font-semibold text-primary leading-[145%]">
       <span v-if="!showCreateProduct">{{ pageTitle }}</span>
       <span v-else>New product</span>
     </h4>
