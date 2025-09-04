@@ -1,13 +1,13 @@
 <template>
   <div class="product-list">
     <!-- Header -->
-    <div class="flex p-3 justify-between items-center">
-      <div class="flex pl-5 items-center justify-between gap-6">
+    <div class="flex flex-col sm:flex-row p-3 justify-between sm:items-center gap-2 sm:gap-0">
+      <div class="flex flex-col sm:flex-row pl-5 sm:items-center justify-between gap-2 sm:gap-6">
         <h6 class="text-primary text-xl leading-[145%] font-semibold">Products</h6>
         <div
-          class="flex bg-background-surface1 border-[1.5px] border-stroke-subtle w-70 rounded-full p-3 pr-5 gap-2 text-secondary">
+          class="flex bg-background-surface1 border-[1.5px] border-stroke-subtle w-full sm:w-70 rounded-full p-3 pr-5 gap-2 text-secondary">
           <icons-search class="min-w-6" />
-          <input type="search" placeholder="Search products" class="text-sm leading-[150%]" v-model="searchInput"
+          <input type="search" placeholder="Search products" class="w-full text-sm leading-[150%]" v-model="searchInput"
             @keyup.enter="handleSearchProduct">
           <div
             class="h-6 min-w-6 bg-background-surface1 text-secondary rounded-full flex opacity-0 justify-center items-center hover:bg-primary"
@@ -16,18 +16,21 @@
           </div>
         </div>
       </div>
-      <div class="flex gap-1 text-sm leading-[100%] font-semibold h-12">
+      <div class="flex sm:hidden m:flex gap-1 text-sm leading-[100%] font-semibold h-12">
         <div v-for="(tab, idx) in tabs" :key="idx"
-          class="flex justify-center items-center p-6 rounded-[48px] cursor-pointer transition-all duration-300"
+          class="flex justify-center items-center p-4 sm:p-6 rounded-[48px] cursor-pointer transition-all duration-300"
           @click="activeTab = tab" :class="{
             'text-primary border-[1.5px] border-stroke': activeTab === tab,
             'text-secondary border border-transparent': activeTab !== tab
           }">{{ tab }}
         </div>
       </div>
+      <div class="hidden sm:flex m:hidden items-center">
+        <select-dropdown :data="tabs" v-model:selected-option="activeTab" addition-class="h-12 "/>
+      </div>
     </div>
     <!-- Table -->
-    <div class="px-4 pb-8">
+    <div class="px-4 pb-8 overflow-x-auto min-w-full">
       <table class="w-full text-sm text-primary leading-[150%]">
         <thead>
           <tr class="justify-between items-center gap-6 px-4 text-xs text-tertiary opacity-80 h-16.75">
@@ -49,7 +52,7 @@
                         transition-all duration-200 ease" @click="handleSelectRow(product.id)">
             <!-- Product -->
             <td class="rounded-l-xl group/setting">
-              <div class="flex gap-5 items-center">
+              <div class="flex gap-5 items-center min-w-75">
                 <input type="checkbox" class="checkbox group-hover:!border-shade05-50" v-model="selectedId"
                   :value="product.id" />
                 <img :src="product.image" class="h-16 w-16 object-contain" />
