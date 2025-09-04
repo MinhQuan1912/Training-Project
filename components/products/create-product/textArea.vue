@@ -16,7 +16,7 @@
                 </button>
             </div>
         </div>
-        <textarea class="p-4 h-24 resize-none text-primary text-sm leading-[150%]" v-model="text" :class="{
+        <textarea spellcheck="false" class="p-4 h-24 resize-none text-primary text-sm leading-[150%]" v-model="text" :class="{
             'font-bold': activeIndexs.includes(0),
             'italic': activeIndexs.includes(1),
             'underline': activeIndexs.includes(2)
