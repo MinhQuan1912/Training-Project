@@ -1,5 +1,5 @@
 <template>
-    <div class="flex gap-3">
+    <div class="flex flex-col m:flex-row gap-3">
         <div class="flex flex-col gap-3 flex-1">
             <div class="create-product-section">
                 <h6 class="h-12 flex items-center pl-5 text-xl leading-[145%] font-semibold text-primary">
@@ -7,7 +7,7 @@
                 </h6>
                 <div class="flex flex-col px-5 gap-8">
                     <div class="flex flex-col gap-4">
-                        <div class="h-5.5 flex items-center py-1 gap-1.5`">
+                        <div class="h-5.5 flex items-center py-1 gap-1.5">
                             <span class="text-primary text-sm leading-[100%] font-semibold">Product title</span>
                             <tooltip text="Maximum 100 characters. No HTML or emoji allowed">
                                 <icons-helping class="h-4 w-4 text-tertiary hover:text-blue cursor-pointer" />
@@ -78,9 +78,9 @@
                                 <icons-helping class="h-4 w-4 text-tertiary hover:text-blue cursor-pointer" />
                             </tooltip>
                         </div>
-                        <div class="grid grid-cols-4 gap-3">
+                        <div class="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3">
                             <button v-for="(item, idx) in compatibilityList" :key="idx"
-                                class="min-w-52.5 flex p-3 items-center gap-2 border-[1.5px] border-stroke rounded-[48px] cursor-pointer hover:bg-stroke transition-all duration-300 ease"
+                                class=" flex p-3 items-center gap-2 border-[1.5px] border-stroke rounded-[48px] cursor-pointer hover:bg-stroke transition-all duration-300 ease"
                                 @click="handleClickCompa(idx)"
                                 :class="{ 'border-stroke-focus border-2': activeCompatibilitys.includes(idx) }">
                                 <div class="w-6 h-6">
@@ -125,7 +125,7 @@
                 </div>
             </div>
         </div>
-        <div class="w-135 flex flex-col gap-3">
+        <div class="w-92 3xl:w-135 flex flex-col gap-3">
             <div class="create-product-section !p-3">
                 <div class="h-12 px-3 flex items-center justify-between gap-3 text-secondary">
                     <h6 class="text-xl leading-[145%] font-semibold text-primary">Cover image</h6>
@@ -166,7 +166,7 @@
                         text-class="text-sm leading-[150%]" />
                     <div class="flex p-6 gap-6 justify-between items-center border-[1.5px] border-stroke rounded-3xl">
                         <div class="flex flex-col gap-2">
-                            <div class="font-semibold text-primary">Bento Pro v 2.0 - Illustration Kit.zip</div>
+                            <div class="font-semibold text-primary line-clamp-1 tracking-[0.0015em]">Bento Pro v 2.0 - Illustration Kit.zip</div>
                             <div class="flex gap-2">
                                 <icons-zip />
                                 <div class="text-secondary">128 MB</div>
@@ -190,10 +190,10 @@
                         </div>
                         <div class="flex p-1 border-[1.5px] border-stroke rounded-[48px] gap-2">
                             <icons-dollar />
-                            <input type="number" class="opacity-50 text-secondary text-sm leading-[150%]">
+                            <input type="number" class="opacity-50 text-secondary text-sm leading-[150%] w-25 3xl:w-46">
                         </div>
                     </div>
-                    <div class="flex flex-col gap-4 flex-1 min-h-22.5">
+                    <div class="flex flex-col gap-4 flex-1">
                         <div class="flex gap-4 justify-between items-center">
                             <div class="py-1 gap-1.5 flex items-center">
                                 <div class="text-primary text-sm leading-[100%] font-semibold">Promo</div>
@@ -392,7 +392,7 @@ const handleRemoveTag = (index: number) => {
 }
 
 .delete-product-file {
-    width: 52px;
+    min-width: 52px;
     height: 52px;
     border-radius: 32px;
     display: flex;

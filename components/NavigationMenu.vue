@@ -44,7 +44,7 @@
       <div class="2xl:hidden">
         <transition name="slide">
           <div v-show="item.subMenu && openIndexs.includes(idx)"
-            class="absolute z-3 top-0 left-[calc(100%+16px)] bg-background-surface1 rounded-2xl">
+            class="absolute z-50 top-0 left-[calc(100%+16px)] bg-background-surface1 rounded-2xl">
             <nuxt-link :to="drop.to" v-for="(drop, dropIdx) in item.subMenu" :key="dropIdx"
               class="h-11 px-3 flex items-center rounded-xl transition-all duration-300 ease" :class="{
                 'text-primary bg-background-pop': isActive(drop),
@@ -161,12 +161,9 @@ watchEffect(() => {
   flex-direction: column;
   font-size: 14px;
   font-weight: 600;
-  overflow-y: auto;
-  overflow-x: hidden;
+
   @media (height < 850px) {
     max-height: 400px;
   }
 }
-
-
 </style>

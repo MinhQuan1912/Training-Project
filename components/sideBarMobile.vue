@@ -1,5 +1,6 @@
 <template>
-    <div class="fixed top-0 bottom-0 right-0 bg-background-surface1 p-5 z-50 w-full xs:w-75 flex lg:hidden flex-col gap-5">
+    <div
+        class="fixed top-0 bottom-0 right-0 bg-background-surface1 p-5 z-50 w-full xs:w-75 flex lg:hidden flex-col gap-5">
         <div class="h-12 flex justify-between items-center ">
             <div class="w-12 h-12">
                 <img src="/images/logo.png" class="w-full h-full object-contain" />
@@ -49,13 +50,15 @@
                 </transition>
             </div>
         </div>
+        <div class="px-3 h-10 flex items-center active:bg-secondary active:text-primary rounded-xl" @click="toCreateProduct">Create product</div>
     </div>
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue';
+import { useCreateProduct } from '~/composable/useCreateProduct';
 import { useSideBar } from '~/composable/useSideBar';
 const { showSideBar } = useSideBar()
+const { showCreateProduct } = useCreateProduct()
 type Menu = {
     label: string;
     icon?: Component;
@@ -87,6 +90,11 @@ const isActive = (item: Menu) => {
     }
     return false;
 };
+const toCreateProduct = () => {
+    showCreateProduct.value = true
+    navigateTo('/product')
+    showSideBar.value = false
+}
 watch(
     () => route.fullPath,
     () => {

@@ -30,7 +30,7 @@
             <div class="flex flex-col">
               <div class="flex gap-2 items-center h-6 sm:mb-2">
                 <p class="font-semibold leading-[150%]">{{ item.label }}</p>
-                <tooltip :text="item.label"><icons-helping /></tooltip>
+                <tooltip :text="item.label"><icons-helping class="w-4 h-4 sm:w-6 sm:h-6"/></tooltip>
               </div>
               <h2 class="flex text-4xl sm:text-[60px] font-medium leading-[125%] sm:mb-3">
                 <span class="text-tertiary text-[32px] font-semibold leading-[145%] mr-2.5 sm:pt-2">$</span>
