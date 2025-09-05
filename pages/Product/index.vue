@@ -3,7 +3,7 @@
     <!-- Overview -->
     <div class="product-overview">
       <div class="w-full flex justify-between h-12">
-        <div class="px-5 flex items-center text-primary text-base xs:text-xl leading-[145%] font-semibold">
+        <div class="xs:px-5 flex items-center text-primary text-base xs:text-xl leading-[145%] font-semibold">
           <p>Overview</p>
         </div>
         <div class="hidden sm:flex gap-1">
@@ -20,7 +20,7 @@
           <select-dropdown :data="overviewTab" v-model:selected-option="activeOverviewTab" addition-class="h-12"/>
         </div>
       </div>
-      <div class="p-3 lg:p-5 text-primary gap-4 lg:gap-8 4xl:gap-16 flex flex-col m:grid grid-cols-3 3xl:grid-cols-4">
+      <div class="xs:p-3 lg:p-5 text-primary gap-4 lg:gap-8 4xl:gap-16 flex flex-col m:grid grid-cols-3 3xl:grid-cols-4">
         <div v-for="(item, idx) in overViewList" :key="idx" class="overview-item"
           :class="{ '!hidden 3xl:!flex': item.label === 'Sales' }">
           <div class="w-10 h-10 sm:w-16 sm:h-16 bg-background-surface1 flex justify-center items-center rounded-full">
@@ -58,7 +58,7 @@
       </div>
       <!-- Product Views -->
       <div class="product-overview !gap-3 w-full m:w-78 3xl:w-135 h-76">
-        <h6 class="h-12 px-3 py-2.5 text-base xs:text-xl leading-[145%] text-primary font-semibold">
+        <h6 class="h-12 xs:px-3 py-2.5 text-base xs:text-xl leading-[145%] text-primary font-semibold">
           Product Views
         </h6>
       </div>
