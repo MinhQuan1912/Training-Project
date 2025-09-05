@@ -2,7 +2,7 @@
   <div class="product-list">
     <!-- Header -->
     <div class="flex flex-col sm:flex-row p-3 justify-between sm:items-center gap-2 sm:gap-0">
-      <div class="flex flex-col sm:flex-row pl-5 sm:items-center justify-between gap-2 sm:gap-6">
+      <div class="flex flex-col sm:flex-row xs:pl-5 sm:items-center justify-between gap-2 sm:gap-6">
         <h6 class="text-primary text-base xs:text-xl leading-[145%] font-semibold">Products</h6>
         <div
           class="flex bg-background-surface1 border-[1.5px] border-stroke-subtle w-full sm:w-70 rounded-full p-3 pr-5 gap-2 text-secondary">
@@ -16,7 +16,8 @@
           </div>
         </div>
       </div>
-      <div class="flex sm:hidden m:flex gap-1 text-sm leading-[100%] font-semibold h-12 w-full s:w-auto overflow-x-auto s:overflow-x-visible">
+      <div
+        class="flex sm:hidden m:flex gap-1 text-sm leading-[100%] font-semibold h-12 w-full s:w-auto overflow-x-auto s:overflow-x-visible">
         <div v-for="(tab, idx) in tabs" :key="idx"
           class="flex justify-center items-center p-4 sm:p-6 rounded-[48px] cursor-pointer transition-all duration-300 whitespace-nowrap"
           @click="activeTab = tab" :class="{
@@ -30,7 +31,7 @@
       </div>
     </div>
     <!-- Table -->
-    <div class="px-4 pb-8 overflow-x-auto min-w-full">
+    <div class="xs:px-4 pb-8 overflow-x-auto min-w-full">
       <table class="min-w-full text-sm text-primary leading-[150%]">
         <thead>
           <tr class="justify-between items-center gap-6 px-4 text-xs text-tertiary opacity-80 h-16.75">
@@ -97,7 +98,7 @@
             <!-- Views -->
             <td class="min-w-24 flex-1 ">
               <div class="flex gap-2 items-center">
-                <span>{{ product.views.current }}m</span>
+                <span>{{ product.views.current ? formatNum(product.views.current) : 0 }}</span>
                 <div class="w-8 h-1.5 rounded-xs bg-[#7B7B7B66]">
                   <div class="h-1.5 rounded-xs bg-chart-green"
                     :style="{ width: product.views.current && product.views.kpi ? (product.views.current / product.views.kpi * 100) + '%' : '0%' }">
@@ -108,7 +109,7 @@
             <!-- Likes -->
             <td class="w-24 hidden xl:table-cell rounded-r-xl">
               <div class="flex gap-2 items-center">
-                <span>{{ product.likes.current }}m</span>
+                <span>{{ product.likes.current }}</span>
                 <div class="w-8 h-1.5 rounded-xs bg-[#7B7B7B66]">
                   <div class="h-1.5 rounded-xs bg-chart-green"
                     :style="{ width: product.likes.current && product.likes.kpi ? (product.likes.current / product.likes.kpi * 100) + '%' : '0%' }">
@@ -124,6 +125,9 @@
 </template>
 
 <script setup lang="ts">
+import { useFormatNumber } from '~/composable/useFormatNumber'
+
+const { formatNum } = useFormatNumber()
 const activeTab = ref('Market')
 const tabs = ref([
   'Market',
@@ -160,8 +164,8 @@ const productList = ref<productList[]>([
       growthRate: 42,
     },
     views: {
-      current: 48,
-      kpi: 100
+      current: 48524123,
+      kpi: 100000000
     },
     likes: {
       current: 480,
@@ -180,8 +184,8 @@ const productList = ref<productList[]>([
       growthRate: -14,
     },
     views: {
-      current: 75,
-      kpi: 100
+      current: 75412553,
+      kpi: 100000000
     },
     likes: {
       current: 889,
@@ -200,8 +204,8 @@ const productList = ref<productList[]>([
       growthRate: 32,
     },
     views: {
-      current: 89,
-      kpi: 100
+      current: 89734513,
+      kpi: 100000000
     },
     likes: {
       current: 454,
@@ -220,8 +224,8 @@ const productList = ref<productList[]>([
       growthRate: -20,
     },
     views: {
-      current: 14,
-      kpi: 100
+      current: 14533412,
+      kpi: 100000000
     },
     likes: {
       current: 323,
@@ -240,8 +244,8 @@ const productList = ref<productList[]>([
       growthRate: 51,
     },
     views: {
-      current: 66,
-      kpi: 100
+      current: 66423143,
+      kpi: 100000000
     },
     likes: {
       current: 918,

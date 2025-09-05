@@ -1,12 +1,12 @@
 <template>
     <div class="flex items-center justify-between h-12">
-        <h6 class="px-5 flex items-center xs:text-xl leading-[145%] font-semibold text-primary">
+        <h6 class="xs:px-5 flex items-center xs:text-xl leading-[145%] font-semibold text-primary">
             Product activity
         </h6>
-        <select-dropdown v-model:selected-option="selectedOption" :data="options" addition-class="w-40 h-12"
-            text-class="text-secondary" />
+        <select-dropdown v-model:selected-option="selectedOption" :data="options"
+            addition-class="w-40 h-12 !pr-0 xs:!pr-3" text-class="text-secondary" />
     </div>
-    <div class="px-5 sm:pt-4 overflow-x-auto min-w-full">
+    <div class="xs:px-5 sm:pt-4 overflow-x-auto min-w-full">
         <table class="w-full text-sm leading-[150%] text-primary">
             <thead class="block ">
                 <tr class="text-xs leading-[160%] text-tertiary flex gap-6">
@@ -25,7 +25,7 @@
                     <!-- Product -->
                     <td class="py-4 flex-1 flex items-center">
                         <div class="flex items-center gap-2">
-                            {{ item.product.value }}
+                            {{ formatNum(item.product.value) }}
                             <span v-if="item.product.growthRate">
                                 <badge-trend :growth-rate="item.product.growthRate" />
                             </span>
@@ -34,7 +34,7 @@
                     <!-- View -->
                     <td class="py-4 flex-1 flex items-center">
                         <div class="flex items-center gap-2">
-                            {{ item.view.value }}
+                            {{ formatNum(item.view.value) }}
                             <span v-if="item.view.growthRate">
                                 <badge-trend :growth-rate="item.view.growthRate" />
                             </span>
@@ -66,8 +66,10 @@
 </template>
 
 <script setup lang="ts">
+import { useFormatNumber } from '~/composable/useFormatNumber'
+
 type activityCol = {
-    value: string,
+    value: number,
     growthRate?: number
 }
 type activityRow = {
@@ -81,81 +83,46 @@ const productActivityList = ref<activityRow[]>([
     {
         week: '13 Jan - 20 Jan',
         product: {
-            value: '24k',
-            growthRate: 31
-        },
-        view: {
-            value: '24k',
-            growthRate: -32
-        },
-        like: {
-            value: '48',
+            value: 24394,
             growthRate: 12
         },
+        view: {
+            value: 32193,
+            growthRate: -23
+        },
+        like: {
+            value: 48,
+            growthRate: 51
+        },
         comment: {
-            value: '16',
-            growthRate: -18
+            value: 16,
+            growthRate: -21
         }
     },
     {
         week: '20 Jan - 27 Jan',
-        product: {
-            value: '40k',
-            growthRate: 21
-        },
-        view: {
-            value: '16k',
-            growthRate: -29
-        },
-        like: {
-            value: '64',
-            growthRate: 12
-        },
-        comment: {
-            value: '32',
-            growthRate: 42
-        }
+        product: { value: 40924 },
+        view: { value: 15694 },
+        like: { value: 64 },
+        comment: { value: 32 }
     },
     {
         week: '27 Jan - 03 Feb',
-        product: {
-            value: '14k',
-            growthRate: -13
-        },
-        view: {
-            value: '2k',
-            growthRate: -50
-        },
-        like: {
-            value: '134',
-            growthRate: 23
-        },
-        comment: {
-            value: '32',
-            growthRate: 31
-        }
+        product: { value: 14930 },
+        view: { value: 2943 },
+        like: { value: 134 },
+        comment: { value: 71 }
     },
     {
         week: '03 Feb - 10 Feb',
-        product: {
-            value: '64k',
-            growthRate: 12
-        },
-        view: {
-            value: '16k',
-            growthRate: -29
-        },
-        like: {
-            value: '64',
-            growthRate: -32
-        },
-        comment: {
-            value: '32',
-            growthRate: 21
-        }
-    },
+        product: { value: 64930 },
+        view: { value: 16940 },
+        like: { value: 64 },
+        comment: { value: 51 }
+    }
 
 ])
+const { formatNum } = useFormatNumber()
 const options = computed(() => {
     const opt = []
     for (let i = 1; i <= productActivityList.value.length; i++) {
@@ -168,6 +135,21 @@ const filterActivities = computed(() => {
     const week = parseInt(selectedOption.value.match(/\d+/)?.[0] || '1')
     const filterList = productActivityList.value.slice(-week)
     return filterList
+})
+watchEffect(() => {
+    productActivityList.value.forEach((item, index, arr) => {
+        if (index === 0) return
+        const prev = arr[index - 1]
+        const calcGrowthRate = (curr: number, prev: number) => {
+            return prev === 0 ? 0 : Math.round(((curr - prev) / prev) * 100)
+        }
+        if (prev) {
+            item.product.growthRate = calcGrowthRate(item.product.value, prev.product.value)
+            item.view.growthRate = calcGrowthRate(item.view.value, prev.view.value)
+            item.like.growthRate = calcGrowthRate(item.like.value, prev.like.value)
+            item.comment.growthRate = calcGrowthRate(item.comment.value, prev.comment.value)
+        }
+    })
 })
 </script>
 
