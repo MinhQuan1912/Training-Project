@@ -3,7 +3,7 @@
     <!-- Overview -->
     <div class="product-overview">
       <div class="w-full flex justify-between h-12">
-        <div class="px-5 flex items-center text-primary text-xl leading-[145%] font-semibold">
+        <div class="px-5 flex items-center text-primary text-base xs:text-xl leading-[145%] font-semibold">
           <p>Overview</p>
         </div>
         <div class="hidden sm:flex gap-1">
@@ -46,7 +46,7 @@
             </div>
           </div>
           <div class="flex m:hidden justify-center items-center ml-3 xs:ml-0">
-            <img src="/images/chart1.png" class="w-12.5 md:w-4/5 md:h-4/5 object-fill" />
+            <img src="/images/chart1.png" class="w-15 xs:w-25 md:w-4/5 md:h-4/5 object-fill" />
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
       </div>
       <!-- Product Views -->
       <div class="product-overview !gap-3 w-full m:w-78 3xl:w-135 h-76">
-        <h6 class="h-12 px-3 py-2.5 text-xl leading-[145%] text-primary font-semibold">
+        <h6 class="h-12 px-3 py-2.5 text-base xs:text-xl leading-[145%] text-primary font-semibold">
           Product Views
         </h6>
       </div>

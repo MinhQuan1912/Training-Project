@@ -50,7 +50,7 @@
                 </transition>
             </div>
         </div>
-        <div class="px-3 h-10 flex items-center active:bg-secondary active:text-primary rounded-xl" @click="toCreateProduct">Create product</div>
+        <div class="px-3 h-10 flex items-center hover:bg-secondary hover:text-primary active:bg-secondary active:text-primary rounded-xl cursor-pointer" @click="toCreateProduct">Create product</div>
     </div>
 </template>
 

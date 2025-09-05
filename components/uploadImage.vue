@@ -1,14 +1,18 @@
 <template>
     <div class="h-78 w-full rounded-4xl bg-black relative" :class="additionClass">
         <div v-if="!preview" class="flex items-center justify-center text-secondary group h-full">
-            <!-- <label for="upload1" class="flex flex-col items-center justify-center cursor-pointer w-full h-full">
-                                    <icons-upload
-                                        class="w-20 h-20 group-hover:text-primary transition-all duration-300" />
-                                    <span class="text-4xl group-hover:text-primary transition-all duration-300">Upload
-                                        Image</span>
-                                </label> -->
-            <div class="flex flex-col gap-2 items-center justify-center w-full h-full">
-                <icons-upload :class="imageClass"/>
+            <!-- Screen < 900px -->
+            <div v-if="isTablet" class="w-full h-full">
+                <label :for="imageId" class="flex flex-col items-center justify-center cursor-pointer w-full h-full">
+                    <icons-upload class="w-16 h-16 group-hover:text-primary transition-all duration-300" />
+                    <span class="text-2xl group-hover:text-primary transition-all duration-300">Upload
+                        Image</span>
+                    <input :id="imageId" accept="image/*" type="file" class="hidden" @change="onPreviewChange" />
+                </label>
+            </div>
+            <!-- Screen > 900px -->
+            <div v-else class="flex flex-col gap-2 items-center justify-center w-full h-full">
+                <icons-upload :class="imageClass" />
                 <div class="text-2xl text-center" :class="textClass">Drag and drop product file, or
                     <label :for="imageId" class="font-bold text-primary cursor-pointer hover:underline">Browse</label>
                 </div>
@@ -35,7 +39,7 @@ defineProps({
     },
     imageId: {
         type: String,
-        required:true
+        required: true
     },
     additionClass: {
         type: String,
@@ -43,15 +47,16 @@ defineProps({
     },
     imageClass: {
         type: String,
-        default:''
+        default: ''
     },
     textClass: {
         type: String,
-        default:''
+        default: ''
     },
-    
+
 })
-const preview = defineModel <string | null > ('preview')
+const isTablet = useMediaQuery('(max-width:899px)')
+const preview = defineModel<string | null>('preview')
 const onPreviewChange = (event: Event) => {
     const input = event.target as HTMLInputElement
     const file = input.files?.[0]
@@ -62,6 +67,7 @@ const onPreviewChange = (event: Event) => {
 const removePreviewImage = () => {
     preview.value = null
 }
+
 </script>
 
 <style scoped></style>

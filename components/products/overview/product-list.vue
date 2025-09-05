@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row p-3 justify-between sm:items-center gap-2 sm:gap-0">
       <div class="flex flex-col sm:flex-row pl-5 sm:items-center justify-between gap-2 sm:gap-6">
-        <h6 class="text-primary text-xl leading-[145%] font-semibold">Products</h6>
+        <h6 class="text-primary text-base xs:text-xl leading-[145%] font-semibold">Products</h6>
         <div
           class="flex bg-background-surface1 border-[1.5px] border-stroke-subtle w-full sm:w-70 rounded-full p-3 pr-5 gap-2 text-secondary">
           <icons-search class="min-w-6" />
@@ -16,9 +16,9 @@
           </div>
         </div>
       </div>
-      <div class="flex sm:hidden m:flex gap-1 text-sm leading-[100%] font-semibold h-12">
+      <div class="flex sm:hidden m:flex gap-1 text-sm leading-[100%] font-semibold h-12 w-full s:w-auto overflow-x-auto s:overflow-x-visible">
         <div v-for="(tab, idx) in tabs" :key="idx"
-          class="flex justify-center items-center p-4 sm:p-6 rounded-[48px] cursor-pointer transition-all duration-300"
+          class="flex justify-center items-center p-4 sm:p-6 rounded-[48px] cursor-pointer transition-all duration-300 whitespace-nowrap"
           @click="activeTab = tab" :class="{
             'text-primary border-[1.5px] border-stroke': activeTab === tab,
             'text-secondary border border-transparent': activeTab !== tab
@@ -31,7 +31,7 @@
     </div>
     <!-- Table -->
     <div class="px-4 pb-8 overflow-x-auto min-w-full">
-      <table class="w-full text-sm text-primary leading-[150%]">
+      <table class="min-w-full text-sm text-primary leading-[150%]">
         <thead>
           <tr class="justify-between items-center gap-6 px-4 text-xs text-tertiary opacity-80 h-16.75">
             <th class="w-94 2xl:min-w-128 cursor-pointer group" @click="chooseAll">
@@ -40,11 +40,11 @@
                 Product
               </div>
             </th>
-            <th class="w-26 2xl:w-50 text-left">Status</th>
-            <th class="w-21 2xl:w-45 text-left">Price</th>
-            <th class="w-42 2xl:w-66 text-left">Sales</th>
-            <th class="2xl:w-54 text-left">Views</th>
-            <th class="w-24 text-left hidden 2xl:table-cell">Likes</th>
+            <th class=" text-left">Status</th>
+            <th class=" text-left">Price</th>
+            <th class=" text-left">Sales</th>
+            <th class=" text-left">Views</th>
+            <th class=" text-left hidden xl:table-cell">Likes</th>
           </tr>
         </thead>
         <tbody>
@@ -55,7 +55,7 @@
               <div class="flex gap-5 items-center min-w-75">
                 <input type="checkbox" class="checkbox group-hover:!border-shade05-50" v-model="selectedId"
                   :value="product.id" />
-                <img :src="product.image" class="h-16 w-16 object-contain" />
+                <img :src="product.image" class="h-12 w-12 md:h-16 md:w-16 object-contain" />
                 <div class="flex flex-col justify-center">
                   <p class="font-semibold ">{{ product.name }}</p>
                   <p
@@ -80,22 +80,22 @@
               </div>
             </td>
             <!-- Status -->
-            <td class="min-w-26">
+            <td class="min-w-26 flex-1">
               <badge-status :status="product.status" class="w-20" />
             </td>
             <!-- Price -->
-            <td>
-              <div class="min-w-21">${{ product.price.toFixed(2) }}</div>
+            <td class="min-w-21 flex-1">
+              <div class="min-w-21 flex-1">${{ product.price.toFixed(2) }}</div>
             </td>
             <!-- Sales -->
-            <td class="min-w-42">
+            <td class="min-w-42 flex-1">
               <div class="flex gap-2 items-center">
                 <span>${{ product.sales.value?.toLocaleString('en-US') }}</span>
                 <badge-trend :growth-rate="product.sales.growthRate" />
               </div>
             </td>
             <!-- Views -->
-            <td class="min-w-24 ">
+            <td class="min-w-24 flex-1 ">
               <div class="flex gap-2 items-center">
                 <span>{{ product.views.current }}m</span>
                 <div class="w-8 h-1.5 rounded-xs bg-[#7B7B7B66]">
@@ -106,7 +106,7 @@
               </div>
             </td>
             <!-- Likes -->
-            <td class="w-24 hidden 2xl:table-cell rounded-r-xl">
+            <td class="w-24 hidden xl:table-cell rounded-r-xl">
               <div class="flex gap-2 items-center">
                 <span>{{ product.likes.current }}m</span>
                 <div class="w-8 h-1.5 rounded-xs bg-[#7B7B7B66]">
