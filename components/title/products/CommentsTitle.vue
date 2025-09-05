@@ -6,9 +6,7 @@
       >
         8 new comments
       </div>
-      <div class="hidden sm:block">
-        <SearchData :placeholder="placeholder" v-model="searchComment" />
-      </div>
+      <SearchData :placeholder="placeholder" v-model="searchComment" />
     </div>
 
     <div class="hidden lg:block">

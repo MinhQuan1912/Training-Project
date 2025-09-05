@@ -9,7 +9,7 @@
       <SearchData :placeholder="placeholder" v-model="searchScheduled" />
     </div>
 
-    <div class="hidden md:block">
+    <div class="hidden lg:block">
       <select-dropdown
         v-model:selected-option="selectedOption"
         :data="options"

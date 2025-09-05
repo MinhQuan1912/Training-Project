@@ -292,7 +292,7 @@ const columns = [
 
 const classTableTr = {
   header: "flex text-tertiary items-center text-left text-xs p-4",
-  body: "flex items-center group bottomHover align-middle hover:bg-background-pop outline-[1.5px] hover:rounded-2xl p-4 outline-solid outline-transparent hover:outline-primary/7.5 text-left",
+  body: "flex items-center group bottomHover align-middle hover:bg-background-pop border-[1.5px] border-solid border-t-stroke-subtle border-b-transparent border-x-transparent hover:border-primary/7.5 hover:rounded-2xl p-4 text-left",
 };
 
 const schedules = ref([

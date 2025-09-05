@@ -77,9 +77,9 @@
 
             <div class="flex gap-5 items-center text-secondary mt-2">
               <NuxtLink
-                @click=""
                 to="#"
                 class="flex items-center gap-1 py-1 pr-1.5 hover:text-primary/80"
+                @click="handleModalEditComment(item)"
               >
                 <icons-edit />
                 <div class="text-xs lg:text-sm font-semibold">Reply</div>
@@ -243,7 +243,7 @@
   </div>
 
   <div
-    v-if="editModal"
+    v-if="editModalComment"
     tabindex="-1"
     aria-hidden="true"
     class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 overflow-y-auto"
@@ -262,7 +262,7 @@
             type="button"
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs lg:text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
             data-modal-toggle="crud-modal"
-            @click="handleModalEdit(item)"
+            @click="handleModalEditComment(item)"
           >
             <svg
               class="w-3 h-3"
@@ -348,7 +348,7 @@
                 clip-rule="evenodd"
               ></path>
             </svg>
-            Save product
+            Save comments
           </button>
         </form>
       </div>
@@ -564,7 +564,7 @@ const columns = [
 
 const classTableTr = {
   header: "text-left flex items-center text-tertiary text-xs p-4",
-  body: "bottomHover flex items-center p-4 relative group outline-[1.5px] outline-solid outline-transparent hover:outline-primary/7.5 hover:bg-background-pop transition-all duration-500 w-full rounded-2xl",
+  body: "bottomHover flex items-center p-4 relative group hover:bg-background-pop w-full hover:rounded-2xl border-[1.5px] border-solid border-t-stroke-subtle border-b-transparent border-x-transparent hover:border-primary/7.5",
 };
 
 const comments = ref([
@@ -802,7 +802,7 @@ const handleDeleteProduct = () => {
 
 const handleModalEditComment = (item) => {
   selectItem.value = { ...item };
-  editModal.value = !editModal.value;
+  editModalComment.value = !editModalComment.value;
 };
 
 const handleSaveComment = () => {
@@ -812,7 +812,7 @@ const handleSaveComment = () => {
   if (index !== -1) {
     comments.value[index] = { ...selectItem.value };
   }
-  editModal.value = false;
+  editModalComment.value = false;
 };
 
 const handleModalEditProduct = (item) => {
