@@ -2,10 +2,10 @@
     <div class="flex flex-col m:flex-row gap-3">
         <div class="flex flex-col gap-3 flex-1">
             <div class="create-product-section">
-                <h6 class="h-12 flex items-center pl-5 text-xl leading-[145%] font-semibold text-primary">
+                <h6 class="h-12 flex items-center xs:pl-5 text-xl leading-[145%] font-semibold text-primary">
                     Product details
                 </h6>
-                <div class="flex flex-col px-5 gap-8">
+                <div class="flex flex-col xs:px-5 gap-8">
                     <div class="flex flex-col gap-4">
                         <div class="h-5.5 flex items-center py-1 gap-1.5">
                             <span class="text-primary text-sm leading-[100%] font-semibold">Product title</span>
@@ -31,10 +31,10 @@
                 </div>
             </div>
             <div class="create-product-section">
-                <h6 class="h-12 flex items-center pl-5 text-xl leading-[145%] font-semibold text-primary">
+                <h6 class="h-12 flex items-center xs:pl-5 text-xl leading-[145%] font-semibold text-primary">
                     Images
                 </h6>
-                <div class="flex flex-col px-5 gap-8">
+                <div class="flex flex-col xs:px-5 gap-4 xs:gap-8">
                     <div class="flex flex-col gap-4">
                         <div class="h-4 flex items-center gap-1.5">
                             <span class="text-primary text-sm leading-[100%] font-semibold">Previews</span>
@@ -51,13 +51,13 @@
                                 <icons-helping class="h-4 w-4 text-tertiary hover:text-blue cursor-pointer" />
                             </tooltip>
                         </div>
-                        <upload-image v-model:preview="previewFull" image-id="previewFull" fit-class="object-fit"
-                            additionClass="h-270" />
+                        <upload-image v-model:preview="previewFull" image-id="previewFull" fit-class="object-contain"
+                            additionClass="m:h-270" />
                     </div>
                 </div>
             </div>
             <div class="create-product-section">
-                <h6 class="h-12 flex items-center pl-5 text-xl leading-[145%] font-semibold text-primary">
+                <h6 class="h-12 flex items-center xs:pl-5 text-xl leading-[145%] font-semibold text-primary">
                     Category & attributes
                 </h6>
                 <div class="flex flex-col gap-8">
@@ -78,7 +78,7 @@
                                 <icons-helping class="h-4 w-4 text-tertiary hover:text-blue cursor-pointer" />
                             </tooltip>
                         </div>
-                        <div class="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3">
+                        <div class="grid grid-cols-2 sm:grid-cols-3 m:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3">
                             <button v-for="(item, idx) in compatibilityList" :key="idx"
                                 class=" flex p-3 items-center gap-2 border-[1.5px] border-stroke rounded-[48px] cursor-pointer hover:bg-stroke transition-all duration-300 ease"
                                 @click="handleClickCompa(idx)"
@@ -109,10 +109,10 @@
                 </div>
             </div>
             <div class="create-product-section">
-                <h6 class="h-12 flex items-center pl-5 text-xl leading-[145%] font-semibold text-primary">
+                <h6 class="h-12 flex items-center xs:pl-5 text-xl leading-[145%] font-semibold text-primary">
                     Discussion
                 </h6>
-                <div class="flex flex-col px-5 gap-8">
+                <div class="flex flex-col xs:px-5 gap-8">
                     <div class="flex flex-col gap-4">
                         <div class="h-4 flex items-center py-1 gap-1.5">
                             <span class="text-primary text-sm leading-[100%] font-semibold">Message to reviewer</span>
@@ -125,13 +125,13 @@
                 </div>
             </div>
         </div>
-        <div class="w-92 3xl:w-135 flex flex-col gap-3">
+        <div class="m:w-92 3xl:w-135 flex sm:grid grid-cols-2 m:flex flex-col gap-3">
             <div class="create-product-section !p-3">
-                <div class="h-12 px-3 flex items-center justify-between gap-3 text-secondary">
+                <div class="h-12 xs:px-3 flex items-center justify-between gap-3 text-secondary">
                     <h6 class="text-xl leading-[145%] font-semibold text-primary">Cover image</h6>
                     <icons-arrow2 class="cursor-pointer" />
                 </div>
-                <div class="p-3 gap-5 flex flex-col">
+                <div class="xs:px-3 m:p-3 gap-5 flex flex-col">
                     <div class="h-60 w-full relative rounded-4xl overflow-hidden">
                         <img src="/images/uploadImage03.png" class="w-full h-full object-cover" alt="Cover image">
                         <button
@@ -140,9 +140,10 @@
                             <icons-close />
                         </button>
                     </div>
-                    <div class="flex justify-between">
+                    <div class="flex justify-between items-center m:items-start gap-3 m:gap-0">
                         <div class="flex flex-col gap-2">
-                            <div class="text-primary font-semibold">Bento Pro v 2.0 - Illustration Kit</div>
+                            <div class="text-primary font-semibold line-clamp-1">Bento Pro v 2.0 - Illustration Kit
+                            </div>
                             <div class="flex gap-2 items-center">
                                 <img src="/images/avatar.png" class="w-8 h-8 object-contain">
                                 <div class="h-5.25 flex gap-1 text-secondary text-sm leading-[150%]">
@@ -156,17 +157,18 @@
                     </div>
                 </div>
             </div>
-            <div class="create-product-section !pb-6">
-                <h6 class="h-12 flex items-center pl-5 text-xl leading-[145%] font-semibold text-primary">
+            <div class="create-product-section xs:!pb-6">
+                <h6 class="h-12 flex items-center xs:pl-5 text-xl leading-[145%] font-semibold text-primary">
                     Upload product files
                 </h6>
-                <div class="flex flex-col px-3 gap-4">
+                <div class="flex flex-col xs:px-3 gap-4">
                     <upload-image v-model:preview="previewProductFile" image-id="previewProductFile"
-                        fit-class="object-cover" addition-class="h-57.5" image-class="w-8 h-8"
+                        fit-class="object-cover" addition-class="!h-60 m:!h-57.5" image-class="w-8 h-8"
                         text-class="text-sm leading-[150%]" />
-                    <div class="flex p-6 gap-6 justify-between items-center border-[1.5px] border-stroke rounded-3xl">
+                    <div class="flex m:p-6 gap-6 justify-between items-center border-[1.5px] border-stroke rounded-3xl">
                         <div class="flex flex-col gap-2">
-                            <div class="font-semibold text-primary line-clamp-1 tracking-[0.0015em]">Bento Pro v 2.0 - Illustration Kit.zip</div>
+                            <div class="font-semibold text-primary line-clamp-1 tracking-[0.0015em]">Bento Pro v 2.0 -
+                                Illustration Kit.zip</div>
                             <div class="flex gap-2">
                                 <icons-zip />
                                 <div class="text-secondary">128 MB</div>
@@ -179,10 +181,10 @@
                 </div>
             </div>
             <div class="create-product-section !p-3">
-                <h6 class="h-12 flex items-center pl-5 text-xl leading-[145%] font-semibold text-primary">
+                <h6 class="h-12 flex items-center xs:pl-5 text-xl leading-[145%] font-semibold text-primary">
                     Price
                 </h6>
-                <div class="p-3 flex gap-3">
+                <div class="xs:p-3 flex flex-col m:flex-row gap-3">
                     <div class="flex flex-col gap-4 flex-1">
                         <div class="flex gap-1.5 items-center">
                             <div class="text-primary text-sm leading-[100%] font-semibold">Price (USD)</div>
@@ -190,7 +192,8 @@
                         </div>
                         <div class="flex p-1 border-[1.5px] border-stroke rounded-[48px] gap-2">
                             <icons-dollar />
-                            <input type="number" class="opacity-50 text-secondary text-sm leading-[150%] w-25 3xl:w-46">
+                            <input type="number"
+                                class="opacity-50 text-secondary text-sm leading-[150%] w-full m:w-25 3xl:w-46">
                         </div>
                     </div>
                     <div class="flex flex-col gap-4 flex-1">
@@ -199,9 +202,9 @@
                                 <div class="text-primary text-sm leading-[100%] font-semibold">Promo</div>
                                 <tooltip text="Promo"><icons-helping class="text-secondary w-4 h-4" /></tooltip>
                             </div>
-                            <div class="promo-switch--off" :class="{ 'promo-switch--on': activePromo }"
+                            <div class="promo-switch" :class="{ 'promo-switch--on': activePromo }"
                                 @click="handletogglePromo">
-                                <div class="promo-button--off " :class="{ 'promo-button--on': activePromo }"></div>
+                                <div class="promo-button"></div>
                             </div>
                         </div>
                         <div class="hidden" :class="{ '!block': activePromo }">
@@ -236,7 +239,7 @@
                 <h6 class="h-12 flex items-center pl-5 text-xl leading-[145%] font-semibold text-primary">
                     CTA button
                 </h6>
-                <div class="p-3">
+                <div class="m:p-3">
                     <select-dropdown :data="ctaList" v-model:selected-option="selectedCTA"
                         addition-class="w-full h-12" />
                 </div>
@@ -275,10 +278,19 @@
                 </div>
             </div>
         </div>
+        <div v-if="showCreateProduct" class="flex m:hidden justify-end gap-3 w-full">
+            <button @click="saveDraft"
+                class="w-1/2 sm:w-auto h-12 py-3.5 px-7 flex justify-center items-center rounded-full text-[15px] leading-6 text-secondary font-semibold bg-background-02 cursor-pointer">Save
+                draft</button>
+            <select-dropdown :data="selectList" v-model:selected-option="selectedOpt" addition-class="addition"
+                text-class=" font-semibold" over-all-class="w-1/2 sm:w-auto" />
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { useCreateProduct } from '~/composable/useCreateProduct'
+
 definePageMeta({
     title: 'New Product'
 })
@@ -354,6 +366,14 @@ const ctaList = ref([
     'Sign up now',
     'Try for free'
 ])
+const selectList = ref([
+    'Publish now',
+    '1',
+    '2',
+    '3'
+])
+const selectedOpt = ref(selectList.value[0])
+const {showCreateProduct} = useCreateProduct()
 const descriptionText = ref('')
 const messageText = ref('')
 const activeCompatibilitys = ref<number[]>([])
@@ -378,6 +398,9 @@ const handleClickCompa = (index: number) => {
 const handleRemoveTag = (index: number) => {
     tagList.value.splice(index, 1)
 }
+const saveDraft = () => {
+    showCreateProduct.value = false
+}
 </script>
 
 <style lang="scss" scoped>
@@ -389,6 +412,9 @@ const handleRemoveTag = (index: number) => {
     gap: 12px;
     background: var(--color-background-02);
     border-radius: 32px;
+    @media (width < 480px) {
+        padding-bottom: 12px;
+    }
 }
 
 .delete-product-file {
@@ -408,11 +434,11 @@ const handleRemoveTag = (index: number) => {
     cursor: pointer;
 }
 
-.promo-switch--off {
+.promo-switch {
     border-image-source: linear-gradient(158.39deg,
             rgba(255, 255, 255, 0.1) 14.19%,
-            rgba(255, 255, 255, 2.5e-05) 35.83%,
-            rgba(255, 255, 255, 2.5e-05) 64.26%,
+            rgba(255, 255, 255, 0.000025) 35.83%,
+            rgba(255, 255, 255,0.000025) 64.26%,
             rgba(255, 255, 255, 0.025) 85.81%);
     width: 44px;
     border: 1.5px solid var(--color-secondary);
@@ -429,13 +455,13 @@ const handleRemoveTag = (index: number) => {
     box-shadow: 2px 0px 8px 2px #F8F8F833 inset;
     border-image-source: linear-gradient(158.39deg,
             rgba(255, 255, 255, 0.1) 14.19%,
-            rgba(255, 255, 255, 2.5e-05) 35.83%,
-            rgba(255, 255, 255, 2.5e-05) 64.26%,
+            rgba(255, 255, 255, 0.000025) 35.83%,
+            rgba(255, 255, 255, 0.000025) 64.26%,
             rgba(255, 255, 255, 0.025) 85.81%);
     border: 1.5px solid var(--color-secondary);
 }
 
-.promo-button--off {
+.promo-button {
     width: 20px;
     height: 20px;
     border-radius: 100%;
@@ -443,7 +469,7 @@ const handleRemoveTag = (index: number) => {
     transition: all 0.3s ease
 }
 
-.promo-button--on {
+.promo-switch--on .promo-button {
     background: var(--color-neutral-01);
     transform: translateX(18px);
 }

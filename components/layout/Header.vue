@@ -1,16 +1,20 @@
 <template>
-  <div class="fixed top-0 right-5 left-5 lg:left-22 2xl:left-85 z-10 bg-black flex gap-4 justify-between items-center py-5">
-    <h4 class="text-2xl xs:text-[32px] font-semibold text-primary leading-[145%]">
-      <span v-if="!showCreateProduct">{{ pageTitle }}</span>
-      <span v-else>New product</span>
-    </h4>
-    <div v-if="showCreateProduct" class="flex gap-3">
-      <button @click="saveDraft"
-        class="h-12 py-3.5 px-7 flex justify-center items-center rounded-full text-[15px] leading-6 text-secondary font-semibold bg-background-02 cursor-pointer">Save
-        draft</button>
-      <products-create-product-selection-button />
+  <div
+    class="fixed top-0 right-5 left-5 lg:left-22 2xl:left-85 z-10 bg-black flex gap-4 justify-between items-center py-5">
+    <div class="flex justify-between w-full">
+      <h4 class="text-2xl xs:text-[32px] font-semibold text-primary leading-[145%]">
+        <span v-if="!showCreateProduct">{{ pageTitle }}</span>
+        <span v-else>New product</span>
+      </h4>
+      <div v-if="showCreateProduct" class="hidden m:flex gap-3">
+        <button @click="saveDraft"
+          class="h-12 py-3.5 px-7 flex justify-center items-center rounded-full text-[15px] leading-6 text-secondary font-semibold bg-background-02 cursor-pointer">Save
+          draft</button>
+        <select-dropdown :data="selectList" v-model:selected-option="selectedOpt" addition-class="addition"
+          text-class=" font-semibold" />
+      </div>
     </div>
-    <div v-else class="hidden lg:flex justify-evenly items-center h-12 gap-2 xl:gap-3">
+    <div v-if="!showCreateProduct" class="hidden lg:flex justify-evenly items-center h-12 gap-2 xl:gap-3">
       <div class="w-78.75 rounded-full bg-background-02 hidden lg:flex items-center text-secondary">
         <div class="p-3 pr-2">
           <icons-search />
@@ -28,7 +32,7 @@
       </div>
       <div class="header-button">
         <div class="w-10 h-10">
-          <img src="/images/avatar.png" class="w-full h-full object-contain"/>
+          <img src="/images/avatar.png" class="w-full h-full object-contain" />
         </div>
       </div>
     </div>
@@ -49,6 +53,13 @@ const pageTitle = computed(() => {
 });
 const { showCreateProduct } = useCreateProduct()
 const { showSideBar } = useSideBar()
+const selectList = ref([
+  'Publish now',
+  '1',
+  '2',
+  '3'
+])
+const selectedOpt = ref(selectList.value[0])
 const toCreateProduct = () => {
   showCreateProduct.value = true
   navigateTo('/product')
@@ -59,6 +70,7 @@ const openSideBar = () => {
 const saveDraft = () => {
   showCreateProduct.value = false
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -82,5 +94,21 @@ const saveDraft = () => {
   justify-content: center;
   align-items: center;
   border-radius: 90px;
+}
+.addition {
+  height: 48px;
+  border-radius: 32px !important;
+  padding: 12px;
+  padding-left: 28px;
+  border-width: 1.5px;
+  background: linear-gradient(180deg, #FDFDFD 0%, #DEDEDE 100%) !important;
+  border-image-source: linear-gradient(158.39deg,
+      rgba(255, 255, 255, 0.55) 14.19%,
+      rgba(255, 255, 255, 0.0001) 35.83%,
+      rgba(255, 255, 255, 0.0001) 64.26%,
+      rgba(255, 255, 255, 0.25) 85.81%);
+  box-shadow: 2px 0px 8px 2px #18181833 inset;
+  min-width: 155px;
+  color: var(--color-light)
 }
 </style>

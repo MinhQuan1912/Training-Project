@@ -1,6 +1,6 @@
 <template>
     <div class="flex items-center justify-between h-12">
-        <h6 class="px-5 flex items-center text-xl leading-[145%] font-semibold text-primary">
+        <h6 class="px-5 flex items-center xs:text-xl leading-[145%] font-semibold text-primary">
             Product activity
         </h6>
         <select-dropdown v-model:selected-option="selectedOption" :data="options" addition-class="w-40 h-12"

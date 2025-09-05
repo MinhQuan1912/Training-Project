@@ -1,6 +1,6 @@
 <template>
     <div class="h-60 flex flex-col rounded-2xl border-[1.5px] border-stroke">
-        <div class="flex items-center bg-[#10101080] border-b-[1.5px] border-stroke-subtle">
+        <div class="flex items-center bg-[#10101080] border-b-[1.5px] border-stroke-subtle max-w-full overflow-x-auto">
             <div class="flex flex-1 p-1 gap-1">
                 <button v-for="(icon, id) in settings" :key="id" class="setting-button" @click="handleClickSetting(id)"
                     :class="{ 'text-primary bg-[#4C4C4C80]': activeIndexs.includes(id) }">
@@ -16,7 +16,8 @@
                 </button>
             </div>
         </div>
-        <textarea spellcheck="false" class="p-4 h-24 resize-none text-primary text-sm leading-[150%]" v-model="text" :class="{
+        <textarea spellcheck="false" class="p-4 h-24 resize-none text-primary text-sm leading-[150%]" v-model="text"
+            :class="{
             'font-bold': activeIndexs.includes(0),
             'italic': activeIndexs.includes(1),
             'underline': activeIndexs.includes(2)
