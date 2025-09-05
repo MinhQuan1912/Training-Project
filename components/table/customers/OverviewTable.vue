@@ -164,7 +164,7 @@
           v-for="(newCustomer, index) in newCustomers"
           :key="index"
           :class="{
-            'hidden xl:flex': index >= newCustomers.length - 4,
+            'hidden xl:flex': newCustomers.length - 4 <= index,
           }"
         >
           <div class="w-16 h-16">

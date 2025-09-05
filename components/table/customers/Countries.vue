@@ -6,7 +6,7 @@
 
     <div class="px-3 flex flex-col gap-2.5 sm:gap-5 w-full">
       <div
-        class="flex gap-1 sm:gap-4 items-center flex-col sm:flex-row"
+        class="flex gap-1 sm:gap-4 flex-col sm:flex-row"
         v-for="(country, index) in countries"
         :key="index"
       >

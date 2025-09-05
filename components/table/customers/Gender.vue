@@ -7,9 +7,7 @@
     <div class="py-6 px-3 flex flex-col gap-8">
       <div></div>
 
-      <div
-        class="flex gap-1 sm:gap-4 justify-between flex-col sm:flex-row max-sm:items-center"
-      >
+      <div class="flex gap-1 sm:gap-4 justify-between flex-col sm:flex-row">
         <div class="flex flex-col gap-1">
           <div class="text-xs leading-[160%] text-tertiary">Female</div>
 
