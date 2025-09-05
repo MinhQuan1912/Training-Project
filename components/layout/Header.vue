@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed top-0 right-5 left-5 lg:left-22 2xl:left-85 z-10 bg-black flex gap-4 justify-between items-center py-5">
+    class="fixed top-0 right-3 left-3 md:right-5 md:left-5 lg:left-22 2xl:left-85 z-10 bg-black flex gap-4 justify-between items-center py-5">
     <div class="flex justify-between w-full">
       <h4 class="text-2xl xs:text-[32px] font-semibold text-primary leading-[145%]">
         <span v-if="!showCreateProduct">{{ pageTitle }}</span>
@@ -37,7 +37,7 @@
       </div>
     </div>
     <button
-      class="w-12 h-12 flex lg:hidden justify-center items-center text-white cursor-pointer bg-background-02 rounded-xl hover:bg-white hover:text-black transition-colors duration-200 ease"
+      class="min-w-12 h-12 flex lg:hidden justify-center items-center text-white cursor-pointer bg-background-02 rounded-xl hover:bg-white hover:text-black transition-colors duration-200 ease"
       @click="openSideBar">
       <icons-menu-header />
     </button>
@@ -48,6 +48,8 @@
 import { useCreateProduct } from '~/composable/useCreateProduct';
 import { useSideBar } from '~/composable/useSideBar';
 const route = useRoute();
+const router = useRouter()
+const previousRoute = ref<string | null>(null)
 const pageTitle = computed(() => {
   return route.meta.title;
 });
@@ -61,16 +63,32 @@ const selectList = ref([
 ])
 const selectedOpt = ref(selectList.value[0])
 const toCreateProduct = () => {
+  previousRoute.value = route.path
+  if (route.path !== '/product') {
+    router.push('/product')
+  }
   showCreateProduct.value = true
-  navigateTo('/product')
 }
 const openSideBar = () => {
   showSideBar.value = true
 }
 const saveDraft = () => {
   showCreateProduct.value = false
+  if (previousRoute.value && previousRoute.value !== '/product') {
+    router.push(previousRoute.value)
+  }
+  else {
+    router.push('/product')
+  }
 }
-
+watch(
+  () => route.fullPath,
+  () => {
+    if (route.path !== '/product') {
+      showCreateProduct.value = false
+    }
+  }
+)
 </script>
 
 <style lang="scss" scoped>
@@ -95,6 +113,7 @@ const saveDraft = () => {
   align-items: center;
   border-radius: 90px;
 }
+
 .addition {
   height: 48px;
   border-radius: 32px !important;

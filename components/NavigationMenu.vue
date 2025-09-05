@@ -71,6 +71,7 @@ import {
   IconsPromote,
   IconsShop,
 } from "#components";
+import { useCreateProduct } from "~/composable/useCreateProduct";
 import { useSideBar } from "~/composable/useSideBar";
 
 const colorMode = useColorMode();
@@ -111,6 +112,7 @@ const isTablet = useMediaQuery('(max-width:1439px)')
 const route = useRoute()
 const openIndexs = ref<number[]>([]);
 const { showSideBar } = useSideBar()
+const { showCreateProduct } = useCreateProduct()
 const handleOpenSubmenu = (index: number) => {
   const isOpen = openIndexs.value.includes(index);
   if (isTablet.value) {
@@ -140,6 +142,7 @@ watch(
     if (isTablet.value) {
       openIndexs.value = [];
     }
+    showCreateProduct.value = false
   }
 )
 watchEffect(() => {
