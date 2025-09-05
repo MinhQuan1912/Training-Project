@@ -4,10 +4,12 @@
       Devices
     </div>
 
-    <div class="py-6 px-3 flex flex-col gap-8">
+    <div class="py-6 px-3 flex flex-col gap-8 @container">
       <div></div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3">
+      <div
+        class="flex justify-between flex-col @xs:flex-row lg:grid grid-cols-3 gap-6"
+      >
         <div class="flex gap-2">
           <icons-mobile />
 

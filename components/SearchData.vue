@@ -1,12 +1,12 @@
 <template>
   <div
-    class="flex bg-background-surface1 border-[1.5px] border-stroke-subtle w-50 lg:w-70 rounded-full p-3 pr-5 gap-2 text-secondary"
+    class="flex bg-background-surface1 border-[1.5px] border-stroke-subtle w-full sm:w-70 rounded-full p-3 gap-2 text-secondary"
   >
     <icons-search />
     <input
       type="search"
       :placeholder="placeholder"
-      class="text-sm leading-[150%] w-full"
+      class="text-sm leading-[150%] w-full hidden sm:block"
       :value="modelValue"
       @keyup.enter="$emit('update:modelValue', $event.target.value)"
     />

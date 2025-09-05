@@ -3,7 +3,7 @@
     <table class="table-auto w-full overflow-x-auto">
       <thead>
         <tr :class="classTableTr.header">
-          <th class="w-10 pl-4 py-4">
+          <th class="">
             <input
               type="checkbox"
               id="myCheckbox"
@@ -26,6 +26,7 @@
       <tbody>
         <tr
           v-for="(item, itemIndex) in items"
+          v-if="items.length > 0"
           :key="itemIndex"
           :class="[
             classTableTr.body,
@@ -33,7 +34,7 @@
           ]"
           :index="itemIndex"
         >
-          <td class="w-10 pl-4 py-4 rounded-l-2xl">
+          <td class="rounded-l-2xl">
             <input
               type="checkbox"
               :id="'checkbox-' + itemIndex"
@@ -55,6 +56,9 @@
           >
             <slot :name="`column-${column.slot}`" :item="item"> </slot>
           </td>
+        </tr>
+        <tr v-else class="text-primary text-center">
+          Không có dữ liệu.
         </tr>
       </tbody>
     </table>

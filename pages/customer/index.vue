@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <div class="flex gap-3">
+    <div class="flex gap-3 flex-col lg:flex-row">
       <!--  lg:w-142 xl:w-261 -->
-      <div class="flex flex-col gap-3 w-2/3">
+      <div class="flex flex-col gap-3 w-full lg:w-2/3">
         <div class="bg-background-02 rounded-4xl flex flex-col gap-4 p-3">
           <OverviewTitle />
 
@@ -17,7 +17,7 @@
       </div>
 
       <!--  lg:w-72 xl:w-114 -->
-      <div class="flex flex-col gap-3 w-1/3">
+      <div class="flex flex-col gap-3 w-full lg:w-1/3">
         <RefundRequests />
 
         <Devices />

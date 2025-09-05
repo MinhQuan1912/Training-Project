@@ -4,9 +4,9 @@
       Countries
     </div>
 
-    <div class="px-3 flex flex-col gap-2.5 sm:gap-5 w-full">
+    <div class="px-3 flex flex-col gap-2.5 sm:gap-5 w-full @container">
       <div
-        class="flex gap-1 sm:gap-4 flex-col sm:flex-row"
+        class="flex gap-1 @xs:gap-4 flex-col @xs:flex-row"
         v-for="(country, index) in countries"
         :key="index"
       >
@@ -20,7 +20,7 @@
 
         <div class="flex flex-col gap-2 flex-grow">
           <div
-            class="flex justify-between flex-col sm:flex-row font-semibold text-primary leading-[150%] text-xs sm:text-base"
+            class="flex justify-between font-semibold text-primary leading-[150%] text-xs sm:text-base"
           >
             <div>{{ country.content }}</div>
 
