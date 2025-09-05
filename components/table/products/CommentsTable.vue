@@ -21,11 +21,11 @@
                 {{ item.titleComment }}
               </div>
               <div class="flex gap-2 items-center">
-                <div class="text-secondary text-sm">
+                <div class="text-secondary text-xs lg:text-sm">
                   {{ item.instaComment }}
                 </div>
                 <icons-status_indicator />
-                <div class="text-secondary text-sm">
+                <div class="text-secondary text-xs lg:text-sm">
                   {{ item.timeComment }}
                 </div>
               </div>
@@ -61,11 +61,11 @@
                 {{ item.titleComment }}
               </div>
               <div class="flex gap-2 items-center">
-                <div class="text-secondary text-sm">
+                <div class="text-secondary text-xs lg:text-sm">
                   {{ item.instaComment }}
                 </div>
                 <icons-status_indicator />
-                <div class="text-secondary text-sm">
+                <div class="text-secondary text-xs lg:text-sm">
                   {{ item.timeComment }}
                 </div>
               </div>
@@ -77,11 +77,12 @@
 
             <div class="flex gap-5 items-center text-secondary mt-2">
               <NuxtLink
+                @click=""
                 to="#"
                 class="flex items-center gap-1 py-1 pr-1.5 hover:text-primary/80"
               >
                 <icons-edit />
-                <div class="text-sm font-semibold">Reply</div>
+                <div class="text-xs lg:text-sm font-semibold">Reply</div>
               </NuxtLink>
 
               <NuxtLink
@@ -89,7 +90,7 @@
                 class="flex items-center gap-1 py-1 pl-1 pr-1.5 hover:text-primary/80"
               >
                 <icons-heart />
-                <div class="text-sm font-semibold">Like</div>
+                <div class="text-xs lg:text-sm font-semibold">Like</div>
               </NuxtLink>
 
               <NuxtLink
@@ -98,7 +99,7 @@
                 class="flex items-center gap-1 py-1 pl-1 pr-1.5 hover:text-primary/80"
               >
                 <icons-trash />
-                <div class="text-sm font-semibold">Remove</div>
+                <div class="text-xs lg:text-sm font-semibold">Remove</div>
               </NuxtLink>
             </div>
           </div>
@@ -118,7 +119,7 @@
               class="flex items-center gap-1 py-1 pr-1.5 hover:text-primary/80"
             >
               <icons-edit />
-              <div class="text-sm font-semibold">Reply</div>
+              <div class="text-xs lg:text-sm font-semibold">Reply</div>
             </NuxtLink>
 
             <NuxtLink
@@ -126,15 +127,16 @@
               class="flex items-center gap-1 py-1 pl-1 pr-1.5 hover:text-primary/80"
             >
               <icons-heartRed />
-              <div class="text-sm font-semibold">Like</div>
+              <div class="text-xs lg:text-sm font-semibold">Like</div>
             </NuxtLink>
 
             <NuxtLink
+              @click="handleModalDeleteProduct(item)"
               to="#"
               class="flex items-center gap-1 py-1 pl-1 pr-1.5 hover:text-primary/80"
             >
               <icons-trash />
-              <div class="text-sm font-semibold">Remove</div>
+              <div class="text-xs lg:text-sm font-semibold">Remove</div>
             </NuxtLink>
           </div>
 
@@ -177,7 +179,7 @@
       <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
         <button
           type="button"
-          class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+          class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs lg:text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
           data-modal-hide="popup-modal"
           @click="handleModalDeleteComment(item)"
         >
@@ -220,10 +222,10 @@
             product?
           </h3>
           <button
-            @click="handleDeleteProduct(item)"
+            @click="handleDeleteComment(item)"
             data-modal-hide="popup-modal"
             type="button"
-            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center cursor-pointer"
+            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-xs lg:text-sm inline-flex items-center px-5 py-2.5 text-center cursor-pointer"
           >
             Yes, I'm sure
           </button>
@@ -231,7 +233,7 @@
             @click="handleModalDeleteComment(item)"
             data-modal-hide="popup-modal"
             type="button"
-            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 cursor-pointer"
+            class="py-2.5 px-5 ms-3 text-xs lg:text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 cursor-pointer"
           >
             No, cancel
           </button>
@@ -258,7 +260,7 @@
           </h3>
           <button
             type="button"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs lg:text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
             data-modal-toggle="crud-modal"
             @click="handleModalEdit(item)"
           >
@@ -286,14 +288,14 @@
             <div class="col-span-2">
               <label
                 for="name"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
                 >Products</label
               >
               <input
                 type="text"
                 name="name"
                 id="name"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Product Name"
                 v-model="selectItem.product"
               />
@@ -301,14 +303,14 @@
             <div class="col-span-2 sm:col-span-1">
               <label
                 for="price"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
                 >Price</label
               >
               <input
                 type="number"
                 name="price"
                 id="price"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="$2999"
                 v-model="selectItem.price"
               />
@@ -316,14 +318,14 @@
             <div class="col-span-2 sm:col-span-1">
               <label
                 for="price"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
                 >Schedule For</label
               >
               <input
                 type="datetime"
                 name="schedulefor"
                 id="schedulefor"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="datetime"
                 v-model="selectItem.scheduleFor"
               />
@@ -332,7 +334,7 @@
           <button
             @click="handleSaveProduct()"
             type="submit"
-            class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs lg:text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             <svg
               class="me-1 -ms-1 w-5 h-5"
@@ -354,7 +356,7 @@
   </div>
 
   <div
-    v-if="deleteModal"
+    v-if="deleteModalProduct"
     tabindex="-1"
     class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 overflow-y-auto"
   >
@@ -362,9 +364,9 @@
       <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
         <button
           type="button"
-          class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+          class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs lg:text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
           data-modal-hide="popup-modal"
-          @click="handleModalDelete()"
+          @click="handleModalDeleteProduct()"
         >
           <svg
             class="w-3 h-3"
@@ -401,22 +403,22 @@
           </svg>
           <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
             Are you sure you want to delete
-            <span class="font-bold">{{ selectItem.product }}</span> this
+            <span class="font-bold">{{ selectItem.titleProduct }}</span> this
             product?
           </h3>
           <button
             @click="handleDeleteProduct(item)"
             data-modal-hide="popup-modal"
             type="button"
-            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center cursor-pointer"
+            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-xs lg:text-sm inline-flex items-center px-5 py-2.5 text-center cursor-pointer"
           >
             Yes, I'm sure
           </button>
           <button
-            @click="handleModalDelete()"
+            @click="handleModalDeleteProduct()"
             data-modal-hide="popup-modal"
             type="button"
-            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 cursor-pointer"
+            class="py-2.5 px-5 ms-3 text-xs lg:text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 cursor-pointer"
           >
             No, cancel
           </button>
@@ -443,7 +445,7 @@
           </h3>
           <button
             type="button"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs lg:text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
             data-modal-toggle="crud-modal"
             @click="handleModalEdit(item)"
           >
@@ -471,14 +473,14 @@
             <div class="col-span-2">
               <label
                 for="name"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
                 >Products</label
               >
               <input
                 type="text"
                 name="name"
                 id="name"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Product Name"
                 v-model="selectItem.product"
               />
@@ -486,14 +488,14 @@
             <div class="col-span-2 sm:col-span-1">
               <label
                 for="price"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
                 >Price</label
               >
               <input
                 type="number"
                 name="price"
                 id="price"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="$2999"
                 v-model="selectItem.price"
               />
@@ -501,14 +503,14 @@
             <div class="col-span-2 sm:col-span-1">
               <label
                 for="price"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
                 >Schedule For</label
               >
               <input
                 type="datetime"
                 name="schedulefor"
                 id="schedulefor"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="datetime"
                 v-model="selectItem.scheduleFor"
               />
@@ -517,7 +519,7 @@
           <button
             @click="handleSaveProduct()"
             type="submit"
-            class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs lg:text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             <svg
               class="me-1 -ms-1 w-5 h-5"
@@ -548,22 +550,21 @@ const columns = [
   {
     slot: "comments",
     label: "Comments",
-    headerClass: "max-lg:w-13/20 text-sm text-tertiary pl-5 py-4 flex-1",
-    cellClass:
-      "w-13/20 max-lg:group-hover:w-full py-4 ml-5 flex-1 flex mr-6 flex-col",
+    headerClass: "w-3/5 pl-5 mr-6 min-w-115",
+    cellClass: "w-3/5 pl-5 flex flex-col text-sm lg:text-base mr-6 min-w-115",
   },
   {
     slot: "product",
     label: "Product",
-    headerClass: "text-sm text-tertiary w-1/4 lg:w-3/10 pr-4 py-4",
+    headerClass: "w-3/25",
     cellClass:
-      "w-1/4 lg:w-3/10 max-lg:group-hover:w-auto py-4 pr-4 rounded-r-2xl flex items-center whitespace-nowrap",
+      "w-3/25 rounded-r-2xl flex items-center whitespace-nowrap text-sm lg:text-base",
   },
 ];
 
 const classTableTr = {
-  header: "text-left flex items-center",
-  body: "bottomHover flex items-center relative group outline-[1.5px] outline-solid outline-transparent hover:outline-primary/7.5 hover:bg-background-pop transition-all duration-500 w-full rounded-2xl border-t-[1.5px] hover:border-transparent border-solid border-stroke-subtle",
+  header: "text-left flex items-center text-tertiary text-xs p-4",
+  body: "bottomHover flex items-center p-4 relative group outline-[1.5px] outline-solid outline-transparent hover:outline-primary/7.5 hover:bg-background-pop transition-all duration-500 w-full rounded-2xl",
 };
 
 const comments = ref([
@@ -780,14 +781,41 @@ const handleModalDeleteComment = (item) => {
   deleteModalComment.value = !deleteModalComment.value;
 };
 
-const handleDeleteProduct = () => {
+const handleDeleteComment = () => {
   comments.value = comments.value.filter(function (d) {
     return d.id !== selectItem.value.id;
   });
   deleteModalComment.value = false;
 };
 
-const handleModalEdit = (item) => {
+const handleModalDeleteProduct = (item) => {
+  selectItem.value = { ...item };
+  deleteModalProduct.value = !deleteModalProduct.value;
+};
+
+const handleDeleteProduct = () => {
+  comments.value = comments.value.filter(function (d) {
+    return d.id !== selectItem.value.id;
+  });
+  deleteModalProduct.value = false;
+};
+
+const handleModalEditComment = (item) => {
+  selectItem.value = { ...item };
+  editModal.value = !editModal.value;
+};
+
+const handleSaveComment = () => {
+  const index = comments.value.findIndex(function (e) {
+    return e.id === selectItem.value.id;
+  });
+  if (index !== -1) {
+    comments.value[index] = { ...selectItem.value };
+  }
+  editModal.value = false;
+};
+
+const handleModalEditProduct = (item) => {
   selectItem.value = { ...item };
   editModal.value = !editModal.value;
 };

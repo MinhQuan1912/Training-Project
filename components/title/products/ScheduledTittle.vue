@@ -2,7 +2,7 @@
   <div class="p-3 flex justify-between items-center h-18">
     <div class="flex items-center">
       <div
-        class="text-xl lg:text-2xl font-medium leading-[145%] text-primary pl-5 pr-6"
+        class="text-xl lg:text-2xl font-medium leading-[145%] text-primary pl-5 pr-6 whitespace-nowrap"
       >
         5 scheduled products
       </div>
