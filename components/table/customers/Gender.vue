@@ -4,32 +4,28 @@
       Gender
     </div>
 
-    <div class="py-6 px-3 flex flex-col gap-8">
+    <div class="py-6 px-3 flex flex-col gap-8 @container">
       <div></div>
 
-      <div class="flex gap-1 sm:gap-4 justify-between flex-col sm:flex-row">
+      <div
+        class="flex justify-between flex-col @xs:flex-row lg:grid grid-cols-3 gap-4"
+      >
         <div class="flex flex-col gap-1">
           <div class="text-xs leading-[160%] text-tertiary">Female</div>
 
-          <div class="leading-[150%] text-primary text-xs sm:text-base">
-            30.16%
-          </div>
+          <div class="leading-[150%] text-primary text-base">30.16%</div>
         </div>
 
         <div class="flex flex-col gap-1">
           <div class="text-xs leading-[160%] text-tertiary">Female</div>
 
-          <div class="leading-[150%] text-primary text-xs sm:text-base">
-            30.16%
-          </div>
+          <div class="leading-[150%] text-primary text-base">30.16%</div>
         </div>
 
         <div class="flex flex-col gap-1">
           <div class="text-xs leading-[160%] text-tertiary">Female</div>
 
-          <div class="leading-[150%] text-primary text-xs sm:text-base">
-            30.16%
-          </div>
+          <div class="leading-[150%] text-primary text-base">30.16%</div>
         </div>
       </div>
     </div>

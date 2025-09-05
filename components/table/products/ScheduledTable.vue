@@ -5,7 +5,7 @@
     :classTableTr="classTableTr"
   >
     <template v-slot:column-product="{ item, index }">
-      <div class="flex items-center">
+      <div class="flex items-center text-sm lg:text-base">
         <div class="w-16 h-16 mr-5 rounded-xl">
           <img
             :src="item.img"
@@ -26,7 +26,7 @@
                   @click="handleModalEdit(item)"
                 >
                   <icons-edit />
-                  <div class="text-sm font-semibold">Edit</div>
+                  <div class="text-xs lg:text-sm font-semibold">Edit</div>
                 </NuxtLink>
               </div>
 
@@ -37,7 +37,7 @@
                   @click="handleModalDelete(item)"
                 >
                   <icons-trash />
-                  <div class="text-sm font-semibold">Delete</div>
+                  <div class="text-xs lg:text-sm font-semibold">Delete</div>
                 </NuxtLink>
               </div>
 
@@ -47,7 +47,7 @@
                   class="flex items-center gap-1 py-1 pl-1 pr-1.5 border-[1.5px] border-solid border-transparent group-hover/button:border-stroke rounded-md group-hover/button:text-primary/80"
                 >
                   <icons-calendar-check />
-                  <div class="text-sm font-semibold">Reschedule</div>
+                  <div class="text-xs lg:text-sm font-semibold">Reschedule</div>
                 </NuxtLink>
               </div>
             </div>
@@ -59,7 +59,7 @@
 
     <template v-slot:column-price="{ item, index }">
       <div
-        class="text-sm font-semibold px-2 py-1.75 border-[1.5px] border-solid rounded-lg inline"
+        class="text-xs lg:text-sm font-semibold px-2 py-1.75 border-[1.5px] border-solid rounded-lg inline"
         :class="{
           'text-primary-03 bg-primary-03/5 border-primary-03/15':
             !item.priceStatus,
@@ -85,7 +85,7 @@
       <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
         <button
           type="button"
-          class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+          class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs lg:text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
           data-modal-hide="popup-modal"
           @click="handleModalDelete()"
         >
@@ -131,7 +131,7 @@
             @click="handleDeleteProduct(item)"
             data-modal-hide="popup-modal"
             type="button"
-            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center cursor-pointer"
+            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-xs lg:text-sm inline-flex items-center px-5 py-2.5 text-center cursor-pointer"
           >
             Yes, I'm sure
           </button>
@@ -139,7 +139,7 @@
             @click="handleModalDelete()"
             data-modal-hide="popup-modal"
             type="button"
-            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 cursor-pointer"
+            class="py-2.5 px-5 ms-3 text-xs lg:text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 cursor-pointer"
           >
             No, cancel
           </button>
@@ -166,7 +166,7 @@
           </h3>
           <button
             type="button"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs lg:text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
             data-modal-toggle="crud-modal"
             @click="handleModalEdit(item)"
           >
@@ -194,14 +194,14 @@
             <div class="col-span-2">
               <label
                 for="name"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
                 >Products</label
               >
               <input
                 type="text"
                 name="name"
                 id="name"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Product Name"
                 v-model="selectItem.product"
               />
@@ -209,14 +209,14 @@
             <div class="col-span-2 sm:col-span-1">
               <label
                 for="price"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
                 >Price</label
               >
               <input
                 type="number"
                 name="price"
                 id="price"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="$2999"
                 v-model="selectItem.price"
               />
@@ -224,14 +224,14 @@
             <div class="col-span-2 sm:col-span-1">
               <label
                 for="price"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
                 >Schedule For</label
               >
               <input
                 type="datetime"
                 name="schedulefor"
                 id="schedulefor"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="datetime"
                 v-model="selectItem.scheduleFor"
               />
@@ -240,7 +240,7 @@
           <button
             @click="handleSaveProduct()"
             type="submit"
-            class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs lg:text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             <svg
               class="me-1 -ms-1 w-5 h-5"
@@ -272,26 +272,27 @@ const columns = [
   {
     slot: "product",
     label: "Products",
-    headerClass: "py-4 pl-5 flex-1",
-    cellClass: "py-4 pl-5 flex-1 whitespace-nowrap",
+    headerClass: "w-2/5 ml-5 min-w-89",
+    cellClass: "w-2/5 ml-5 min-w-89 whitespace-nowrap",
   },
   {
     slot: "price",
     label: "Price",
-    headerClass: "w-3/20 lg:w-3/10 py-4 pl-8 pr-12.5",
-    cellClass: "w-3/20 lg:w-3/10 py-4 pl-8 pr-12.5",
+    headerClass: "w-3/10 pl-8 pr-12.5",
+    cellClass: "w-3/10 pl-8 pr-12.5",
   },
   {
     slot: "scheduledFor",
     label: "Scheduled for",
-    headerClass: "w-1/4 py-4 pr-4",
-    cellClass: "text-secondary w-1/4 py-4 pr-4 rounded-r-2xl whitespace-nowrap",
+    headerClass: "w-1/4",
+    cellClass:
+      "w-1/4 text-secondary rounded-r-2xl whitespace-nowrap text-sm sm:text-base",
   },
 ];
 
 const classTableTr = {
-  header: "text-tertiary items-center text-left",
-  body: "group bottomHover align-middle hover:bg-background-pop outline-[1.5px] hover:rounded-2xl outline-solid outline-transparent p-4 hover:outline-primary/7.5 border-t-[1.5px] hover:border-none border-solid border-stroke-subtle text-left",
+  header: "flex text-tertiary items-center text-left text-xs p-4",
+  body: "flex items-center group bottomHover align-middle hover:bg-background-pop border-[1.5px] border-solid border-t-stroke-subtle border-b-transparent border-x-transparent hover:border-primary/7.5 hover:rounded-2xl p-4 text-left",
 };
 
 const schedules = ref([

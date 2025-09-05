@@ -72,12 +72,12 @@
           </div>
         </div>
 
-        <div class="flex gap-4 justify-center">
+        <div class="flex gap-4 justify-center @container">
           <div class="text-xs text-primary leading-[160%] opacity-80">
             Least engaged
           </div>
 
-          <div class="flex flex-col sm:flex-row gap-0.5 items-center">
+          <div class="flex flex-col @xs:flex-row gap-0.5 items-center">
             <div class="w-12 h-2 rounded-xs bg-shade05-100/20"></div>
 
             <div class="w-12 h-2 rounded-xs bg-shade05-100/35"></div>
