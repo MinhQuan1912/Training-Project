@@ -1,5 +1,5 @@
 <template>
-  <div class="pb-8 px-4 overflow-x-auto overflow-y-hidden">
+  <div class="overflow-x-auto overflow-y-hidden" :class="classTableTr.padding">
     <table class="table-auto w-full overflow-x-auto">
       <thead>
         <tr :class="classTableTr.header" @click="toggleAllChecked">

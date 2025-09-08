@@ -291,6 +291,7 @@ const columns = [
 ];
 
 const classTableTr = {
+  padding: "pb-8 px-4",
   header: "flex text-tertiary items-center text-left text-xs p-4",
   body: "flex items-center group bottomHover align-middle hover:bg-background-pop border-[1.5px] border-solid border-t-stroke-subtle border-b-transparent border-x-transparent hover:border-primary/7.5 hover:rounded-2xl p-4 text-left",
 };
