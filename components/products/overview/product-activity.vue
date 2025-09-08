@@ -1,10 +1,16 @@
 <template>
   <div class="flex items-center justify-between h-12">
-    <h6 class="xs:px-5 flex items-center xs:text-xl leading-[145%] font-semibold text-primary">
+    <h6
+      class="xs:px-5 flex items-center xs:text-xl leading-[145%] font-semibold text-primary"
+    >
       Product activity
     </h6>
-    <select-dropdown v-model:selected-option="selectedOption" :data="options" addition-class="w-40 h-12 !pr-0 xs:!pr-3"
-      text-class="text-secondary" />
+    <select-dropdown
+      v-model:selected-option="selectedOption"
+      :data="options"
+      addition-class="w-40 h-12 !pr-0 xs:!pr-3"
+      text-class="text-secondary"
+    />
   </div>
   <!-- <div class="xs:px-5 sm:pt-4 overflow-x-auto min-w-full">
         <table class="w-full text-sm leading-[150%] text-primary">
@@ -62,13 +68,19 @@
             </tbody>
         </table>
     </div> -->
-  <data-table :items="filterActivities" :columns="columns" :class-table-tr="{
-    padding: 'px-5 pt-4',
-    header: 'flex gap-6 justify-between items-center',
-    body: 'flex gap-6 border-t border-stroke-subtle w-full',
-    thInput: 'hidden',
-    tdInput: 'hidden'
-  }" t-body-class="block overflow-y-auto max-h-34" t-head-class="block">
+  <data-table
+    :items="filterActivities"
+    :columns="columns"
+    :class-table-tr="{
+      padding: 'px-5 pt-4',
+      header: 'flex gap-6 justify-between items-center',
+      body: 'flex gap-6 border-t border-stroke-subtle w-full',
+      thInput: 'hidden',
+      tdInput: 'hidden',
+    }"
+    t-body-class="block overflow-y-auto max-h-34"
+    t-head-class="block"
+  >
     <!-- Week -->
     <template #column-week="{ item }">
       <div class="text-primary text-sm leading-[150%]">
@@ -136,7 +148,8 @@ const columns = [
   {
     label: "Week",
     slot: "week",
-    headerClass: "min-w-28 flex-1 py-5 text-left text-xs leading-[160%] text-tertiary",
+    headerClass:
+      "min-w-28 flex-1 py-5 text-left text-xs leading-[160%] text-tertiary",
     cellClass: "min-w-28 py-4 flex-1 flex items-center",
   },
   {
@@ -167,48 +180,47 @@ const columns = [
 ];
 const productActivityList = ref<activityRow[]>([
   {
-    week: '13 Jan - 20 Jan',
+    week: "13 Jan - 20 Jan",
     product: {
       value: 24394,
-      growthRate: 12
+      growthRate: 12,
     },
     view: {
       value: 32193,
-      growthRate: -23
+      growthRate: -23,
     },
     like: {
       value: 48,
-      growthRate: 51
+      growthRate: 51,
     },
     comment: {
       value: 16,
-      growthRate: -21
-    }
+      growthRate: -21,
+    },
   },
   {
-    week: '20 Jan - 27 Jan',
+    week: "20 Jan - 27 Jan",
     product: { value: 40924 },
     view: { value: 15694 },
     like: { value: 64 },
-    comment: { value: 32 }
+    comment: { value: 32 },
   },
   {
-    week: '27 Jan - 03 Feb',
+    week: "27 Jan - 03 Feb",
     product: { value: 14930 },
     view: { value: 2943 },
     like: { value: 134 },
-    comment: { value: 71 }
+    comment: { value: 71 },
   },
   {
-    week: '03 Feb - 10 Feb',
+    week: "03 Feb - 10 Feb",
     product: { value: 64930 },
     view: { value: 16940 },
     like: { value: 64 },
-    comment: { value: 71 }
-  }
-
-])
-const { formatNum } = useFormatNumber()
+    comment: { value: 71 },
+  },
+]);
+const { formatNum } = useFormatNumber();
 const options = computed(() => {
   const opt = [];
   for (let i = 1; i <= productActivityList.value.length; i++) {
