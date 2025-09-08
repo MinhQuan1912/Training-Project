@@ -623,6 +623,7 @@ const columns = [
 ];
 
 const classTableTr = {
+  padding: "pb-8 px-4",
   header: "text-left flex items-center text-tertiary text-xs p-4",
   body: "bottomHover flex items-center p-4 relative group hover:bg-background-pop w-full hover:rounded-2xl border-[1.5px] border-solid border-t-stroke-subtle border-b-transparent border-x-transparent hover:border-primary/7.5",
   thInput: "",
