@@ -9,6 +9,7 @@
               id="myCheckbox"
               class="original-checkbox"
               v-model="allChecked"
+              @click="toggleAllChecked"
             />
             <label for="myCheckbox" class="custom-checkbox"></label>
           </th>
@@ -30,7 +31,7 @@
           :key="itemIndex"
           :class="[
             classTableTr.body,
-            { 'bg-background-pop': item.checked === true },
+            { 'bg-background-pop rounded-2xl': item.checked === true },
           ]"
           :index="itemIndex"
         >
@@ -86,6 +87,23 @@ const props = defineProps({
     }),
   },
 });
+
+const allChecked = ref(false);
+
+const toggleAllChecked = () => {
+  allChecked.value = !allChecked.value;
+  props.items.forEach((item) => {
+    item.checked = allChecked.value;
+  });
+};
+
+watch(
+  () => props.items,
+  () => {
+    allChecked.value = props.items.every((item) => item.checked);
+  },
+  { deep: true }
+);
 </script>
 
 <style scoped lang="scss">

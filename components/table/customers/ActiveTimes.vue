@@ -12,7 +12,7 @@
           <div class="flex flex-col gap-2">
             <div class="flex flex-col gap-0.5">
               <div
-                class="flex gap-3 sm:gap-7.75 px-5"
+                class="flex gap-3 sm:gap-7.75 sm:px-5"
                 v-for="(timeSetDay, index) in timeSetDays"
                 :key="index"
               >
@@ -32,39 +32,39 @@
               </div>
             </div>
 
-            <div class="flex justify-between ml-20 px-5">
+            <div class="flex justify-between ml-15 sm:ml-20 sm:px-5">
               <div
-                class="w-23 text-xs leading-[160%] text-tertiary flex justify-center"
+                class="sm:w-23 text-xs leading-[160%] text-tertiary flex justify-center"
               >
                 Mo
               </div>
               <div
-                class="w-23 text-xs leading-[160%] text-tertiary flex justify-center"
+                class="sm:w-23 text-xs leading-[160%] text-tertiary flex justify-center"
               >
                 Tu
               </div>
               <div
-                class="w-23 text-xs leading-[160%] text-tertiary flex justify-center"
+                class="sm:w-23 text-xs leading-[160%] text-tertiary flex justify-center"
               >
                 We
               </div>
               <div
-                class="w-23 text-xs leading-[160%] text-tertiary flex justify-center"
+                class="sm:w-23 text-xs leading-[160%] text-tertiary flex justify-center"
               >
                 Th
               </div>
               <div
-                class="w-23 text-xs leading-[160%] text-tertiary flex justify-center"
+                class="sm:w-23 text-xs leading-[160%] text-tertiary flex justify-center"
               >
                 Fr
               </div>
               <div
-                class="w-23 text-xs leading-[160%] text-tertiary flex justify-center"
+                class="sm:w-23 text-xs leading-[160%] text-tertiary flex justify-center"
               >
                 Sa
               </div>
               <div
-                class="w-23 text-xs leading-[160%] text-tertiary flex justify-center"
+                class="sm:w-23 text-xs leading-[160%] text-tertiary flex justify-center"
               >
                 Su
               </div>

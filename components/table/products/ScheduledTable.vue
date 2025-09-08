@@ -284,9 +284,9 @@ const columns = [
   {
     slot: "scheduledFor",
     label: "Scheduled for",
-    headerClass: "w-1/4",
+    headerClass: "w-1/4 min-w-30.75",
     cellClass:
-      "w-1/4 text-secondary rounded-r-2xl whitespace-nowrap text-sm sm:text-base",
+      "w-1/4 min-w-30.75 text-secondary rounded-r-2xl whitespace-nowrap text-sm sm:text-base",
   },
 ];
 
