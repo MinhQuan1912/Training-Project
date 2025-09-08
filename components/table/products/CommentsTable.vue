@@ -58,15 +58,15 @@
           <div>
             <div class="flex items-center gap-3">
               <div class="font-semibold text-primary">
-                {{ item.titleComment }}
+                {{ item.titleAnswer }}
               </div>
               <div class="flex gap-2 items-center">
                 <div class="text-secondary text-xs lg:text-sm">
-                  {{ item.instaComment }}
+                  {{ item.instaAnswer }}
                 </div>
                 <icons-status_indicator />
                 <div class="text-secondary text-xs lg:text-sm">
-                  {{ item.timeComment }}
+                  {{ item.timeAnswer }}
                 </div>
               </div>
             </div>
@@ -79,7 +79,7 @@
               <NuxtLink
                 to="#"
                 class="flex items-center gap-1 py-1 pr-1.5 hover:text-primary/80"
-                @click="handleModalEditComment(item)"
+                @click.stop="handleModalEditComment(item)"
               >
                 <icons-edit />
                 <div class="text-xs lg:text-sm font-semibold">Reply</div>
@@ -94,7 +94,7 @@
               </NuxtLink>
 
               <NuxtLink
-                @click="handleModalDeleteComment(item)"
+                @click.stop="handleModalDeleteComment(item)"
                 to="#"
                 class="flex items-center gap-1 py-1 pl-1 pr-1.5 hover:text-primary/80"
               >
@@ -115,6 +115,7 @@
             v-if="item.activeIndex === true"
           >
             <NuxtLink
+              @click.stop="handleModalEditProduct(item)"
               to="#"
               class="flex items-center gap-1 py-1 pr-1.5 hover:text-primary/80"
             >
@@ -131,7 +132,7 @@
             </NuxtLink>
 
             <NuxtLink
-              @click="handleModalDeleteProduct(item)"
+              @click.stop="handleModalDeleteProduct(item)"
               to="#"
               class="flex items-center gap-1 py-1 pl-1 pr-1.5 hover:text-primary/80"
             >
@@ -156,7 +157,7 @@
                 {{ item.titleProduct }}
               </div>
               <div class="font-normal text-secondary">
-                <div>UI Design Kit</div>
+                {{ item.contentProduct }}
               </div>
             </div>
           </div>
@@ -260,7 +261,7 @@
           </h3>
           <button
             type="button"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs lg:text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs lg:text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
             data-modal-toggle="crud-modal"
             @click="handleModalEditComment(item)"
           >
@@ -289,7 +290,7 @@
               <label
                 for="name"
                 class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
-                >Products</label
+                >Name Comment</label
               >
               <input
                 type="text"
@@ -297,29 +298,28 @@
                 id="name"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Product Name"
-                v-model="selectItem.product"
+                v-model="selectItem.titleComment"
               />
             </div>
             <div class="col-span-2 sm:col-span-1">
               <label
                 for="price"
                 class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
-                >Price</label
+                >Insta Comment</label
               >
               <input
-                type="number"
-                name="price"
-                id="price"
+                type="text"
+                name="insta"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="$2999"
-                v-model="selectItem.price"
+                v-model="selectItem.instaComment"
               />
             </div>
             <div class="col-span-2 sm:col-span-1">
               <label
                 for="price"
                 class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
-                >Schedule For</label
+                >Time Comment</label
               >
               <input
                 type="datetime"
@@ -327,14 +327,89 @@
                 id="schedulefor"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="datetime"
-                v-model="selectItem.scheduleFor"
+                v-model="selectItem.timeComment"
+              />
+            </div>
+            <div class="col-span-2">
+              <label
+                for="price"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
+                >Nội dung Comment</label
+              >
+              <input
+                type="datetime"
+                name="schedulefor"
+                id="schedulefor"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="datetime"
+                v-model="selectItem.contentComment"
+              />
+            </div>
+
+            <div class="col-span-2">
+              <label
+                for="name"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
+                >Name Answer</label
+              >
+              <input
+                type="text"
+                name="name"
+                id="name"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Product Name"
+                v-model="selectItem.titleAnswer"
+              />
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+              <label
+                for="price"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
+                >Insta Answer</label
+              >
+              <input
+                type="text"
+                name="insta"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="$2999"
+                v-model="selectItem.instaAnswer"
+              />
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+              <label
+                for="price"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
+                >Time Answer</label
+              >
+              <input
+                type="datetime"
+                name="schedulefor"
+                id="schedulefor"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="datetime"
+                v-model="selectItem.timeAnswer"
+              />
+            </div>
+            <div class="col-span-2">
+              <label
+                for="price"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
+                >Nội dung Answer</label
+              >
+              <input
+                type="datetime"
+                name="schedulefor"
+                id="schedulefor"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="datetime"
+                v-model="selectItem.contentAnswer"
               />
             </div>
           </div>
           <button
-            @click="handleSaveProduct()"
+            @click="handleSaveComment()"
             type="submit"
-            class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs lg:text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs lg:text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer"
           >
             <svg
               class="me-1 -ms-1 w-5 h-5"
@@ -428,7 +503,7 @@
   </div>
 
   <div
-    v-if="editModal"
+    v-if="editModalProduct"
     tabindex="-1"
     aria-hidden="true"
     class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 overflow-y-auto"
@@ -445,9 +520,9 @@
           </h3>
           <button
             type="button"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs lg:text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs lg:text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
             data-modal-toggle="crud-modal"
-            @click="handleModalEdit(item)"
+            @click="handleModalEditProduct(item)"
           >
             <svg
               class="w-3 h-3"
@@ -482,44 +557,29 @@
                 id="name"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Product Name"
-                v-model="selectItem.product"
+                v-model="selectItem.titleProduct"
               />
             </div>
-            <div class="col-span-2 sm:col-span-1">
+            <div class="col-span-2">
               <label
-                for="price"
+                for="name"
                 class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
-                >Price</label
+                >Nội dung</label
               >
               <input
-                type="number"
-                name="price"
-                id="price"
+                type="text"
+                name="name"
+                id="name"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="$2999"
-                v-model="selectItem.price"
-              />
-            </div>
-            <div class="col-span-2 sm:col-span-1">
-              <label
-                for="price"
-                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
-                >Schedule For</label
-              >
-              <input
-                type="datetime"
-                name="schedulefor"
-                id="schedulefor"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="datetime"
-                v-model="selectItem.scheduleFor"
+                placeholder="Product Name"
+                v-model="selectItem.contentProduct"
               />
             </div>
           </div>
           <button
             @click="handleSaveProduct()"
             type="submit"
-            class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs lg:text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs lg:text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer"
           >
             <svg
               class="me-1 -ms-1 w-5 h-5"
@@ -578,6 +638,7 @@ const comments = ref([
       "Can you make a version for automated penetration testing and cybersecurity?",
     imgProduct: "/images/1.png",
     titleProduct: "123123Bento Pro v.2",
+    contentProduct: "UI Design Kit",
     imgAnswer: "/images/1.png",
     titleAnswer: "Dash",
     instaAnswer: "@dash",
@@ -597,6 +658,7 @@ const comments = ref([
     contentComment:
       "Can you make a version for automated penetration testing and cybersecurity?",
     titleProduct: "123123",
+    contentProduct: "UI Design Kit",
     imgAnswer: "/images/1.png",
     titleAnswer: "Dash",
     instaAnswer: "@dash",
@@ -616,6 +678,7 @@ const comments = ref([
     contentComment:
       "Can you make a version for automated penetration testing and cybersecurity?",
     titleProduct: "123123",
+    contentProduct: "UI Design Kit",
     imgAnswer: "/images/1.png",
     titleAnswer: "Dash",
     instaAnswer: "@dash",
@@ -635,6 +698,7 @@ const comments = ref([
     contentComment:
       "Can you make a version for automated penetration testing and cybersecurity?",
     titleProduct: "123123",
+    contentProduct: "UI Design Kit",
     imgAnswer: "/images/1.png",
     titleAnswer: "Dash",
     instaAnswer: "@dash",
@@ -654,6 +718,7 @@ const comments = ref([
     contentComment:
       "Can you make a version for automated penetration testing and cybersecurity?",
     titleProduct: "123123",
+    contentProduct: "UI Design Kit",
     imgAnswer: "/images/1.png",
     titleAnswer: "Dash",
     instaAnswer: "@dash",
@@ -673,6 +738,7 @@ const comments = ref([
     contentComment:
       "Can you make a version for automated penetration testing and cybersecurity?",
     titleProduct: "123123",
+    contentProduct: "UI Design Kit",
     imgAnswer: "/images/1.png",
     titleAnswer: "Dash",
     instaAnswer: "@dash",
@@ -692,6 +758,7 @@ const comments = ref([
     contentComment:
       "Can you make a version for automated penetration testing and cybersecurity?",
     titleProduct: "123123",
+    contentProduct: "UI Design Kit",
     imgAnswer: "/images/1.png",
     titleAnswer: "Dash",
     instaAnswer: "@dash",
@@ -711,6 +778,7 @@ const comments = ref([
     contentComment:
       "Can you make a version for automated penetration testing and cybersecurity?",
     titleProduct: "123123",
+    contentProduct: "UI Design Kit",
     imgAnswer: "/images/1.png",
     titleAnswer: "Dash",
     instaAnswer: "@dash",
@@ -817,7 +885,7 @@ const handleSaveComment = () => {
 
 const handleModalEditProduct = (item) => {
   selectItem.value = { ...item };
-  editModal.value = !editModal.value;
+  editModalProduct.value = !editModalProduct.value;
 };
 
 const handleSaveProduct = () => {
@@ -827,7 +895,7 @@ const handleSaveProduct = () => {
   if (index !== -1) {
     comments.value[index] = { ...selectItem.value };
   }
-  editModal.value = false;
+  editModalProduct.value = false;
 };
 </script>
 

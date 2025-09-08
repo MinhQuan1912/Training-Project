@@ -1,15 +1,17 @@
 <template>
-  <div class="p-3 flex justify-between items-center h-18">
+  <div class="p-3 flex justify-between items-center h-18 @container">
     <div class="flex items-center">
       <div
         class="text-xl lg:text-2xl font-medium leading-[145%] text-primary pl-5 pr-6 whitespace-nowrap"
       >
         8 new comments
       </div>
-      <SearchData :placeholder="placeholder" v-model="searchComment" />
+      <div class="hidden @xs:flex">
+        <SearchData :placeholder="placeholder" v-model="searchComment" />
+      </div>
     </div>
 
-    <div class="hidden lg:block">
+    <div class="hidden md:block">
       <select-dropdown
         v-model:selected-option="selectedOption"
         :data="options"
@@ -44,6 +46,15 @@ const searchComment = computed({
     emit("update:modelValue", value);
   },
 });
+
+const selectedOption = ref(null);
+
+const options = [
+  { label: "Option 1", value: "value-1" },
+  { label: "Option 2", value: "value-2" },
+  { label: "Option 3", value: "value-3" },
+  { label: "Option 4", value: "value-4" },
+];
 </script>
 
 <style lang="scss" scoped></style>

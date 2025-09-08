@@ -1,5 +1,7 @@
 <template>
-  <div class="pt-3 pb-4 px-8 flex flex-col gap-10 bg-background-02 rounded-4xl">
+  <div
+    class="pt-3 pb-4 px-8 flex flex-col gap-10 bg-background-02 rounded-4xl @container"
+  >
     <div class="h-12 mx-5 text-xl font-semibold text-primary flex items-center">
       Traffic channel
     </div>
@@ -46,7 +48,7 @@
         </div>
 
         <div
-          class="mt-2 ml-11 flex justify-between gap-3 text-xs text-tertiary/80 leading-[160%]"
+          class="mt-2 ml-11 flex justify-between gap-1 sm:gap-3 text-xs text-tertiary/80 leading-[160%]"
         >
           <div class="w-full flex justify-center">22</div>
 
@@ -64,7 +66,9 @@
         </div>
       </div>
 
-      <div class="my-4 flex gap-5 sm:gap-10 items-center">
+      <div
+        class="my-4 flex gap-5 sm:gap-10 sm:items-center flex-col @xs:flex-row"
+      >
         <div class="flex gap-1.5 items-center">
           <div
             class="w-3.5 h-3.5 bg-secondary/40 rounded-sm cursor-pointer"

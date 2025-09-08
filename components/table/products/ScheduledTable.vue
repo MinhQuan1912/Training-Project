@@ -23,7 +23,7 @@
                 <NuxtLink
                   to=""
                   class="flex items-center gap-1 py-1 pl-1 pr-1.5 border-[1.5px] border-solid border-transparent group-hover/button:border-stroke rounded-md group-hover/button:text-primary/80"
-                  @click="handleModalEdit(item)"
+                  @click.stop="handleModalEdit(item)"
                 >
                   <icons-edit />
                   <div class="text-xs lg:text-sm font-semibold">Edit</div>
@@ -34,7 +34,7 @@
                 <NuxtLink
                   to="#"
                   class="flex items-center gap-1 py-1 pl-1 pr-1.5 border-[1.5px] border-solid border-transparent group-hover/button:border-stroke rounded-md group-hover/button:text-primary/80"
-                  @click="handleModalDelete(item)"
+                  @click.stop="handleModalDelete(item)"
                 >
                   <icons-trash />
                   <div class="text-xs lg:text-sm font-semibold">Delete</div>
@@ -128,7 +128,7 @@
             product?
           </h3>
           <button
-            @click="handleDeleteProduct(item)"
+            @click.stop="handleDeleteProduct(item)"
             data-modal-hide="popup-modal"
             type="button"
             class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-xs lg:text-sm inline-flex items-center px-5 py-2.5 text-center cursor-pointer"
@@ -166,7 +166,7 @@
           </h3>
           <button
             type="button"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs lg:text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs lg:text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
             data-modal-toggle="crud-modal"
             @click="handleModalEdit(item)"
           >
@@ -240,7 +240,7 @@
           <button
             @click="handleSaveProduct()"
             type="submit"
-            class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs lg:text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs lg:text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer"
           >
             <svg
               class="me-1 -ms-1 w-5 h-5"
@@ -284,9 +284,9 @@ const columns = [
   {
     slot: "scheduledFor",
     label: "Scheduled for",
-    headerClass: "w-1/4",
+    headerClass: "w-1/4 min-w-30.75",
     cellClass:
-      "w-1/4 text-secondary rounded-r-2xl whitespace-nowrap text-sm sm:text-base",
+      "w-1/4 min-w-30.75 text-secondary rounded-r-2xl whitespace-nowrap text-sm sm:text-base",
   },
 ];
 

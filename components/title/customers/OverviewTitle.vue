@@ -1,16 +1,18 @@
 <template>
   <div class="container">
-    <div class="flex w-full items-center h-12 justify-between">
+    <div class="flex w-full items-center h-12 justify-between @container">
       <div class="text-xl font-semibold leading-[145%] text-primary px-5">
         Overview
       </div>
 
       <div class="flex gap-3">
-        <div class="p-3 border-[1.5px] border-solid border-stroke rounded-full">
+        <div
+          class="p-3 border-[1.5px] border-solid border-stroke rounded-full hidden @xs:block"
+        >
           <icons-calendar />
         </div>
 
-        <div class="hidden sm:block">
+        <div class="hidden @sm:block">
           <select-dropdown
             v-model:selected-option="selectedOption"
             :data="options"
