@@ -40,7 +40,7 @@
 
       <div
         :class="[
-          'transition-all ml-18 duration-500 ease-in-out',
+          'transition-all ml-18 duration-1000 ease-in-out',
           item.activeIndex === true
             ? 'max-h-100 opacity-100 visible'
             : 'max-h-0 opacity-0 invisible',
@@ -810,11 +810,10 @@ const commentsFilter = computed(() => {
 
   if (!props.search) {
     return comments.value;
-  } else {
-    return comments.value.filter(function (comment) {
-      return comment.titleComment.toLowerCase().includes(key);
-    });
   }
+  comments.value.filter(function (comment) {
+    return comment.titleComment.toLowerCase().includes(key);
+  });
 });
 
 // const handleSearch = () => {
