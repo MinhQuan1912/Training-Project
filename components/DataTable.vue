@@ -3,7 +3,7 @@
     <table class="table-auto w-full overflow-x-auto">
       <thead>
         <tr :class="classTableTr.header" @click="toggleAllChecked">
-          <th class="">
+          <th :class="classTableTr.thInput">
             <input
               type="checkbox"
               id="myCheckbox"
@@ -39,11 +39,11 @@
           @mouseenter.stop="$emit('row-click', itemIndex)"
           @mouseleave.stop="$emit('row-click', itemIndex)"
         >
-          <td class="rounded-l-2xl">
+          <td :class="classTableTr.tdInput">
             <input
               type="checkbox"
               :id="'checkbox-' + itemIndex"
-              class="original-checkbox group-hover:border-tertiary"
+              class="original-checkbox group-hover:border-red-700"
               v-model="item.checked"
               :value="item"
             />
