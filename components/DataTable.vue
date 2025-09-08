@@ -1,7 +1,7 @@
 <template>
   <div class="overflow-x-auto overflow-y-hidden" :class="classTableTr.padding">
     <table class="table-auto w-full overflow-x-auto">
-      <thead>
+      <thead :class="tHeadClass">
         <tr :class="classTableTr.header" @click="toggleAllChecked">
           <th :class="classTableTr.thInput">
             <input
@@ -24,6 +24,7 @@
           </th>
         </tr>
       </thead>
+      <<<<<<< HEAD
       <tbody>
         <tr
           v-for="(item, itemIndex) in items"
@@ -39,31 +40,50 @@
           @mouseenter="hoverEnterIndex(itemIndex)"
           @mouseleave="hoverLeaveIndex(itemIndex)"
         >
-          <td :class="classTableTr.tdInput">
-            <input
-              type="checkbox"
-              :id="'checkbox-' + itemIndex"
-              class="original-checkbox group-hover:border-red-700"
-              v-model="item.checked"
-              :value="item"
-            />
-            <label
-              :for="'checkbox-' + itemIndex"
-              class="custom-checkbox group-hover:border-tertiary"
+          =======
+          <tbody :class="tBodyClass">
+            <tr
+              v-for="(item, itemIndex) in items"
+              v-if="items.length > 0"
+              :key="itemIndex"
+              class="group"
+              :class="[
+                classTableTr.body,
+                { 'bg-background-pop rounded-2xl': item.checked === true },
+              ]"
+              :index="itemIndex"
               @click="toggleCheckedItem(item)"
-            ></label>
-          </td>
-          <td
-            v-for="(column, columIndex) in columns"
-            :key="columIndex"
-            :class="column.cellClass"
-            :colspan="column.colspan"
-          >
-            <slot :name="`column-${column.slot}`" :item="item"> </slot>
-          </td>
-        </tr>
-        <tr v-else class="text-primary text-center">
-          Không có dữ liệu.
+              @mouseenter.stop="$emit('row-click', itemIndex)"
+              @mouseleave.stop="$emit('row-click', itemIndex)"
+            >
+              >>>>>>> ce5d550e421ea3dd9305467b820eb8da0809e0a8
+              <td :class="classTableTr.tdInput">
+                <input
+                  type="checkbox"
+                  :id="'checkbox-' + itemIndex"
+                  class="original-checkbox group-hover:border-red-700"
+                  v-model="item.checked"
+                  :value="item"
+                />
+                <label
+                  :for="'checkbox-' + itemIndex"
+                  class="custom-checkbox group-hover:border-tertiary"
+                  @click="toggleCheckedItem(item)"
+                ></label>
+              </td>
+              <td
+                v-for="(column, columIndex) in columns"
+                :key="columIndex"
+                :class="column.cellClass"
+                :colspan="column.colspan"
+              >
+                <slot :name="`column-${column.slot}`" :item="item"> </slot>
+              </td>
+            </tr>
+            <tr v-else class="text-primary text-center">
+              Không có dữ liệu.
+            </tr>
+          </tbody>
         </tr>
       </tbody>
     </table>
@@ -89,6 +109,14 @@ const props = defineProps({
       header: "",
       body: "",
     }),
+  },
+  tBodyClass: {
+    type: String,
+    default: "",
+  },
+  tHeadClass: {
+    type: String,
+    default: "",
   },
   hoverEnterIndex: {
     type: Function,
