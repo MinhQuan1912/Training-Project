@@ -60,7 +60,8 @@
       <div class="product-overview !gap-3 w-full m:w-78 3xl:w-135 h-76">
         <h6 class="h-12 xs:px-3 py-2.5 text-base xs:text-xl leading-[145%] text-primary font-semibold">
           Product Views
-        </h6>
+        </h6> 
+          
       </div>
     </div>
     <!-- Products -->

@@ -207,7 +207,7 @@
                                 <div class="promo-button"></div>
                             </div>
                         </div>
-                        <div class="hidden" :class="{ '!block': activePromo }">
+                        <div class="opacity-0" :class="{ 'opacity-100': activePromo }">
                             <select-dropdown :data="promoList" v-model:selected-option="selectedPromo"
                                 addition-class="h-12" text-class="text-secondary" :class="{ 'block': activePromo }" />
                         </div>
