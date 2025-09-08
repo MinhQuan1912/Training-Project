@@ -2,7 +2,7 @@
   <div class="pb-8 px-4 overflow-x-auto overflow-y-hidden">
     <table class="table-auto w-full overflow-x-auto">
       <thead>
-        <tr :class="classTableTr.header">
+        <tr :class="classTableTr.header" @click="toggleAllChecked">
           <th class="">
             <input
               type="checkbox"
@@ -29,23 +29,28 @@
           v-for="(item, itemIndex) in items"
           v-if="items.length > 0"
           :key="itemIndex"
+          class="group"
           :class="[
             classTableTr.body,
             { 'bg-background-pop rounded-2xl': item.checked === true },
           ]"
           :index="itemIndex"
+          @click="toggleCheckedItem(item)"
+          @mouseenter.stop="$emit('row-click', itemIndex)"
+          @mouseleave.stop="$emit('row-click', itemIndex)"
         >
           <td class="rounded-l-2xl">
             <input
               type="checkbox"
               :id="'checkbox-' + itemIndex"
-              class="original-checkbox"
+              class="original-checkbox group-hover:border-tertiary"
               v-model="item.checked"
               :value="item"
             />
             <label
               :for="'checkbox-' + itemIndex"
-              class="custom-checkbox"
+              class="custom-checkbox group-hover:border-tertiary"
+              @click="toggleCheckedItem(item)"
             ></label>
           </td>
           <td
@@ -53,7 +58,6 @@
             :key="columIndex"
             :class="column.cellClass"
             :colspan="column.colspan"
-            @click="$emit('row-click', itemIndex)"
           >
             <slot :name="`column-${column.slot}`" :item="item"> </slot>
           </td>
@@ -97,6 +101,10 @@ const toggleAllChecked = () => {
   });
 };
 
+const toggleCheckedItem = (item) => {
+  item.checked = !item.checked;
+};
+
 watch(
   () => props.items,
   () => {
@@ -117,7 +125,6 @@ watch(
   width: 24px;
   height: 24px;
   border: 2px solid #282828;
-  background-color: #222222;
   cursor: pointer;
   position: relative;
   border-radius: 6px;

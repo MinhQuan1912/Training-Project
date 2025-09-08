@@ -26,7 +26,7 @@
                   @click.stop="handleModalEdit(item)"
                 >
                   <icons-edit />
-                  <div class="text-xs lg:text-sm font-semibold">Edit</div>
+                  <div class="text-sm font-semibold">Edit</div>
                 </NuxtLink>
               </div>
 
@@ -37,7 +37,7 @@
                   @click.stop="handleModalDelete(item)"
                 >
                   <icons-trash />
-                  <div class="text-xs lg:text-sm font-semibold">Delete</div>
+                  <div class="text-sm font-semibold">Delete</div>
                 </NuxtLink>
               </div>
 
@@ -47,7 +47,7 @@
                   class="flex items-center gap-1 py-1 pl-1 pr-1.5 border-[1.5px] border-solid border-transparent group-hover/button:border-stroke rounded-md group-hover/button:text-primary/80"
                 >
                   <icons-calendar-check />
-                  <div class="text-xs lg:text-sm font-semibold">Reschedule</div>
+                  <div class="text-sm font-semibold">Reschedule</div>
                 </NuxtLink>
               </div>
             </div>
@@ -378,13 +378,14 @@ const props = defineProps({
 
 const schedulesFilter = computed(() => {
   const query = props.search.toLowerCase();
+
   if (!props.search) {
     return schedules.value;
-  } else {
-    return schedules.value.filter(function (schedule) {
-      return schedule.product.toLowerCase().includes(query);
-    });
   }
+
+  schedules.value.filter(function (schedule) {
+    return schedule.product.toLowerCase().includes(query);
+  });
 });
 
 // them sua xoa
