@@ -40,67 +40,67 @@
 
       <div
         :class="[
-          'transition-all ml-18 duration-1000 ease-in-out',
-          item.activeIndex === true
-            ? 'max-h-100 opacity-100 visible'
-            : 'max-h-0 opacity-0 invisible',
+          'grid transition-[grid-template-rows] ml-18 duration-500 ease-in-out',
+          item.activeIndex === true ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
         ]"
       >
-        <div class="flex gap-4 mt-4.5">
-          <div class="w-8 h-8 rounded-full flex flex-none">
-            <img
-              :src="item.imgAnswer"
-              alt=""
-              class="w-full h-full rounded-full object-cover"
-            />
-          </div>
-
-          <div>
-            <div class="flex items-center gap-3">
-              <div class="font-semibold text-primary">
-                {{ item.titleAnswer }}
-              </div>
-              <div class="flex gap-2 items-center">
-                <div class="text-secondary text-xs lg:text-sm">
-                  {{ item.instaAnswer }}
-                </div>
-                <icons-status_indicator />
-                <div class="text-secondary text-xs lg:text-sm">
-                  {{ item.timeAnswer }}
-                </div>
-              </div>
+        <div class="overflow-hidden">
+          <div class="flex gap-4 mt-4.5">
+            <div class="w-8 h-8 rounded-full flex flex-none">
+              <img
+                :src="item.imgAnswer"
+                alt=""
+                class="w-full h-full rounded-full object-cover"
+              />
             </div>
 
-            <div class="text-primary/80">
-              {{ item.contentAnswer }}
-            </div>
+            <div>
+              <div class="flex items-center gap-3">
+                <div class="font-semibold text-primary">
+                  {{ item.titleAnswer }}
+                </div>
+                <div class="flex gap-2 items-center">
+                  <div class="text-secondary text-xs lg:text-sm">
+                    {{ item.instaAnswer }}
+                  </div>
+                  <icons-status_indicator />
+                  <div class="text-secondary text-xs lg:text-sm">
+                    {{ item.timeAnswer }}
+                  </div>
+                </div>
+              </div>
 
-            <div class="flex gap-5 items-center text-secondary mt-2">
-              <NuxtLink
-                to="#"
-                class="flex items-center gap-1 py-1 pr-1.5 hover:text-primary/80"
-                @click.stop="handleModalEditComment(item)"
-              >
-                <icons-edit />
-                <div class="text-xs lg:text-sm font-semibold">Reply</div>
-              </NuxtLink>
+              <div class="text-primary/80">
+                {{ item.contentAnswer }}
+              </div>
 
-              <NuxtLink
-                to="#"
-                class="flex items-center gap-1 py-1 pl-1 pr-1.5 hover:text-primary/80"
-              >
-                <icons-heart />
-                <div class="text-xs lg:text-sm font-semibold">Like</div>
-              </NuxtLink>
+              <div class="flex gap-5 items-center text-secondary mt-2">
+                <NuxtLink
+                  to="#"
+                  class="flex items-center gap-1 py-1 pr-1.5 hover:text-primary/80"
+                  @click.stop="handleModalEditComment(item)"
+                >
+                  <icons-edit />
+                  <div class="text-xs lg:text-sm font-semibold">Reply</div>
+                </NuxtLink>
 
-              <NuxtLink
-                @click.stop="handleModalDeleteComment(item)"
-                to="#"
-                class="flex items-center gap-1 py-1 pl-1 pr-1.5 hover:text-primary/80"
-              >
-                <icons-trash />
-                <div class="text-xs lg:text-sm font-semibold">Remove</div>
-              </NuxtLink>
+                <NuxtLink
+                  to="#"
+                  class="flex items-center gap-1 py-1 pl-1 pr-1.5 hover:text-primary/80"
+                >
+                  <icons-heart />
+                  <div class="text-xs lg:text-sm font-semibold">Like</div>
+                </NuxtLink>
+
+                <NuxtLink
+                  @click.stop="handleModalDeleteComment(item)"
+                  to="#"
+                  class="flex items-center gap-1 py-1 pl-1 pr-1.5 hover:text-primary/80"
+                >
+                  <icons-trash />
+                  <div class="text-xs lg:text-sm font-semibold">Remove</div>
+                </NuxtLink>
+              </div>
             </div>
           </div>
         </div>
@@ -108,7 +108,7 @@
     </template>
 
     <template v-slot:column-product="{ item, index }">
-      <div class="flex items-center">
+      <div class="flex items-center relative">
         <div class="grid transition-all">
           <div
             class="hidden lg:flex gap-5 items-center text-secondary mt-2"
@@ -163,12 +163,12 @@
           </div>
         </div>
       </div>
-    </template>
 
-    <div
-      class="w-2 h-2 rounded-full flex-none absolute top-4 right-4"
-      :class="{ 'bg-primary-02': item.on === true }"
-    ></div>
+      <div
+        class="w-2 h-2 rounded-full flex-none absolute top-4 right-4"
+        :class="{ 'bg-primary-02': item.on === true }"
+      ></div>
+    </template>
   </DataTable>
 
   <div
@@ -625,6 +625,8 @@ const columns = [
 const classTableTr = {
   header: "text-left flex items-center text-tertiary text-xs p-4",
   body: "bottomHover flex items-center p-4 relative group hover:bg-background-pop w-full hover:rounded-2xl border-[1.5px] border-solid border-t-stroke-subtle border-b-transparent border-x-transparent hover:border-primary/7.5",
+  thInput: "",
+  tdInput: "rounded-2xl",
 };
 
 const comments = ref([
