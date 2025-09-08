@@ -1,5 +1,5 @@
 <template>
-  <div class="p-3 flex flex-col gap-3 bg-background-02 rounded-4xl">
+  <div class="p-3 flex flex-col gap-3 bg-background-02 rounded-4xl @container">
     <div class="h-12 mx-5 text-xl font-semibold text-primary flex items-center">
       Share products
     </div>
@@ -46,27 +46,27 @@
         Start earning now! 🔥
       </p>
 
-      <div class="flex gap-3 justify-between">
+      <div class="grid gap-3 grid-cols-2 @xs:grid-cols-4">
         <div
-          class="w-1/4 py-3 px-3 sm:px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full cursor-pointer"
+          class="py-3 px-3 sm:px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full cursor-pointer"
         >
           <icons-x-twitter1 />
         </div>
 
         <div
-          class="w-1/4 py-3 px-3 sm:px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full cursor-pointer"
+          class="py-3 px-3 sm:px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full cursor-pointer"
         >
           <icons-facebook1 />
         </div>
 
         <div
-          class="w-1/4 py-3 px-3 sm:px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full cursor-pointer"
+          class="py-3 px-3 sm:px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full cursor-pointer"
         >
           <icons-instalgram1 />
         </div>
 
         <div
-          class="w-1/4 py-3 px-3 sm:px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full cursor-pointer"
+          class="py-3 px-3 sm:px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full cursor-pointer"
         >
           <icons-threads />
         </div>

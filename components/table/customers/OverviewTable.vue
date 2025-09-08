@@ -135,7 +135,7 @@
       </div>
     </div>
 
-    <div class="mt-5.5 flex flex-col gap-6">
+    <div class="mt-5.5 flex flex-col gap-6 @container">
       <div class="flex justify-between">
         <div class="flex flex-col gap-1">
           <div class="flex gap-3 items-center">
@@ -158,13 +158,13 @@
         <div class="p-3.5 w-6 h-6"></div>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8">
+      <div class="grid grid-cols-2 @xs:grid-cols-4 @2xl:grid-cols-8">
         <div
           class="py-4 px-3 sm:py-8 sm:px-6 flex flex-col gap-4 items-center"
           v-for="(newCustomer, index) in newCustomers"
           :key="index"
           :class="{
-            'hidden xl:flex': newCustomers.length - 4 <= index,
+            'hidden @2xl:flex': newCustomers.length - 4 <= index,
           }"
         >
           <div class="w-16 h-16">

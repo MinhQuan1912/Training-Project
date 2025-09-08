@@ -66,19 +66,19 @@
 </template>
 
 <script setup lang="ts">
-import { useFormatNumber } from '~/composable/useFormatNumber'
+import { useFormatNumber } from "~/composable/useFormatNumber";
 
 type activityCol = {
-    value: number,
-    growthRate?: number
-}
+  value: number;
+  growthRate?: number;
+};
 type activityRow = {
-    week: string,
-    product: activityCol,
-    view: activityCol,
-    like: activityCol,
-    comment: activityCol
-}
+  week: string;
+  product: activityCol;
+  view: activityCol;
+  like: activityCol;
+  comment: activityCol;
+};
 const productActivityList = ref<activityRow[]>([
     {
         week: '13 Jan - 20 Jan',
@@ -124,34 +124,41 @@ const productActivityList = ref<activityRow[]>([
 ])
 const { formatNum } = useFormatNumber()
 const options = computed(() => {
-    const opt = []
-    for (let i = 1; i <= productActivityList.value.length; i++) {
-        opt.push(`Last ${i} week`)
-    }
-    return opt
-})
-const selectedOption = ref<string>(options.value[1] || '')
+  const opt = [];
+  for (let i = 1; i <= productActivityList.value.length; i++) {
+    opt.push(`Last ${i} week`);
+  }
+  return opt;
+});
+const selectedOption = ref<string>(options.value[1] || "");
 const filterActivities = computed(() => {
-    const week = parseInt(selectedOption.value.match(/\d+/)?.[0] || '1')
-    const filterList = productActivityList.value.slice(-week)
-    return filterList
-})
+  const week = parseInt(selectedOption.value.match(/\d+/)?.[0] || "1");
+  const filterList = productActivityList.value.slice(-week);
+  return filterList;
+});
 watchEffect(() => {
-    productActivityList.value.forEach((item, index, arr) => {
-        if (index === 0) return
-        const prev = arr[index - 1]
-        const calcGrowthRate = (currVal: number, prevVal: number) => {
-            return prevVal === 0 ? 0 : Math.round(((currVal - prevVal) / prevVal) * 100)
-        }
-        if (prev) {
-            item.product.growthRate = calcGrowthRate(item.product.value, prev.product.value)
-            item.view.growthRate = calcGrowthRate(item.view.value, prev.view.value)
-            item.like.growthRate = calcGrowthRate(item.like.value, prev.like.value)
-            item.comment.growthRate = calcGrowthRate(item.comment.value, prev.comment.value)
-        }
-    })
-    
-})
+  productActivityList.value.forEach((item, index, arr) => {
+    if (index === 0) return;
+    const prev = arr[index - 1];
+    const calcGrowthRate = (currVal: number, prevVal: number) => {
+      return prevVal === 0
+        ? 0
+        : Math.round(((currVal - prevVal) / prevVal) * 100);
+    };
+    if (prev) {
+      item.product.growthRate = calcGrowthRate(
+        item.product.value,
+        prev.product.value
+      );
+      item.view.growthRate = calcGrowthRate(item.view.value, prev.view.value);
+      item.like.growthRate = calcGrowthRate(item.like.value, prev.like.value);
+      item.comment.growthRate = calcGrowthRate(
+        item.comment.value,
+        prev.comment.value
+      );
+    }
+  });
+});
 </script>
 
 <style lang="scss" scoped></style>
