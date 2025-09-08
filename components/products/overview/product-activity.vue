@@ -63,11 +63,12 @@
         </table>
     </div> -->
   <data-table :items="filterActivities" :columns="columns" :class-table-tr="{
-    header: 'py-5 h-14',
-    body: 'h-17 border-t border-stroke-subtle w-full',
+    padding: 'px-5 pt-4',
+    header: 'flex gap-6 justify-between items-center',
+    body: 'flex gap-6 border-t border-stroke-subtle w-full',
     thInput: 'hidden',
     tdInput: 'hidden'
-  }">
+  }" t-body-class="block overflow-y-auto max-h-34" t-head-class="block">
     <!-- Week -->
     <template #column-week="{ item }">
       <div class="text-primary text-sm leading-[150%]">
@@ -135,32 +136,32 @@ const columns = [
   {
     label: "Week",
     slot: "week",
-    headerClass: "w-48.5 text-left text-xs leading-[160%] text-tertiary",
-    cellClass: " min-w-28",
+    headerClass: "min-w-28 flex-1 py-5 text-left text-xs leading-[160%] text-tertiary",
+    cellClass: "min-w-28 py-4 flex-1 flex items-center",
   },
   {
     label: "Products",
     slot: "products",
-    headerClass: "w-48.5 text-left text-xs leading-[160%] text-tertiary",
-    cellClass: "",
+    headerClass: "flex-1 py-5 text-left text-xs leading-[160%] text-tertiary",
+    cellClass: "py-4 flex-1 flex items-center",
   },
   {
     label: "Views",
     slot: "views",
-    headerClass: "w-48.5 text-left text-xs leading-[160%] text-tertiary",
-    cellClass: "",
+    headerClass: "flex-1 py-5 text-left text-xs leading-[160%] text-tertiary",
+    cellClass: "py-4 flex-1 flex items-center",
   },
   {
     label: "Likes",
     slot: "likes",
-    headerClass: "w-48.5 text-left text-xs leading-[160%] text-tertiary",
-    cellClass: "",
+    headerClass: "flex-1 py-5 text-left text-xs leading-[160%] text-tertiary",
+    cellClass: "py-4 flex-1 flex items-center",
   },
   {
     label: "Comments",
     slot: "comments",
     headerClass:
-      "min-w-48.5 text-left text-xs leading-[160%] text-tertiary hidden 2xl:table-cell",
+      "flex-1 py-5 text-left text-xs leading-[160%] text-tertiary hidden 2xl:table-cell",
     cellClass: "py-4 flex-1 hidden 2xl:table-cell items-center",
   },
 ];

@@ -160,6 +160,7 @@
       </table>
     </div> -->
     <data-table :items="searchResult" :columns="columns" :classTableTr="{
+      padding: 'pb-8 px-4',
       header: 'text-xs text-tertiary opacity-80 h-16.75 px-4',
       body: 'h-24 hover:bg-background-highlight transition-all duration-200 ease px-4 group/setting',
       thInput: 'min-w-10 text-right',
