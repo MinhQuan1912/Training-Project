@@ -1,12 +1,12 @@
 <template>
-    <div class="flex items-center justify-between h-12">
-        <h6 class="xs:px-5 flex items-center xs:text-xl leading-[145%] font-semibold text-primary">
-            Product activity
-        </h6>
-        <select-dropdown v-model:selected-option="selectedOption" :data="options"
-            addition-class="w-40 h-12 !pr-0 xs:!pr-3" text-class="text-secondary" />
-    </div>
-    <div class="xs:px-5 sm:pt-4 overflow-x-auto min-w-full">
+  <div class="flex items-center justify-between h-12">
+    <h6 class="xs:px-5 flex items-center xs:text-xl leading-[145%] font-semibold text-primary">
+      Product activity
+    </h6>
+    <select-dropdown v-model:selected-option="selectedOption" :data="options" addition-class="w-40 h-12 !pr-0 xs:!pr-3"
+      text-class="text-secondary" />
+  </div>
+  <!-- <div class="xs:px-5 sm:pt-4 overflow-x-auto min-w-full">
         <table class="w-full text-sm leading-[150%] text-primary">
             <thead class="block ">
                 <tr class="text-xs leading-[160%] text-tertiary flex gap-6">
@@ -20,9 +20,9 @@
             <tbody class="block overflow-y-auto max-h-34 min-w-150 overflow-x-auto">
                 <tr v-for="(item, idx) in filterActivities" :key="idx"
                     class="flex gap-6 h-17 border-t border-stroke-subtle w-full">
-                    <!-- Week -->
+                   
                     <td class="py-4 flex-1 flex items-center">{{ item.week }}</td>
-                    <!-- Product -->
+                    
                     <td class="py-4 flex-1 flex items-center">
                         <div class="flex items-center gap-2">
                             {{ formatNum(item.product.value) }}
@@ -31,7 +31,7 @@
                             </span>
                         </div>
                     </td>
-                    <!-- View -->
+                    
                     <td class="py-4 flex-1 flex items-center">
                         <div class="flex items-center gap-2">
                             {{ formatNum(item.view.value) }}
@@ -40,7 +40,7 @@
                             </span>
                         </div>
                     </td>
-                    <!-- Like -->
+                   
                     <td class="py-4 flex-1 flex items-center    ">
                         <div class="flex items-center gap-2">
                             {{ item.like.value }}
@@ -49,7 +49,7 @@
                             </span>
                         </div>
                     </td>
-                    <!-- Comment -->
+                    
                     <td class="py-4 hidden 2xl:table-cell flex-1">
                         <div class="flex items-center gap-2">
                             {{ item.comment.value }}
@@ -61,8 +61,60 @@
                 </tr>
             </tbody>
         </table>
+    </div> -->
+  <data-table :items="filterActivities" :columns="columns" :class-table-tr="{
+    header: 'py-5 h-14',
+    body: 'h-17 border-t border-stroke-subtle w-full',
+    thInput: 'hidden',
+    tdInput: 'hidden'
+  }">
+    <!-- Week -->
+    <template #column-week="{ item }">
+      <div class="text-primary text-sm leading-[150%]">
+        {{ item.week }}
+      </div>
+    </template>
 
-    </div>
+    <!-- Products -->
+    <template #column-products="{ item }">
+      <div class="flex items-center gap-2 text-primary text-sm leading-[150%]">
+        {{ formatNum(item.product.value) }}
+        <span v-if="item.product.growthRate">
+          <badge-trend :growth-rate="item.product.growthRate" />
+        </span>
+      </div>
+    </template>
+
+    <!-- Views -->
+    <template #column-views="{ item }">
+      <div class="flex items-center gap-2 text-primary text-sm leading-[150%]">
+        {{ formatNum(item.view.value) }}
+        <span v-if="item.view.growthRate">
+          <badge-trend :growth-rate="item.view.growthRate" />
+        </span>
+      </div>
+    </template>
+
+    <!-- Likes -->
+    <template #column-likes="{ item }">
+      <div class="flex items-center gap-2 text-primary text-sm leading-[150%]">
+        {{ item.like.value }}
+        <span v-if="item.like.growthRate">
+          <badge-trend :growth-rate="item.like.growthRate" />
+        </span>
+      </div>
+    </template>
+
+    <!-- Comments -->
+    <template #column-comments="{ item }">
+      <div class="flex items-center gap-2 text-primary text-sm leading-[150%]">
+        {{ item.comment.value }}
+        <span v-if="item.comment.growthRate">
+          <badge-trend :growth-rate="item.comment.growthRate" />
+        </span>
+      </div>
+    </template>
+  </data-table>
 </template>
 
 <script setup lang="ts">
@@ -79,47 +131,80 @@ type activityRow = {
   like: activityCol;
   comment: activityCol;
 };
+const columns = [
+  {
+    label: "Week",
+    slot: "week",
+    headerClass: "w-48.5 text-left text-xs leading-[160%] text-tertiary",
+    cellClass: " min-w-28",
+  },
+  {
+    label: "Products",
+    slot: "products",
+    headerClass: "w-48.5 text-left text-xs leading-[160%] text-tertiary",
+    cellClass: "",
+  },
+  {
+    label: "Views",
+    slot: "views",
+    headerClass: "w-48.5 text-left text-xs leading-[160%] text-tertiary",
+    cellClass: "",
+  },
+  {
+    label: "Likes",
+    slot: "likes",
+    headerClass: "w-48.5 text-left text-xs leading-[160%] text-tertiary",
+    cellClass: "",
+  },
+  {
+    label: "Comments",
+    slot: "comments",
+    headerClass:
+      "min-w-48.5 text-left text-xs leading-[160%] text-tertiary hidden 2xl:table-cell",
+    cellClass: "py-4 flex-1 hidden 2xl:table-cell items-center",
+  },
+];
 const productActivityList = ref<activityRow[]>([
-    {
-        week: '13 Jan - 20 Jan',
-        product: {
-            value: 24394,
-            growthRate: 12
-        },
-        view: {
-            value: 32193,
-            growthRate: -23
-        },
-        like: {
-            value: 48,
-            growthRate: 51
-        },
-        comment: {
-            value: 16,
-            growthRate: -21
-        }
+  {
+    week: '13 Jan - 20 Jan',
+    product: {
+      value: 24394,
+      growthRate: 12
     },
-    {
-        week: '20 Jan - 27 Jan',
-        product: { value: 40924 },
-        view: { value: 15694 },
-        like: { value: 64 },
-        comment: { value: 32 }
+    view: {
+      value: 32193,
+      growthRate: -23
     },
-    {
-        week: '27 Jan - 03 Feb',
-        product: { value: 14930 },
-        view: { value: 2943 },
-        like: { value: 134 },
-        comment: { value: 71 }
+    like: {
+      value: 48,
+      growthRate: 51
     },
-    {
-        week: '03 Feb - 10 Feb',
-        product: { value: 64930 },
-        view: { value: 16940 },
-        like: { value: 64 },
-        comment: { value: 71 }
+    comment: {
+      value: 16,
+      growthRate: -21
     }
+  },
+  {
+    week: '20 Jan - 27 Jan',
+    product: { value: 40924 },
+    view: { value: 15694 },
+    like: { value: 64 },
+    comment: { value: 32 }
+  },
+  {
+    week: '27 Jan - 03 Feb',
+    product: { value: 14930 },
+    view: { value: 2943 },
+    like: { value: 134 },
+    comment: { value: 71 }
+  },
+  {
+    week: '03 Feb - 10 Feb',
+    product: { value: 64930 },
+    view: { value: 16940 },
+    like: { value: 64 },
+    comment: { value: 71 }
+  }
 
 ])
 const { formatNum } = useFormatNumber()

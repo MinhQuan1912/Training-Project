@@ -162,6 +162,8 @@
     <data-table :items="searchResult" :columns="columns" :classTableTr="{
       header: 'text-xs text-tertiary opacity-80 h-16.75 px-4',
       body: 'h-24 hover:bg-background-highlight transition-all duration-200 ease px-4 group/setting',
+      thInput: 'min-w-10 text-right',
+      tdInput: 'rounded-2xl w-10 text-right'
     }">
       <!-- Product -->
       <template #column-product="{ item }">
@@ -270,8 +272,8 @@ const columns = [
   { label: "Status", slot: "status", headerClass: "text-left min-w-26 w-50" },
   { label: "Price", slot: "price", headerClass: "text-left min-w-21 w-45" },
   { label: "Sales", slot: "sales", headerClass: "text-left min-w-42 w-66" },
-  { label: "Views", slot: "views", headerClass: "text-left min-w-24 w-54" },
-  { label: "Likes", slot: "likes", headerClass: "text-left hidden xl:table-cell w-24" },
+  { label: "Views", slot: "views", headerClass: "text-left min-w-24 w-54", cellClass: "rounded-r-2xl" },
+  { label: "Likes", slot: "likes", headerClass: "text-left hidden xl:table-cell w-24", cellClass: "rounded-r-2xl" },
 ];
 
 const productList = ref<productList[]>([
