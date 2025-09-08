@@ -46,6 +46,10 @@ const searchScheduled = computed({
     emit("update:modelValue", value);
   },
 });
+
+const options = ref(["Option 1", "Option 2"]);
+
+const selectedOption = ref(options.value[0]);
 </script>
 
 <style lang="scss" scoped></style>

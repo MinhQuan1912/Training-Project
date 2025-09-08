@@ -36,8 +36,8 @@
           ]"
           :index="itemIndex"
           @click="toggleCheckedItem(item)"
-          @mouseenter.stop="$emit('row-click', itemIndex)"
-          @mouseleave.stop="$emit('row-click', itemIndex)"
+          @mouseenter="hoverEnterIndex(itemIndex)"
+          @mouseleave="hoverLeaveIndex(itemIndex)"
         >
           <td :class="classTableTr.tdInput">
             <input
@@ -89,6 +89,14 @@ const props = defineProps({
       header: "",
       body: "",
     }),
+  },
+  hoverEnterIndex: {
+    type: Function,
+    required: false,
+  },
+  hoverLeaveIndex: {
+    type: Function,
+    required: false,
   },
 });
 
