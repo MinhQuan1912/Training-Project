@@ -118,7 +118,7 @@ const productActivityList = ref<activityRow[]>([
         product: { value: 64930 },
         view: { value: 16940 },
         like: { value: 64 },
-        comment: { value: 51 }
+        comment: { value: 71 }
     }
 
 ])

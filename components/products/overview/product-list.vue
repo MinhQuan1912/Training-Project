@@ -31,7 +31,7 @@
       </div>
     </div>
     <!-- Table -->
-    <div class="xs:px-4 pb-8 overflow-x-auto min-w-full">
+    <!-- <div class="xs:px-4 pb-8 overflow-x-auto min-w-full">
       <table class="min-w-full text-sm text-primary leading-[150%]">
         <thead>
           <tr class="justify-between items-center gap-6 px-4 text-xs text-tertiary opacity-80 h-16.75">
@@ -51,7 +51,7 @@
         <tbody>
           <tr v-for="product in searchResult" :key="product.id" class="h-24 rounded-xl hover:bg-background-highlight outline outline-solid outline-transparent hover:outline-shade05-50 group
                         transition-all duration-200 ease" @click="handleSelectRow(product.id)">
-            <!-- Product -->
+            
             <td class="rounded-l-xl group/setting">
               <div class="flex gap-5 items-center min-w-75">
                 <input type="checkbox" class="checkbox group-hover:!border-shade05-50" v-model="selectedId"
@@ -80,22 +80,22 @@
                 </div>
               </div>
             </td>
-            <!-- Status -->
+            
             <td class="min-w-26 flex-1">
               <badge-status :status="product.status" class="w-20" />
             </td>
-            <!-- Price -->
+            
             <td class="min-w-21 flex-1">
               <div class="min-w-21 flex-1">${{ product.price.toFixed(2) }}</div>
             </td>
-            <!-- Sales -->
+            
             <td class="min-w-42 flex-1">
               <div class="flex gap-2 items-center">
                 <span>${{ product.sales.value?.toLocaleString('en-US') }}</span>
                 <badge-trend :growth-rate="product.sales.growthRate" />
               </div>
             </td>
-            <!-- Views -->
+            
             <td class="min-w-24 flex-1 ">
               <div class="flex gap-2 items-center">
                 <span>{{ product.views.current ? formatNum(product.views.current) : 0 }}</span>
@@ -106,7 +106,7 @@
                 </div>
               </div>
             </td>
-            <!-- Likes -->
+            
             <td class="w-24 hidden xl:table-cell rounded-r-xl">
               <div class="flex gap-2 items-center">
                 <span>{{ product.likes.current }}</span>
@@ -120,7 +120,87 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
+    <data-table :items="searchResult" :columns="columns" :classTableTr="{
+      header: 'text-xs text-tertiary opacity-80 h-16.75 px-4',
+      body: 'h-24 hover:bg-background-highlight transition-all duration-200 ease px-4 group/setting',
+    }">
+      <!-- Product -->
+      <template #column-product="{ item }">
+        <div class="flex px-5 gap-5 items-center min-w-75">
+          <img :src="item.image" class="h-12 w-12 lg:h-16 lg:w-16 object-contain" />
+          <div class="flex flex-col justify-center relative">
+            <p class="font-semibold text-primary">{{ item.name }}</p>
+            <p class="group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80">{{ item.type }}
+            </p>
+            <div
+              class="hidden group-hover/setting:flex gap-2 h-6 relative -left-1 text-sm leading-[100%] font-semibold text-secondary transition-all duration-200 ease">
+              <button class="setting-button">
+                <icons-edit />
+                <p class="">Edit</p>
+              </button>
+              <button class="setting-button">
+                <icons-trash />
+                <p class="">Delete</p>
+              </button>
+              <button class="setting-button">
+                <icons-share />
+                <p class="">Share</p>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </template>
+
+      <!-- Status  -->
+      <template #column-status="{ item }">
+        <div class="flex items-center">
+          <badge-status :status="item.status" />
+        </div>
+
+      </template>
+
+      <!-- Price -->
+      <template #column-price="{ item }">
+        <div class="text-primary">
+          ${{ item.price.toFixed(2) }}
+        </div>
+      </template>
+
+      <!-- Sales -->
+      <template #column-sales="{ item }">
+        <div class="flex gap-2 items-center">
+          <span class="text-primary">${{ item.sales.value?.toLocaleString('en-US') }}</span>
+          <badge-trend :growth-rate="item.sales.growthRate" />
+        </div>
+      </template>
+
+      <!-- Views -->
+      <template #column-views="{ item }">
+        <div class="flex gap-2 items-center">
+          <span class="text-primary">{{ formatNum(item.views.current) }}</span>
+          <div class="w-8 h-1.5 rounded-xs bg-[#7b7b7b66]">
+            <div class="h-1.5 rounded-xs bg-chart-green"
+              :style="{ width: (item.views.current / item.views.kpi * 100) + '%' }">
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <!-- Likes -->
+
+      <template #column-likes="{ item }">
+        <div class="hidden xl:flex gap-2 items-center ">
+          <span class="text-primary">{{ item.likes.current }}</span>
+          <div class="w-8 h-1.5 rounded-xs bg-[#7b7b7b66]">
+            <div class="h-1.5 rounded-xs bg-chart-green"
+              :style="{ width: (item.likes.current / item.likes.kpi * 100) + '%' }">
+            </div>
+          </div>
+        </div>
+      </template>
+    </data-table>
   </div>
 </template>
 
@@ -151,6 +231,15 @@ type productList = {
   views: productData,
   likes: productData
 }
+const columns = [
+  { label: "Product", slot: "product", headerClass: "text-left min-w-85  px-5" },
+  { label: "Status", slot: "status", headerClass: "text-left min-w-26 w-50" },
+  { label: "Price", slot: "price", headerClass: "text-left min-w-21 w-45" },
+  { label: "Sales", slot: "sales", headerClass: "text-left min-w-42 w-66" },
+  { label: "Views", slot: "views", headerClass: "text-left min-w-24 w-54" },
+  { label: "Likes", slot: "likes", headerClass: "text-left hidden xl:table-cell w-24" },
+];
+
 const productList = ref<productList[]>([
   {
     id: 1,

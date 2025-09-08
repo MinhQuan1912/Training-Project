@@ -6,7 +6,7 @@
             <icons-arrow1 class="text-secondary rotate-0 transition-transform duration-300"
                 :class="{ '!-rotate-180': openOption === true }" />
         </div>
-        <transition name="collapse">
+        <transition name="collapse" mode="out-in">
             <ul v-if="openOption"
                 class="absolute left-0 z-2 flex flex-col w-full border-[1.5px] border-stroke rounded-xl overflow-hidden"
                 :class="{
