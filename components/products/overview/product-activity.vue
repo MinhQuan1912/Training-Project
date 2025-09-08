@@ -147,8 +147,10 @@ watchEffect(() => {
   productActivityList.value.forEach((item, index, arr) => {
     if (index === 0) return;
     const prev = arr[index - 1];
-    const calcGrowthRate = (curr: number, prev: number) => {
-      return prev === 0 ? 0 : Math.round(((curr - prev) / prev) * 100);
+    const calcGrowthRate = (currVal: number, prevVal: number) => {
+      return prevVal === 0
+        ? 0
+        : Math.round(((currVal - prevVal) / prevVal) * 100);
     };
     if (prev) {
       item.product.growthRate = calcGrowthRate(
