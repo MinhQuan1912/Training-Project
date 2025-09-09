@@ -1,9 +1,10 @@
 <template>
   <DataTable
-    :items="commentsFilter"
+    :items="commentsSearch"
     :columns="columns"
     :classTableTr="classTableTr"
-    @row-click="handleRowClick"
+    :hoverEnterIndex="hoverEnterIndex"
+    :hoverLeaveIndex="hoverLeaveIndex"
   >
     <template v-slot:column-comments="{ item, index }">
       <div class="flex items-center">
@@ -610,8 +611,9 @@ const columns = [
   {
     slot: "comments",
     label: "Comments",
-    headerClass: "w-3/5 pl-5 mr-6 min-w-115",
-    cellClass: "w-3/5 pl-5 flex flex-col text-sm lg:text-base mr-6 min-w-115",
+    headerClass: "w-3/5 pl-5 pr-6 min-w-115 group-hover:min-w-full",
+    cellClass:
+      "w-3/5 pl-5 flex flex-col text-sm lg:text-base pr-4 lg:pr-6 min-w-115 max-lg:group-hover:min-w-full",
   },
   {
     slot: "product",
@@ -793,13 +795,7 @@ const comments = ref([
   },
 ]);
 
-const handleRowClick = (index) => {
-  comments.value.forEach((comment, i) => {
-    if (i === index) {
-      comment.activeIndex = !comment.activeIndex;
-    }
-  });
-};
+const hoverRowIndex = (index) => {};
 
 const props = defineProps({
   search: {
@@ -808,24 +804,32 @@ const props = defineProps({
   },
 });
 
-const commentsFilter = computed(() => {
-  const key = props.search.toLowerCase();
+const commentsSearch = computed(() => {
+  const query = props.search.toLowerCase();
 
-  if (!props.search) {
+  if (!query) {
     return comments.value;
   }
-  comments.value.filter(function (comment) {
-    return comment.titleComment.toLowerCase().includes(key);
+  return comments.value.filter((comment) => {
+    return comment.titleComment.toLowerCase().includes(query);
   });
 });
 
+const hoverEnterIndex = (index) => {
+  comments.value[index].activeIndex = true;
+};
+
+const hoverLeaveIndex = (index) => {
+  comments.value[index].activeIndex = false;
+};
+
 // const handleSearch = () => {
-//   const keyword = value.value.trim().toLowerCase();
+//   const keyword = comment.value.trim().toLowerCase();
 //   if (!keyword) {
-//     results.value = data.value;
+//     return comments.value;
 //   } else {
-//     results.value = data.value.filter((item) =>
-//       item.name.toLowerCase().includes(keyword)
+//     comments.value = comments.value.filter((comment) =>
+//       comment.titleComment.toLowerCase().includes(keyword)
 //     );
 //   }
 // };

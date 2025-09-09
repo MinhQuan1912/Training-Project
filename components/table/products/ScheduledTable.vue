@@ -1,6 +1,6 @@
 <template>
   <DataTable
-    :items="schedulesFilter"
+    :items="schedulesSearch"
     :columns="columns"
     :classTableTr="classTableTr"
   >
@@ -377,14 +377,14 @@ const props = defineProps({
   },
 });
 
-const schedulesFilter = computed(() => {
+const schedulesSearch = computed(() => {
   const query = props.search.toLowerCase();
 
-  if (!props.search) {
+  if (!query) {
     return schedules.value;
   }
 
-  schedules.value.filter(function (schedule) {
+  return schedules.value.filter((schedule) => {
     return schedule.product.toLowerCase().includes(query);
   });
 });
