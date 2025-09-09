@@ -611,9 +611,9 @@ const columns = [
   {
     slot: "comments",
     label: "Comments",
-    headerClass: "w-3/5 pl-5 pr-6 min-w-115 group-hover:min-w-full",
+    headerClass: "w-3/5 pl-5 pr-6 min-w-115",
     cellClass:
-      "w-3/5 pl-5 flex flex-col text-sm lg:text-base pr-4 lg:pr-6 min-w-115 max-lg:group-hover:min-w-full",
+      "pl-5 flex flex-col text-sm lg:text-base pr-4 lg:pr-6 w-3/5 min-w-115 max-lg:group-hover:min-w-full",
   },
   {
     slot: "product",

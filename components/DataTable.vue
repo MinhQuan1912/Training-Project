@@ -43,7 +43,7 @@
             <input
               type="checkbox"
               :id="'checkbox-' + itemIndex"
-              class="original-checkbox group-hover:border-red-700"
+              class="original-checkbox group-hover:border-tertiary"
               v-model="item.checked"
               :value="item"
             />

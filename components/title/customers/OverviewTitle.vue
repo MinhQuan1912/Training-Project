@@ -26,6 +26,12 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+
+const options = ref(["Option 1", "Option 2"]);
+
+const selectedOption = ref(options.value[0]);
+</script>
 
 <style lang="scss" scoped></style>
