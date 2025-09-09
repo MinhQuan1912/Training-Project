@@ -1,16 +1,16 @@
 <template>
   <div
-    class="fixed top-0 right-3 left-3 md:right-5 md:left-5 lg:left-22 2xl:left-85 z-10 bg-black flex gap-4 justify-between items-center py-5">
-    <div class="flex justify-between w-full">
-      <h4 class="text-2xl xs:text-[32px] font-semibold text-primary leading-[145%]">
+    class="fixed top-0 right-3 left-3 md:right-5 md:left-5 lg:left-22 2xl:left-85 z-10 bg-black flex gap-4 justify-between items-center py-3 lg:py-5">
+    <div class="flex justify-between w-full items-center">
+      <h4 class="text-2xl lg:text-[32px] font-semibold text-primary leading-[145%]">
         <span v-if="!showCreateProduct">{{ pageTitle }}</span>
         <span v-else>New product</span>
       </h4>
-      <div v-if="showCreateProduct" class="hidden m:flex gap-3">
+      <div v-if="showCreateProduct" class="hidden m:flex gap-3 items-center">
         <button @click="saveDraft"
-          class="h-12 py-3.5 px-7 flex justify-center items-center rounded-full text-[15px] leading-6 text-secondary font-semibold bg-background-02 cursor-pointer">Save
+          class="h-9 lg:h-12 py-3.5 px-7 flex justify-center items-center rounded-full text-[15px] leading-6 text-secondary font-semibold bg-background-02 cursor-pointer">Save
           draft</button>
-        <select-dropdown :data="selectList" v-model:selected-option="selectedOpt" addition-class="addition"
+        <select-dropdown :data="selectList" v-model:selected-option="selectedOpt" addition-class="addition !h-9 lg:!h-12"
           text-class=" font-semibold" />
       </div>
     </div>
@@ -37,7 +37,7 @@
       </div>
     </div>
     <button
-      class="min-w-12 h-12 flex lg:hidden justify-center items-center text-white cursor-pointer bg-background-02 rounded-xl hover:bg-white hover:text-black transition-colors duration-200 ease"
+      class="min-w-9 h-9 lg:min-w-12 lg:h-12 flex lg:hidden justify-center items-center text-white cursor-pointer bg-background-02 rounded-xl hover:bg-white hover:text-black transition-colors duration-200 ease"
       @click="openSideBar">
       <icons-menu-header />
     </button>
@@ -49,11 +49,12 @@ import { useCreateProduct } from '~/composable/useCreateProduct';
 import { useSideBar } from '~/composable/useSideBar';
 const route = useRoute();
 const router = useRouter()
-const previousRoute = ref<string | null>(null)
+
 const pageTitle = computed(() => {
   return route.meta.title;
 });
 const { showCreateProduct } = useCreateProduct()
+const { previousRoute } = useCreateProduct()
 const { showSideBar } = useSideBar()
 const selectList = ref([
   'Publish now',
@@ -64,21 +65,20 @@ const selectList = ref([
 const selectedOpt = ref(selectList.value[0])
 const toCreateProduct = () => {
   previousRoute.value = route.path
-  if (route.path !== '/product') {
-    router.push('/product')
-  }
+  router.push('/product')
   showCreateProduct.value = true
+
 }
 const openSideBar = () => {
   showSideBar.value = true
 }
 const saveDraft = () => {
-  showCreateProduct.value = false
   if (previousRoute.value && previousRoute.value !== '/product') {
     router.push(previousRoute.value)
   }
   else {
     router.push('/product')
+    showCreateProduct.value = false
   }
 }
 watch(
