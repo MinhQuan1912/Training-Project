@@ -142,7 +142,9 @@ watch(
     if (isTablet.value) {
       openIndexs.value = [];
     }
-    showCreateProduct.value = false
+    if (route.path !== '/product') {
+      showCreateProduct.value = false
+    }
   }
 )
 watchEffect(() => {

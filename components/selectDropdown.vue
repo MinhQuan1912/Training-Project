@@ -13,7 +13,6 @@
                     '!bottom-[calc(100%+8px)]': isdropUp,
                     'top-[calc(100%+8px)]': !isdropUp
                 }">
-
                 <li v-for="(option, optionIdx) in props.data" :key="optionIdx" @click="handleChooseOpt(option)"
                     class="h-10 pl-5 flex items-center text-primary cursor-pointer bg-background-02 hover:bg-stroke active:bg-stroke whitespace-nowrap"
                     :class="props.textClass">

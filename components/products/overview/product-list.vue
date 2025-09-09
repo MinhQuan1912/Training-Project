@@ -169,21 +169,26 @@
       <!-- Product -->
       <template #column-product="{ item }">
         <div class="flex px-5 gap-5 items-center min-w-75">
-          <img :src="item.image" class="h-12 w-12 lg:h-16 lg:w-16 object-contain" />
+          <img :src="(item as productList).image" class="h-12 w-12 lg:h-16 lg:w-16 object-contain" />
           <div class="flex flex-col justify-center relative">
-            <p class="font-semibold text-primary">{{ item.name }}</p>
-            <p class="group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80">{{ item.type }}
+            <p class="font-semibold text-primary">{{ (item as productList).name }}</p>
+            <p class="group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80">{{ (item as
+              productList).type }}
             </p>
             <div
               class="hidden group-hover/setting:flex gap-2 h-6 relative -left-1 text-sm leading-[100%] font-semibold text-secondary transition-all duration-200 ease">
-              <button class="setting-button">
+              <button class="setting-button" @click.stop="toggleEditModal((item as productList).id)">
                 <icons-edit />
                 <p class="">Edit</p>
               </button>
-              <button class="setting-button">
+              <modal-edit :isOpen="selectedEditId === (item as productList).id" @close="toggleEditModal(null)"
+                :item="(item as productList)" @save="saveEditModal" />
+              <button class="setting-button" @click.stop="toggleDeleteModal((item as productList).id)">
                 <icons-trash />
                 <p class="">Delete</p>
               </button>
+              <modal-delete :isOpen="selectedDeleteId === (item as productList).id" @close="toggleDeleteModal(null)"
+                :item="(item as productList)" @delete="deleteProduct" />
               <button class="setting-button">
                 <icons-share />
                 <p class="">Share</p>
@@ -191,52 +196,45 @@
             </div>
           </div>
         </div>
-
       </template>
-
       <!-- Status  -->
       <template #column-status="{ item }">
         <div class="flex items-center">
-          <badge-status :status="item.status" />
+          <badge-status :status="(item as productList).status" />
         </div>
 
       </template>
-
       <!-- Price -->
       <template #column-price="{ item }">
         <div class="text-primary">
-          ${{ item.price.toFixed(2) }}
+          ${{ (item as productList).price.toFixed(2) }}
         </div>
       </template>
-
       <!-- Sales -->
       <template #column-sales="{ item }">
         <div class="flex gap-2 items-center">
-          <span class="text-primary">${{ item.sales.value?.toLocaleString('en-US') }}</span>
-          <badge-trend :growth-rate="item.sales.growthRate" />
+          <span class="text-primary">${{ (item as productList).sales.value?.toLocaleString('en-US') }}</span>
+          <badge-trend :growth-rate="(item as productList).sales.growthRate" />
         </div>
       </template>
-
       <!-- Views -->
       <template #column-views="{ item }">
         <div class="flex gap-2 items-center">
-          <span class="text-primary">{{ formatNum(item.views.current) }}</span>
+          <span class="text-primary">{{ formatNum((item as productList).views.current ?? 0) }}</span>
           <div class="w-8 h-1.5 rounded-xs bg-[#7b7b7b66]">
             <div class="h-1.5 rounded-xs bg-chart-green"
-              :style="{ width: (item.views.current / item.views.kpi * 100) + '%' }">
+              :style="{ width: (((item as productList).views.current ?? 0) / ((item as productList).views.kpi ?? 1) * 100) + '%' }">
             </div>
           </div>
         </div>
       </template>
-
       <!-- Likes -->
-
       <template #column-likes="{ item }">
         <div class="hidden xl:flex gap-2 items-center ">
-          <span class="text-primary">{{ item.likes.current }}</span>
+          <span class="text-primary">{{ (item as productList).likes.current }}</span>
           <div class="w-8 h-1.5 rounded-xs bg-[#7b7b7b66]">
             <div class="h-1.5 rounded-xs bg-chart-green"
-              :style="{ width: (item.likes.current / item.likes.kpi * 100) + '%' }">
+              :style="{ width: (((item as productList).likes.current ?? 0) / ((item as productList).likes.kpi ?? 1) * 100) + '%' }">
             </div>
           </div>
         </div>
@@ -379,12 +377,31 @@ const productList = ref<productList[]>([
     },
   },
 ]);
+const selectedEditId = ref<number | null>(null)
+const selectedDeleteId = ref<number | null>(null)
 const searchInput = ref("");
 const searchResult = ref<productList[]>([...productList.value]);
 const selectedId = ref<number[]>([]);
 const selectedAll = computed(() => {
   return selectedId.value.length === productList.value.length;
 });
+const toggleEditModal = (id: number | null) => {
+  selectedEditId.value = id
+}
+const saveEditModal = (newProd: productList) => {
+  const index = productList.value.findIndex(p => p.id === newProd.id)
+  productList.value[index] = { ...productList.value[index], ...newProd }
+  toggleEditModal(null)
+}
+watch(productList, (newVal) => {
+  searchResult.value = [...newVal]
+}, { deep: true })
+const toggleDeleteModal = (id: number | null) => {
+  selectedDeleteId.value = id
+}
+const deleteProduct = (id: number) => {
+  productList.value = productList.value.filter(p => p.id !== id)
+}
 const chooseAll = () => {
   if (selectedAll.value) {
     selectedId.value = [];
@@ -408,6 +425,7 @@ const clearSearchInput = () => {
   searchInput.value = "";
   searchResult.value = productList.value;
 };
+
 </script>
 
 <style lang="scss" scoped>
