@@ -47,14 +47,9 @@ const searchComment = computed({
   },
 });
 
-const selectedOption = ref(null);
+const options = ref(["Option 1", "Option 2"]);
 
-const options = [
-  { label: "Option 1", value: "value-1" },
-  { label: "Option 2", value: "value-2" },
-  { label: "Option 3", value: "value-3" },
-  { label: "Option 4", value: "value-4" },
-];
+const selectedOption = ref(options.value[0]);
 </script>
 
 <style lang="scss" scoped></style>

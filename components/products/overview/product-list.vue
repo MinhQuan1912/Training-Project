@@ -1,36 +1,59 @@
 <template>
   <div class="product-list">
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row p-3 justify-between sm:items-center gap-2 sm:gap-0">
-      <div class="flex flex-col sm:flex-row xs:pl-5 sm:items-center justify-between gap-2 sm:gap-6">
-        <h6 class="text-primary text-base xs:text-xl leading-[145%] font-semibold">
+    <div
+      class="flex flex-col sm:flex-row p-3 justify-between sm:items-center gap-2 sm:gap-0"
+    >
+      <div
+        class="flex flex-col sm:flex-row xs:pl-5 sm:items-center justify-between gap-2 sm:gap-6"
+      >
+        <h6
+          class="text-primary text-base xs:text-xl leading-[145%] font-semibold"
+        >
           Products
         </h6>
         <div
-          class="flex bg-background-surface1 border-[1.5px] border-stroke-subtle w-full sm:w-70 rounded-full p-3 pr-5 gap-2 text-secondary">
+          class="flex bg-background-surface1 border-[1.5px] border-stroke-subtle w-full sm:w-70 rounded-full p-3 pr-5 gap-2 text-secondary"
+        >
           <icons-search class="min-w-6" />
-          <input type="search" placeholder="Search products" class="w-full text-sm leading-[150%]" v-model="searchInput"
-            @keyup.enter="handleSearchProduct" />
+          <input
+            type="search"
+            placeholder="Search products"
+            class="w-full text-sm leading-[150%]"
+            v-model="searchInput"
+            @keyup.enter="handleSearchProduct"
+          />
           <div
             class="h-6 min-w-6 bg-background-surface1 text-secondary rounded-full flex opacity-0 justify-center items-center hover:bg-primary"
-            :class="{ 'opacity-100 cursor-pointer': searchInput }" @click="clearSearchInput">
+            :class="{ 'opacity-100 cursor-pointer': searchInput }"
+            @click="clearSearchInput"
+          >
             <icons-close class="w-4 h-4" />
           </div>
         </div>
       </div>
       <div
-        class="flex sm:hidden m:flex gap-1 text-sm leading-[100%] font-semibold h-12 w-full s:w-auto overflow-x-auto s:overflow-x-visible">
-        <div v-for="(tab, idx) in tabs" :key="idx"
+        class="flex sm:hidden m:flex gap-1 text-sm leading-[100%] font-semibold h-12 w-full s:w-auto overflow-x-auto s:overflow-x-visible"
+      >
+        <div
+          v-for="(tab, idx) in tabs"
+          :key="idx"
           class="flex justify-center items-center p-4 sm:p-6 rounded-[48px] cursor-pointer transition-all duration-300 whitespace-nowrap"
-          @click="activeTab = tab" :class="{
+          @click="activeTab = tab"
+          :class="{
             'text-primary border-[1.5px] border-stroke': activeTab === tab,
             'text-secondary border border-transparent': activeTab !== tab,
-          }">
+          }"
+        >
           {{ tab }}
         </div>
       </div>
       <div class="hidden sm:flex m:hidden items-center">
-        <select-dropdown :data="tabs" v-model:selected-option="activeTab" addition-class="h-12 " />
+        <select-dropdown
+          :data="tabs"
+          v-model:selected-option="activeTab"
+          addition-class="h-12 "
+        />
       </div>
     </div>
     <!-- Table -->
@@ -159,23 +182,34 @@
         </tbody>
       </table>
     </div> -->
-    <data-table :items="searchResult" :columns="columns" :classTableTr="{
-      padding: 'pb-8 px-4',
-      header: 'text-xs text-tertiary opacity-80 h-16.75 px-4',
-      body: 'h-24 hover:bg-background-highlight transition-all duration-200 ease px-4 group/setting',
-      thInput: 'min-w-10 text-right',
-      tdInput: 'rounded-2xl w-10 text-right'
-    }">
+    <data-table
+      :items="searchResult"
+      :columns="columns"
+      :classTableTr="{
+        padding: 'pb-8 px-4',
+        header: 'text-xs text-tertiary opacity-80 h-16.75 px-4',
+        body: 'h-24 hover:bg-background-highlight transition-all duration-200 ease px-4 group/setting',
+        thInput: 'min-w-10 text-right',
+        tdInput: 'rounded-2xl w-10 text-right',
+      }"
+    >
       <!-- Product -->
       <template #column-product="{ item }">
         <div class="flex px-5 gap-5 items-center min-w-75">
-          <img :src="item.image" class="h-12 w-12 lg:h-16 lg:w-16 object-contain" />
+          <img
+            :src="item.image"
+            class="h-12 w-12 lg:h-16 lg:w-16 object-contain"
+          />
           <div class="flex flex-col justify-center relative">
             <p class="font-semibold text-primary">{{ item.name }}</p>
-            <p class="group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80">{{ item.type }}
+            <p
+              class="group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80"
+            >
+              {{ item.type }}
             </p>
             <div
-              class="hidden group-hover/setting:flex gap-2 h-6 relative -left-1 text-sm leading-[100%] font-semibold text-secondary transition-all duration-200 ease">
+              class="hidden group-hover/setting:flex gap-2 h-6 relative -left-1 text-sm leading-[100%] font-semibold text-secondary transition-all duration-200 ease"
+            >
               <button class="setting-button">
                 <icons-edit />
                 <p class="">Edit</p>
@@ -191,7 +225,6 @@
             </div>
           </div>
         </div>
-
       </template>
 
       <!-- Status  -->
@@ -199,20 +232,19 @@
         <div class="flex items-center">
           <badge-status :status="item.status" />
         </div>
-
       </template>
 
       <!-- Price -->
       <template #column-price="{ item }">
-        <div class="text-primary">
-          ${{ item.price.toFixed(2) }}
-        </div>
+        <div class="text-primary">${{ item.price.toFixed(2) }}</div>
       </template>
 
       <!-- Sales -->
       <template #column-sales="{ item }">
         <div class="flex gap-2 items-center">
-          <span class="text-primary">${{ item.sales.value?.toLocaleString('en-US') }}</span>
+          <span class="text-primary"
+            >${{ item.sales.value?.toLocaleString("en-US") }}</span
+          >
           <badge-trend :growth-rate="item.sales.growthRate" />
         </div>
       </template>
@@ -222,9 +254,12 @@
         <div class="flex gap-2 items-center">
           <span class="text-primary">{{ formatNum(item.views.current) }}</span>
           <div class="w-8 h-1.5 rounded-xs bg-[#7b7b7b66]">
-            <div class="h-1.5 rounded-xs bg-chart-green"
-              :style="{ width: (item.views.current / item.views.kpi * 100) + '%' }">
-            </div>
+            <div
+              class="h-1.5 rounded-xs bg-chart-green"
+              :style="{
+                width: (item.views.current / item.views.kpi) * 100 + '%',
+              }"
+            ></div>
           </div>
         </div>
       </template>
@@ -232,12 +267,15 @@
       <!-- Likes -->
 
       <template #column-likes="{ item }">
-        <div class="hidden xl:flex gap-2 items-center ">
+        <div class="hidden xl:flex gap-2 items-center">
           <span class="text-primary">{{ item.likes.current }}</span>
           <div class="w-8 h-1.5 rounded-xs bg-[#7b7b7b66]">
-            <div class="h-1.5 rounded-xs bg-chart-green"
-              :style="{ width: (item.likes.current / item.likes.kpi * 100) + '%' }">
-            </div>
+            <div
+              class="h-1.5 rounded-xs bg-chart-green"
+              :style="{
+                width: (item.likes.current / item.likes.kpi) * 100 + '%',
+              }"
+            ></div>
           </div>
         </div>
       </template>
@@ -258,23 +296,37 @@ type productData = {
   kpi?: number;
 };
 type productList = {
-  id: number,
-  image: string,
-  name: string,
-  type: string,
-  status: boolean,
-  price: number,
-  sales: productData,
-  views: productData,
-  likes: productData
-}
+  id: number;
+  image: string;
+  name: string;
+  type: string;
+  status: boolean;
+  price: number;
+  sales: productData;
+  views: productData;
+  likes: productData;
+};
 const columns = [
-  { label: "Product", slot: "product", headerClass: "text-left min-w-85  px-5" },
+  {
+    label: "Product",
+    slot: "product",
+    headerClass: "text-left min-w-85  px-5",
+  },
   { label: "Status", slot: "status", headerClass: "text-left min-w-26 w-50" },
   { label: "Price", slot: "price", headerClass: "text-left min-w-21 w-45" },
   { label: "Sales", slot: "sales", headerClass: "text-left min-w-42 w-66" },
-  { label: "Views", slot: "views", headerClass: "text-left min-w-24 w-54", cellClass: "rounded-r-2xl" },
-  { label: "Likes", slot: "likes", headerClass: "text-left hidden xl:table-cell w-24", cellClass: "rounded-r-2xl" },
+  {
+    label: "Views",
+    slot: "views",
+    headerClass: "text-left min-w-24 w-54",
+    cellClass: "rounded-r-2xl",
+  },
+  {
+    label: "Likes",
+    slot: "likes",
+    headerClass: "text-left hidden xl:table-cell w-24",
+    cellClass: "rounded-r-2xl",
+  },
 ];
 
 const productList = ref<productList[]>([
