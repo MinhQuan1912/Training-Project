@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="flex w-full items-center justify-between @container">
-      <div class="text-xl font-semibold leading-[145%] text-primary px-5">
+      <div class="text-xl font-semibold leading-[145%] text-primary sm:px-5">
         Overview
       </div>
 

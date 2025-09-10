@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-4 px-5 pb-5 flex flex-col">
+  <div class="sm:pt-4 sm:px-5 sm:pb-5 flex flex-col">
     <div class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-8">
       <div
         class="flex flex-col gap-5 lg:gap-10"

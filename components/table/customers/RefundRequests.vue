@@ -1,15 +1,15 @@
 <template>
   <div
-    class="bg-background-02 pt-3 px-3 pb-6 flex flex-col gap-8 rounded-4xl @container"
+    class="bg-background-02 pt-3 px-3 pb-3 sm:pb-6 flex flex-col gap-8 rounded-2xl sm:rounded-4xl @container"
   >
     <div class="flex flex-col gap-3">
       <div
-        class="py-2.5 px-3 text-primary text-xl leading-[145%] font-semibold"
+        class="py-2.5 sm:px-3 text-primary text-xl leading-[145%] font-semibold"
       >
         Refund requests
       </div>
 
-      <div class="flex gap-5 items-center flex-col @xs:flex-row">
+      <div class="flex gap-5 items-center flex-col @xs:flex-row sm:px-3">
         <div class="bg-secondary-01 p-5 rounded-full cursor-pointer">
           <icons-bags />
         </div>
