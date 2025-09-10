@@ -105,18 +105,18 @@ const shareProducts = ref([
   },
 ]);
 
-// const moveProduct = () => {
-//   const itemsProduct = shareProducts.value.splice(-1, 1)[0];
-//   shareProducts.value.unshift(itemsProduct);
-// };
+const moveProduct = () => {
+  const itemsProduct = shareProducts.value.splice(-1, 1)[0];
+  shareProducts.value.unshift(itemsProduct);
+};
 
-// onMounted(() => {
-//   let intervalId = setInterval(moveProduct, 2000);
-// });
+onMounted(() => {
+  let intervalId = setInterval(moveProduct, 2000);
+});
 
-// onUnmounted(() => {
-//   clearInterval(intervalId);
-// });
+onUnmounted(() => {
+  clearInterval(intervalId);
+});
 </script>
 
 <style lang="scss" scoped></style>
