@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="flex gap-3 flex-col lg:flex-row overflow-hidden">
+    <div class="flex gap-3 flex-col lg:flex-row overflow-hidden w-full">
       <!--  lg:w-142 xl:w-261 -->
       <div class="flex flex-col gap-3 w-full lg:w-2/3">
         <div class="bg-background-02 rounded-4xl flex flex-col gap-4 p-3">

@@ -32,12 +32,13 @@
           class="group"
           :class="[
             classTableTr.body,
-            { 'bg-background-pop rounded-2xl': item.checked === true },
+            {
+              'bg-background-pop rounded-2xl': item.checked === true,
+            },
           ]"
           :index="itemIndex"
           @click="toggleCheckedItem(item)"
-          @mouseenter="hoverEnterIndex(itemIndex)"
-          @mouseleave="hoverLeaveIndex(itemIndex)"
+          @click.stop="$emit('row-click', itemIndex)"
         >
           <td :class="classTableTr.tdInput">
             <input
@@ -89,14 +90,6 @@ const props = defineProps({
       header: "",
       body: "",
     }),
-  },
-  hoverEnterIndex: {
-    type: Function,
-    required: false,
-  },
-  hoverLeaveIndex: {
-    type: Function,
-    required: false,
   },
   tBodyClass: {
     type: String,

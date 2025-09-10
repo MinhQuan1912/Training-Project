@@ -15,7 +15,7 @@
         }"
       >
         <div
-          class="bg-background-surface1 p-5 rounded-full inline w-fit h-fit flex-none"
+          class="bg-background-surface1 p-5 rounded-full inline w-fit h-fit flex-none cursor-pointer"
         >
           <component :is="iconComponents[overview.iconName]" />
         </div>
@@ -160,7 +160,7 @@
 
       <div class="grid grid-cols-2 @xs:grid-cols-4 @2xl:grid-cols-8">
         <div
-          class="py-4 px-3 sm:py-8 sm:px-6 flex flex-col gap-4 items-center"
+          class="py-4 px-3 sm:py-8 sm:px-6 flex flex-col gap-4 items-center cursor-pointer"
           v-for="(newCustomer, index) in newCustomers"
           :key="index"
           :class="{
@@ -182,18 +182,122 @@
           </div>
         </div>
 
-        <div class="py-4 px-3 sm:py-8 sm:px-6 flex flex-col gap-4 items-center">
+        <div
+          to=""
+          class="py-4 px-3 sm:py-8 sm:px-6 flex flex-col gap-4 items-center group cursor-pointer"
+          @click="toggleViewAll()"
+        >
           <div
-            class="w-16 h-16 flex justify-center items-center p-5 border-[1.5px] border-solid border-stroke rounded-full cursor-pointer"
+            class="w-16 h-16 flex justify-center items-center p-5 border-[1.5px] border-solid border-stroke group-hover:border-primary/80 rounded-full"
           >
             <icons-arrow-right />
           </div>
 
           <div
-            class="text-secondary font-semibold leading-[150%] w-19.5 flex justify-center"
+            class="text-secondary font-semibold leading-[150%] w-19.5 flex justify-center group-hover:text-primary/80"
           >
             View All
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    v-if="viewAll"
+    aria-hidden="true"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 overflow-y-auto"
+  >
+    <div class="relative p-4 w-full max-w-md max-h-full">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+        <!-- Modal header -->
+        <div
+          class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200"
+        >
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            Open people
+          </h3>
+          <button
+            @click="toggleViewAll()"
+            type="button"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm h-8 w-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+          >
+            <svg
+              class="w-3 h-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+              />
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="p-4 md:p-5">
+          <p class="text-gray-500 dark:text-gray-400 mb-4">
+            Select your people:
+          </p>
+          <ul class="space-y-4 mb-4 h-80 overflow-y-auto">
+            <li v-for="(newCustomer, index) in newCustomers" :key="index">
+              <input
+                type="radio"
+                id="job-1"
+                name="job"
+                value="job-1"
+                class="hidden peer"
+                required
+              />
+              <label
+                for="job-1"
+                class="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-500 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 dark:peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white dark:bg-gray-600 dark:hover:bg-gray-500"
+              >
+                <div class="flex items-center gap-4">
+                  <div class="w-16 h-16">
+                    <img
+                      :src="newCustomer.img"
+                      alt=""
+                      class="w-full h-full rounded-full object-contain"
+                    />
+                  </div>
+
+                  <div
+                    class="text-secondary font-semibold leading-[150%] w-19.5 flex justify-center"
+                  >
+                    {{ newCustomer.content }}
+                  </div>
+                </div>
+                <svg
+                  class="w-4 h-4 ms-3 rtl:rotate-180 text-gray-500 dark:text-gray-400"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 10"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M1 5h12m0 0L9 1m4 4L9 9"
+                  />
+                </svg>
+              </label>
+            </li>
+          </ul>
+          <button
+            class="text-white inline-flex w-full justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Next step
+          </button>
         </div>
       </div>
     </div>
@@ -282,6 +386,12 @@ const newCustomers = ref([
     content: "Joyce",
   },
 ]);
+
+const viewAll = ref(false);
+
+const toggleViewAll = () => {
+  viewAll.value = !viewAll.value;
+};
 </script>
 
 <style lang="scss" scoped></style>

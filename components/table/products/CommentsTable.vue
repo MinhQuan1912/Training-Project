@@ -3,8 +3,7 @@
     :items="commentsSearch"
     :columns="columns"
     :classTableTr="classTableTr"
-    :hoverEnterIndex="hoverEnterIndex"
-    :hoverLeaveIndex="hoverLeaveIndex"
+    @row-click="handleRowClick"
   >
     <template v-slot:column-comments="{ item, index }">
       <div class="flex items-center">
@@ -166,7 +165,7 @@
       </div>
 
       <div
-        class="w-2 h-2 rounded-full flex-none absolute top-4 right-4"
+        class="w-2 h-2 rounded-full flex-none absolute top-2 right-2 lg:top-4 lg:right-4"
         :class="{ 'bg-primary-02': item.on === true }"
       ></div>
     </template>
@@ -613,7 +612,7 @@ const columns = [
     label: "Comments",
     headerClass: "w-3/5 pl-5 pr-6 min-w-115",
     cellClass:
-      "pl-5 flex flex-col text-sm lg:text-base pr-4 lg:pr-6 w-3/5 min-w-115 max-lg:group-hover:min-w-full",
+      "pl-5 flex flex-col text-sm lg:text-base pr-4 lg:pr-6 w-3/5 min-w-115",
   },
   {
     slot: "product",
@@ -625,9 +624,9 @@ const columns = [
 ];
 
 const classTableTr = {
-  padding: "pb-8 px-4",
-  header: "text-left flex items-center text-tertiary text-xs p-4",
-  body: "bottomHover flex items-center p-4 relative group hover:bg-background-pop w-full hover:rounded-2xl border-[1.5px] border-solid border-t-stroke-subtle border-b-transparent border-x-transparent hover:border-primary/7.5",
+  padding: "pb-4 lg:pb-8 px-2 lg:px-4",
+  header: "text-left flex items-center text-tertiary text-xs p-2 lg:p-4",
+  body: "bottomHover flex items-center p-2 lg:p-4 relative group hover:bg-background-pop w-full hover:rounded-2xl border-[1.5px] border-solid border-t-stroke-subtle border-b-transparent border-x-transparent hover:border-primary/7.5",
   thInput: "",
   tdInput: "rounded-2xl",
 };
@@ -797,6 +796,14 @@ const comments = ref([
 
 const hoverRowIndex = (index) => {};
 
+const handleRowClick = (index) => {
+  comments.value.forEach((comment, i) => {
+    if (i === index) {
+      comment.activeIndex = !comment.activeIndex;
+    }
+  });
+};
+
 const props = defineProps({
   search: {
     type: String,
@@ -814,14 +821,6 @@ const commentsSearch = computed(() => {
     return comment.titleComment.toLowerCase().includes(query);
   });
 });
-
-const hoverEnterIndex = (index) => {
-  comments.value[index].activeIndex = true;
-};
-
-const hoverLeaveIndex = (index) => {
-  comments.value[index].activeIndex = false;
-};
 
 // const handleSearch = () => {
 //   const keyword = comment.value.trim().toLowerCase();
