@@ -1,10 +1,10 @@
 <template>
-  <div class="bg-background-02 rounded-4xl">
+  <div class="bg-background-02 rounded-2xl sm:rounded-4xl">
     <div class="container">
-      <div class="flex flex-col gap-6 pt-3 px-3 pb-8">
+      <div class="flex flex-col gap-6 pt-3 px-3 pb-3 sm:pb-8">
         <div class="flex flex-col gap-8">
           <div
-            class="text-xl font-semibold leading-[145%] text-primary px-5 h-12 flex items-center"
+            class="text-xl font-semibold leading-[145%] text-primary sm:px-5 h-12 flex items-center"
           >
             Active times
           </div>
