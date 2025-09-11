@@ -4,19 +4,20 @@
     width="25"
     height="24"
     viewBox="0 0 25 24"
-    fill="none"
+    fill="currentColor"
+    class="stroke-[#7B7B7B] group-hover:stroke-primary/80"
   >
     <path
       d="M14.8516 8L17.4374 10.5858C18.2184 11.3668 18.2184 12.6332 17.4373 13.4142L14.8516 16"
-      stroke="#7B7B7B"
       stroke-width="1.5"
       stroke-linecap="round"
+      fill="currentColor"
     />
     <path
       d="M6.85156 12L17.8516 12"
-      stroke="#7B7B7B"
       stroke-width="1.5"
       stroke-linecap="round"
+      fill="currentColor"
     />
   </svg>
 </template>

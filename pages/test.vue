@@ -1,201 +1,139 @@
 <template>
-  <DataTable
-    :items="schedules"
-    :columns="columns"
-    :classTableTr="classTableTr"
-    @hover-row="hoveredIndex = $event"
+  <div
+    class="p-3 flex flex-col gap-3 bg-background-02 rounded-2xl sm:rounded-4xl @container"
   >
-    <template #cell-product="{ item, index }">
-      <div class="flex items-center">
-        <div class="w-16 h-16 mr-5 rounded-xl">
-          <img
-            :src="item.img"
-            alt=""
-            class="w-full h-full rounded-xl object-contain"
-          />
-        </div>
-        <div class="relative">
-          <div class="font-semibold text-primary">
-            {{ item.product }}
+    <div
+      class="h-12 mx-3 sm:mx-5 text-xl font-semibold text-primary flex items-center"
+    >
+      Share products
+    </div>
+
+    <div class="flex flex-col gap-6">
+      <TransitionGroup name="list" tag="div" class="grid grid-cols-3 gap-3">
+        <div
+          v-for="shareProduct in shareProducts"
+          :key="shareProduct.id"
+          class="flex flex-col @sm:flex-row gap-3 p-3 @sm:items-center border-[1.5px] border-solid border-transparent hover:border-primary/7.5 hover:bg-background-pop rounded-[20px] cursor-pointer"
+        >
+          <div class="w-16 h-16 flex-none">
+            <img
+              :src="shareProduct.img"
+              alt=""
+              class="object-cover w-full h-full rounded-xl"
+            />
           </div>
-          <div class="font-normal text-secondary">
-            <div class="flex gap-2 items-center">
-              <div class="group">
-                <NuxtLink
-                  to=""
-                  class="flex items-center gap-1 py-1 pl-1 pr-1.5 border-[1.5px] border-solid border-transparent group-hover:border-stroke rounded-md group-hover:text-primary/80"
-                  data-modal-target="crud-modal"
-                  data-modal-toggle="crud-modal"
-                  @click="showModalEdit = true"
-                >
-                  <icons-edit />
-                  <div class="text-sm font-semibold">Edit</div>
-                </NuxtLink>
+
+          <div class="flex justify-between w-full max-sm:items-center">
+            <div class="flex flex-col gap-1.5">
+              <div
+                class="text-primary font-semibold leading-[150%] whitespace-nowrap"
+              >
+                {{ shareProduct.title }}
               </div>
 
-              <div class="group">
-                <NuxtLink
-                  to="#"
-                  class="flex items-center gap-1 py-1 pl-1 pr-1.5 border-[1.5px] border-solid border-transparent group-hover:border-stroke rounded-md group-hover:text-primary/80"
-                >
-                  <icons-trash />
-                  <div class="text-sm font-semibold">Delete</div>
-                </NuxtLink>
-              </div>
-
-              <div class="group">
-                <NuxtLink
-                  to="#"
-                  class="flex items-center gap-1 py-1 pl-1 pr-1.5 border-[1.5px] border-solid border-transparent group-hover:border-stroke rounded-md group-hover:text-primary/80"
-                >
-                  <icons-calendar-check />
-                  <div class="text-sm font-semibold">Reschedule</div>
-                </NuxtLink>
+              <div class="text-secondary/80 text-sm leading-[150%]">
+                {{ shareProduct.content }}
               </div>
             </div>
-            <div>ui8.net/product-link</div>
+
+            <div
+              class="px-3 py-1.75 border-[1.5px] border-solid border-primary-02/15 bg-primary-02/5 rounded-lg text-primary-02 text-sm w-fit h-fit"
+            >
+              ${{ shareProduct.price }}
+            </div>
           </div>
         </div>
-      </div>
-    </template>
+      </TransitionGroup>
 
-    <template #cell-price="{ item }">
-      <div
-        class="text-sm font-semibold px-2 py-1.75 border-[1.5px] border-solid rounded-lg inline"
-        :class="{
-          'text-primary-03 bg-primary-03/5 border-primary-03/15':
-            !item.priceStatus,
-          'text-primary-02 bg-primary-02/5 border-primary-02/15':
-            item.priceStatus,
-        }"
-      >
-        ${{ item.price }}
-      </div>
-    </template>
+      <p class="mx-5 text-secondary text-sm leading-[150%]">
+        Fifty percent of new customers explore products because the author
+        shares their work on social media.<br />
+        Start earning now! 🔥
+      </p>
 
-    <template #cell-scheduledFor="{ item }">
-      {{ item.scheduleFor }}
-    </template>
-  </DataTable>
+      <div class="grid gap-3 grid-cols-2 @xs:grid-cols-4">
+        <div
+          class="px-1 py-1 sm:py-3 sm:px-3 lg:px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full cursor-pointer group hover:border-primary/80"
+        >
+          <icons-x-twitter1 />
+        </div>
+
+        <div
+          class="px-1 py-1 sm:py-3 sm:px-3 lg:px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full cursor-pointer group hover:border-primary/80"
+        >
+          <icons-facebook1 />
+        </div>
+
+        <div
+          class="px-1 py-1 sm:py-3 sm:px-3 lg:px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full cursor-pointer group hover:border-primary/80"
+        >
+          <icons-instalgram1 />
+        </div>
+
+        <div
+          class="px-1 py-1 sm:py-3 sm:px-3 lg:px-7 flex justify-center border-[1.5px] border-solid border-stroke rounded-full cursor-pointer group hover:border-primary/80"
+        >
+          <icons-threads />
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import DataTable from "~/components/DataTable.vue";
-import ScheduledTitle from "~/components/title/products/ScheduledTittle.vue";
-import { defineProps } from "vue";
-
-// Trong script setup của bạn
-const columns = [
+const shareProducts = ref([
   {
-    field: "product",
-    label: "Products",
-    headerClass: "py-4 pl-5 flex-1",
-    cellClass: "py-4 pl-5 flex-1",
-  },
-  {
-    field: "price",
-    label: "Price",
-    headerClass: "w-3/20 lg:w-3/10 py-4",
-    cellClass: "w-3/20 lg:w-3/10 py-4",
-  },
-  {
-    field: "scheduledFor",
-    label: "Scheduled for",
-    headerClass: "w-1/4 py-4 pr-4",
-    cellClass: "text-secondary w-1/4 py-4 pr-4 rounded-r-2xl",
-  },
-];
-
-const classTableTr = {
-  header: "text-tertiary items-center text-left",
-  body: "bottomHover align-middle hover:bg-background-pop outline-[1.5px] hover:rounded-2xl outline-solid outline-transparent p-4 hover:outline-primary/7.5 border-t-[1.5px] hover:border-none border-solid border-stroke-subtle text-left",
-};
-
-const schedules = ref([
-  {
+    id: 1,
     img: "/images/1.png",
-    product: "Bento Pro v.2",
-    activeIndex: false,
-    price: "98.00",
-    priceStatus: true,
-    scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    title: "Bento Pro v.2",
+    content: "UI Design Kit",
+    price: "98",
   },
   {
+    id: 2,
     img: "/images/2.png",
-    product: "Fleet – Travel UI Kit",
-    activeIndex: false,
-    price: "98.00",
-    priceStatus: true,
-    scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    title: "Bento Pro v.2",
+    content: "UI Design Kit",
+    price: "98",
   },
   {
+    id: 3,
     img: "/images/3.png",
-    product: "Bento Pro - Vol. 2",
-    activeIndex: false,
-    price: "98.00",
-    priceStatus: false,
-    scheduleFor: "Apr 9, 2044 at 3:55 PM",
-  },
-  {
-    img: "/images/4.png",
-    product: "Core Dashboard Builder v.1",
-    activeIndex: false,
-    price: "98.00",
-    priceStatus: true,
-  },
-  {
-    img: "/images/5.png",
-    product: "Paradox - Coded Template",
-    activeIndex: false,
-    price: "98.00",
-    priceStatus: true,
-    scheduleFor: "Apr 9, 2044 at 3:55 PM",
-  },
-  {
-    img: "/images/6.png",
-    product: "Bento UI Design Kit",
-    activeIndex: false,
-    price: "98.00",
-    priceStatus: true,
-    scheduleFor: "Apr 9, 2044 at 3:55 PM",
-  },
-  {
-    img: "/images/7.png",
-    product: "Bloom - 3D Illustrations",
-    activeIndex: false,
-    price: "98.00",
-    priceStatus: true,
-    scheduleFor: "Apr 9, 2044 at 3:55 PM",
-  },
-  {
-    img: "/images/8.png",
-    product: "Tiny - Avatar Builder",
-    activeIndex: false,
-    price: "98.00",
-    priceStatus: true,
-    scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    title: "Bento Pro v.2",
+    content: "UI Design Kit",
+    price: "98",
   },
 ]);
 
-const showModalEdit = ref(false);
+const moveProduct = () => {
+  const itemsProduct = shareProducts.value.splice(-1, 1)[0];
+  shareProducts.value.unshift(itemsProduct);
+};
 
-const props = defineProps({
-  searchQuery: {
-    type: String,
-    required: true,
-  },
+let intervalId;
+
+onMounted(() => {
+  intervalId = setInterval(moveProduct, 2000);
 });
 
-const filteredSchedule = computed(() => {
-  if (!props.searchQuery) {
-    return schedules.value;
-  }
-
-  const query = props.searchQuery.toLowerCase();
-
-  return schedules.value.filter((schedule) =>
-    schedule.product.toLowerCase().includes(query)
-  );
+onUnmounted(() => {
+  clearInterval(intervalId);
 });
 </script>
+
+<style lang="scss" scoped>
+.list-enter-active,
+.list-leave-active {
+  transition: all 2s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.list-move {
+  transition: transform 2s ease;
+}
+</style>

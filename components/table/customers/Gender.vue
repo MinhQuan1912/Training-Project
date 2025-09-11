@@ -1,10 +1,14 @@
 <template>
-  <div class="px-3 pt-3 flex flex-col gap-3 bg-background-02 rounded-4xl">
-    <div class="py-2.5 px-3 text-lg font-semibold leading-[145%] text-primary">
+  <div
+    class="px-3 pt-3 flex flex-col gap-3 bg-background-02 rounded-2xl sm:rounded-4xl"
+  >
+    <div
+      class="py-2.5 sm:px-3 text-lg font-semibold leading-[145%] text-primary"
+    >
       Gender
     </div>
 
-    <div class="py-6 px-3 flex flex-col gap-8 @container">
+    <div class="py-3 sm:py-6 sm:px-3 flex flex-col gap-8 @container">
       <div></div>
 
       <div
