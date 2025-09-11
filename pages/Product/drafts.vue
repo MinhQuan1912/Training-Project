@@ -1,262 +1,120 @@
 <template>
   <div class="container">
     <div class="overflow-hidden border-cus-4">
-      <div class="w-full flex justify-between items-center py-3 px-3">
-        <div class="flex gap-6 items-center">
-          <h2 class="text-primary text-6 leading-[145%] tracking-[0.06px] pl-5">
+      <div class="w-full flex justify-between items-center py-3 px-3 gap-3">
+        <div class="flex flex-col xs:flex-row gap-2 xs:gap-6 xs:items-center w-full sm:w-auto">
+          <h2 class="text-primary text-6 leading-[145%] tracking-[0.06px] xs:pl-5 pt-2 xs:pt-0">
             Products
           </h2>
-          <UInput
-            v-model="value"
-            placeholder="Search products"
-            icon="i-lucide-search"
-            color="success"
-            :ui="{
-              root: 'text-secondary',
-              base: 'p-3 pl-9 border-1 !text-secondary shadow-3 w-40 sm:w-62 text-sm leading-[150%] tracking-[0.035px] cursor-pointer',
-              leadingIcon: 'text-secondary',
-            }"
-            @keydown.enter="handleSearch"
-          >
+          <UInput v-model="value" placeholder="Search products" icon="i-lucide-search" color="success" :ui="{
+            root: 'text-secondary flex-1',
+            base: 'p-3 pl-9 border-1 !text-secondary shadow-3 w-40 sm:w-62 text-sm leading-[150%] tracking-[0.035px] w-full',
+            leadingIcon: 'text-secondary',
+          }" @keydown.enter="handleSearch">
           </UInput>
         </div>
-        <div class="gap-2 items-center hidden sm:flex">
-          <div
-            @click="layout = 'grid'"
-            :class="{
-              'border border-solid border-[#282828]': layout === 'grid',
-            }"
-            class="rounded-full"
-          >
-            <icons-sort class="cursor-pointer hover:opacity-40" />
+        <div class="gap-2 items-center flex text-secondary">
+          <div @click="layout = 'grid'" :class="{
+            'border border-solid border-[#282828] rounded-full text-primary ': layout === 'grid',
+          }">
+            <icons-sort class="transition-all duration-200 ease cursor-pointer hover:text-primary" />
           </div>
-          <div
-            @click="layout = 'list'"
-            :class="{
-              'border border-solid border-[#282828]': layout === 'list',
-            }"
-            class="rounded-full"
-          >
-            <icons-list class="cursor-pointer hover:opacity-40" />
+          <div @click="layout = 'list'" :class="{
+            'border border-solid border-[#282828] rounded-full text-primary': layout === 'list'
+          }" class="w-12 h-12 flex justify-center items-center">
+            <icons-list class="transition-all duration-200 ease cursor-pointer hover:text-primary" />
           </div>
         </div>
       </div>
-      <div
-        v-if="layout === 'grid'"
-        class="p-8 pt-5 grid md:grid-cols-[1fr_2fr_1fr] lg:grid-cols-4 xxl:grid-cols-5 gap-4 md:gap-6"
-      >
-        <ProductsDraftCard
-          v-for="(item, index) in results"
-          :key="item.id"
-          :id="item.id"
-          :title="item.title"
-          :image="item.image"
-          :price="item.price"
-          :date="item.date"
-          @edit="onEdit(item)"
-          @delete="onDelete(item)"
-          @editBefore="onEdit(results[index - 1])"
-          @editAfter="onEdit(results[index + 1])"
-          @deleteBefore="onDelete(results[index - 1])"
-          @deleteAfter="onDelete(results[index + 1])"
-          :class="index % 3 !== 1 ? 'md:opacity-0 lg:opacity-100' : ''"
-          v-bind="
-            index % 3 === 1
-              ? {
-                  'item-before': results[index - 1] || null,
-                  'item-after': results[index + 1] || null,
-                }
-              : {}
-          "
-        />
+      <div v-if="layout === 'grid'"
+        class=" md:p-8 xs:py-5 grid xs:grid-cols-2 md:grid-cols-[1fr_2fr_1fr] lg:grid-cols-4 2xl:grid-cols-5 gap-4 md:gap-6">
+        <ProductsDraftCard v-for="(item, index) in results" :key="item.id" :id="item.id" :title="item.title"
+          :image="item.image" :price="item.price" :date="item.date" @edit="toggleEditModal(item.id)"
+          @delete="toggleDeleteModal(item.id)" @editBefore="toggleEditModal(results[index - 1]?.id ?? null)"
+          @editAfter="toggleEditModal(results[index + 1]?.id ?? null)"
+          @deleteBefore="toggleDeleteModal(results[index - 1]?.id ?? null)"
+          @deleteAfter="toggleDeleteModal(results[index + 1]?.id ?? null)"
+          :class="index % 3 !== 1 ? 'md:opacity-0 lg:opacity-100' : ''" v-bind="index % 3 === 1
+            ? {
+              'item-before': results[index - 1] || null,
+              'item-after': results[index + 1] || null,
+            }
+            : {}
+            " />
       </div>
-      <div
-        v-if="layout === 'list'"
-        class="mt-3 p-4 overflow-x-auto custom-scroll"
-      >
-        <table
-          class="border-separate border-spacing-0 text-sm text-gray-200 p-1 min-w-full"
-        >
-          <thead
-            class="w-full table-fixed rounded-xl text-tertiary text-xs font-normal leading-[160%] tracking-[0.048px]"
-          >
-            <tr
-              class="rounded-[16px] p-4 hover:!bg-background-highlight border-b-[2px] border-stroke-subtle"
-            >
-              <th class="p-4 rounded-l-[16px]">
-                <label
-                  class="relative w-6 h-6 flex items-center justify-center border-2 border-[#727272] rounded-[6px] cursor-pointer"
-                >
-                  <input
-                    type="checkbox"
-                    v-model="selectAll"
-                    @change="toggleAll"
-                    class="peer hidden"
-                  />
-                  <span
-                    class="absolute inset-0 flex shrink-0 items-center justify-center peer-checked:before:content-['✔'] peer-checked:before:text-green-500 peer-checked:before:text-sm"
-                  ></span>
-                </label>
-              </th>
-              <th class="p-6 pl-4 text-left min-w-80 md:w-120">Product</th>
-              <th class="p-6 pl-4 text-left">Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-for="(item, index) in results"
-              :key="index"
-              class="rounded-[16px] outline-[1.5px] outline-solid outline-transparent hover:outline-[#313131] hover:bg-background-highlight group cursor-pointer"
-              :class="{
-                'bg-background-highlight': selected.includes(item),
-              }"
-              @click="toggleSelect(item)"
-            >
-              <td class="p-4 rounded-l-[16px]">
-                <label
-                  class="relative w-6 h-6 flex items-center shrink-0 justify-center border-2 border-[#727272] rounded-[6px] cursor-pointer"
-                  @click.stop
-                >
-                  <input
-                    type="checkbox"
-                    v-model="selected"
-                    :value="item"
-                    class="peer hidden"
-                  />
-                  <span
-                    class="absolute inset-0 flex items-center justify-center peer-checked:before:content-['✔'] peer-checked:before:text-green-500 peer-checked:before:text-sm"
-                  ></span>
-                </label>
-              </td>
-              <td class="p-4 w-full min-w-80 md:w-120">
-                <div class="flex items-center gap-3">
-                  <img
-                    :src="item.image"
-                    :alt="item.title"
-                    class="w-16 h-16 rounded-md object-cover"
-                  />
-                  <div class="w-full">
-                    <div class="font-medium text-white text-base">
-                      {{ item.title }}
-                    </div>
-                    <div
-                      class="text-sm text-gray-400 block group-hover:hidden duration-100"
-                    >
-                      {{ item.date }}
-                    </div>
-                    <div
-                      class="text-sm text-gray-400 hidden group-hover:flex gap-2 items-center duration-100 cursor-pointer"
-                    >
-                      <div
-                        class="flex items-center gap-1 hover:text-white"
-                        @click.stop="onEdit(item)"
-                      >
-                        <icons-edit-2 />
-                        <span>Edit</span>
-                      </div>
-                      <div
-                        class="flex items-center gap-1 hover:text-white"
-                        @click.stop.prevent="onDelete(item)"
-                      >
-                        <icons-trash-2 />
-                        <span>Delete</span>
-                      </div>
-                      <div
-                        class="flex items-center gap-1 hover:text-white"
-                        @click.stop
-                      >
-                        <icons-eye-2 />
-                        <span>Unpublish</span>
-                      </div>
-                    </div>
-                  </div>
+      <div v-if="layout === 'list'">
+        <DataTable :items="results" :columns="columns" :classTableTr="{
+          header: 'rounded-[16px] p-4 ',
+          body: 'rounded-[16px] outline-[1.5px] outline-solid outline-transparent hover:outline-[#313131] hover:bg-background-highlight group cursor-pointer',
+          tdInput: 'min-w-10 w-10 text-right',
+          thInput: 'min-w-10 w-10 text-right',
+          padding: 'pb-8 px-4'
+        }"
+          tHeadClass="w-full table-fixed rounded-xl text-tertiary text-xs font-normal leading-[160%] tracking-[0.048px]">
+          <!-- Product -->
+          <template #column-product="{ item }">
+            <div class="flex items-center gap-3">
+              <div class="h-12 min-w-12 lg:h-16 lg:min-w-16 rounded-md overflow-hidden">
+                <img :src="(item as Data).image" :alt="(item as Data).title"
+                  class="w-full h-full object-cover aspect-square" />
+              </div>
+              <div class="w-full">
+                <div class="font-medium text-primary text-base leading-[150%]">
+                  {{ (item as Data).title }}
                 </div>
-              </td>
-              <td class="p-4">${{ item.price }}</td>
-            </tr>
-          </tbody>
-        </table>
+                <div class="text-sm text-secondary opacity-80">
+                  {{ formatDate((item as Data).date) }}
+                </div>
+              </div>
+            </div>
+          </template>
+          <!--  Price -->
+          <template #column-price="{ item }">
+            <div class="text-primary ">
+              ${{ (item as Data).price.toFixed(2) }}
+            </div>
+            <div class="text-sm text-secondary flex gap-3 items-center duration-100 cursor-pointer">
+              <div class="flex items-center gap-1 hover:text-white transition-colors duration-250 ease"
+                @click.stop="toggleEditModal((item as Data).id)">
+                <icons-edit-2 />
+                <span>Edit</span>
+              </div>
+              <div class="flex items-center gap-1 hover:text-white transition-colors duration-250 ease"
+                @click.stop.prevent="toggleDeleteModal((item as Data).id)">
+                <icons-trash-2 />
+                <span>Delete</span>
+              </div>
+              <div class="flex items-center gap-1 hover:text-white transition-colors duration-250 ease" @click.stop>
+                <icons-eye-2 />
+                <span>Unpublish</span>
+              </div>
+            </div>
+          </template>
+        </DataTable>
       </div>
     </div>
   </div>
-  <Transition name="fade-zoom">
-    <div
-      v-if="showEditModal"
-      class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-    >
-      <UCard class="w-[50dvw]">
-        <template #header>
-          <h2 class="text-lg font-semibold">Edit Item</h2>
-        </template>
-
-        <div
-          class="flex flex-col gap-4 overflow-y-auto max-h-[50vh] custom-scroll"
-        >
-          <UFormField label="Title">
-            <UInput
-              v-model="currentItem.title"
-              placeholder="Enter title"
-              class="w-full"
-            />
-          </UFormField>
-
-          <div class="flex gap-2 w-full">
-            <UFormField label="Date" class="flex-1">
-              <UInput
-                v-model="currentItem.date"
-                type="datetime-local"
-                class="w-full"
-              />
-            </UFormField>
-
-            <UFormField label="Price" class="flex-1">
-              <UInput
-                v-model="currentItem.price"
-                type="number"
-                class="w-full"
-              />
-            </UFormField>
-          </div>
-        </div>
-
-        <template #footer>
-          <div class="flex justify-end gap-2">
-            <UButton
-              color="neutral"
-              variant="outline"
-              @click="showEditModal = false"
-              >Cancel</UButton
-            >
-            <UButton color="success" @click="saveEdit">Save</UButton>
-          </div>
-        </template>
-      </UCard>
-    </div>
-  </Transition>
-  <Transition name="fade-zoom">
-    <div
-      v-if="showDeleteConfirm"
-      class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-    >
-      <UCard class="w-[30dvw]">
-        <div class="p-3 space-y-4">
-          <h3 class="text-lg font-medium">Confirm Delete</h3>
-          <p>
-            Bạn có chắc chắn muốn xóa <b>{{ currentItem?.title }}</b> không?
-          </p>
-          <div class="flex justify-end gap-3">
-            <UButton
-              color="neutral"
-              variant="outline"
-              @click="showDeleteConfirm = false"
-              >Cancel</UButton
-            >
-            <UButton color="success" @click="confirmDelete">Delete</UButton>
-          </div>
-        </div>
-      </UCard>
-    </div>
-  </Transition>
+  <modal-edit :isOpen="selectedEditId ? true : false" @close="toggleEditModal(null)" @save="saveEditModal">
+    <form class="flex gap-x-4 gap-y-4 flex-wrap" v-if="editProduct">
+      <div class="flex flex-col gap-1 xs:gap-2 w-full">
+        <div class="text-base xl:text-lg">Product name</div>
+        <input type="text" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
+          v-model="editProduct.title">
+      </div>
+      <div class="flex flex-col gap-1 xs:gap-2 w-full xs:w-[calc(50%-8px)]">
+        <div class="text-base xl:text-lg">Product price</div>
+        <input type="number" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
+          v-model="editProduct.price">
+      </div>
+      <div class="flex flex-col gap-1 xs:gap-2 w-full xs:w-[calc(50%-8px)]">
+        <div class="text-base xl:text-lg">Schedule time</div>
+        <input type="datetime-local" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
+          v-model="editProduct.date" />
+      </div>
+    </form>
+  </modal-edit>
+  <modal-delete :isOpen="selectedDeleteId ? true : false" @close="toggleDeleteModal(null)"
+    @delete="deleteProduct(selectedDeleteId)" />
 </template>
 <script setup lang="ts">
 import { h, resolveComponent } from "vue";
@@ -265,25 +123,16 @@ const UCheckbox = resolveComponent("UCheckbox");
 const UBadge = resolveComponent("UBadge");
 const UDropdownMenu = resolveComponent("UDropdownMenu");
 const UIcon = resolveComponent("UIcon");
-const layout = ref("grid");
-const selectAll = ref(false);
-const selected = ref<any[]>([]);
-const toggleAll = () => {
-  if (selectAll.value) {
-    selected.value = [...data.value];
-  } else {
-    selected.value = [];
-  }
-};
-const toggleSelect = (item: any) => {
-  if (selected.value.includes(item)) {
-    selected.value = selected.value.filter((i) => i !== item);
-  } else {
-    selected.value.push(item);
-  }
-};
+const layout = ref("list");
 const value = ref("");
-const data = ref([
+type Data = {
+  id: number,
+  title: string,
+  image: string,
+  price: number,
+  date: string
+}
+const data = ref<Data[]>([
   {
     id: 1,
     title: "Bento Design System",
@@ -355,51 +204,63 @@ const data = ref([
     date: "2044-04-09T15:55:00Z",
   },
 ]);
-const keyword = ref("");
-const results = computed(() => {
-  const kw = keyword.value.trim().toLowerCase();
-  return kw
-    ? data.value.filter((i) => i.title.toLowerCase().includes(kw))
-    : data.value;
-});
+const columns = [
+  {
+    label: "Product",
+    slot: "product",
+    headerClass: "p-6 pl-4 text-left min-w-80 md:w-120",
+    cellClass: "p-4 w-full min-w-80 md:w-120",
+  },
+  {
+    label: "Price",
+    slot: "price",
+    headerClass: "p-6 pl-4 text-left",
+    cellClass: "p-4 flex justify-between h-24 items-center gap-8",
+  },
+];
+
+const results = ref<Data[]>([...data.value])
 
 const handleSearch = () => {
-  keyword.value = value.value;
-};
-const showEditModal = ref(false);
-const showDeleteConfirm = ref(false);
-const currentItem = ref({
-  id: 0,
-  title: "",
-  image: "",
-  price: 0,
-  date: "",
-});
-
-const onEdit = (item: any) => {
-  currentItem.value = { ...item };
-  showEditModal.value = true;
-};
-
-const onDelete = (item: any) => {
-  currentItem.value = { ...item };
-  showDeleteConfirm.value = true;
-};
-
-const confirmDelete = () => {
-  data.value = data.value.filter((d) => d.id !== currentItem.value.id);
-  showDeleteConfirm.value = false;
-};
-const saveEdit = () => {
-  const index = data.value.findIndex(
-    (item) => item.id === currentItem.value.id
+  results.value = data.value.filter((p) =>
+    p.title.toLowerCase().includes(value.value.toLowerCase())
   );
-  if (index !== -1) {
-    data.value[index] = { ...currentItem.value };
-  }
-  showEditModal.value = false;
 };
 
+const selectedEditId = ref<number | null>(null)
+const selectedDeleteId = ref<number | null>(null)
+const editProduct = ref<Partial<Data | null>>(null)
+const toggleEditModal = (id: number | null) => {
+  selectedEditId.value = id
+  const prod = data.value.find(p => p.id === id)
+  editProduct.value = { ...prod }
+}
+const saveEditModal = () => {
+  const index = data.value.findIndex(p => p.id === editProduct.value?.id)
+  data.value[index] = { ...data.value[index], ...editProduct.value } as Data
+}
+watch(data, (newVal) => {
+  results.value = [...newVal]
+}, { deep: true })
+const toggleDeleteModal = (id: number | null) => {
+  selectedDeleteId.value = id
+}
+const deleteProduct = (id: number | null) => {
+  data.value = data.value.filter(p => p.id !== id)
+}
+function formatDate(value: string) {
+  const d = new Date(value);
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  })
+    .format(d)
+    .replace(",", " at");
+}
 definePageMeta({
   title: "Drafts",
 });
