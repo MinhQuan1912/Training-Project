@@ -4,6 +4,7 @@
     :columns="columns"
     :classTableTr="classTableTr"
     @row-click="handleRowClick"
+    :selectRowTable="false"
   >
     <template v-slot:column-comments="{ item, index }">
       <div class="flex items-center">
@@ -86,10 +87,14 @@
 
                 <NuxtLink
                   to="#"
-                  class="flex items-center gap-1 py-1 pl-1 pr-1.5 hover:text-primary/80"
+                  class="flex items-center gap-1 py-1 pl-1 pr-1.5 group/nest"
                 >
                   <icons-heart />
-                  <div class="text-xs lg:text-sm font-semibold">Like</div>
+                  <div
+                    class="text-xs lg:text-sm font-semibold group-hover/nest:text-primary/80"
+                  >
+                    Like
+                  </div>
                 </NuxtLink>
 
                 <NuxtLink
@@ -125,10 +130,14 @@
 
             <NuxtLink
               to="#"
-              class="flex items-center gap-1 py-1 pl-1 pr-1.5 hover:text-primary/80"
+              class="flex items-center gap-1 py-1 pl-1 pr-1.5 group/nest"
             >
-              <icons-heartRed />
-              <div class="text-xs lg:text-sm font-semibold">Like</div>
+              <icons-heart />
+              <div
+                class="text-xs lg:text-sm font-semibold group-hover/nest:text-primary/80"
+              >
+                Like
+              </div>
             </NuxtLink>
 
             <NuxtLink

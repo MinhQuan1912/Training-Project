@@ -37,8 +37,11 @@
             },
           ]"
           :index="itemIndex"
-          @click="toggleCheckedItem(item)"
-          @click.stop="$emit('row-click', itemIndex)"
+          @click="
+            selectRowTable
+              ? handleRowClick(item, itemIndex)
+              : emit('row-click', itemIndex)
+          "
         >
           <td :class="classTableTr.tdInput">
             <input
@@ -51,7 +54,7 @@
             <label
               :for="'checkbox-' + itemIndex"
               class="custom-checkbox group-hover:border-tertiary"
-              @click="toggleCheckedItem(item)"
+              @click.stop="$emit('row-click', itemIndex)"
             ></label>
           </td>
           <td
@@ -99,7 +102,16 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  selectRowTable: {
+    type: Boolean,
+    default: true,
+  },
 });
+
+const handleRowClick = (item, itemIndex) => {
+  toggleCheckedItem(item);
+  emit("row-click", itemIndex);
+};
 
 const allChecked = ref(false);
 
