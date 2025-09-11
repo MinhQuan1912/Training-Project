@@ -9,8 +9,10 @@
     </div>
 
     <div>
-      <div class="relative">
-        <TrafficChannelBar class="absolute inset-0 w-full h-full pb-10" />
+      <div class="relative z-0">
+        <TrafficChannelBar
+          class="absolute left-7 inset-0 w-full h-full pb-10 z-50"
+        />
 
         <div
           class="flex flex-col gap-10 text-xs text-tertiary/80 leading-[160%]"
@@ -99,7 +101,7 @@
 </template>
 
 <script setup>
-import TrafficChannelBar from "~/components/TrafficChannelBar.vue";
+import TrafficChannelBar from "~/components/vue-chart/TrafficChannelBar.vue";
 </script>
 
 <style lang="scss" scoped></style>

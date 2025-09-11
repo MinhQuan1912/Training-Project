@@ -1,3 +1,4 @@
+// chart.client.ts
 import {
   Chart as ChartJS,
   Title,
@@ -6,6 +7,10 @@ import {
   BarElement,
   CategoryScale,
   LinearScale,
+  PointElement,
+  // Add these two for line charts
+  LineElement,
+  LineController,
 } from "chart.js";
 
 export default defineNuxtPlugin(() => {
@@ -15,6 +20,10 @@ export default defineNuxtPlugin(() => {
     Legend,
     BarElement,
     CategoryScale,
-    LinearScale
+    LinearScale,
+    PointElement,
+    // Add these two for line charts
+    LineElement,
+    LineController
   );
 });

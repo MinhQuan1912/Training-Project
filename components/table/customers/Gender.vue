@@ -12,7 +12,7 @@
       class="py-3 sm:py-6 sm:px-3 flex flex-col gap-8 @container items-center"
     >
       <div class="w-69.5 h-69.5">
-        <DoughnutChart :chartDataPoints="genderDataGt" />
+        <DoughnutChart :chartDataPoints="genderDataGt" :plugins="plugins" />
       </div>
 
       <div
@@ -38,7 +38,7 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import DoughnutChart from "~/components/DoughnutChart.vue";
+import DoughnutChart from "~/components/vue-chart/DoughnutChart.vue";
 
 const genderDataGt = ref([
   { label: "Female", value: 1485, color: "#7b7b7b" },

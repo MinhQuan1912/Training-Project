@@ -84,8 +84,9 @@
       </div>
     </div>
 
-    <div class="flex gap-4 flex-col mt-10 mb-5.5">
-      <div class="flex flex-col gap-10 relative">
+    <div class="flex gap-4 flex-col mt-10 mb-5.5 h-72.75 relative">
+      <LineChart class="absolute top-0 left-0" />
+      <!-- <div class="flex flex-col gap-10 relative">
         <div class="flex gap-6 items-center">
           <div class="w-8 text-xs leading-[160%] text-tertiary">2k</div>
           <div
@@ -132,7 +133,7 @@
         <div>Jun</div>
 
         <div>July</div>
-      </div>
+      </div> -->
     </div>
 
     <div class="mt-5.5 flex flex-col gap-6 @container">
@@ -311,6 +312,7 @@ import Product from "~/components/icons/productlight.vue";
 import graph1 from "~/components/icons/graph1.vue";
 import graph2 from "~/components/icons/graph2.vue";
 import graph3 from "~/components/icons/graph3.vue";
+import LineChart from "~/components/vue-chart/LineChart.vue";
 
 const overviews = ref([
   {

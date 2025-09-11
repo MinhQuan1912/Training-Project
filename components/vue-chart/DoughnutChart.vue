@@ -124,5 +124,5 @@ const centerTextPlugin = {
   },
 };
 
-ChartJS.register(centerTextPlugin);
+const plugins = [centerTextPlugin];
 </script>

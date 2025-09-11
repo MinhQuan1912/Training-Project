@@ -11,17 +11,17 @@ const chartData: ChartData<"bar"> = {
   datasets: [
     {
       label: "Direct",
-      backgroundColor: "#3b82f6",
+      backgroundColor: "#373737",
       data: [800, 1500, 1000, 1200, 1900, 1200, 2000],
     },
     {
       label: "Search",
-      backgroundColor: "#ef4444",
+      backgroundColor: "#373737",
       data: [1200, 2000, 1500, 1700, 2000, 1800, 2200],
     },
     {
       label: "Other",
-      backgroundColor: "#f59e0b",
+      backgroundColor: "#373737",
       data: [300, 500, 300, 400, 500, 300, 400],
     },
   ],
@@ -29,6 +29,9 @@ const chartData: ChartData<"bar"> = {
 
 const chartOptions: ChartOptions<"bar"> = {
   responsive: true,
+  datalabels: {
+    display: false,
+  },
   maintainAspectRatio: false,
   plugins: {
     legend: {
@@ -52,8 +55,9 @@ const chartOptions: ChartOptions<"bar"> = {
       stacked: false,
       beginAtZero: true,
       grid: {
-        color: "rgba(255, 255, 255, 0.2)",
-        borderDash: [5, 5],
+        // color: "rgba(255, 255, 255, 0.2)",
+        // borderDash: [5, 5],
+        display: false,
       },
       ticks: {
         display: false,
