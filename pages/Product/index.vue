@@ -38,16 +38,18 @@
                 {{ isMobile ? item.revenue : formatNum(item.revenue) }}
               </h2>
               <div class="flex gap-2 items-center">
-                <badge-trend :growth-rate="item.growthRate" />
+                <badge-trend :growth-rate="item.chart.growthRate" />
                 <span class="text-tertiary text-sm leading-[150%]">vs last year</span>
               </div>
             </div>
             <div class="w-16 h-14 xl:w-23.5 xl:h-20 hidden m:block">
-              <img src="/images/chart1.png" class="w-full h-full object-contain" />
+              <products-overview-line-chart :date="item.chart.data.date" :value="item.chart.data.value"
+                :growth="item.chart.growthRate" />
             </div>
           </div>
-          <div class="flex m:hidden justify-center items-center ml-3 xs:ml-0">
-            <img src="/images/chart1.png" class="w-15 xs:w-25 md:w-4/5 md:h-4/5 object-fill" />
+          <div class="flex m:hidden justify-center items-center ml-3 xs:ml-0 w-15 h-15 xs:w-35 xs:h-25 sm:w-50 ">
+            <products-overview-line-chart :date="item.chart.data.date" :value="item.chart.data.value"
+              :growth="item.chart.growthRate" />
           </div>
         </div>
       </div>
@@ -63,7 +65,7 @@
           Product Views
         </h6>
         <div class="h-full">
-          <canvas ref="chartRef" class=""></canvas>
+          <products-overview-product-views />
         </div>
       </div>
     </div>
@@ -92,140 +94,54 @@ const overViewList = ref([
     label: "Earning",
     icon: markRaw(IconsFolder),
     revenue: 128594,
-    growthRate: 14,
+    chart: {
+      data: {
+        date: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        value: [4821, 7321, 1594, 9012, 6234, 8123, 3456, 6789, 2345, 9876, 4567, 1234]
+      },
+      growthRate: 14
+    }
   },
   {
     label: "Customer",
     icon: markRaw(IconsPerson),
     revenue: 512,
-    growthRate: -41,
+    chart: {
+      data: {
+        date: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        value: [7352, 4910, 8621, 2743, 9834, 5186, 6702, 3045, 7921, 1587, 4369, 8095]
+      },
+      growthRate: -41
+    }
   },
   {
     label: "Sales",
     icon: markRaw(IconsProduct),
     revenue: 6812,
-    growthRate: 32,
+    chart: {
+      data: {
+        date: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        value: [6427, 3158, 7894, 4562, 9210, 5831, 1347, 8675, 2904, 7012, 4789, 3560]
+      },
+      growthRate: 32
+    }
   },
   {
     label: "Payout",
     icon: markRaw(IconsArrow2),
     revenue: 256012,
-    growthRate: 5,
+    chart: {
+      data: {
+        date: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        value: [8371, 2645, 7198, 5023, 9487, 3764, 6152, 4819, 8320, 1576, 6934, 2401]
+      },
+      growthRate: 5
+    }
   },
 ]);
 
 const overviewTab = ref(["1D", "7D", "1M", "6M", "1Y"]);
 const activeOverviewTab = ref("1Y");
-
-import {
-  Chart,
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  LineElement,
-  PointElement,
-  BarController
-} from "chart.js"
-
-Chart.register(
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  LineElement,
-  PointElement,
-  BarController
-)
-
-const labels = [
-  { short: "Mo", full: "Monday", value: 124940 },
-  { short: "Tu", full: "Tuesday", value: 859304 },
-  { short: "We", full: "Wednesday", value: 32492 },
-  { short: "Th", full: "Thursday", value: 559128 },
-  { short: "Fr", full: "Friday", value: 395823 },
-  { short: "Sa", full: "Saturday", value: 19394 },
-  { short: "Su", full: "Sunday", value: 359483 }
-]
-const chartRef = ref<HTMLCanvasElement | null>(null)
-let chart: Chart | null = null
-
-onMounted(() => {
-  if (!chartRef.value) return
-  chart = new Chart(chartRef.value, {
-    type: "bar",
-    data: {
-      labels: labels.map(l => l.short),
-      datasets: [
-        {
-          data: labels.map(l => l.value),
-          backgroundColor: "#7B7B7B66",
-          borderRadius: {
-            topLeft: 8,
-            topRight: 8,
-            bottomLeft: 8,
-            bottomRight: 8,
-          },
-          borderSkipped: false,
-          hoverBackgroundColor: '#00b512',
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          display: false
-        },
-        tooltip: {
-          displayColors: false,
-          padding: 8,
-          backgroundColor: '#e2e2e2',
-          titleAlign: 'center',
-          titleColor: '#141414',
-          titleFont: {
-            size: 12,
-            weight: 'normal'
-          },
-          bodyColor: '#141414',
-          bodyFont: {
-            weight: "bold",
-            size: 12,
-            family: 'Inter'
-          },
-          callbacks: {
-            title: (context) => {
-              const index = context[0]?.dataIndex as number
-              return labels[index]?.full
-            },
-            label: (context) => {
-              return context.parsed.y.toLocaleString('en-US')
-            }
-          },
-        }
-      },
-      scales: {
-        y: {
-          display: false,
-          beginAtZero: false
-        }
-      },
-      maintainAspectRatio: false
-    },
-  })
-})
-
-onBeforeUnmount(() => {
-  if (chart) {
-    chart.destroy()
-  }
-})
 
 </script>
 <style lang="scss" scoped>

@@ -36,7 +36,7 @@
         }">
           <template #column-product="{ item }">
             <div class="flex px-5 gap-5 items-center min-w-75">
-              <img :src="(item as Data).image" class="h-12 w-12 lg:h-16 lg:w-16 object-contain" />
+              <img loading="lazy" :src="(item as Data).image" class="h-12 w-12 lg:h-16 lg:w-16 object-contain" />
               <div class="flex flex-col justify-center relative">
                 <p class="font-semibold text-primary">{{ (item as Data).name }}</p>
                 <p class="lg:group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80">{{
@@ -320,7 +320,7 @@ const handleSearch = () => {
 };
 
 
-const layout = ref("grid");
+const layout = ref("list");
 
 definePageMeta({
   title: "Released",

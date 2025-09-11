@@ -55,7 +55,7 @@
           <template #column-product="{ item }">
             <div class="flex items-center gap-3">
               <div class="h-12 min-w-12 lg:h-16 lg:min-w-16 rounded-md overflow-hidden">
-                <img :src="(item as Data).image" :alt="(item as Data).title"
+                <img loading="lazy" :src="(item as Data).image" :alt="(item as Data).title"
                   class="w-full h-full object-cover aspect-square" />
               </div>
               <div class="w-full">
@@ -123,7 +123,7 @@ const UCheckbox = resolveComponent("UCheckbox");
 const UBadge = resolveComponent("UBadge");
 const UDropdownMenu = resolveComponent("UDropdownMenu");
 const UIcon = resolveComponent("UIcon");
-const layout = ref("list");
+const layout = ref("grid");
 const value = ref("");
 type Data = {
   id: number,
