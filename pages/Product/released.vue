@@ -2,340 +2,212 @@
   <div class="container overflow-hidden">
     <div class="border-cus-4 min-h-[85dvh] min-w-full">
       <div class="p-3 w-full flex justify-between items-center">
-        <div class="flex gap-6 items-center">
+        <div class="flex flex-col xs:flex-row gap-2 xs:gap-6 xs:items-center w-full sm:w-auto">
           <h2 class="text-primary text-6 leading-[145%] tracking-[0.06px]">
             Products
           </h2>
-          <UInput
-            v-model="value"
-            placeholder="Search products"
-            icon="i-lucide-search"
-            color="success"
-            :ui="{
-              root: 'text-secondary',
-              base: 'p-3 pl-9 border-1 !text-secondary shadow-3 w-40 sm:w-62 text-sm leading-[150%] tracking-[0.035px] cursor-pointer',
-              leadingIcon: 'text-secondary',
-            }"
-            @keydown.enter="handleSearch"
-          >
+          <UInput v-model="value" placeholder="Search products" icon="i-lucide-search" color="success" :ui="{
+            root: 'text-secondary',
+            base: 'p-3 pl-9 border-1 !text-secondary shadow-3 w-full sm:w-62 text-sm leading-[150%] tracking-[0.035px]',
+            leadingIcon: 'text-secondary',
+          }" @keydown.enter="handleSearch">
           </UInput>
         </div>
-        <div class="gap-2 items-center hidden sm:flex">
-          <div
-            @click="layout = 'grid'"
-            :class="{
-              'border border-solid border-[#282828]': layout === 'grid',
-            }"
-            class="rounded-full"
-          >
-            <icons-sort class="cursor-pointer hover:opacity-40" />
+        <div class="gap-2 items-center flex text-secondary">
+          <div @click="layout = 'grid'" :class="{
+            'border border-solid border-[#282828] rounded-full text-primary': layout === 'grid',
+          }">
+            <icons-sort class="transition-all duration-200 ease cursor-pointer hover:text-primary" />
           </div>
-          <div
-            @click="layout = 'list'"
-            :class="{
-              'border border-solid border-[#282828]': layout === 'list',
-            }"
-            class="rounded-full"
-          >
-            <icons-list class="cursor-pointer hover:opacity-40" />
+          <div @click="layout = 'list'" :class="{
+            'border border-solid border-[#282828] rounded-full text-primary': layout === 'list',
+          }" class="w-12 h-12 flex justify-center items-center">
+            <icons-list class="transition-all duration-200 ease cursor-pointer hover:text-primary" />
           </div>
         </div>
       </div>
-      <div
-        v-if="layout === 'list'"
-        class="mt-3 p-4 overflow-x-auto custom-scroll"
-      >
-        <table
-          class="border-separate border-spacing-0 text-sm text-gray-200 p-1 min-w-full"
-        >
-          <thead
-            class="w-full table-fixed rounded-xl text-tertiary text-xs font-normal leading-[160%] tracking-[0.048px]"
-          >
-            <tr
-              class="rounded-[16px] p-4 hover:!bg-background-highlight border-b-[2px] border-stroke-subtle"
-            >
-              <th class="p-4 rounded-l-[16px]">
-                <label
-                  class="relative w-6 h-6 flex items-center justify-center border-2 border-[#727272] rounded-[6px] cursor-pointer"
-                >
-                  <input
-                    type="checkbox"
-                    v-model="selectAll"
-                    @change="toggleAll"
-                    class="peer hidden"
-                  />
-                  <span
-                    class="absolute inset-0 flex shrink-0 items-center justify-center peer-checked:before:content-['✔'] peer-checked:before:text-green-500 peer-checked:before:text-sm"
-                  ></span>
-                </label>
-              </th>
-              <th class="p-6 pl-4 text-left min-w-80 md:w-120">Product</th>
-              <th class="p-6 pl-4 text-left">Status</th>
-              <th class="p-6 pl-4 text-left">Price</th>
-              <th class="p-6 pl-4 text-left">Sales</th>
-              <th class="p-6 pl-4 text-left">Rating</th>
-              <th
-                class="p-6 pl-4 text-left rounded-r-[16px] hidden lg:table-cell"
-              >
-                Views
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-for="(item, index) in results"
-              :key="index"
-              class="rounded-[16px] outline-[1.5px] outline-solid outline-transparent hover:outline-[#313131] hover:bg-background-highlight group cursor-pointer"
-              :class="{
-                'bg-background-highlight': selected.includes(item),
-              }"
-              @click="toggleSelect(item)"
-            >
-              <td class="p-4 rounded-l-[16px]">
-                <label
-                  class="relative w-6 h-6 flex items-center shrink-0 justify-center border-2 border-[#727272] rounded-[6px] cursor-pointer"
-                  @click.stop
-                >
-                  <input
-                    type="checkbox"
-                    v-model="selected"
-                    :value="item"
-                    class="peer hidden"
-                  />
-                  <span
-                    class="absolute inset-0 flex items-center justify-center peer-checked:before:content-['✔'] peer-checked:before:text-green-500 peer-checked:before:text-sm"
-                  ></span>
-                </label>
-              </td>
-              <td class="p-4 w-full min-w-80 md:w-120">
-                <div class="flex items-center gap-3">
-                  <img
-                    :src="item.image"
-                    :alt="item.name"
-                    class="w-16 h-16 rounded-md object-cover"
-                  />
-                  <div class="w-full">
-                    <div class="font-medium text-white text-base">
-                      {{ item.name }}
-                    </div>
-                    <div
-                      class="text-sm text-gray-400 block group-hover:hidden duration-100"
-                    >
-                      {{ item.description }}
-                    </div>
-                    <div
-                      class="text-sm text-gray-400 hidden group-hover:flex gap-2 items-center duration-100 cursor-pointer"
-                    >
-                      <div
-                        class="flex items-center gap-1 hover:text-white"
-                        @click.stop="onEdit(item)"
-                      >
-                        <icons-edit-2 />
-                        <span>Edit</span>
-                      </div>
-                      <div
-                        class="flex items-center gap-1 hover:text-white"
-                        @click.stop.prevent="onDelete(item)"
-                      >
-                        <icons-trash-2 />
-                        <span>Delete</span>
-                      </div>
-                      <div
-                        class="flex items-center gap-1 hover:text-white"
-                        @click.stop
-                      >
-                        <icons-eye-2 />
-                        <span>Unpublish</span>
-                      </div>
-                    </div>
-                  </div>
+      <div v-if="layout === 'list'">
+        <DataTable :items="results" :columns="columns" :classTableTr="{
+          padding: 'pb-8 xs:px-4',
+          header: 'text-xs text-tertiary opacity-80 h-16.75 px-4',
+          body: 'h-24 hover:bg-background-highlight transition-all duration-200 ease px-4 group/setting rounded-[16px] outline-[1.5px] outline-solid outline-transparent hover:outline-[#313131]',
+          thInput: 'min-w-10 text-right',
+          tdInput: 'rounded-2xl w-10 text-right',
+        }">
+          <template #column-product="{ item }">
+            <div class="flex px-5 gap-5 items-center min-w-75">
+              <img :src="(item as Data).image" class="h-12 w-12 lg:h-16 lg:w-16 object-contain" />
+              <div class="flex flex-col justify-center relative">
+                <p class="font-semibold text-primary">{{ (item as Data).name }}</p>
+                <p class="lg:group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80">{{
+                  (item as
+                  Data).description }}
+                </p>
+                <div
+                  class="hidden lg:group-hover/setting:flex gap-2 h-6 relative -left-1 text-sm leading-[100%] font-semibold text-secondary transition-all duration-200 ease">
+                  <button class="setting-button" @click.stop="toggleEditModal((item as Data).id)">
+                    <icons-edit />
+                    <p class="">Edit</p>
+                  </button>
+                  <button class="setting-button" @click.stop="toggleDeleteModal((item as Data).id)">
+                    <icons-trash />
+                    <p class="">Delete</p>
+                  </button>
+                  <button class="setting-button">
+                    <icons-hide />
+                    <p class="">Unpublish</p>
+                  </button>
                 </div>
-              </td>
-              <td class="p-4">
-                <span
-                  class="px-2 py-1 text-sm rounded-md border font-medium"
-                  :class="
-                    item.status === 'Active'
-                      ? 'bg-green-500/10 text-green-400 border-green-500/30'
-                      : 'bg-red-500/10 text-red-400 border-red-500/30'
-                  "
-                >
-                  {{ item.status }}
-                </span>
-              </td>
-              <td class="p-4">${{ item.price }}</td>
-              <td class="p-4">
-                <div class="flex flex-nowrap items-center gap-2">
-                  <span>${{ item.sales.toLocaleString() }}</span>
-                  <div
-                    class="text-sm whitespace-nowrap hidden md:inline-block border border-solid rounded-[8px] bg-green-500/10 border-green-500/30 leading-[1] tracking-[0.175px] text-primary-02 py-1.5 px-2"
-                    :class="
-                      item.growth >= 0
-                        ? 'text-green-400'
-                        : 'text-red-400 bg-red-500/10  border-red-500/30'
-                    "
-                  >
-                    {{ item.growth >= 0 ? "↑" : "↓" }} {{ item.growth }}%
-                  </div>
+              </div>
+            </div>
+          </template>
+          <!-- Status -->
+          <template #column-status="{ item }">
+            <div class="flex items-center">
+              <badge-status :status="(item as Data).status" />
+            </div>
+          </template>
+          <!-- Price -->`
+          <template #column-price="{ item }">
+            <div class="text-primary">
+              ${{ (item as Data).price.toLocaleString() }}
+            </div>
+          </template>
+          <!-- Sales -->
+          <template #column-sales="{ item }">
+            <div class="flex gap-2 items-center">
+              <span class="text-primary">${{ (item as Data).sales.toLocaleString('en-US') }}</span>
+              <badge-trend :growth-rate="(item as Data).growth" />
+            </div>
+          </template>
+          <!-- Rating -->
+          <template #column-rating="{ item }">
+            <div class="flex items-center flex-nowrap gap-1">
+              <div class="text-secondary group-hover/setting:text-chart-yellow">
+                <icons-star />
+              </div>
+              <p class="whitespace-nowrap text-primary">
+                {{ (item as Data).rating }} <span class="!text-secondary">({{ (item as Data).reviews }})</span>
+              </p>
+            </div>
+            <div
+              class="flex lg:hidden gap-2 h-6 relative -left-1 text-sm leading-[100%] font-semibold text-secondary transition-all duration-200 ease">
+              <button class="setting-button" @click.stop="toggleEditModal((item as Data).id)">
+                <icons-edit />
+                <p class="">Edit</p>
+              </button>
+              <button class="setting-button" @click.stop="toggleDeleteModal((item as Data).id)">
+                <icons-trash />
+                <p class="">Delete</p>
+              </button>
+              <button class="setting-button">
+                <icons-hide />
+                <p class="">Unpublish</p>
+              </button>
+            </div>
+          </template>
+          <!-- Views -->
+          <template #column-views="{ item }">
+            <div class="flex gap-2 items-center">
+              <span class="text-primary">{{ formatNum((item as Data).views) }}</span>
+              <div class="w-8 h-1.5 rounded-xs bg-[#7b7b7b66]">
+                <div class="h-1.5 rounded-xs bg-chart-green"
+                  :style="{ width: (((item as Data).views ?? 0) / 300 * 100) + '%' }">
                 </div>
-              </td>
-              <td class="p-4">
-                <div class="flex items-center flex-nowrap gap-1">
-                  <UIcon
-                    name="ant-design:star-outlined"
-                    class="size-5 text-yellow-400 block group-hover:hidden"
-                  />
-                  <UIcon
-                    name="ant-design:star-filled"
-                    class="size-5 text-yellow-400 hidden group-hover:block"
-                  />
-                  <span class="whitespace-nowrap"
-                    >{{ item.rating }} ({{ item.reviews }})</span
-                  >
-                </div>
-              </td>
-              <td class="p-4 rounded-r-[16px] hidden lg:table-cell">
-                <div class="flex items-center gap-2">
-                  {{ item.views }}m
-                  <UProgress
-                    v-model="item.views"
-                    :max="300"
-                    color="success"
-                    class="hidden lg:block w-8"
-                  />
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+            </div>
+          </template>
+        </DataTable>
       </div>
-      <div
-        v-if="layout === 'grid'"
-        class="p-8 pt-5 grid md:grid-cols-[1fr_2fr_1fr] lg:grid-cols-4 xxl:grid-cols-5 gap-4 md:gap-6 overflow-hidden"
-      >
-        <ProductsDraftCard
-          v-for="(item, index) in results"
-          :key="item.id"
-          :id="item.id"
-          :title="item.name"
-          :image="item.image"
-          :price="item.price"
-          @edit="onEdit(item)"
-          @delete="onDelete(item)"
-          @editBefore="onEdit(results[index - 1])"
-          @editAfter="onEdit(results[index + 1])"
-          @deleteBefore="onDelete(results[index - 1])"
-          @deleteAfter="onDelete(results[index + 1])"
-          :class="index % 3 !== 1 ? 'md:opacity-0 lg:opacity-100' : ''"
-          v-bind="
-            index % 3 === 1
-              ? {
-                  'item-before': results[index - 1] || null,
-                  'item-after': results[index + 1] || null,
-                }
-              : {}
-          "
-        />
+      <div v-if="layout === 'grid'"
+        class="md:p-8 xs:py-5 grid xs:grid-cols-2 md:grid-cols-[1fr_2fr_1fr] lg:grid-cols-4 2xl:grid-cols-5 gap-4 md:gap-6 overflow-hidden">
+        <ProductsDraftCard v-for="(item, index) in results" :key="item.id" :id="item.id" :title="item.name"
+          :image="item.image" :price="item.price" @edit="toggleEditModal(item.id)" @delete="toggleDeleteModal(item.id)"
+          @editBefore="toggleEditModal(results[index - 1]?.id ?? null)"
+          @editAfter="toggleEditModal(results[index + 1]?.id ?? null)"
+          @deleteBefore="toggleDeleteModal(results[index - 1]?.id ?? null)"
+          @deleteAfter="toggleDeleteModal(results[index + 1]?.id ?? null)"
+          :class="index % 3 !== 1 ? 'md:opacity-0 lg:opacity-100' : ''" v-bind="index % 3 === 1 ? {
+            'item-before':
+              results[index - 1] || null, 'item-after': results[index + 1] || null,
+          } : {}" />
       </div>
     </div>
   </div>
 
-  <UModal
-    v-model:open="showEditModal"
-    :overlay="true"
-    title="Edit Item"
-    :ui="{
-      footer: 'flex !justify-end gap-2',
-    }"
-  >
-    <template #body
-      ><div
-        class="flex flex-col gap-4 overflow-y-auto max-h-[50vh] custom-scroll"
-      >
-        <UFormField label="Name">
-          <UInput
-            v-model="currentItem.name"
-            placeholder="Enter name"
-            class="w-full"
-          />
-        </UFormField>
-
-        <UFormField label="Description">
-          <UTextarea
-            v-model="currentItem.description"
-            placeholder="Enter description"
-            class="w-full"
-          />
-        </UFormField>
-
-        <div class="flex gap-2 w-full">
-          <UFormField label="Status" class="flex-1">
-            <USelect
-              v-model="currentItem.status"
-              :items="statusOptions"
-              class="w-full overflow-visible"
-              :popper="{ strategy: 'absolute' }"
-            />
-          </UFormField>
-
-          <UFormField label="Price" class="flex-1">
-            <UInput v-model="currentItem.price" type="number" class="w-full" />
-          </UFormField>
-        </div></div
-    ></template>
-    <template #footer>
-      <div class="flex gap-2">
-        <UButton
-          color="neutral"
-          variant="outline"
-          @click="showEditModal = false"
-        >
-          Cancel
-        </UButton>
-        <UButton color="success" @click="saveEdit">Save</UButton>
+  <modal-edit :isOpen="selectedEditId ? true : false" @close="toggleEditModal(null)" @save="saveEditModal">
+    <form class="flex gap-x-4 gap-y-4 flex-wrap" v-if="editProduct">
+      <div class="flex flex-col gap-1 xs:gap-2 w-full">
+        <div class="text-base xl:text-lg">Product name</div>
+        <input type="text" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
+          v-model="editProduct.name">
       </div>
-    </template>
-  </UModal>
-  <Transition name="fade-zoom">
-    <div
-      v-if="showDeleteConfirm"
-      class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-    >
-      <UCard class="w-[30dvw]">
-        <div class="p-3 space-y-4">
-          <h3 class="text-lg font-medium">Confirm Delete</h3>
-          <p>
-            Bạn có chắc chắn muốn xóa <b>{{ currentItem?.name }}</b> không?
-          </p>
-          <div class="flex justify-end gap-3">
-            <UButton
-              color="neutral"
-              variant="outline"
-              @click="showDeleteConfirm = false"
-              >Cancel</UButton
-            >
-            <UButton color="success" @click="confirmDelete">Delete</UButton>
-          </div>
+      <div class="flex flex-col gap-1 xs:gap-2 w-full">
+        <div class="text-base xl:text-lg">Product type</div>
+        <input type="text" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
+          v-model="editProduct.description">
+      </div>
+      <div class="flex flex-col gap-1 xs:gap-2 w-full xs:w-[calc(50%-8px)]">
+        <div class="text-base xl:text-lg">Product price</div>
+        <input type="number" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
+          v-model="editProduct.price">
+      </div>
+      <div class="flex flex-col gap-1 xs:gap-2 w-full xs:w-[calc(50%-8px)]">
+        <div class="text-base xl:text-lg">Product status</div>
+        <div class="flex justify-between items-center gap-5">
+          <label
+            class="flex justify-center items-center flex-1 h-12 border-3 rounded-xl cursor-pointer transition-colors duration-200 ease"
+            :class="editProduct.status === true
+              ? 'bg-primary-02 text-white border-primary-02'
+              : 'border-primary-02 text-primary-02 hover:text-white hover:bg-primary-02'">
+            <input type="radio" class="hidden" :value="true" v-model="editProduct.status" />
+            Active
+          </label>
+          <label
+            class="flex justify-center items-center flex-1 h-12 border-3 rounded-xl cursor-pointer transition-colors duration-200 ease"
+            :class="editProduct.status === false
+              ? 'bg-[#ff6a55] text-white border-[#ff6a55]'
+              : 'border-[#ff6a55] text-[#ff6a55] hover:text-white hover:bg-[#ff6a55]'">
+            <input type="radio" class="hidden" :value="false" v-model="editProduct.status" />
+            Offline
+          </label>
         </div>
-      </UCard>
-    </div>
-  </Transition>
+      </div>
+    </form>
+  </modal-edit>
+  <modal-delete :isOpen="selectedDeleteId ? true : false" @close="toggleDeleteModal(null)"
+    @delete="deleteProduct(selectedDeleteId)" />
 </template>
 <script setup lang="ts">
 import { h, resolveComponent } from "vue";
+import { useFormatNumber } from "~/composable/useFormatNumber";
 const UButton = resolveComponent("UButton");
 const UCheckbox = resolveComponent("UCheckbox");
 const UBadge = resolveComponent("UBadge");
 const UDropdownMenu = resolveComponent("UDropdownMenu");
 const UIcon = resolveComponent("UIcon");
 const value = ref("");
-const data = ref([
+const { formatNum } = useFormatNumber()
+type Data = {
+  id: number,
+  image: string,
+  name: string,
+  description: string,
+  status: boolean,
+  price: number,
+  sales: number,
+  growth: number,
+  rating: number,
+  reviews: number,
+  views: number
+}
+const data = ref<Data[]>([
   {
     id: 1,
     image: "/images/6.png",
     name: "Bento Pro v.2",
     description: "UI Design Kit",
-    status: "Active",
+    status: true,
     price: 98,
     sales: 3200,
     growth: 36.8,
@@ -348,7 +220,7 @@ const data = ref([
     image: "/images/5.png",
     name: "Dashboard Kit",
     description: "Admin Templates",
-    status: "Active",
+    status: true,
     price: 120,
     sales: 5400,
     growth: 22.5,
@@ -361,7 +233,7 @@ const data = ref([
     image: "/images/4.png",
     name: "Landing Page Kit",
     description: "Marketing UI Pack",
-    status: "Offline",
+    status: false,
     price: 79,
     sales: 2600,
     growth: -5.2,
@@ -374,7 +246,7 @@ const data = ref([
     image: "/images/3.png",
     name: "Mobile UI Kit",
     description: "iOS + Android",
-    status: "Offline",
+    status: true,
     price: 150,
     sales: 8800,
     growth: 48.1,
@@ -387,7 +259,7 @@ const data = ref([
     image: "/images/2.png",
     name: "E-commerce Kit",
     description: "Shop UI Components",
-    status: "Active",
+    status: true,
     price: 110,
     sales: 4200,
     growth: 18.4,
@@ -400,7 +272,7 @@ const data = ref([
     image: "/images/6.png",
     name: "Bento Pro v.2",
     description: "UI Design Kit",
-    status: "Active",
+    status: false,
     price: 98,
     sales: 3200,
     growth: 36.8,
@@ -409,89 +281,62 @@ const data = ref([
     views: 89,
   },
 ]);
-const keyword = ref("");
-const results = computed(() => {
-  const kw = keyword.value.trim().toLowerCase();
-  return kw
-    ? data.value.filter(i => i.name.toLowerCase().includes(kw))
-    : data.value;
-});
+const columns = [
+  { slot: "product", label: "Product", headerClass: "text-left px-5 min-w-70 w-160" },
+  { slot: "status", label: "Status", headerClass: "text-left min-w-23 w-49.5" },
+  { slot: "price", label: "Price", headerClass: "text-left min-w-18 w-44.5" },
+  { slot: "sales", label: "Sales", headerClass: "text-left min-w-40 w-65.5" },
+  { slot: "rating", label: "Rating", headerClass: "text-left min-w-23 w-49.5", cellClass: "rounded-r-2xl flex h-24 gap-9 justify-between lg:table-cell items-center" },
+  { slot: "views", label: "Views", headerClass: "text-left hidden xl:table-cell w-24", cellClass: "rounded-r-2xl hidden xl:table-cell" },
+]
+const selectedEditId = ref<number | null>(null)
+const selectedDeleteId = ref<number | null>(null)
+const editProduct = ref<Partial<Data | null>>(null)
+const toggleEditModal = (id: number | null) => {
+  selectedEditId.value = id
+  const prod = data.value.find(p => p.id === id)
+  editProduct.value = { ...prod }
+}
+const saveEditModal = () => {
+  const index = data.value.findIndex(p => p.id === editProduct.value?.id)
+  data.value[index] = { ...data.value[index], ...editProduct.value } as Data
+}
+watch(data, (newVal) => {
+  results.value = [...newVal]
+}, { deep: true })
+const toggleDeleteModal = (id: number | null) => {
+  selectedDeleteId.value = id
+}
+const deleteProduct = (id: number | null) => {
+  data.value = data.value.filter(p => p.id !== id)
+}
+
+const results = ref<Data[]>([...data.value])
 
 const handleSearch = () => {
-  keyword.value = value.value;
+  results.value = data.value.filter((p) =>
+    p.name.toLowerCase().includes(value.value.toLowerCase())
+  );
 };
-const statusOptions = ref(["Active", "Offline"]);
-const selected = ref<any[]>([]);
-const selectAll = ref(false);
-const layout = ref("list");
-const toggleAll = () => {
-  if (selectAll.value) {
-    selected.value = [...data.value];
-  } else {
-    selected.value = [];
-  }
-};
+
+
+const layout = ref("grid");
+
 definePageMeta({
   title: "Released",
 });
-const toggleSelect = (item: any) => {
-  if (selected.value.includes(item)) {
-    selected.value = selected.value.filter((i) => i !== item);
-  } else {
-    selected.value.push(item);
-  }
-};
-import { ref } from "vue";
-
-const showEditModal = ref(false);
-const showDeleteConfirm = ref(false);
-const currentItem = ref({
-  id: 0,
-  image: "",
-  name: "",
-  description: "",
-  status: "",
-  price: 0,
-  sales: 0,
-  growth: 0,
-  rating: 0,
-  reviews: 0,
-  views: 0,
-});
-
-const onEdit = (item: any) => {
-  currentItem.value = { ...item };
-  showEditModal.value = true;
-};
-
-const onDelete = (item: any) => {
-  currentItem.value = { ...item };
-  showDeleteConfirm.value = true;
-};
-
-const confirmDelete = () => {
-  data.value = data.value.filter((d) => d.id !== currentItem.value.id);
-  showDeleteConfirm.value = false;
-};
-const saveEdit = () => {
-  const index = data.value.findIndex(
-    (item) => item.id === currentItem.value.id
-  );
-  if (index !== -1) {
-    data.value[index] = { ...currentItem.value };
-  }
-  showEditModal.value = false;
-};
 </script>
 
 <style lang="scss" scoped>
 :deep(tr.absolute.w-full.h-px) {
   background-color: var(--color-stroke-subtle);
 }
+
 :deep(input::placeholder) {
   color: #7b7b7b !important;
   opacity: 1;
 }
+
 input[type="checkbox"] {
   accent-color: var(--color-primary-02);
   color: white;

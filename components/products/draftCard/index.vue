@@ -2,77 +2,56 @@
   <div class="md:relative lg:static w-full" :id="`draft-${id}`" :class="class">
     <div class="group relative">
       <div class="h-auto w-full overflow-hidden rounded-4xl">
-        <img
-          :src="image"
-          alt=""
-          class="h-[230px] w-full object-cover md:!w-[460px]"
-        />
+        <img :src="image" alt="" class="h-[230px] w-full object-cover md:!w-[460px]" />
       </div>
       <div class="flex gap-1 mt-3.5 font-semibold">
-        <span
-          class="flex-1 items-center text-base leading-[1.5] tracking-[0.024px] text-primary line-clamp-1"
-          >{{ title }}</span
-        >
+        <span class="flex-1 items-center text-base leading-[1.5] tracking-[0.024px] text-primary line-clamp-1">{{ title
+        }}</span>
         <div
-          class="border border-solid rounded-[999px] bg-green-500/10 border-green-500/30 leading-[1] tracking-[0.175px] text-primary-02 text-sm py-1.75 px-3"
-        >
+          class="w-12 h-7 border-[1.5px] border-solid rounded-lg bg-primary-02/5 border-primary-02/15 leading-[1] tracking-[0.175px] text-primary-02 text-sm flex justify-center items-center">
           ${{ price }}
         </div>
       </div>
       <div class="flex items-center gap-2 mb-2 group-hover:opacity-0 py-1">
-        <UIcon name="fa6-regular:clock" class="size-4 text-secondary" />
+        <icons-clock  class=" text-secondary" />
         <span class="text-secondary text-xs leading-[1.6] tracking-[0.048px]">{{
           formatDate(date || "2044-04-09T15:55:00Z")
         }}</span>
       </div>
       <div
-        class="absolute bottom-0 left-0 text-xs text-gray-400 hidden group-hover:flex gap-2 items-center duration-200 cursor-pointer"
-      >
+        class="absolute bottom-0 left-0 text-xs text-gray-400 hidden group-hover:flex gap-2 items-center duration-200 cursor-pointer">
         <div
           class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
-          @click.stop="$emit('edit')"
-        >
+          @click.stop="$emit('edit')">
           <icons-edit-2 />
           <span>Edit</span>
         </div>
         <div
           class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
-          @click.stop.prevent="$emit('delete')"
-        >
+          @click.stop.prevent="$emit('delete')">
           <icons-trash-2 />
           <span>Delete</span>
         </div>
         <div
           class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
-          @click.stop
-        >
+          @click.stop>
           <icons-calendar-2 />
           <span>Schedule</span>
         </div>
       </div>
     </div>
 
-    <div
-      v-if="itemBefore"
+    <div v-if="itemBefore"
       class="absolute z-2 top-0 right-full h-full mr-6 w-full groupBefore hidden md:block lg:hidden"
-      :id="`draft-${itemBefore.id}`"
-      :class="class"
-    >
+      :id="`draft-${itemBefore.id}`" :class="class">
       <div class="h-auto w-full overflow-hidden rounded-4xl">
-        <img
-          :src="itemBefore.image"
-          alt=""
-          class="h-[230px] w-full object-cover md:!w-[460px]"
-        />
+        <img :src="itemBefore.image" alt="" class="h-[230px] w-full object-cover md:!w-[460px]" />
       </div>
       <div class="flex gap-1 mt-3.5 font-semibold">
-        <span
-          class="flex-1 items-center text-base leading-[1.5] tracking-[0.024px] text-primary line-clamp-1"
-          >{{ itemBefore.title || itemBefore.name }}</span
-        >
+        <span class="flex-1 items-center text-base leading-[1.5] tracking-[0.024px] text-primary line-clamp-1">{{
+          itemBefore.title || itemBefore.name }}</span>
         <div
-          class="border border-solid rounded-[999px] bg-green-500/10 border-green-500/30 leading-[1] tracking-[0.175px] text-primary-02 text-sm py-1.75 px-3"
-        >
+          class="border border-solid rounded-[999px] bg-green-500/10 border-green-500/30 leading-[1] tracking-[0.175px] text-primary-02 text-sm py-1.75 px-3">
           ${{ itemBefore.price }}
         </div>
       </div>
@@ -82,53 +61,37 @@
           formatDate(itemBefore.date || "2044-04-09T15:55:00Z")
         }}</span>
       </div>
-      <div
-        class="option text-xs text-gray-400 hidden gap-2 items-center duration-200 cursor-pointer"
-      >
+      <div class="option text-xs text-gray-400 hidden gap-2 items-center duration-200 cursor-pointer">
         <div
           class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-solid hover:outline-[1.5px] hover:outline-stroke p-1"
-          @click.stop="$emit('editBefore')"
-        >
+          @click.stop="$emit('editBefore')">
           <icons-edit-2 />
           <span>Edit</span>
         </div>
         <div
           class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
-          @click.stop.prevent="$emit('deleteBefore')"
-        >
+          @click.stop.prevent="$emit('deleteBefore')">
           <icons-trash-2 />
           <span>Delete</span>
         </div>
         <div
           class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
-          @click.stop
-        >
+          @click.stop>
           <icons-calendar-2 />
           <span>Schedule</span>
         </div>
       </div>
     </div>
-    <div
-      v-if="itemAfter"
-      class="absolute z-2 top-0 left-full h-full ml-6 w-full groupAfter hidden md:block lg:hidden"
-      :id="`draft-${itemAfter.id}`"
-      :class="class"
-    >
+    <div v-if="itemAfter" class="absolute z-2 top-0 left-full h-full ml-6 w-full groupAfter hidden md:block lg:hidden"
+      :id="`draft-${itemAfter.id}`" :class="class">
       <div class="h-auto w-full overflow-hidden rounded-4xl">
-        <img
-          :src="itemAfter.image"
-          alt=""
-          class="h-[230px] w-full object-cover md:!w-[460px]"
-        />
+        <img :src="itemAfter.image" alt="" class="h-[230px] w-full object-cover md:!w-[460px]" />
       </div>
       <div class="flex gap-1 mt-3.5 font-semibold">
-        <span
-          class="flex-1 items-center text-base leading-[1.5] tracking-[0.024px] text-primary line-clamp-1"
-          >{{ itemAfter.title || itemAfter.name }}</span
-        >
+        <span class="flex-1 items-center text-base leading-[1.5] tracking-[0.024px] text-primary line-clamp-1">{{
+          itemAfter.title || itemAfter.name }}</span>
         <div
-          class="border border-solid rounded-[999px] bg-green-500/10 border-green-500/30 leading-[1] tracking-[0.175px] text-primary-02 text-sm py-1.75 px-3"
-        >
+          class="border border-solid rounded-[999px] bg-green-500/10 border-green-500/30 leading-[1] tracking-[0.175px] text-primary-02 text-sm py-1.75 px-3">
           ${{ itemAfter.price }}
         </div>
       </div>
@@ -138,27 +101,22 @@
           formatDate(itemAfter.date || "2044-04-09T15:55:00Z")
         }}</span>
       </div>
-      <div
-        class="option text-xs text-gray-400 hidden gap-2 items-center duration-200 cursor-pointer"
-      >
+      <div class="option text-xs text-gray-400 hidden gap-2 items-center duration-200 cursor-pointer">
         <div
           class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
-          @click.stop="$emit('editAfter')"
-        >
+          @click.stop="$emit('editAfter')">
           <icons-edit-2 />
           <span>Edit</span>
         </div>
         <div
           class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
-          @click.stop.prevent="$emit('deleteAfter')"
-        >
+          @click.stop.prevent="$emit('deleteAfter')">
           <icons-trash-2 />
           <span>Delete</span>
         </div>
         <div
           class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
-          @click.stop
-        >
+          @click.stop>
           <icons-calendar-2 />
           <span>Schedule</span>
         </div>
@@ -233,6 +191,7 @@ function formatDate(value) {
 .groupAfter:hover .option {
   display: flex;
 }
+
 .groupBefore:hover .time,
 .groupAfter:hover .time {
   display: none;

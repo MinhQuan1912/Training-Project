@@ -1,221 +1,65 @@
 <template>
   <div class="product-list">
     <!-- Header -->
-    <div
-      class="flex flex-col sm:flex-row p-3 justify-between sm:items-center gap-2 sm:gap-0"
-    >
-      <div
-        class="flex flex-col sm:flex-row xs:pl-5 sm:items-center justify-between gap-2 sm:gap-6"
-      >
-        <h6
-          class="text-primary text-base xs:text-xl leading-[145%] font-semibold"
-        >
+    <div class="flex flex-col sm:flex-row p-3 justify-between sm:items-center gap-2 sm:gap-0">
+      <div class="flex flex-col sm:flex-row xs:pl-5 sm:items-center justify-between gap-2 sm:gap-6">
+        <h6 class="text-primary text-base xs:text-xl leading-[145%] font-semibold">
           Products
         </h6>
         <div
-          class="flex bg-background-surface1 border-[1.5px] border-stroke-subtle w-full sm:w-70 rounded-full p-3 pr-5 gap-2 text-secondary"
-        >
+          class="flex bg-background-surface1 border-[1.5px] border-stroke-subtle w-full sm:w-70 rounded-full p-3 pr-5 gap-2 text-secondary">
           <icons-search class="min-w-6" />
-          <input
-            type="search"
-            placeholder="Search products"
-            class="w-full text-sm leading-[150%]"
-            v-model="searchInput"
-            @keyup.enter="handleSearchProduct"
-          />
+          <input type="search" placeholder="Search products" class="w-full text-sm leading-[150%]" v-model="searchInput"
+            @keyup.enter="handleSearchProduct" />
           <div
             class="h-6 min-w-6 bg-background-surface1 text-secondary rounded-full flex opacity-0 justify-center items-center hover:bg-primary"
-            :class="{ 'opacity-100 cursor-pointer': searchInput }"
-            @click="clearSearchInput"
-          >
+            :class="{ 'opacity-100 cursor-pointer': searchInput }" @click="clearSearchInput">
             <icons-close class="w-4 h-4" />
           </div>
         </div>
       </div>
       <div
-        class="flex sm:hidden m:flex gap-1 text-sm leading-[100%] font-semibold h-12 w-full s:w-auto overflow-x-auto s:overflow-x-visible"
-      >
-        <div
-          v-for="(tab, idx) in tabs"
-          :key="idx"
+        class="flex sm:hidden m:flex gap-1 text-sm leading-[100%] font-semibold h-12 w-full s:w-auto overflow-x-auto s:overflow-x-visible">
+        <div v-for="(tab, idx) in tabs" :key="idx"
           class="flex justify-center items-center p-4 sm:p-6 rounded-[48px] cursor-pointer transition-all duration-300 whitespace-nowrap"
-          @click="activeTab = tab"
-          :class="{
+          @click="activeTab = tab" :class="{
             'text-primary border-[1.5px] border-stroke': activeTab === tab,
             'text-secondary border border-transparent': activeTab !== tab,
-          }"
-        >
+          }">
           {{ tab }}
         </div>
       </div>
       <div class="hidden sm:flex m:hidden items-center">
-        <select-dropdown
-          :data="tabs"
-          v-model:selected-option="activeTab"
-          addition-class="h-12 "
-        />
+        <select-dropdown :data="tabs" v-model:selected-option="activeTab" addition-class="h-12 " />
       </div>
     </div>
-    <!-- Table -->
-    <!-- <div class="xs:px-4 pb-8 overflow-x-auto min-w-full">
-      <table class="min-w-full text-sm text-primary leading-[150%]">
-        <thead>
-          <tr
-            class="justify-between items-center gap-6 px-4 text-xs text-tertiary opacity-80 h-16.75"
-          >
-            <th
-              class="w-94 2xl:min-w-128 cursor-pointer group"
-              @click="chooseAll"
-            >
-              <div class="flex gap-5 items-center px-4">
-                <input
-                  type="checkbox"
-                  class="checkbox group-hover:!border-shade05-50"
-                  :checked="selectedAll"
-                />
-                Product
-              </div>
-            </th>
-            <th class="text-left">Status</th>
-            <th class="text-left">Price</th>
-            <th class="text-left">Sales</th>
-            <th class="text-left">Views</th>
-            <th class="text-left hidden xl:table-cell">Likes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="product in searchResult" :key="product.id" class="h-24 rounded-xl hover:bg-background-highlight outline outline-solid outline-transparent hover:outline-shade05-50 group
-                        transition-all duration-200 ease" @click="handleSelectRow(product.id)">
-            
-            <td class="rounded-l-xl group/setting">
-              <div class="flex gap-5 items-center min-w-75">
-                <input
-                  type="checkbox"
-                  class="checkbox group-hover:!border-shade05-50"
-                  v-model="selectedId"
-                  :value="product.id"
-                />
-                <img
-                  :src="product.image"
-                  class="h-12 w-12 md:h-16 md:w-16 object-contain"
-                />
-                <div class="flex flex-col justify-center">
-                  <p class="font-semibold">{{ product.name }}</p>
-                  <p
-                    class="min-h-6 text-sm text-secondary group-hover/setting:hidden transition-all duration-200 ease line-clamp-2"
-                  >
-                    {{ product.type }}
-                  </p>
-                  <div
-                    class="hidden group-hover/setting:flex gap-2 h-6 relative -left-1 text-sm leading-[100%] font-semibold text-secondary transition-all duration-200 ease"
-                  >
-                    <button class="setting-button">
-                      <icons-edit />
-                      <p class="">Edit</p>
-                    </button>
-                    <button class="setting-button">
-                      <icons-trash />
-                      <p class="">Delete</p>
-                    </button>
-                    <button class="setting-button">
-                      <icons-share />
-                      <p class="">Share</p>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </td>
-            
-            <td class="min-w-26 flex-1">
-              <badge-status :status="product.status" class="w-20" />
-            </td>
-            
-            <td class="min-w-21 flex-1">
-              <div class="min-w-21 flex-1">${{ product.price.toFixed(2) }}</div>
-            </td>
-            
-            <td class="min-w-42 flex-1">
-              <div class="flex gap-2 items-center">
-                <span>${{ product.sales.value?.toLocaleString("en-US") }}</span>
-                <badge-trend :growth-rate="product.sales.growthRate" />
-              </div>
-            </td>
-            
-            <td class="min-w-24 flex-1 ">
-              <div class="flex gap-2 items-center">
-                <span>{{
-                  product.views.current ? formatNum(product.views.current) : 0
-                }}</span>
-                <div class="w-8 h-1.5 rounded-xs bg-[#7B7B7B66]">
-                  <div
-                    class="h-1.5 rounded-xs bg-chart-green"
-                    :style="{
-                      width:
-                        product.views.current && product.views.kpi
-                          ? (product.views.current / product.views.kpi) * 100 +
-                            '%'
-                          : '0%',
-                    }"
-                  ></div>
-                </div>
-              </div>
-            </td>
-            
-            <td class="w-24 hidden xl:table-cell rounded-r-xl">
-              <div class="flex gap-2 items-center">
-                <span>{{ product.likes.current }}</span>
-                <div class="w-8 h-1.5 rounded-xs bg-[#7B7B7B66]">
-                  <div
-                    class="h-1.5 rounded-xs bg-chart-green"
-                    :style="{
-                      width:
-                        product.likes.current && product.likes.kpi
-                          ? (product.likes.current / product.likes.kpi) * 100 +
-                            '%'
-                          : '0%',
-                    }"
-                  ></div>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div> -->
-    <data-table
-      :items="searchResult"
-      :columns="columns"
-      :classTableTr="{
-        padding: 'pb-8 px-4',
-        header: 'text-xs text-tertiary opacity-80 h-16.75 px-4',
-        body: 'h-24 hover:bg-background-highlight transition-all duration-200 ease px-4 group/setting',
-        thInput: 'min-w-10 text-right',
-        tdInput: 'rounded-2xl w-10 text-right',
-      }"
-    >
+    <data-table :items="searchResult" :columns="columns" :classTableTr="{
+      padding: 'pb-8 xs:px-4',
+      header: 'text-xs text-tertiary opacity-80 h-16.75 px-4',
+      body: 'h-24 hover:bg-background-highlight transition-all duration-200 ease px-4 group/setting rounded-[16px] outline-[1.5px] outline-solid outline-transparent hover:outline-[#313131]',
+      thInput: 'min-w-10 text-right',
+      tdInput: 'rounded-2xl w-10 text-right',
+    }">
       <!-- Product -->
       <template #column-product="{ item }">
         <div class="flex px-5 gap-5 items-center min-w-75">
           <img :src="(item as productList).image" class="h-12 w-12 lg:h-16 lg:w-16 object-contain" />
           <div class="flex flex-col justify-center relative">
             <p class="font-semibold text-primary">{{ (item as productList).name }}</p>
-            <p class="group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80">{{ (item as
-              productList).type }}
+            <p class="lg:group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80">{{
+              (item as
+                productList).type }}
             </p>
             <div
-              class="hidden group-hover/setting:flex gap-2 h-6 relative -left-1 text-sm leading-[100%] font-semibold text-secondary transition-all duration-200 ease">
+              class="hidden lg:group-hover/setting:flex gap-2 h-6 relative -left-1 text-sm leading-[100%] font-semibold text-secondary transition-all duration-200 ease">
               <button class="setting-button" @click.stop="toggleEditModal((item as productList).id)">
                 <icons-edit />
                 <p class="">Edit</p>
               </button>
-              <modal-edit :isOpen="selectedEditId === (item as productList).id" @close="toggleEditModal(null)"
-                :item="(item as productList)" @save="saveEditModal" />
               <button class="setting-button" @click.stop="toggleDeleteModal((item as productList).id)">
                 <icons-trash />
                 <p class="">Delete</p>
               </button>
-              <modal-delete :isOpen="selectedDeleteId === (item as productList).id" @close="toggleDeleteModal(null)"
-                :item="(item as productList)" @delete="deleteProduct" />
               <button class="setting-button">
                 <icons-share />
                 <p class="">Share</p>
@@ -253,6 +97,21 @@
             </div>
           </div>
         </div>
+        <div
+          class="flex lg:hidden gap-2 h-6 relative -left-1 text-sm leading-[100%] font-semibold text-secondary transition-all duration-200 ease">
+          <button class="setting-button" @click.stop="toggleEditModal((item as productList).id)">
+            <icons-edit />
+            <p class="">Edit</p>
+          </button>
+          <button class="setting-button" @click.stop="toggleDeleteModal((item as productList).id)">
+            <icons-trash />
+            <p class="">Delete</p>
+          </button>
+          <button class="setting-button">
+            <icons-share />
+            <p class="">Share</p>
+          </button>
+        </div>
       </template>
       <!-- Likes -->
       <template #column-likes="{ item }">
@@ -267,6 +126,49 @@
       </template>
     </data-table>
   </div>
+
+  <modal-edit :isOpen="selectedEditId ? true : false" @close="toggleEditModal(null)" @save="saveEditModal">
+    <form class="flex gap-x-4 gap-y-4 flex-wrap" v-if="editProduct" >
+      <div class="flex flex-col gap-1 xs:gap-2 w-full">
+        <div class="text-base xl:text-lg">Product name</div>
+        <input type="text" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
+          v-model="editProduct.name">
+      </div>
+      <div class="flex flex-col gap-1 xs:gap-2 w-full">
+        <div class="text-base xl:text-lg">Product type</div>
+        <input type="text" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
+          v-model="editProduct.type">
+      </div>
+      <div class="flex flex-col gap-1 xs:gap-2 w-full xs:w-[calc(50%-8px)]">
+        <div class="text-base xl:text-lg">Product price</div>
+        <input type="number" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
+          v-model="editProduct.price">
+      </div>
+      <div class="flex flex-col gap-1 xs:gap-2 w-full xs:w-[calc(50%-8px)]">
+        <div class="text-base xl:text-lg">Product status</div>
+        <div class="flex justify-between items-center gap-5">
+          <label
+            class="flex justify-center items-center flex-1 h-12 border-3 rounded-xl cursor-pointer transition-colors duration-200 ease"
+            :class="editProduct.status === true
+              ? 'bg-primary-02 text-white border-primary-02'
+              : 'border-primary-02 text-primary-02 hover:text-white hover:bg-primary-02'">
+            <input type="radio" class="hidden" :value="true" v-model="editProduct.status" />
+            Active
+          </label>
+          <label
+            class="flex justify-center items-center flex-1 h-12 border-3 rounded-xl cursor-pointer transition-colors duration-200 ease"
+            :class="editProduct.status === false
+              ? 'bg-[#ff6a55] text-white border-[#ff6a55]'
+              : 'border-[#ff6a55] text-[#ff6a55] hover:text-white hover:bg-[#ff6a55]'">
+            <input type="radio" class="hidden" :value="false" v-model="editProduct.status" />
+            Offline
+          </label>
+        </div>
+      </div>
+    </form>
+  </modal-edit>
+  <modal-delete :isOpen="selectedDeleteId ? true : false" @close="toggleDeleteModal(null)"
+    @delete="deleteProduct(selectedDeleteId)" />
 </template>
 
 <script setup lang="ts">
@@ -296,7 +198,7 @@ const columns = [
   {
     label: "Product",
     slot: "product",
-    headerClass: "text-left min-w-85  px-5",
+    headerClass: "text-left min-w-85 px-5",
   },
   { label: "Status", slot: "status", headerClass: "text-left min-w-26 w-50" },
   { label: "Price", slot: "price", headerClass: "text-left min-w-21 w-45" },
@@ -305,7 +207,7 @@ const columns = [
     label: "Views",
     slot: "views",
     headerClass: "text-left min-w-24 w-54",
-    cellClass: "rounded-r-2xl",
+    cellClass: "rounded-r-2xl flex h-24 gap-3 justify-between lg:table-cell items-center",
   },
   {
     label: "Likes",
@@ -421,17 +323,16 @@ const selectedEditId = ref<number | null>(null)
 const selectedDeleteId = ref<number | null>(null)
 const searchInput = ref("");
 const searchResult = ref<productList[]>([...productList.value]);
-const selectedId = ref<number[]>([]);
-const selectedAll = computed(() => {
-  return selectedId.value.length === productList.value.length;
-});
+const editProduct = ref<Partial<productList | null>>(null)
+
 const toggleEditModal = (id: number | null) => {
   selectedEditId.value = id
+  const prod = productList.value.find(p => p.id === id)
+  editProduct.value = { ...prod }
 }
-const saveEditModal = (newProd: productList) => {
-  const index = productList.value.findIndex(p => p.id === newProd.id)
-  productList.value[index] = { ...productList.value[index], ...newProd }
-  toggleEditModal(null)
+const saveEditModal = () => {
+  const index = productList.value.findIndex(p => p.id === editProduct.value?.id)
+  productList.value[index] = { ...productList.value[index], ...editProduct.value } as productList
 }
 watch(productList, (newVal) => {
   searchResult.value = [...newVal]
@@ -439,23 +340,9 @@ watch(productList, (newVal) => {
 const toggleDeleteModal = (id: number | null) => {
   selectedDeleteId.value = id
 }
-const deleteProduct = (id: number) => {
+const deleteProduct = (id: number | null) => {
   productList.value = productList.value.filter(p => p.id !== id)
 }
-const chooseAll = () => {
-  if (selectedAll.value) {
-    selectedId.value = [];
-  } else {
-    selectedId.value = productList.value.map((p) => p.id);
-  }
-};
-const handleSelectRow = (id: number) => {
-  if (selectedId.value.includes(id)) {
-    selectedId.value = selectedId.value.filter((i) => i !== id);
-  } else {
-    selectedId.value.push(id);
-  }
-};
 const handleSearchProduct = () => {
   searchResult.value = productList.value.filter((p) =>
     p.name.toLowerCase().includes(searchInput.value.toLowerCase())
@@ -498,24 +385,5 @@ td:first-child {
   padding-right: 24px;
 }
 
-.setting-button {
-  display: flex;
-  padding: 4px;
-  padding-left: 6px;
-  justify-content: space-between;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-  border: 1.5px solid transparent;
 
-  &:hover {
-    border: 1.5px solid var(--color-shade05-50);
-    border-radius: 6px;
-    color: var(--color-primary);
-
-    p {
-      opacity: 80%;
-    }
-  }
-}
 </style>
