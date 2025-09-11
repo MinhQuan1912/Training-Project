@@ -12,69 +12,13 @@
       text-class="text-secondary"
     />
   </div>
-  <!-- <div class="xs:px-5 sm:pt-4 overflow-x-auto min-w-full">
-        <table class="w-full text-sm leading-[150%] text-primary">
-            <thead class="block ">
-                <tr class="text-xs leading-[160%] text-tertiary flex gap-6">
-                    <th class="flex-1 py-5 text-left">Week</th>
-                    <th class="flex-1 py-5 text-left">Products</th>
-                    <th class="flex-1 py-5 text-left">Views</th>
-                    <th class="flex-1 py-5 text-left">Likes</th>
-                    <th class="flex-1 py-5 text-left hidden 2xl:table-cell">Comments</th>
-                </tr>
-            </thead>
-            <tbody class="block overflow-y-auto max-h-34 min-w-150 overflow-x-auto">
-                <tr v-for="(item, idx) in filterActivities" :key="idx"
-                    class="flex gap-6 h-17 border-t border-stroke-subtle w-full">
-                   
-                    <td class="py-4 flex-1 flex items-center">{{ item.week }}</td>
-                    
-                    <td class="py-4 flex-1 flex items-center">
-                        <div class="flex items-center gap-2">
-                            {{ formatNum(item.product.value) }}
-                            <span v-if="item.product.growthRate">
-                                <badge-trend :growth-rate="item.product.growthRate" />
-                            </span>
-                        </div>
-                    </td>
-                    
-                    <td class="py-4 flex-1 flex items-center">
-                        <div class="flex items-center gap-2">
-                            {{ formatNum(item.view.value) }}
-                            <span v-if="item.view.growthRate">
-                                <badge-trend :growth-rate="item.view.growthRate" />
-                            </span>
-                        </div>
-                    </td>
-                   
-                    <td class="py-4 flex-1 flex items-center    ">
-                        <div class="flex items-center gap-2">
-                            {{ item.like.value }}
-                            <span v-if="item.like.growthRate">
-                                <badge-trend :growth-rate="item.like.growthRate" />
-                            </span>
-                        </div>
-                    </td>
-                    
-                    <td class="py-4 hidden 2xl:table-cell flex-1">
-                        <div class="flex items-center gap-2">
-                            {{ item.comment.value }}
-                            <span v-if="item.comment.growthRate">
-                                <badge-trend :growth-rate="item.comment.growthRate" />
-                            </span>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div> -->
   <data-table
     :items="filterActivities"
     :columns="columns"
     :class-table-tr="{
       padding: 'px-5 pt-4',
       header: 'flex gap-6 justify-between items-center',
-      body: 'flex gap-6 border-t border-stroke-subtle w-full',
+      body: 'flex gap-6 border-t border-stroke-subtle w-full h-17',
       thInput: 'hidden',
       tdInput: 'hidden',
     }"
@@ -84,16 +28,16 @@
     <!-- Week -->
     <template #column-week="{ item }">
       <div class="text-primary text-sm leading-[150%]">
-        {{ item.week }}
+        {{ (item as activityRow).week }}
       </div>
     </template>
 
     <!-- Products -->
     <template #column-products="{ item }">
       <div class="flex items-center gap-2 text-primary text-sm leading-[150%]">
-        {{ formatNum(item.product.value) }}
-        <span v-if="item.product.growthRate">
-          <badge-trend :growth-rate="item.product.growthRate" />
+        {{ formatNum((item as activityRow).product.value) }}
+        <span v-if="(item as activityRow).product.growthRate">
+          <badge-trend :growth-rate="(item as activityRow).product.growthRate" />
         </span>
       </div>
     </template>
@@ -101,9 +45,9 @@
     <!-- Views -->
     <template #column-views="{ item }">
       <div class="flex items-center gap-2 text-primary text-sm leading-[150%]">
-        {{ formatNum(item.view.value) }}
-        <span v-if="item.view.growthRate">
-          <badge-trend :growth-rate="item.view.growthRate" />
+        {{ formatNum((item as activityRow).view.value) }}
+        <span v-if="(item as activityRow).view.growthRate">
+          <badge-trend :growth-rate="(item as activityRow).view.growthRate" />
         </span>
       </div>
     </template>
@@ -111,9 +55,9 @@
     <!-- Likes -->
     <template #column-likes="{ item }">
       <div class="flex items-center gap-2 text-primary text-sm leading-[150%]">
-        {{ item.like.value }}
-        <span v-if="item.like.growthRate">
-          <badge-trend :growth-rate="item.like.growthRate" />
+        {{ (item as activityRow).like.value }}
+        <span v-if="(item as activityRow).like.growthRate">
+          <badge-trend :growth-rate="(item as activityRow).like.growthRate" />
         </span>
       </div>
     </template>
@@ -121,9 +65,9 @@
     <!-- Comments -->
     <template #column-comments="{ item }">
       <div class="flex items-center gap-2 text-primary text-sm leading-[150%]">
-        {{ item.comment.value }}
-        <span v-if="item.comment.growthRate">
-          <badge-trend :growth-rate="item.comment.growthRate" />
+        {{ (item as activityRow).comment.value }}
+        <span v-if="(item as activityRow).comment.growthRate">
+          <badge-trend :growth-rate="(item as activityRow).comment.growthRate" />
         </span>
       </div>
     </template>

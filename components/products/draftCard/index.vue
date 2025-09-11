@@ -2,7 +2,7 @@
   <div class="md:relative lg:static w-full" :id="`draft-${id}`" :class="class">
     <div class="group relative">
       <div class="h-auto w-full overflow-hidden rounded-4xl">
-        <img :src="image" alt="" class="h-[230px] w-full object-cover md:!w-[460px]" />
+        <img loading="lazy" :src="image" alt="" class="h-[230px] w-full object-cover md:!w-[460px]" />
       </div>
       <div class="flex gap-1 mt-3.5 font-semibold">
         <span class="flex-1 items-center text-base leading-[1.5] tracking-[0.024px] text-primary line-clamp-1">{{ title
@@ -45,7 +45,7 @@
       class="absolute z-2 top-0 right-full h-full mr-6 w-full groupBefore hidden md:block lg:hidden"
       :id="`draft-${itemBefore.id}`" :class="class">
       <div class="h-auto w-full overflow-hidden rounded-4xl">
-        <img :src="itemBefore.image" alt="" class="h-[230px] w-full object-cover md:!w-[460px]" />
+        <img loading="lazy" :src="itemBefore.image" alt="" class="h-[230px] w-full object-cover md:!w-[460px]" />
       </div>
       <div class="flex gap-1 mt-3.5 font-semibold">
         <span class="flex-1 items-center text-base leading-[1.5] tracking-[0.024px] text-primary line-clamp-1">{{
@@ -85,7 +85,7 @@
     <div v-if="itemAfter" class="absolute z-2 top-0 left-full h-full ml-6 w-full groupAfter hidden md:block lg:hidden"
       :id="`draft-${itemAfter.id}`" :class="class">
       <div class="h-auto w-full overflow-hidden rounded-4xl">
-        <img :src="itemAfter.image" alt="" class="h-[230px] w-full object-cover md:!w-[460px]" />
+        <img loading="lazy" :src="itemAfter.image" alt="" class="h-[230px] w-full object-cover md:!w-[460px]" />
       </div>
       <div class="flex gap-1 mt-3.5 font-semibold">
         <span class="flex-1 items-center text-base leading-[1.5] tracking-[0.024px] text-primary line-clamp-1">{{
