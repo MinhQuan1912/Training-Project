@@ -17,10 +17,11 @@
           </div>
         </div>
         <div class="flex sm:hidden items-center">
-          <select-dropdown :data="overviewTab" v-model:selected-option="activeOverviewTab" addition-class="h-12"/>
+          <select-dropdown :data="overviewTab" v-model:selected-option="activeOverviewTab" addition-class="h-12" />
         </div>
       </div>
-      <div class="xs:p-3 lg:p-5 text-primary gap-4 lg:gap-8 4xl:gap-16 flex flex-col m:grid grid-cols-3 3xl:grid-cols-4">
+      <div
+        class="xs:p-3 lg:p-5 text-primary gap-4 lg:gap-8 4xl:gap-16 flex flex-col m:grid grid-cols-3 3xl:grid-cols-4">
         <div v-for="(item, idx) in overViewList" :key="idx" class="overview-item"
           :class="{ '!hidden 3xl:!flex': item.label === 'Sales' }">
           <div class="w-10 h-10 sm:w-16 sm:h-16 bg-background-surface1 flex justify-center items-center rounded-full">
@@ -30,7 +31,7 @@
             <div class="flex flex-col">
               <div class="flex gap-2 items-center h-6 sm:mb-2">
                 <p class="font-semibold leading-[150%]">{{ item.label }}</p>
-                <tooltip :text="item.label"><icons-helping class="w-4 h-4 sm:w-6 sm:h-6"/></tooltip>
+                <tooltip :text="item.label"><icons-helping class="w-4 h-4 sm:w-6 sm:h-6" /></tooltip>
               </div>
               <h2 class="flex text-4xl sm:text-[60px] font-medium leading-[125%] sm:mb-3">
                 <span class="text-tertiary text-[32px] font-semibold leading-[145%] mr-2.5 sm:pt-2">$</span>
@@ -57,11 +58,13 @@
         <products-overview-product-activity />
       </div>
       <!-- Product Views -->
-      <div class="product-overview !gap-3 w-full m:w-78 3xl:w-135 h-76">
-        <h6 class="h-12 xs:px-3 py-2.5 text-base xs:text-xl leading-[145%] text-primary font-semibold">
+      <div class="product-overview xs:!pb-6 !gap-3 w-full m:w-78 3xl:w-135 m:h-76">
+        <h6 class="h-9.5 xs:h-12 xs:px-3 xs:py-2.5 text-base xs:text-xl leading-[145%] text-primary font-semibold">
           Product Views
-        </h6> 
-          
+        </h6>
+        <div class="h-full">
+          <canvas ref="chartRef" class=""></canvas>
+        </div>
       </div>
     </div>
     <!-- Products -->
@@ -113,6 +116,116 @@ const overViewList = ref([
 
 const overviewTab = ref(["1D", "7D", "1M", "6M", "1Y"]);
 const activeOverviewTab = ref("1Y");
+
+import {
+  Chart,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  BarController
+} from "chart.js"
+
+Chart.register(
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  BarController
+)
+
+const labels = [
+  { short: "Mo", full: "Monday", value: 124940 },
+  { short: "Tu", full: "Tuesday", value: 859304 },
+  { short: "We", full: "Wednesday", value: 32492 },
+  { short: "Th", full: "Thursday", value: 559128 },
+  { short: "Fr", full: "Friday", value: 395823 },
+  { short: "Sa", full: "Saturday", value: 19394 },
+  { short: "Su", full: "Sunday", value: 359483 }
+]
+const chartRef = ref<HTMLCanvasElement | null>(null)
+let chart: Chart | null = null
+
+onMounted(() => {
+  if (!chartRef.value) return
+  chart = new Chart(chartRef.value, {
+    type: "bar",
+    data: {
+      labels: labels.map(l => l.short),
+      datasets: [
+        {
+          data: labels.map(l => l.value),
+          backgroundColor: "#7B7B7B66",
+          borderRadius: {
+            topLeft: 8,
+            topRight: 8,
+            bottomLeft: 8,
+            bottomRight: 8,
+          },
+          borderSkipped: false,
+          hoverBackgroundColor: '#00b512',
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          displayColors: false,
+          padding: 8,
+          backgroundColor: '#e2e2e2',
+          titleAlign: 'center',
+          titleColor: '#141414',
+          titleFont: {
+            size: 12,
+            weight: 'normal'
+          },
+          bodyColor: '#141414',
+          bodyFont: {
+            weight: "bold",
+            size: 12,
+            family: 'Inter'
+          },
+          callbacks: {
+            title: (context) => {
+              const index = context[0]?.dataIndex as number
+              return labels[index]?.full
+            },
+            label: (context) => {
+              return context.parsed.y.toLocaleString('en-US')
+            }
+          },
+        }
+      },
+      scales: {
+        y: {
+          display: false,
+          beginAtZero: false
+        }
+      },
+      maintainAspectRatio: false
+    },
+  })
+})
+
+onBeforeUnmount(() => {
+  if (chart) {
+    chart.destroy()
+  }
+})
 
 </script>
 <style lang="scss" scoped>

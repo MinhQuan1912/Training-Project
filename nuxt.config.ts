@@ -22,6 +22,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-11-27",
   app: {
     head: {
+      title:'Training Project',
       meta: [
         {
           name: "viewport",
