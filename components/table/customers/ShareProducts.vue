@@ -113,10 +113,6 @@ const moveProduct = () => {
 onMounted(() => {
   let intervalId = setInterval(moveProduct, 2000);
 });
-
-onUnmounted(() => {
-  clearInterval(intervalId);
-});
 </script>
 
 <style lang="scss" scoped></style>
