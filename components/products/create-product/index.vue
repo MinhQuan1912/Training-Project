@@ -8,16 +8,24 @@
                 <div class="flex flex-col xs:px-5 gap-8">
                     <div class="flex flex-col gap-4">
                         <div class="h-5.5 flex items-center py-1 gap-1.5">
-                            <span class="text-primary text-sm leading-[100%] font-semibold">Product title</span>
+                            <span class="text-primary text-sm leading-[100%] font-semibold">
+                                Product title
+                            </span>
                             <tooltip text="Maximum 100 characters. No HTML or emoji allowed">
                                 <icons-helping class="h-4 w-4 text-tertiary hover:text-blue cursor-pointer" />
                             </tooltip>
                         </div>
-                        <div
-                            class="h-12 flex justify-between items-center py-3 px-5 border-[1.5px] border-stroke rounded-[48px]">
-                            <input type="text" class="text-primary text-sm leading-[150%] w-95/100">
-                            <icons-tick class="text-primary-02" />
+                        <div class="h-12 flex justify-between items-center py-3 px-5 border-[1.5px] rounded-[48px]"
+                            :class="error && error.length > 0 ? 'border-primary-03' : 'border-stroke'">
+                            <input spellcheck="false" type="text" v-model="title" @input="validateTitle"
+                                class="text-primary text-sm leading-[150%] w-95/100 outline-none" />
+                            <icons-tick v-if="error && error.length === 0 && title.length > 0"
+                                class="text-primary-02" />
+                            <icons-close v-if="error && error.length > 0" class="text-primary-03" />
                         </div>
+                        <p v-if="error && error.length > 0" v-for="err in error" class="text-primary-03 text-xs pl-3">
+                            {{ err }}
+                        </p>
                     </div>
                     <div class="flex flex-col gap-4">
                         <div class="h-4 flex items-center py-1 gap-1.5">
@@ -373,7 +381,7 @@ const selectList = ref([
     '3'
 ])
 const selectedOpt = ref(selectList.value[0])
-const {showCreateProduct} = useCreateProduct()
+const { showCreateProduct } = useCreateProduct()
 const descriptionText = ref('')
 const messageText = ref('')
 const activeCompatibilitys = ref<number[]>([])
@@ -384,6 +392,19 @@ const previewProductFile = ref<string | null>(null)
 const activePromo = ref(true)
 const selectedPromo = ref(promoList.value[promoList.value.length - 1])
 const selectedCTA = ref(ctaList.value[0])
+const title = ref("");
+const error = ref<string[] | null>(null);
+
+const validateTitle = () => {
+    const htmlTagRegex = /<\/?[a-z]+>/g;
+    error.value = []
+    if (title.value.length > 100) {
+        error.value.push("Maximum 100 characters allowed");
+    }
+    if (htmlTagRegex.test(title.value)) {
+        error.value.push("HTML tags are not allowed")
+    }
+};
 const handletogglePromo = () => {
     activePromo.value = !activePromo.value
 }
@@ -412,6 +433,7 @@ const saveDraft = () => {
     gap: 12px;
     background: var(--color-background-02);
     border-radius: 32px;
+
     @media (width < 480px) {
         padding-bottom: 12px;
     }
@@ -438,7 +460,7 @@ const saveDraft = () => {
     border-image-source: linear-gradient(158.39deg,
             rgba(255, 255, 255, 0.1) 14.19%,
             rgba(255, 255, 255, 0.000025) 35.83%,
-            rgba(255, 255, 255,0.000025) 64.26%,
+            rgba(255, 255, 255, 0.000025) 64.26%,
             rgba(255, 255, 255, 0.025) 85.81%);
     width: 44px;
     border: 1.5px solid var(--color-secondary);

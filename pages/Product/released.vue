@@ -36,7 +36,9 @@
         }">
           <template #column-product="{ item }">
             <div class="flex px-5 gap-5 items-center min-w-75">
-              <img loading="lazy" :src="(item as Data).image" class="h-12 w-12 lg:h-16 lg:w-16 object-contain" />
+              <div class="h-12 min-w-12 max-w-12 lg:h-16 lg:min-w-16 lg:max-w-16 rounded-xl overflow-hidden">
+                <img :src="(item as Data).image" class=" object-cover w-full h-full" />
+              </div>
               <div class="flex flex-col justify-center relative">
                 <p class="font-semibold text-primary">{{ (item as Data).name }}</p>
                 <p class="lg:group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80">{{
@@ -136,23 +138,34 @@
   </div>
 
   <modal-edit :isOpen="selectedEditId ? true : false" @close="toggleEditModal(null)" @save="saveEditModal">
-    <form class="flex gap-x-4 gap-y-4 flex-wrap" v-if="editProduct">
-      <div class="flex flex-col gap-1 xs:gap-2 w-full">
-        <div class="text-base xl:text-lg">Product name</div>
-        <input type="text" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
-          v-model="editProduct.name">
+    <form class="flex gap-x-4 gap-y-4 flex-wrap max-h-85 sm:max-h-none overflow-y-auto sm:overflow-y-visible"
+      v-if="editProduct">
+      <div class="flex gap-4 flex-col sm:flex-row w-full ">
+        <div class="flex flex-col gap-4 w-full sm:w-[calc(50%-8px)] ">
+          <div class="flex flex-col gap-1 xs:gap-2 w-full">
+            <div class="text-base xl:text-lg">Product name</div>
+            <input type="text" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-12"
+              v-model="editProduct.name">
+          </div>
+          <div class="flex flex-col gap-1 xs:gap-2 w-full">
+            <div class="text-base xl:text-lg">Product type</div>
+            <select-dropdown :data="typeList" v-model:selected-option="editProduct.description"
+              addition-class="text-sm xs:text-xl h-8 xs:h-12 !text-black !p-2 rounded-xl"
+              text-class="!text-black !bg-white h-12" />
+          </div>
+          <div class="flex flex-col gap-1 xs:gap-2 w-full">
+            <div class="text-base xl:text-lg">Product price</div>
+            <input type="number" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-12"
+              v-model="editProduct.price">
+          </div>
+        </div>
+        <div class="flex flex-col gap-2 w-full sm:w-[calc(50%-8px)]">
+          <div class="text-base xl:text-lg">Product image</div>
+          <upload-image v-model:preview="editProduct.image" image-id="preview" fit-class="object-cover"
+            addition-class="h-full aspect-[1/1]" />
+        </div>
       </div>
       <div class="flex flex-col gap-1 xs:gap-2 w-full">
-        <div class="text-base xl:text-lg">Product type</div>
-        <input type="text" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
-          v-model="editProduct.description">
-      </div>
-      <div class="flex flex-col gap-1 xs:gap-2 w-full xs:w-[calc(50%-8px)]">
-        <div class="text-base xl:text-lg">Product price</div>
-        <input type="number" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
-          v-model="editProduct.price">
-      </div>
-      <div class="flex flex-col gap-1 xs:gap-2 w-full xs:w-[calc(50%-8px)]">
         <div class="text-base xl:text-lg">Product status</div>
         <div class="flex justify-between items-center gap-5">
           <label
@@ -318,7 +331,13 @@ const handleSearch = () => {
     p.name.toLowerCase().includes(value.value.toLowerCase())
   );
 };
-
+const typeList = ref([
+  'UI Design Kit',
+  'Admin Templates',
+  'Marketing UI Pack',
+  'iOS + Android',
+  'Shop UI Components'
+])
 
 const layout = ref("list");
 

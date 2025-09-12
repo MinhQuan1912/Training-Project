@@ -22,7 +22,7 @@
         <div v-else class="w-full h-full">
             <img :src="preview" class="w-full h-full rounded-4xl" :class="fitClass">
             <button
-                class="w-12 h-12 rounded-full bg-background-02 text-secondary absolute top-3 right-3 
+                class="w-8 h-8 xs:w-12 xs:h-12 rounded-full bg-background-02 text-secondary absolute top-3 right-3 
                                 flex justify-center items-center cursor-pointer hover:text-background-02 hover:bg-white transition-all duration-300 ease"
                 @click="removePreviewImage">
                 <icons-close />
