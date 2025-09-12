@@ -7,6 +7,8 @@ import { computed, ref } from "vue";
 import { Doughnut } from "vue-chartjs";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
+ChartJS.register(ArcElement, Tooltip, Legend);
+
 const props = defineProps({
   chartDataPoints: {
     type: Array,
@@ -15,51 +17,6 @@ const props = defineProps({
 });
 
 const hoveredIndex = ref(null);
-
-const centerTextPlugin = {
-  id: "centerTextPlugin",
-  beforeDraw(chart) {
-    const {
-      ctx,
-      chartArea: { width, height },
-    } = chart;
-    ctx.save();
-
-    const activeTooltip = chart.tooltip._active[0];
-
-    if (activeTooltip) {
-      const dataIndex = activeTooltip.index;
-      const dataPoint = props.chartDataPoints[dataIndex];
-      const total = props.chartDataPoints.reduce(
-        (sum, point) => sum + point.value,
-        0
-      );
-      const percentage =
-        total > 0 ? ((dataPoint.value / total) * 100).toFixed(1) : 0;
-
-      const text = `${dataPoint.label}`;
-      const valueText = `${dataPoint.value.toLocaleString("en-US")}`;
-      const percentageText = `${percentage}%`;
-
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-
-      ctx.fillStyle = "#FFFFFF";
-      ctx.font = "bold 20px Arial";
-      ctx.fillText(text, width / 2, height / 2 - 15);
-
-      ctx.font = "normal 16px Arial";
-      ctx.fillText(valueText, width / 2, height / 2 + 5);
-
-      ctx.font = "normal 14px Arial";
-      ctx.fillStyle = "#AAAAAA";
-      ctx.fillText(percentageText, width / 2, height / 2 + 25);
-    }
-    ctx.restore();
-  },
-};
-
-ChartJS.register(ArcElement, Tooltip, Legend, centerTextPlugin);
 
 const chartData = computed(() => {
   const labels = props.chartDataPoints.map((point) => point.label);
@@ -121,6 +78,49 @@ const chartOptions = {
       hoveredIndex.value = null;
       chart.update();
     }
+  },
+};
+
+const totalCount = computed(() =>
+  props.chartDataPoints.reduce((sum, point) => sum + point.value, 0)
+);
+const totalLabel = "Total";
+
+const centerTextPlugin = {
+  id: "centerText",
+  beforeDraw(chart) {
+    const { ctx, width, height } = chart;
+    ctx.restore();
+    ctx.textBaseline = "middle";
+
+    let mainText, subText;
+    if (hoveredIndex.value !== null) {
+      const point = props.chartDataPoints[hoveredIndex.value];
+      const total = totalCount.value;
+      const percentage = ((point.value / total) * 100).toFixed(1) + "%";
+      mainText = percentage;
+      subText = point.label;
+      ctx.fillStyle = "#00B512";
+    } else {
+      mainText = totalCount.value.toString();
+      subText = "Total";
+      ctx.fillStyle = "#FFFFFF";
+    }
+
+    const mainFontSize = (height / 114).toFixed(2);
+    ctx.font = `bolder ${mainFontSize}em sans-serif`;
+    const mainTextWidth = ctx.measureText(mainText).width;
+    const mainX = Math.round((width - mainTextWidth) / 2);
+    const mainY = height / 2 - 15;
+    ctx.fillText(mainText, mainX, mainY);
+
+    const subFontSize = (height / 180).toFixed(2);
+    ctx.font = `normal ${subFontSize}em sans-serif`;
+    const subTextWidth = ctx.measureText(subText).width;
+    const subX = Math.round((width - subTextWidth) / 2);
+    const subY = height / 2 + 15;
+    ctx.fillText(subText, subX, subY);
+    ctx.save();
   },
 };
 </script>
