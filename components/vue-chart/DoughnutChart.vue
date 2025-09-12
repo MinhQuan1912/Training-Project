@@ -7,7 +7,50 @@ import { computed, ref } from "vue";
 import { Doughnut } from "vue-chartjs";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
+// Đăng ký các thành phần cốt lõi của Chart.js
 ChartJS.register(ArcElement, Tooltip, Legend);
+
+// Định nghĩa plugin cục bộ
+const centerTextPlugin = {
+  id: "centerText",
+  beforeDraw(chart) {
+    const { ctx, width, height } = chart;
+    ctx.restore();
+    ctx.textBaseline = "middle";
+
+    let mainText, subText;
+    if (hoveredIndex.value !== null) {
+      const point = props.chartDataPoints[hoveredIndex.value];
+      const total = totalCount.value;
+      const percentage = ((point.value / total) * 100).toFixed(1) + "%";
+      mainText = percentage;
+      subText = point.label;
+      ctx.fillStyle = "#00B512";
+    } else {
+      mainText = totalCount.value.toString();
+      subText = "Total";
+      ctx.fillStyle = "#FFFFFF";
+    }
+
+    const mainFontSize = (height / 114).toFixed(2);
+    ctx.font = `bolder ${mainFontSize}em sans-serif`;
+    const mainTextWidth = ctx.measureText(mainText).width;
+    const mainX = Math.round((width - mainTextWidth) / 2);
+    const mainY = height / 2 - 15;
+    ctx.fillText(mainText, mainX, mainY);
+
+    const subFontSize = (height / 180).toFixed(2);
+    ctx.font = `normal ${subFontSize}em sans-serif`;
+    const subTextWidth = ctx.measureText(subText).width;
+    const subX = Math.round((width - subTextWidth) / 2);
+    const subY = height / 2 + 15;
+    ctx.fillText(subText, subX, subY);
+    ctx.save();
+  },
+};
+
+// Đăng ký plugin
+// ChartJS.register(centerTextPlugin);
 
 const props = defineProps({
   chartDataPoints: {
@@ -84,45 +127,6 @@ const chartOptions = {
 const totalCount = computed(() =>
   props.chartDataPoints.reduce((sum, point) => sum + point.value, 0)
 );
+
 const totalLabel = "Total";
-
-const centerTextPlugin = {
-  id: "centerText",
-  beforeDraw(chart) {
-    const { ctx, width, height } = chart;
-    ctx.restore();
-    ctx.textBaseline = "middle";
-
-    let mainText, subText;
-    if (hoveredIndex.value !== null) {
-      const point = props.chartDataPoints[hoveredIndex.value];
-      const total = totalCount.value;
-      const percentage = ((point.value / total) * 100).toFixed(1) + "%";
-      mainText = percentage;
-      subText = point.label;
-      ctx.fillStyle = "#00B512";
-    } else {
-      mainText = totalCount.value.toString();
-      subText = "Total";
-      ctx.fillStyle = "#FFFFFF";
-    }
-
-    const mainFontSize = (height / 114).toFixed(2);
-    ctx.font = `bolder ${mainFontSize}em sans-serif`;
-    const mainTextWidth = ctx.measureText(mainText).width;
-    const mainX = Math.round((width - mainTextWidth) / 2);
-    const mainY = height / 2 - 15;
-    ctx.fillText(mainText, mainX, mainY);
-
-    const subFontSize = (height / 180).toFixed(2);
-    ctx.font = `normal ${subFontSize}em sans-serif`;
-    const subTextWidth = ctx.measureText(subText).width;
-    const subX = Math.round((width - subTextWidth) / 2);
-    const subY = height / 2 + 15;
-    ctx.fillText(subText, subX, subY);
-    ctx.save();
-  },
-};
-
-const plugins = [centerTextPlugin];
 </script>

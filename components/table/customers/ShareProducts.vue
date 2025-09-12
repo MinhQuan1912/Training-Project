@@ -9,39 +9,43 @@
     </div>
 
     <div class="flex flex-col gap-6">
-      <div class="grid grid-cols-1 sm:grid-cols-2 3xl:grid-cols-3 gap-3">
-        <div
-          class="flex flex-col @sm:flex-row gap-3 p-3 @sm:items-center border-[1.5px] border-solid border-transparent hover:border-primary/7.5 hover:bg-background-pop rounded-[20px] cursor-pointer"
-          v-for="shareProduct in shareProducts"
-          :key="shareProduct.id"
-        >
-          <div class="w-16 h-16 flex-none">
-            <img
-              :src="shareProduct.img"
-              alt=""
-              class="object-cover w-full h-full rounded-xl"
-            />
-          </div>
+      <div class="overflow-hidden">
+        <div class="flex gap-3">
+          <TransitionGroup
+            name="list"
+            tag="div"
+            class="flex w-1/3 min-w-77.5 gap-3 p-3 @sm:items-center border-[1.5px] border-solid border-transparent hover:border-primary/7.5 hover:bg-background-pop rounded-[20px] cursor-pointer"
+            v-for="shareProduct in shareProducts"
+            :key="shareProduct.id"
+          >
+            <div class="w-16 h-16 flex-none">
+              <img
+                :src="shareProduct.img"
+                alt=""
+                class="object-cover w-full h-full rounded-xl"
+              />
+            </div>
 
-          <div class="flex justify-between w-full max-sm:items-center gap-4">
-            <div class="flex flex-col gap-1.5">
+            <div class="flex justify-between w-full max-sm:items-center gap-4">
+              <div class="flex flex-col gap-1.5">
+                <div
+                  class="text-primary font-semibold leading-[150%] whitespace-nowrap"
+                >
+                  {{ shareProduct.title }}
+                </div>
+
+                <div class="text-secondary/80 text-sm leading-[150%]">
+                  {{ shareProduct.content }}
+                </div>
+              </div>
+
               <div
-                class="text-primary font-semibold leading-[150%] whitespace-nowrap"
+                class="px-3 py-1.75 border-[1.5px] border-solid border-primary-02/15 bg-primary-02/5 rounded-lg text-primary-02 text-sm w-fit h-fit"
               >
-                {{ shareProduct.title }}
-              </div>
-
-              <div class="text-secondary/80 text-sm leading-[150%]">
-                {{ shareProduct.content }}
+                ${{ shareProduct.price }}
               </div>
             </div>
-
-            <div
-              class="px-3 py-1.75 border-[1.5px] border-solid border-primary-02/15 bg-primary-02/5 rounded-lg text-primary-02 text-sm w-fit h-fit"
-            >
-              ${{ shareProduct.price }}
-            </div>
-          </div>
+          </TransitionGroup>
         </div>
       </div>
 
@@ -81,6 +85,8 @@
 </template>
 
 <script setup>
+import { TransitionGroup } from "vue";
+
 const shareProducts = ref([
   {
     id: 1,
@@ -106,13 +112,32 @@ const shareProducts = ref([
 ]);
 
 const moveProduct = () => {
+  // xóa phần tử cuối cùng của mảng
   const itemsProduct = shareProducts.value.splice(-1, 1)[0];
+
+  // đưa nó lên đầu mảng
   shareProducts.value.unshift(itemsProduct);
 };
 
 onMounted(() => {
-  let intervalId = setInterval(moveProduct, 2000);
+  setInterval(moveProduct, 2000);
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: scaleY(0.01) translate(30px, 0);
+}
+
+.list-leave-active {
+  position: absolute;
+}
+</style>
