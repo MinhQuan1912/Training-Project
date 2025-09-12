@@ -398,7 +398,7 @@ import { enUS } from "date-fns/locale";
 import { format } from "date-fns";
 
 const now = new Date();
-const formatted = format(now, "dd/MM/yyyy HH:mm:ss", {locale: });
+const formatted = format(now, "MMM dd,yyyy 'at' h:mm a", { locale: enUS });
 console.log(formatted);
 
 // them sua xoa
