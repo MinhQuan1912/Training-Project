@@ -167,8 +167,4 @@ watch(
   border-width: 0 3px 3px 0;
   transform: translate(-50%, -50%) rotate(45deg);
 }
-
-.bottomHover:hover + .bottomHover {
-  border-top: transparent;
-}
 </style>

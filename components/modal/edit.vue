@@ -32,20 +32,17 @@
 </template>
 
 <script setup lang="ts">
-
 const props = defineProps<{
-    isOpen: boolean,
-}>()
-const emit = defineEmits(['close', 'save'])
+  isOpen: boolean;
+}>();
+const emit = defineEmits(["close", "save"]);
 const closeModal = () => {
-    emit('close')
-}
+  emit("close");
+};
 const save = () => {
-    emit('save')
-    closeModal()
-}
+  emit("save");
+  closeModal();
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

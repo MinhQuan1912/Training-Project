@@ -2,7 +2,7 @@
   <div
     class="flex bg-background-surface1 border-[1.5px] border-stroke-subtle w-full sm:w-70 rounded-full p-3 gap-2 text-secondary"
   >
-    <icons-search />
+    <icons-search @click="emitUpdate" />
     <input
       type="search"
       :placeholder="placeholder"

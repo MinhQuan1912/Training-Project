@@ -30,18 +30,17 @@
 </template>
 
 <script setup lang="ts">
-
 const props = defineProps<{
-    isOpen: boolean,
-}>()
-const emit = defineEmits(['close', 'delete'])
+  isOpen: boolean;
+}>();
+const emit = defineEmits(["close", "delete"]);
 const closeModal = () => {
-    emit('close')
-}
+  emit("close");
+};
 const deleteModal = () => {
-    emit('delete')
-    closeModal()
-}
+  emit("delete");
+  closeModal();
+};
 </script>
 
 <style lang="scss" scoped></style>

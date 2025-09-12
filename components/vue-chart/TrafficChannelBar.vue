@@ -12,16 +12,19 @@ const chartData: ChartData<"bar"> = {
     {
       label: "Direct",
       backgroundColor: "#373737",
+      hoverBackgroundColor: "#00b512",
       data: [800, 1500, 1000, 1200, 1900, 1200, 2000],
     },
     {
       label: "Search",
       backgroundColor: "#373737",
+      hoverBackgroundColor: "#00b512",
       data: [1200, 2000, 1500, 1700, 2000, 1800, 2200],
     },
     {
       label: "Other",
       backgroundColor: "#373737",
+      hoverBackgroundColor: "#00b512",
       data: [300, 500, 300, 400, 500, 300, 400],
     },
   ],
