@@ -266,7 +266,7 @@
           class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200"
         >
           <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-            Edit Product
+            Edit Comments
           </h3>
           <button
             type="button"
@@ -331,9 +331,8 @@
                 >Time Comment</label
               >
               <input
-                type="datetime"
+                type="text"
                 name="schedulefor"
-                id="schedulefor"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="datetime"
                 v-model="selectItem.timeComment"
@@ -626,9 +625,9 @@ const columns = [
   {
     slot: "product",
     label: "Product",
-    headerClass: "w-3/25",
+    headerClass: "w-3/25 min-w-49",
     cellClass:
-      "w-3/25 rounded-r-2xl flex items-center whitespace-nowrap text-sm lg:text-base",
+      "w-3/25 min-w-49 rounded-r-2xl flex items-center whitespace-nowrap text-sm lg:text-base",
   },
 ];
 
@@ -914,7 +913,7 @@ const handleSaveProduct = () => {
 </script>
 
 <style>
-.bottomHover:hover + .bottomHover {
+/* .bottomHover:hover + .bottomHover {
   border-top: transparent;
-}
+} */
 </style>

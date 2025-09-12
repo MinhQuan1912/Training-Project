@@ -73,6 +73,7 @@ const chartOptions = computed(() => ({
         stepSize: 450,
         color: "#A0A0A0",
         callback: function (value) {
+          if (value === 2000) return "2k";
           if (value === 1500) return "1.5k";
           if (value === 1000) return "1k";
           return value;

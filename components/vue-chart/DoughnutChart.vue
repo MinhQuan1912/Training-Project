@@ -123,6 +123,4 @@ const centerTextPlugin = {
     ctx.save();
   },
 };
-
-const plugins = [centerTextPlugin];
 </script>
