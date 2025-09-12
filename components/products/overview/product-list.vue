@@ -42,13 +42,15 @@
     }">
       <!-- Product -->
       <template #column-product="{ item }">
-        <div class="flex px-5 gap-5 items-center min-w-75">
-          <img :src="(item as productList).image" class="h-12 w-12 lg:h-16 lg:w-16 object-contain" />
+        <div class="flex px-5 gap-5 items-center min-w-75 w-90">
+          <div class="h-12 min-w-12 max-w-12 lg:h-16 lg:min-w-16 lg:max-w-16 rounded-xl overflow-hidden">
+            <img :src="(item as productList).image" class=" object-cover w-full h-full" />
+          </div>
           <div class="flex flex-col justify-center relative">
             <p class="font-semibold text-primary">{{ (item as productList).name }}</p>
             <p class="lg:group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80">{{
               (item as
-                productList).type }}
+              productList).type }}
             </p>
             <div
               class="hidden lg:group-hover/setting:flex gap-2 h-6 relative -left-1 text-sm leading-[100%] font-semibold text-secondary transition-all duration-200 ease">
@@ -126,25 +128,35 @@
       </template>
     </data-table>
   </div>
-
+  <!-- Edit modal -->
   <modal-edit :isOpen="selectedEditId ? true : false" @close="toggleEditModal(null)" @save="saveEditModal">
-    <form class="flex gap-x-4 gap-y-4 flex-wrap" v-if="editProduct" >
-      <div class="flex flex-col gap-1 xs:gap-2 w-full">
-        <div class="text-base xl:text-lg">Product name</div>
-        <input type="text" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
-          v-model="editProduct.name">
+    <form class="flex gap-x-4 gap-y-4 flex-wrap max-h-85 sm:max-h-none overflow-y-auto sm:overflow-y-visible" v-if="editProduct">
+      <div class="flex gap-4 flex-col sm:flex-row w-full ">
+        <div class="flex flex-col gap-4 w-full sm:w-[calc(50%-8px)] ">
+          <div class="flex flex-col gap-1 xs:gap-2 w-full">
+            <div class="text-base xl:text-lg">Product name</div>
+            <input type="text" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-12"
+              v-model="editProduct.name">
+          </div>
+          <div class="flex flex-col gap-1 xs:gap-2 w-full">
+            <div class="text-base xl:text-lg">Product type</div>
+            <select-dropdown :data="typeList" v-model:selected-option="editProduct.type"
+              addition-class="text-sm xs:text-xl h-8 xs:h-12 !text-black !p-2 rounded-xl"
+              text-class="!text-black !bg-white h-12" />
+          </div>
+          <div class="flex flex-col gap-1 xs:gap-2 w-full">
+            <div class="text-base xl:text-lg">Product price</div>
+            <input type="number" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-12"
+              v-model="editProduct.price">
+          </div>
+        </div>
+        <div class="flex flex-col gap-2 w-full sm:w-[calc(50%-8px)]">
+          <div class="text-base xl:text-lg">Product image</div>
+          <upload-image v-model:preview="editProduct.image" image-id="preview" fit-class="object-cover"
+            addition-class="h-full aspect-[1/1]" />
+        </div>
       </div>
       <div class="flex flex-col gap-1 xs:gap-2 w-full">
-        <div class="text-base xl:text-lg">Product type</div>
-        <input type="text" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
-          v-model="editProduct.type">
-      </div>
-      <div class="flex flex-col gap-1 xs:gap-2 w-full xs:w-[calc(50%-8px)]">
-        <div class="text-base xl:text-lg">Product price</div>
-        <input type="number" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
-          v-model="editProduct.price">
-      </div>
-      <div class="flex flex-col gap-1 xs:gap-2 w-full xs:w-[calc(50%-8px)]">
         <div class="text-base xl:text-lg">Product status</div>
         <div class="flex justify-between items-center gap-5">
           <label
@@ -167,6 +179,7 @@
       </div>
     </form>
   </modal-edit>
+  <!-- Delete modal -->
   <modal-delete :isOpen="selectedDeleteId ? true : false" @close="toggleDeleteModal(null)"
     @delete="deleteProduct(selectedDeleteId)" />
 </template>
@@ -216,13 +229,19 @@ const columns = [
     cellClass: "rounded-r-2xl",
   },
 ];
-
+const typeList = ref([
+  'UI Design Kit',
+  'Admin Templates',
+  'Marketing UI Pack',
+  'iOS + Android',
+  'Shop UI Components'
+])
 const productList = ref<productList[]>([
   {
     id: 1,
     image: "/images/1.png",
     name: "Tasteful Bento 3D Graphics",
-    type: "UI Design Kit UI Design Kit UI Design Kit UI Design Kit ",
+    type: "UI Design Kit",
     status: true,
     price: 98,
     sales: {
@@ -242,7 +261,7 @@ const productList = ref<productList[]>([
     id: 2,
     image: "/images/2.png",
     name: "Flavor Fusion 3D Collection",
-    type: "UI Design Kit",
+    type: "Admin Templates",
     status: true,
     price: 75.41,
     sales: {
@@ -262,7 +281,7 @@ const productList = ref<productList[]>([
     id: 3,
     image: "/images/3.png",
     name: "Artisan Meal 3D Visuals",
-    type: "UI Design Kit",
+    type: "Marketing UI Pack",
     status: false,
     price: 93.12,
     sales: {
@@ -282,7 +301,7 @@ const productList = ref<productList[]>([
     id: 4,
     image: "/images/4.png",
     name: "Culinary  Creations 3D Illustration",
-    type: "UI Design Kit",
+    type: "iOS + Android",
     status: true,
     price: 58.41,
     sales: {
@@ -302,7 +321,7 @@ const productList = ref<productList[]>([
     id: 5,
     image: "/images/5.png",
     name: "Savory Bento 3D Design Kit",
-    type: "UI Design Kit",
+    type: "Shop UI Components",
     status: false,
     price: 69.53,
     sales: {
@@ -384,6 +403,4 @@ td:first-child {
   padding-left: 16px;
   padding-right: 24px;
 }
-
-
 </style>
