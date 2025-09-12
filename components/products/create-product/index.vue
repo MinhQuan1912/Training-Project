@@ -106,7 +106,7 @@
                             </tooltip>
                         </div>
                         <div class="flex p-2 rounded-[20px] border-[1.5px] border-stroke gap-1.5 flex-wrap">
-                            <div v-for="(tag, tagIdx) in tagList" :key="tagIdx"
+                            <div v-for="(tag, tagIdx) in tagAfterRemove" :key="tagIdx"
                                 class="h-8 px-3 flex items-center justify-between gap-1.5 rounded-4xl bg-background-surface1 cursor-pointer hover:bg-stroke"
                                 @click="handleRemoveTag(tagIdx)">
                                 <span class="text-primary text-sm leading-[150%]">{{ tag }}</span>
@@ -201,7 +201,8 @@
                         <div class="flex p-1 border-[1.5px] border-stroke rounded-[48px] gap-2">
                             <icons-dollar />
                             <input type="number"
-                                class="opacity-50 text-secondary text-sm leading-[150%] w-full m:w-25 3xl:w-46">
+                                class="opacity-50 text-secondary text-sm leading-[150%] w-full m:w-25 3xl:w-46"
+                                v-model="price">
                         </div>
                     </div>
                     <div class="flex flex-col gap-4 flex-1">
@@ -216,8 +217,9 @@
                             </div>
                         </div>
                         <div class="opacity-0" :class="{ 'opacity-100': activePromo }">
-                            <select-dropdown :data="promoList" v-model:selected-option="selectedPromo"
-                                addition-class="h-12" text-class="text-secondary" :class="{ 'block': activePromo }" />
+                            <select-dropdown v-if="selectedPromo" :data="promoList.map(i => i.label)"
+                                v-model:selected-option="selectedPromo.label" addition-class="h-12"
+                                text-class="text-secondary" :class="{ 'block': activePromo }" />
                         </div>
                     </div>
                 </div>
@@ -294,18 +296,74 @@
                 text-class=" font-semibold" over-all-class="w-1/2 sm:w-auto" />
         </div>
     </div>
+    <modal-edit :is-open="showSaveModal" @close="showSaveModal = false" title="Information" @save="saveModal">
+        <form class="flex gap-x-4 gap-y-4 flex-wrap max-h-85 sm:max-h-140 overflow-y-auto ">
+            <div v-if="title" class="flex flex-col gap-1 xs:gap-2 w-full">
+                <div class="text-base xl:text-lg">Product name</div>
+                <div class="flex items-center rounded-xl p-2 text-sm xs:text-xl h-12 bg-secondary/30">{{ title }}</div>
+            </div>
+            <div v-if="descriptionText" class="flex flex-col gap-1 xs:gap-2 w-full">
+                <div class="text-base xl:text-lg">Product description</div>
+                <div class="flex items-center rounded-xl p-2 text-sm xs:text-xl h-12 bg-secondary/30">{{ descriptionText
+                }}</div>
+            </div>
+            <div v-if="preview" class="flex flex-col gap-2 w-full ">
+                <div class="text-base xl:text-lg">Product image</div>
+                <div class="h-78 rounded-4xl overflow-hidden">
+                    <img v-if="preview" :src="preview" class="w-full h-full object-cover">
+                </div>
+            </div>
+            <div v-if="selectedCategory" class="flex flex-col gap-1 xs:gap-2 w-full">
+                <div class="text-base xl:text-lg">Category</div>
+                <div class="flex items-center rounded-xl p-2 text-sm xs:text-xl h-12 bg-secondary/30">{{
+                    selectedCategory }}</div>
+            </div>
+            <div v-if="activeCompatibilitys.length > 0" class="flex flex-col gap-1 xs:gap-2 w-full">
+                <div class="text-base xl:text-lg">Compatibility</div>
+                <div class="grid grid-cols-3 gap-2">
+                    <div v-for="item in activeCompatibilitys.map(i => compatibilityList[i]?.name)"
+                        class="flex items-center justify-center rounded-xl p-2 text-sm xs:text-xl h-12 bg-secondary/30">
+                        {{ item }}
+                    </div>
+                </div>
+            </div>
+            <div v-if="tagAfterRemove.length > 0" class="flex flex-col gap-1 xs:gap-2 w-full">
+                <div class="text-base xl:text-lg">Tags</div>
+                <div class="grid grid-cols-3 gap-2">
+                    <div v-for="item in tagAfterRemove"
+                        class="flex items-center justify-center rounded-xl p-2 text-sm xs:text-xl h-12 bg-secondary/30">
+                        {{ item }}
+                    </div>
+                </div>
+            </div>
+            <div v-if="messageText" class="flex flex-col gap-1 xs:gap-2 w-full">
+                <div class="text-base xl:text-lg">Message to reviewer</div>
+                <div class="flex items-center rounded-xl p-2 text-sm xs:text-xl h-12 bg-secondary/30">{{ messageText
+                }}</div>
+            </div>
+            <div v-if="price" class="flex flex-col gap-1 xs:gap-2 w-full">
+                <div class="text-base xl:text-lg">Product price</div>
+                <div class="flex items-center rounded-xl p-2 text-sm xs:text-xl h-12 bg-secondary/30">
+                    {{ activePromo ? price * (1 - (selectedPromoValue?.value ?? 0)) : price }}
+                </div>
+            </div>
+        </form>
+    </modal-edit>
 </template>
 
 <script setup lang="ts">
+
 import { useCreateProduct } from '~/composable/useCreateProduct'
 
 definePageMeta({
     title: 'New Product'
 })
+
 type highlight = {
     label: string,
     confirm: boolean
 }
+const price = ref()
 const tagList = ref([
     'Dashboard',
     'Light',
@@ -317,6 +375,7 @@ const tagList = ref([
     'Illustration',
     'Menu'
 ])
+const tagAfterRemove = ref([...tagList.value])
 const categoryList = ref<string[]>([
     'Illustrations',
     '1',
@@ -325,11 +384,26 @@ const categoryList = ref<string[]>([
     '4',
 ])
 const promoList = ref([
-    '10%',
-    '20%',
-    '30%',
-    '40%',
-    '50% (max)'
+    {
+        label: '10%',
+        value: 0.1
+    },
+    {
+        label: '20%',
+        value: 0.2
+    },
+    {
+        label: '30%',
+        value: 0.3
+    },
+    {
+        label: '40%',
+        value: 0.4
+    },
+    {
+        label: '50% (max)',
+        value: 0.5
+    },
 ])
 const compatibilityList = ref([
     { icon: '/images/compatibility/Notion.png', name: 'Notion' },
@@ -380,8 +454,33 @@ const selectList = ref([
     '2',
     '3'
 ])
+const selectedPromoValue = computed(() => {
+    const promo = promoList.value.find(i => i.label === selectedPromo.value?.label)
+    return promo
+})
+const saveModal = () => {
+    showSaveModal.value = false
+    if (previousRoute.value && previousRoute.value !== '/product') {
+        router.push(previousRoute.value)
+    }
+    else {
+        router.push('/product')
+        showCreateProduct.value = false
+    }
+}
+const clearInput = () => {
+    title.value = ''
+    preview.value = null
+    descriptionText.value = ''
+    selectedCategory.value = ''
+    messageText.value = ''
+    activeCompatibilitys.value = []
+    selectedPromo.value = promoList.value[promoList.value.length - 1]
+
+}
 const selectedOpt = ref(selectList.value[0])
-const { showCreateProduct } = useCreateProduct()
+const { showCreateProduct, showSaveModal, previousRoute } = useCreateProduct()
+const router = useRouter()
 const descriptionText = ref('')
 const messageText = ref('')
 const activeCompatibilitys = ref<number[]>([])
@@ -417,7 +516,7 @@ const handleClickCompa = (index: number) => {
     }
 }
 const handleRemoveTag = (index: number) => {
-    tagList.value.splice(index, 1)
+    tagAfterRemove.value.splice(index, 1)
 }
 const saveDraft = () => {
     showCreateProduct.value = false

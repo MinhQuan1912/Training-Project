@@ -10,8 +10,8 @@
         <button @click="saveDraft"
           class="h-9 lg:h-12 py-3.5 px-7 flex justify-center items-center rounded-full text-[15px] leading-6 text-secondary font-semibold bg-background-02 cursor-pointer">Save
           draft</button>
-        <select-dropdown :data="selectList" v-model:selected-option="selectedOpt" addition-class="addition !h-9 lg:!h-12"
-          text-class=" font-semibold" />
+        <select-dropdown :data="selectList" v-model:selected-option="selectedOpt"
+          addition-class="addition !h-9 lg:!h-12" text-class=" font-semibold" />
       </div>
     </div>
     <div v-if="!showCreateProduct" class="hidden lg:flex justify-evenly items-center h-12 gap-2 xl:gap-3">
@@ -53,8 +53,7 @@ const router = useRouter()
 const pageTitle = computed(() => {
   return route.meta.title;
 });
-const { showCreateProduct } = useCreateProduct()
-const { previousRoute } = useCreateProduct()
+const { showCreateProduct, previousRoute, showSaveModal } = useCreateProduct()
 const { showSideBar } = useSideBar()
 const selectList = ref([
   'Publish now',
@@ -73,13 +72,8 @@ const openSideBar = () => {
   showSideBar.value = true
 }
 const saveDraft = () => {
-  if (previousRoute.value && previousRoute.value !== '/product') {
-    router.push(previousRoute.value)
-  }
-  else {
-    router.push('/product')
-    showCreateProduct.value = false
-  }
+  
+  showSaveModal.value = true
 }
 watch(
   () => route.fullPath,
