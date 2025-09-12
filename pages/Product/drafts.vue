@@ -54,8 +54,9 @@
           <!-- Product -->
           <template #column-product="{ item }">
             <div class="flex items-center gap-3">
-              <div class="h-12 min-w-12 max-w-12 lg:h-16 lg:min-w-16 lg:max-w-16 rounded-xl overflow-hidden">
-                <img :src="(item as Data).image" class=" object-cover w-full h-full" />
+              <div class="h-12 min-w-12 lg:h-16 lg:min-w-16 rounded-md overflow-hidden">
+                <img loading="lazy" :src="(item as Data).image" :alt="(item as Data).title"
+                  class="w-full h-full object-cover aspect-square" />
               </div>
               <div class="w-full">
                 <div class="font-medium text-primary text-base leading-[150%]">
@@ -94,13 +95,7 @@
     </div>
   </div>
   <modal-edit :isOpen="selectedEditId ? true : false" @close="toggleEditModal(null)" @save="saveEditModal">
-    <form class="flex gap-x-4 gap-y-4 flex-wrap max-h-75 sm:max-h-none overflow-y-auto sm:overflow-y-visible"
-      v-if="editProduct">
-      <div class="flex gap-4 w-full">
-        <div class="text-base flex items-center xl:text-lg w-1/2">Product image</div>
-        <upload-image v-model:preview="editProduct.image" image-id="preview" fit-class="object-cover"
-          addition-class="h-full aspect-[1/1]" />
-      </div>
+    <form class="flex gap-x-4 gap-y-4 flex-wrap" v-if="editProduct">
       <div class="flex flex-col gap-1 xs:gap-2 w-full">
         <div class="text-base xl:text-lg">Product name</div>
         <input type="text" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
