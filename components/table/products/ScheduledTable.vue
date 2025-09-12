@@ -279,21 +279,23 @@ const columns = [
     slot: "price",
     label: "Price",
     headerClass: "w-3/10 pl-8 pr-12.5",
-    cellClass: "w-3/10 pl-8 pr-12.5",
+    cellClass: "w-3/10 pl-8 pr-12.5 h-7 my-2",
   },
   {
     slot: "scheduledFor",
     label: "Scheduled for",
     headerClass: "w-1/4 min-w-30.75 max-sm:pr-6",
     cellClass:
-      "w-1/4 min-w-30.75 text-secondary rounded-r-2xl whitespace-nowrap text-sm sm:text-base max-sm:pr-6",
+      "w-1/4 min-w-30.75 text-secondary rounded-r-2xl whitespace-nowrap text-sm sm:text-base max-sm:pr-6 h-7 my-2",
   },
 ];
 
 const classTableTr = {
   padding: "pb-4 lg:pb-8 px-2 lg:px-4",
   header: "flex text-tertiary items-center text-left text-xs p-2 lg:p-4",
-  body: "flex items-center group bottomHover align-middle hover:bg-background-pop border-[1.5px] border-solid border-t-stroke-subtle border-b-transparent border-x-transparent hover:border-primary/7.5 hover:rounded-2xl p-2 lg:p-4 text-left",
+  body: "flex group bottomHover align-middle hover:bg-background-pop border-[1.5px] border-solid border-t-stroke-subtle border-b-transparent border-x-transparent hover:border-primary/7.5 hover:rounded-2xl p-2 lg:p-4 text-left",
+  thInput: "",
+  tdInput: "rounded-2xl flex items-center",
 };
 
 const schedules = ref([
@@ -388,6 +390,16 @@ const schedulesSearch = computed(() => {
     return schedule.product.toLowerCase().includes(query);
   });
 });
+
+// NGAY THANG NAM GIO PHUT GIAY
+const date = new Date();
+import { enUS } from "date-fns/locale";
+
+import { format } from "date-fns";
+
+const now = new Date();
+const formatted = format(now, "dd/MM/yyyy HH:mm:ss", {locale: });
+console.log(formatted);
 
 // them sua xoa
 const selectItem = ref({

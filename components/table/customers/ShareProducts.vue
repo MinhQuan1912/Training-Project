@@ -10,10 +10,8 @@
 
     <div class="flex flex-col gap-6">
       <div class="overflow-hidden">
-        <div class="flex gap-3">
-          <TransitionGroup
-            name="list"
-            tag="div"
+        <div class="flex gap-3 overflow-x-auto">
+          <div
             class="flex w-1/3 min-w-77.5 gap-3 p-3 @sm:items-center border-[1.5px] border-solid border-transparent hover:border-primary/7.5 hover:bg-background-pop rounded-[20px] cursor-pointer"
             v-for="shareProduct in shareProducts"
             :key="shareProduct.id"
@@ -45,7 +43,7 @@
                 ${{ shareProduct.price }}
               </div>
             </div>
-          </TransitionGroup>
+          </div>
         </div>
       </div>
 
@@ -111,33 +109,33 @@ const shareProducts = ref([
   },
 ]);
 
-const moveProduct = () => {
-  // xóa phần tử cuối cùng của mảng
-  const itemsProduct = shareProducts.value.splice(-1, 1)[0];
+// const moveProduct = () => {
+//   // xóa phần tử cuối cùng của mảng
+//   const itemsProduct = shareProducts.value.splice(-1, 1)[0];
 
-  // đưa nó lên đầu mảng
-  shareProducts.value.unshift(itemsProduct);
-};
+//   // đưa nó lên đầu mảng
+//   shareProducts.value.unshift(itemsProduct);
+// };
 
-onMounted(() => {
-  setInterval(moveProduct, 2000);
-});
+// onMounted(() => {
+//   setInterval(moveProduct, 5000);
+// });
 </script>
 
 <style lang="scss" scoped>
-.list-move,
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
-}
+// .list-move,
+// .list-enter-active,
+// .list-leave-active {
+//   transition: all 5s cubic-bezier(0.55, 0, 0.1, 1);
+// }
 
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: scaleY(0.01) translate(30px, 0);
-}
+// .list-enter-from,
+// .list-leave-to {
+//   opacity: 0;
+//   transform: scaleY(0.01) translate(30px, 0);
+// }
 
-.list-leave-active {
-  position: absolute;
-}
+// .list-leave-active {
+//   position: absolute;
+// }
 </style>
