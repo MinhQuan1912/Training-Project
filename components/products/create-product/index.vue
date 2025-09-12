@@ -309,7 +309,7 @@
             </div>
             <div v-if="preview" class="flex flex-col gap-2 w-full ">
                 <div class="text-base xl:text-lg">Product image</div>
-                <div class="h-78 rounded-4xl overflow-hidden">
+                <div class="h-50 xs:h-78 rounded-4xl overflow-hidden">
                     <img v-if="preview" :src="preview" class="w-full h-full object-cover">
                 </div>
             </div>
@@ -320,7 +320,7 @@
             </div>
             <div v-if="activeCompatibilitys.length > 0" class="flex flex-col gap-1 xs:gap-2 w-full">
                 <div class="text-base xl:text-lg">Compatibility</div>
-                <div class="grid grid-cols-3 gap-2">
+                <div class="grid grid-cols-2 xs:grid-cols-3 gap-2">
                     <div v-for="item in activeCompatibilitys.map(i => compatibilityList[i]?.name)"
                         class="flex items-center justify-center rounded-xl p-2 text-sm xs:text-xl h-12 bg-secondary/30">
                         {{ item }}
@@ -329,7 +329,7 @@
             </div>
             <div v-if="tagAfterRemove.length > 0" class="flex flex-col gap-1 xs:gap-2 w-full">
                 <div class="text-base xl:text-lg">Tags</div>
-                <div class="grid grid-cols-3 gap-2">
+                <div class="grid grid-cols-2 xs:grid-cols-3 gap-2">
                     <div v-for="item in tagAfterRemove"
                         class="flex items-center justify-center rounded-xl p-2 text-sm xs:text-xl h-12 bg-secondary/30">
                         {{ item }}
@@ -480,7 +480,7 @@ const clearInput = () => {
 }
 const selectedOpt = ref(selectList.value[0])
 const { showCreateProduct, showSaveModal, previousRoute } = useCreateProduct()
-const router = useRouter()
+const router = useRouter(   )
 const descriptionText = ref('')
 const messageText = ref('')
 const activeCompatibilitys = ref<number[]>([])

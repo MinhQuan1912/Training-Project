@@ -97,7 +97,7 @@ const overViewList = ref([
     chart: {
       data: {
         date: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        value: [4821, 7321, 1594, 9012, 6234, 8123, 3456, 6789, 2345, 9876, 4567, 1234]
+        value: [2824, 1409, 5506, 5012, 4657, 3286, 2679, 9935, 2424, 7912, 1520, 1488]
       },
       growthRate: 14
     }
