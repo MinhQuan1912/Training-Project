@@ -16,7 +16,6 @@ const props = defineProps({
 
 const hoveredIndex = ref(null);
 
-// Plugin tùy chỉnh để vẽ thông tin vào tâm biểu đồ
 const centerTextPlugin = {
   id: "centerTextPlugin",
   beforeDraw(chart) {
@@ -26,10 +25,8 @@ const centerTextPlugin = {
     } = chart;
     ctx.save();
 
-    // Tìm index của slice đang được hover
     const activeTooltip = chart.tooltip._active[0];
 
-    // Chỉ vẽ khi có một slice đang được hover
     if (activeTooltip) {
       const dataIndex = activeTooltip.index;
       const dataPoint = props.chartDataPoints[dataIndex];
@@ -47,16 +44,13 @@ const centerTextPlugin = {
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
-      // Vẽ văn bản chính (label)
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 20px Arial";
       ctx.fillText(text, width / 2, height / 2 - 15);
 
-      // Vẽ giá trị
       ctx.font = "normal 16px Arial";
       ctx.fillText(valueText, width / 2, height / 2 + 5);
 
-      // Vẽ phần trăm
       ctx.font = "normal 14px Arial";
       ctx.fillStyle = "#AAAAAA";
       ctx.fillText(percentageText, width / 2, height / 2 + 25);
@@ -65,7 +59,6 @@ const centerTextPlugin = {
   },
 };
 
-// Đăng ký các thành phần cốt lõi của Chart.js và plugin tùy chỉnh
 ChartJS.register(ArcElement, Tooltip, Legend, centerTextPlugin);
 
 const chartData = computed(() => {
