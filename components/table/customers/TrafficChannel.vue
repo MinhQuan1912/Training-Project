@@ -11,7 +11,7 @@
     <div>
       <div class="relative z-0">
         <TrafficChannelBar
-          class="absolute left-7 inset-0 w-full h-full pb-10 z-50"
+          class="absolute left-7 inset-0 w-full h-full pb-10 pr-4 max-lg:pl-2.5 z-50"
         />
 
         <div
