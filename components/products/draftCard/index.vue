@@ -19,21 +19,21 @@
         }}</span>
       </div>
       <div
-        class="absolute bottom-0 left-0 text-xs text-gray-400 hidden group-hover:flex gap-2 items-center duration-200 cursor-pointer">
+        class="absolute bottom-0 left-0 text-xs text-secondary hidden group-hover:flex gap-2 items-center duration-200 cursor-pointer">
         <div
-          class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
+          class="flex items-center gap-1 hover:text-primary rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
           @click.stop="$emit('edit')">
           <icons-edit-2 />
           <span>Edit</span>
         </div>
         <div
-          class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
+          class="flex items-center gap-1 hover:text-primary rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
           @click.stop.prevent="$emit('delete')">
           <icons-trash-2 />
           <span>Delete</span>
         </div>
         <div
-          class="flex items-center gap-1 hover:text-white rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
+          class="flex items-center gap-1 hover:text-primary rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
           @click.stop>
           <icons-calendar-2 />
           <span>Schedule</span>
