@@ -48,10 +48,31 @@ const save = () => {
 </script>
 
 <style lang="scss" scoped>
-
+.modal-content {
+    scrollbar-width: none !important;
+}
 
 .modal-content::-webkit-scrollbar {
-    display: none;
-    /* Chrome, Safari */
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+.modal-content::-webkit-scrollbar-corner {
+    display: none !important;
+    width: 0 !important;
+        height: 0 !important;
 }
 </style>
