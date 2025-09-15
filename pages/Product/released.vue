@@ -35,14 +35,14 @@
           tdInput: 'rounded-2xl w-10 text-right',
         }">
           <template #column-product="{ item }">
-            <div class="flex px-5 gap-5 items-center min-w-75">
+            <div class="flex px-5 gap-5 items-center xs:min-w-75 max-w-50 xs:max-w-none truncate">
               <div class="h-12 min-w-12 max-w-12 lg:h-16 lg:min-w-16 lg:max-w-16 rounded-xl overflow-hidden">
                 <img :src="(item as Data).image" :alt="(item as Data).name" loading="lazy" decoding="async"
                   class="object-cover w-full h-full" />
               </div>
               <div class="flex flex-col justify-center relative">
                 <p class="font-semibold text-primary">{{ (item as Data).name }}</p>
-                <p class="lg:group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80 min-w-63">{{
+                <p class="lg:group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80 xs:min-w-63">{{
                   (item as
                     Data).description }}
                 </p>
