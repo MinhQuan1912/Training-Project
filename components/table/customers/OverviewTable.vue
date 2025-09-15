@@ -85,7 +85,7 @@
     </div>
 
     <div class="flex gap-4 flex-col mt-10 mb-5.5 h-72.75 relative">
-      <LineChart class="absolute top-0 left-0" />
+      <LineChart class="absolute top-0 left-0" :mock-data="mockData" />
       <!-- <div class="flex flex-col gap-10 relative">
         <div class="flex gap-6 items-center">
           <div class="w-8 text-xs leading-[160%] text-tertiary">2k</div>
@@ -314,8 +314,36 @@ import graph2 from "~/components/icons/graph2.vue";
 import graph3 from "~/components/icons/graph3.vue";
 import LineChart from "~/components/vue-chart/LineChart.vue";
 
+const mockData = reactive({
+  labels: ["Apr", "May", "Jun", "July"],
+  datasets: [
+    {
+      label: "New Customers",
+      data: [1500, 750, 1250, 1500],
+      borderColor: "rgb(34, 197, 94)",
+      backgroundColor: "rgba(34, 197, 94, 0.5)",
+      pointBackgroundColor: "rgb(34, 197, 94)",
+      pointBorderColor: "#fff",
+      borderWidth: 2,
+      pointRadius: 5,
+      tension: 0.4,
+    },
+    {
+      label: "Target",
+      data: [800, 800, 80, 800],
+      borderColor: "rgb(255, 255, 255)",
+      backgroundColor: "rgba(255, 255, 255, 0.5)",
+      pointRadius: 0,
+      border: [5, 5],
+      borderWidth: 2,
+      tension: 0.4,
+    },
+  ],
+});
+
 const overviews = ref([
   {
+    id: 1,
     iconName: "wallet",
     iconGraph: "graph1",
     title: "Total customers",
@@ -325,6 +353,7 @@ const overviews = ref([
     time: "vs last year",
   },
   {
+    id: 2,
     iconName: "customer",
     iconGraph: "graph2",
     title: "New customers",
@@ -334,6 +363,7 @@ const overviews = ref([
     time: "vs last year",
   },
   {
+    id: 3,
     iconName: "product",
     iconGraph: "graph3",
     title: "Sales",
