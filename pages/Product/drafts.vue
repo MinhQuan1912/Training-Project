@@ -95,16 +95,16 @@
     </div>
   </div>
   <modal-edit :isOpen="selectedEditId ? true : false" @close="toggleEditModal(null)" @save="saveEditModal">
-    <form class="flex gap-x-4 gap-y-4 flex-wrap max-h-75 sm:max-h-none overflow-y-auto sm:overflow-y-visible"
+    <form class="flex gap-x-4 gap-y-4 flex-wrap max-h-75 md:max-h-none overflow-y-auto md:overflow-y-visible"
       v-if="editProduct">
       <div class="flex gap-4 w-full">
         <div class="text-base flex items-center xl:text-lg w-1/2">Product image</div>
         <upload-image v-model:preview="editProduct.image" image-id="preview" fit-class="object-cover"
-          addition-class="h-full aspect-[1/1] bg-white" />
+          addition-class="!w-[calc(50%-8px)] !h-auto aspect-square bg-white" />
       </div>
       <div class="flex flex-col gap-1 xs:gap-2 w-full">
         <div class="text-base xl:text-lg">Product name</div>
-        <input type="text" class="!-[1.5px] border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
+        <input type="text" class="!border-[1.5px] border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
           v-model="editProduct.title">
       </div>
       <div class="flex flex-col gap-1 xs:gap-2 w-full xs:w-[calc(50%-8px)]">
