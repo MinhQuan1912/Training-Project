@@ -344,7 +344,7 @@
             <div v-if="price" class="flex flex-col gap-1 xs:gap-2 w-full">
                 <div class="text-base xl:text-lg">Product price</div>
                 <div class="flex items-center rounded-xl p-2 text-sm xs:text-xl h-12 bg-secondary/30">
-                    {{ activePromo ? price * (1 - (selectedPromoValue?.value ?? 0)) : price }}
+                    {{ (activePromo ? price * (1 - (selectedPromoValue?.value ?? 0)) : price).toLocaleString('en-US') }}
                 </div>
             </div>
         </form>
