@@ -305,7 +305,7 @@
             <div v-if="descriptionText" class="flex flex-col gap-1 xs:gap-2 w-full">
                 <div class="text-base xl:text-lg">Product description</div>
                 <div class="flex items-center rounded-xl p-2 text-sm xs:text-xl h-12 bg-secondary/30">{{ descriptionText
-                }}</div>
+                    }}</div>
             </div>
             <div v-if="preview" class="flex flex-col gap-2 w-full ">
                 <div class="text-base xl:text-lg">Product image</div>
@@ -339,7 +339,7 @@
             <div v-if="messageText" class="flex flex-col gap-1 xs:gap-2 w-full">
                 <div class="text-base xl:text-lg">Message to reviewer</div>
                 <div class="flex items-center rounded-xl p-2 text-sm xs:text-xl h-12 bg-secondary/30">{{ messageText
-                }}</div>
+                    }}</div>
             </div>
             <div v-if="price" class="flex flex-col gap-1 xs:gap-2 w-full">
                 <div class="text-base xl:text-lg">Product price</div>
@@ -480,7 +480,7 @@ const clearInput = () => {
 }
 const selectedOpt = ref(selectList.value[0])
 const { showCreateProduct, showSaveModal, previousRoute } = useCreateProduct()
-const router = useRouter(   )
+const router = useRouter()
 const descriptionText = ref('')
 const messageText = ref('')
 const activeCompatibilitys = ref<number[]>([])

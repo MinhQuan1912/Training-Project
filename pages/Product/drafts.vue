@@ -55,7 +55,8 @@
           <template #column-product="{ item }">
             <div class="flex items-center gap-3">
               <div class="h-12 min-w-12 max-w-12 lg:h-16 lg:min-w-16 lg:max-w-16 rounded-xl overflow-hidden">
-                <img :src="(item as Data).image" class=" object-cover w-full h-full" />
+                <img :src="(item as Data).image" :alt="(item as Data).title" loading="lazy" decoding="async"
+                  class="object-cover w-full h-full" />
               </div>
               <div class="w-full">
                 <div class="font-medium text-primary text-base leading-[150%]">

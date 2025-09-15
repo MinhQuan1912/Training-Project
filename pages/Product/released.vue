@@ -37,13 +37,14 @@
           <template #column-product="{ item }">
             <div class="flex px-5 gap-5 items-center min-w-75">
               <div class="h-12 min-w-12 max-w-12 lg:h-16 lg:min-w-16 lg:max-w-16 rounded-xl overflow-hidden">
-                <img :src="(item as Data).image" class=" object-cover w-full h-full" />
+                <img :src="(item as Data).image" :alt="(item as Data).name" loading="lazy" decoding="async"
+                  class="object-cover w-full h-full" />
               </div>
               <div class="flex flex-col justify-center relative">
                 <p class="font-semibold text-primary">{{ (item as Data).name }}</p>
                 <p class="lg:group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80">{{
                   (item as
-                  Data).description }}
+                    Data).description }}
                 </p>
                 <div
                   class="hidden lg:group-hover/setting:flex gap-2 h-6 relative -left-1 text-sm leading-[100%] font-semibold text-secondary transition-all duration-200 ease">
