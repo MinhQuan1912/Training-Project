@@ -23,6 +23,9 @@ textarea {
   outline: none;
   caret-color: var(--color-blue);
 }
+button {
+  outline: none
+}
 
 input[type="search"]::-webkit-search-cancel-button {
   display: none;
