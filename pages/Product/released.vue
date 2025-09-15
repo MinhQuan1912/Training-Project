@@ -144,18 +144,18 @@
         <div class="flex flex-col gap-4 w-full sm:w-[calc(50%-8px)] ">
           <div class="flex flex-col gap-1 xs:gap-2 w-full">
             <div class="text-base xl:text-lg">Product name</div>
-            <input type="text" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-12"
+            <input type="text" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
               v-model="editProduct.name">
           </div>
           <div class="flex flex-col gap-1 xs:gap-2 w-full">
             <div class="text-base xl:text-lg">Product type</div>
             <select-dropdown :data="typeList" v-model:selected-option="editProduct.description"
               addition-class="text-sm xs:text-xl h-8 xs:h-12 !text-black !p-2 rounded-xl"
-              text-class="!text-black !bg-white h-12" />
+              text-class="!text-black !bg-white !h-8 xs:!h-12 text-sm xs:text-xl" />
           </div>
           <div class="flex flex-col gap-1 xs:gap-2 w-full">
             <div class="text-base xl:text-lg">Product price</div>
-            <input type="number" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-12"
+            <input type="number" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
               v-model="editProduct.price">
           </div>
         </div>
