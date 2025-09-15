@@ -2,4 +2,6 @@
   <div></div>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+navigateTo("/product");
+</script>

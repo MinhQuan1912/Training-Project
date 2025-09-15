@@ -146,7 +146,7 @@
           </div>
           <div class="flex flex-col gap-1 xs:gap-2 w-full">
             <div class="text-base xl:text-lg">Product price</div>
-            <input type="number" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
+            <input type="number" step="any" class="!border border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
               v-model="editProduct.price">
           </div>
         </div>
