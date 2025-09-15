@@ -9,12 +9,12 @@
     </div>
 
     <div>
-      <div class="relative z-0">
+      <div class="relative z-0 h-72.75">
         <TrafficChannelBar
-          class="absolute left-7 inset-0 w-full h-full pb-10 pr-4 max-lg:pl-2.5 z-50"
+          class="left-7 inset-0 w-full h-full px-2.5 sm:px-5 lg:px-0 z-50"
         />
 
-        <div
+        <!-- <div
           class="flex flex-col gap-10 text-xs text-tertiary/80 leading-[160%]"
         >
           <div class="flex gap-6 items-center">
@@ -69,11 +69,11 @@
           <div class="w-full flex justify-center">27</div>
 
           <div class="w-full flex justify-center">28</div>
-        </div>
+        </div> -->
       </div>
 
       <div
-        class="my-4 flex gap-5 sm:gap-10 sm:items-center flex-col @xs:flex-row"
+        class="my-4 flex gap-5 sm:gap-10 sm:items-center flex-col @xs:flex-row max-lg:justify-center"
       >
         <div class="flex gap-1.5 items-center">
           <div

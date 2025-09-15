@@ -51,19 +51,22 @@ const chartOptions: ChartOptions<"bar"> = {
         display: false,
       },
       ticks: {
-        display: false,
+        display: true,
       },
     },
     y: {
       stacked: false,
       beginAtZero: true,
       grid: {
-        // color: "rgba(255, 255, 255, 0.2)",
-        // borderDash: [5, 5],
-        display: false,
+        display: true,
+        // Đặt màu và kiểu đường kẻ
+        color: "rgba(114, 114, 114, 0.2)",
+        borderDash: [5, 5],
+        drawOnChartArea: true,
+        drawTicks: false,
       },
       ticks: {
-        display: false,
+        display: true,
         stepSize: 500,
         callback: function (value: string | number) {
           if (typeof value === "number") {

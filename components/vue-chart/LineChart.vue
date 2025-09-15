@@ -6,34 +6,14 @@
 import { computed } from "vue";
 import { Line } from "vue-chartjs";
 
-const mockData = {
-  labels: ["Apr", "May", "Jun", "July"],
-  datasets: [
-    {
-      label: "New Customers",
-      data: [1500, 750, 1250, 1500],
-      borderColor: "rgb(34, 197, 94)",
-      backgroundColor: "rgba(34, 197, 94, 0.5)",
-      pointBackgroundColor: "rgb(34, 197, 94)",
-      pointBorderColor: "#fff",
-      borderWidth: 2,
-      pointRadius: 5,
-      tension: 0.4,
-    },
-    {
-      label: "Target",
-      data: [800, 800, 80, 800],
-      borderColor: "rgb(255, 255, 255)",
-      backgroundColor: "rgba(255, 255, 255, 0.5)",
-      pointRadius: 0,
-      border: [5, 5],
-      borderWidth: 2,
-      tension: 0.4,
-    },
-  ],
-};
+const props = defineProps({
+  mockData: {
+    type: Object,
+    required: true,
+  },
+});
 
-const chartData = computed(() => mockData);
+const chartData = computed(() => props.mockData);
 
 const chartOptions = computed(() => ({
   responsive: true,

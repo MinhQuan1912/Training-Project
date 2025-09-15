@@ -7,7 +7,7 @@
     :selectRowTable="false"
   >
     <template v-slot:column-comments="{ item, index }">
-      <div class="flex items-center">
+      <div class="flex items-center cursor-pointer">
         <div class="w-12 h-12 mr-5 rounded-full flex-none">
           <img
             :src="item.imgComment"
@@ -151,7 +151,7 @@
           </div>
 
           <div
-            class="flex gap-5 items-center"
+            class="flex gap-5 items-center cursor-pointer"
             v-if="item.activeIndex === false"
           >
             <div class="w-16 h-16 rounded-xl flex-none">
@@ -161,7 +161,7 @@
                 class="w-full h-full rounded-xl object-contain"
               />
             </div>
-            <div class="relative cursor-pointer">
+            <div class="relative">
               <div class="font-semibold text-primary">
                 {{ item.titleProduct }}
               </div>
