@@ -100,7 +100,7 @@
       <div class="flex gap-4 w-full">
         <div class="text-base flex items-center xl:text-lg w-1/2">Product image</div>
         <upload-image v-model:preview="editProduct.image" image-id="preview" fit-class="object-cover"
-          addition-class="h-full aspect-[1/1]" />
+          addition-class="h-full aspect-[1/1] bg-white" />
       </div>
       <div class="flex flex-col gap-1 xs:gap-2 w-full">
         <div class="text-base xl:text-lg">Product name</div>

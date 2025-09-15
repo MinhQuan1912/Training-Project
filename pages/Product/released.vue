@@ -163,7 +163,7 @@
         <div class="flex flex-col gap-2 w-full sm:w-[calc(50%-8px)]">
           <div class="text-base xl:text-lg">Product image</div>
           <upload-image v-model:preview="editProduct.image" image-id="preview" fit-class="object-cover"
-            addition-class="h-full aspect-[1/1]" />
+            addition-class="h-full aspect-[1/1] bg-white" />
         </div>
       </div>
       <div class="flex flex-col gap-1 xs:gap-2 w-full">
