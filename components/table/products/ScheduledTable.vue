@@ -51,7 +51,7 @@
                 </NuxtLink>
               </div>
             </div>
-            <div class="block group-hover:hidden">ui8.net/product-link</div>
+            <div class="block group-hover:hidden">{{ item.link }}</div>
           </div>
         </div>
       </div>
@@ -154,7 +154,7 @@
     aria-hidden="true"
     class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 overflow-y-auto"
   >
-    <div class="relative p-4 w-full max-w-xl max-h-full">
+    <div class="relative p-4 w-full max-w-lg max-h-full">
       <!-- Modal content -->
       <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
         <!-- Modal header -->
@@ -208,7 +208,7 @@
             </div> -->
 
             <div class="grid gap-4 mb-4 grid-cols-2">
-              <div class="col-span-2">
+              <div class="col-span-2 sm:col-span-1">
                 <label
                   for="name"
                   class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
@@ -221,6 +221,21 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Product Name"
                   v-model="selectItem.product"
+                />
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <label
+                  for="name"
+                  class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
+                  >Link</label
+                >
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Link Product Name"
+                  v-model="selectItem.link"
                 />
               </div>
               <div class="col-span-2 sm:col-span-1">
@@ -325,6 +340,7 @@ const schedules = ref([
     price: "98.00",
     priceStatus: true,
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    link: "ui8.net/product-link",
   },
   {
     id: 2,
@@ -334,6 +350,7 @@ const schedules = ref([
     price: "980000.00",
     priceStatus: true,
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    link: "ui8.net/product-link",
   },
   {
     id: 3,
@@ -343,6 +360,7 @@ const schedules = ref([
     price: "98.00",
     priceStatus: false,
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    link: "ui8.net/product-link",
   },
   {
     id: 4,
@@ -351,6 +369,7 @@ const schedules = ref([
     activeIndex: false,
     price: "98.00",
     priceStatus: true,
+    link: "ui8.net/product-link",
   },
   {
     id: 5,
@@ -360,6 +379,7 @@ const schedules = ref([
     price: "98.00",
     priceStatus: true,
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    link: "ui8.net/product-link",
   },
   {
     id: 6,
@@ -369,6 +389,7 @@ const schedules = ref([
     price: "98.00",
     priceStatus: true,
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    link: "ui8.net/product-link",
   },
   {
     id: 7,
@@ -378,6 +399,7 @@ const schedules = ref([
     price: "98.00",
     priceStatus: true,
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    link: "ui8.net/product-link",
   },
   {
     id: 8,
@@ -387,6 +409,7 @@ const schedules = ref([
     price: "98.00",
     priceStatus: true,
     scheduleFor: "Apr 9, 2044 at 3:55 PM",
+    link: "ui8.net/product-link",
   },
 ]);
 

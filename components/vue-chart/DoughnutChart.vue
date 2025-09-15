@@ -1,11 +1,21 @@
 <template>
-  <Doughnut :data="chartData" :options="chartOptions" />
+  <Doughnut
+    :data="chartData"
+    :options="chartOptions"
+    :plugins="[centerTextPlugin]"
+  />
 </template>
 
 <script setup>
 import { computed, ref } from "vue";
 import { Doughnut } from "vue-chartjs";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  plugins,
+} from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -58,13 +68,14 @@ const chartOptions = {
           return value.toLocaleString("en-US");
         },
       },
-      backgroundColor: "#282828",
-      titleColor: "#FFFFFF",
-      bodyColor: "#FFFFFF",
+      backgroundColor: "#FFFFFF",
+      titleColor: "#282828",
+      bodyColor: "#282828",
       borderColor: "#FFFFFF",
       borderWidth: 1,
       displayColors: false,
       padding: 10,
+      caretSize: 0,
     },
   },
   onHover: (event, elements, chart) => {
