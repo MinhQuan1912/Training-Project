@@ -519,7 +519,7 @@ const handleRemoveTag = (index: number) => {
     tagAfterRemove.value.splice(index, 1)
 }
 const saveDraft = () => {
-    showCreateProduct.value = false
+    showSaveModal.value = true
 }
 </script>
 
