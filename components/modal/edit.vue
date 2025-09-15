@@ -11,7 +11,7 @@
                     <div class="py-4 flex justify-between items-center border-b border-gray-200">
                         <p class="text-2xl font-semibold ">{{ props.title ? props.title : "Edit product" }}</p>
                         <button
-                            class="h-8 w-8 text-black rounded-md flex justify-center items-center hover:bg-gray-300 cursor-pointer"
+                            class="h-8 w-8 text-black rounded-md flex justify-center items-center hover:bg-gray-300 active:bg-gray-300 cursor-pointer"
                             @click="closeModal">
                             <icons-close class="h-5 w-5" />
                         </button>

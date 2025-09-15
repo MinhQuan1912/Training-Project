@@ -37,7 +37,7 @@
       </div>
     </div>
     <button
-      class="min-w-9 h-9 lg:min-w-12 lg:h-12 flex lg:hidden justify-center items-center text-white cursor-pointer bg-background-02 rounded-xl hover:bg-white hover:text-black transition-colors duration-200 ease"
+      class="min-w-9 h-9 lg:min-w-12 lg:h-12 flex lg:hidden justify-center items-center text-white cursor-pointer bg-background-02 rounded-xl hover:bg-white active:bg-white hover:text-black active:text-black transition-colors duration-200 ease"
       @click="openSideBar">
       <icons-menu-header />
     </button>

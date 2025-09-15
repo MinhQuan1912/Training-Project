@@ -6,20 +6,48 @@
       </div>
       <div class="flex gap-1 mt-3.5 font-semibold">
         <span class="flex-1 items-center text-base leading-[1.5] tracking-[0.024px] text-primary line-clamp-1">{{ title
-        }}</span>
+          }}</span>
         <div
           class="w-12 h-7 border-[1.5px] border-solid rounded-lg bg-primary-02/5 border-primary-02/15 leading-[1] tracking-[0.175px] text-primary-02 text-sm flex justify-center items-center">
           ${{ price }}
         </div>
       </div>
-      <div class="flex items-center gap-2 mb-2 group-hover:opacity-0 py-1">
-        <icons-clock  class=" text-secondary" />
-        <span class="text-secondary text-xs leading-[1.6] tracking-[0.048px]">{{
-          formatDate(date || "2044-04-09T15:55:00Z")
-        }}</span>
+      <div class="flex items-center justify-between gap-2 mb-2 group-hover:opacity-0 py-1">
+        <div class="flex items-center gap-2">
+          <icons-clock class=" text-secondary" />
+          <span class="text-secondary text-xs leading-[1.6] tracking-[0.048px]">{{
+            formatDate(date || "2044-04-09T15:55:00Z")
+            }}</span>
+        </div>
+        <div class="block md:hidden text-secondary relative" @click="toggleOption">
+          <icons-option />
+          <Transition name="slide-left">
+            <div v-if="openOption"
+              class="absolute right-[calc(100%+8px)] top-1/2 -translate-y-1/2 flex flex-col z-10 bg-background-02 rounded-xl p-2">
+              <div
+                class="flex items-center gap-1 hover:text-primary rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
+                @click.stop="$emit('edit')">
+                <icons-edit-2 />
+                <span>Edit</span>
+              </div>
+              <div
+                class="flex items-center gap-1 hover:text-primary rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
+                @click.stop.prevent="$emit('delete')">
+                <icons-trash-2 />
+                <span>Delete</span>
+              </div>
+              <div
+                class="flex items-center gap-1 hover:text-primary rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
+                @click.stop>
+                <icons-calendar-2 />
+                <span>Schedule</span>
+              </div>
+            </div>
+          </Transition>
+        </div>
       </div>
       <div
-        class="absolute bottom-0 left-0 text-xs text-secondary hidden group-hover:flex gap-2 items-center duration-200 cursor-pointer">
+        class="absolute bottom-1 left-0 text-xs text-secondary hidden md:group-hover:flex gap-2 items-center duration-200 cursor-pointer">
         <div
           class="flex items-center gap-1 hover:text-primary rounded-[6px] hover:outline-[1.5px] hover:outline-stroke p-1"
           @click.stop="$emit('edit')">
@@ -59,7 +87,7 @@
         <UIcon name="fa6-regular:clock" class="size-4 text-secondary" />
         <span class="text-secondary text-xs leading-[1.6] tracking-[0.048px]">{{
           formatDate(itemBefore.date || "2044-04-09T15:55:00Z")
-        }}</span>
+          }}</span>
       </div>
       <div class="option text-xs text-gray-400 hidden gap-2 items-center duration-200 cursor-pointer">
         <div
@@ -99,7 +127,7 @@
         <UIcon name="fa6-regular:clock" class="size-4 text-secondary" />
         <span class="text-secondary text-xs leading-[1.6] tracking-[0.048px]">{{
           formatDate(itemAfter.date || "2044-04-09T15:55:00Z")
-        }}</span>
+          }}</span>
       </div>
       <div class="option text-xs text-gray-400 hidden gap-2 items-center duration-200 cursor-pointer">
         <div
@@ -184,6 +212,10 @@ function formatDate(value) {
   })
     .format(d)
     .replace(",", " at");
+}
+const openOption = ref(false)
+const toggleOption = () => {
+  openOption.value = !openOption.value
 }
 </script>
 <style scoped>

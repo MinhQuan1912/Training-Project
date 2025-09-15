@@ -6,7 +6,7 @@
                 <img src="/images/logo.png" class="w-full h-full object-contain" />
             </div>
             <button
-                class="w-12 h-12 rounded-full bg-background-02 text-secondary flex justify-center items-center cursor-pointer hover:text-background-02 hover:bg-white transition-all duration-300 ease"
+                class="w-12 h-12 rounded-full bg-background-02 text-secondary flex justify-center items-center cursor-pointer hover:text-background-02 active:text-background-02 hover:bg-white active:bg-white transition-all duration-300 ease"
                 @click="closeSideBar">
                 <icons-close />
             </button>
