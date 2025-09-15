@@ -7,7 +7,7 @@
         <transition name="scale">
             <div v-if="props.isOpen" class="fixed inset-0 flex items-center justify-center z-110"
                 @mousedown.self="closeModal">
-                <div class="bg-white w-[80dvw] xs:w-110 md:w-150 rounded-2xl flex flex-col px-4">
+                <div class="bg-white w-[80dvw] xs:w-110 md:w-150 rounded-2xl flex flex-col px-4 modal-content">
                     <div class="py-4 flex justify-between items-center border-b border-gray-200">
                         <p class="text-2xl font-semibold">{{ props.title ? props.title : "Edit product" }}</p>
                         <button
@@ -47,4 +47,11 @@ const save = () => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+
+.modal-content::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari */
+}
+</style>
