@@ -42,7 +42,7 @@
               </div>
               <div class="flex flex-col justify-center relative">
                 <p class="font-semibold text-primary">{{ (item as Data).name }}</p>
-                <p class="lg:group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80">{{
+                <p class="lg:group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80 min-w-63">{{
                   (item as
                     Data).description }}
                 </p>

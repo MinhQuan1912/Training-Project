@@ -46,8 +46,8 @@
         <DataTable :items="results" :columns="columns" :classTableTr="{
           header: 'rounded-[16px] p-4 ',
           body: 'rounded-[16px] outline-[1.5px] outline-solid outline-transparent hover:outline-[#313131] hover:bg-background-highlight group cursor-pointer',
-          tdInput: 'min-w-10 w-10 text-right',
-          thInput: 'min-w-10 w-10 text-right',
+  tdInput: 'min-w-10 w-10 text-right rounded-2xl',
+          thInput: 'min-w-10 w-10 text-right ',
           padding: 'pb-8 px-4'
         }"
           tHeadClass="w-full table-fixed rounded-xl text-tertiary text-xs font-normal leading-[160%] tracking-[0.048px]">
@@ -215,13 +215,13 @@ const columns = [
     label: "Product",
     slot: "product",
     headerClass: "p-6 pl-4 text-left min-w-80 md:w-120",
-    cellClass: "p-4 w-full min-w-80 md:w-120",
+    cellClass: "p-4 w-full min-w-80 md:w-120 rounded-r-2xl",
   },
   {
     label: "Price",
     slot: "price",
     headerClass: "p-6 pl-4 text-left",
-    cellClass: "p-4 flex justify-between h-24 items-center gap-8",
+    cellClass: "p-4 flex justify-between h-24 items-center gap-8 rounded-r-2xl",
   },
 ];
 
