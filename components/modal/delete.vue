@@ -8,7 +8,7 @@
             <div v-if="props.isOpen" class="fixed inset-0 flex items-center justify-center z-110"
                 @mousedown.self="closeModal">
                 <div class="bg-white w-[80dvw] xs:w-110 md:w-150 rounded-2xl flex flex-col px-4">
-                    <div class="py-4 flex justify-between items-center border-b border-gray-200">
+                    <div class="py-4 flex justify-between items-center border-b border-gray-200 text-black">
                         <p class="text-2xl font-semibold">Are you sure you want to delete this product?</p>
                     </div>
                     <div class="p-4 py-2 flex justify-end items-center gap-4">

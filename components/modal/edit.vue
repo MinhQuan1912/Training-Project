@@ -7,9 +7,9 @@
         <transition name="scale">
             <div v-if="props.isOpen" class="fixed inset-0 flex items-center justify-center z-110"
                 @mousedown.self="closeModal">
-                <div class="bg-white w-[80dvw] xs:w-110 md:w-150 rounded-2xl flex flex-col px-4 modal-content">
+                <div class="bg-white w-[80dvw] xs:w-110 md:w-150 rounded-2xl flex flex-col px-4 modal-content text-black">
                     <div class="py-4 flex justify-between items-center border-b border-gray-200">
-                        <p class="text-2xl font-semibold">{{ props.title ? props.title : "Edit product" }}</p>
+                        <p class="text-2xl font-semibold ">{{ props.title ? props.title : "Edit product" }}</p>
                         <button
                             class="h-8 w-8 text-black rounded-md flex justify-center items-center hover:bg-gray-300 cursor-pointer"
                             @click="closeModal">
