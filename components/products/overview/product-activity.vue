@@ -16,7 +16,7 @@
     :items="filterActivities"
     :columns="columns"
     :class-table-tr="{
-      padding: 'px-5 pt-4',
+      padding: 'xs:px-5 pt-4',
       header: 'flex gap-6 justify-between items-center',
       body: 'flex gap-6 border-t border-stroke-subtle w-full h-17',
       thInput: 'hidden',
@@ -99,27 +99,27 @@ const columns = [
   {
     label: "Products",
     slot: "products",
-    headerClass: "flex-1 py-5 text-left text-xs leading-[160%] text-tertiary",
-    cellClass: "py-4 flex-1 flex items-center",
+    headerClass: "flex-1 min-w-37.5 px-4 py-5 text-left text-xs leading-[160%] text-tertiary",
+    cellClass: "min-w-37.5 p-4 flex-1 flex items-center",
   },
   {
     label: "Views",
     slot: "views",
-    headerClass: "flex-1 py-5 text-left text-xs leading-[160%] text-tertiary",
-    cellClass: "py-4 flex-1 flex items-center",
+    headerClass: "flex-1 min-w-37.5 px-4 py-5 text-left text-xs leading-[160%] text-tertiary",
+    cellClass: "min-w-37.5 p-4 flex-1 flex items-center",
   },
   {
     label: "Likes",
     slot: "likes",
-    headerClass: "flex-1 py-5 text-left text-xs leading-[160%] text-tertiary",
-    cellClass: "py-4 flex-1 flex items-center",
+    headerClass: "flex-1 min-w-37.5 px-4 py-5 text-left text-xs leading-[160%] text-tertiary",
+    cellClass: "min-w-37.5 p-4 flex-1 flex items-center",
   },
   {
     label: "Comments",
     slot: "comments",
     headerClass:
       "flex-1 py-5 text-left text-xs leading-[160%] text-tertiary hidden 2xl:table-cell",
-    cellClass: "py-4 flex-1 hidden 2xl:table-cell items-center",
+    cellClass: "p-4 flex-1 hidden 2xl:table-cell items-center",
   },
 ];
 const productActivityList = ref<activityRow[]>([
