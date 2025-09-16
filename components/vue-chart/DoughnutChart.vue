@@ -111,7 +111,7 @@ const centerTextPlugin = {
       const percentage = ((point.value / total) * 100).toFixed(1) + "%";
       mainText = percentage;
       subText = point.label;
-      ctx.fillStyle = "#00B512";
+      ctx.fillStyle = "#FFFFFF";
     } else {
       mainText = totalCount.value.toString();
       subText = "Total";

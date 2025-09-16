@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-background-02 pt-3 px-3 pb-3 sm:pb-8 flex flex-col gap-4 rounded-2xl sm:rounded-4xl"
+    class="bg-background-02 pt-3 px-3 pb-3 sm:pb-8 flex flex-col gap-4 rounded-2xl sm:rounded-4xl @container"
   >
     <div
       class="py-2.5 sm:px-3 text-xl font-semibold leading-[145%] text-primary"
@@ -8,7 +8,7 @@
       Countries
     </div>
 
-    <div class="sm:px-3 flex flex-col gap-2.5 sm:gap-5 w-full @container">
+    <div class="sm:px-3 flex flex-col gap-2.5 sm:gap-5 w-full">
       <div
         class="flex gap-1 @3xs:gap-4 flex-col @3xs:flex-row"
         v-for="(country, index) in countries"

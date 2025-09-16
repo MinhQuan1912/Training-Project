@@ -190,8 +190,7 @@
         </div>
         <!-- Modal body -->
         <form class="p-4 md:p-5">
-          <div class="flex gap-5 items-center">
-            <!-- <div
+          <!-- <div
               class="w-20 h-20 rounded-2xl relative flex flex-col items-center"
             >
               <img :src="selectItem.img" alt="" class="object-cover w-full" />
@@ -207,69 +206,69 @@
               </div>
             </div> -->
 
-            <div class="grid gap-4 mb-4 grid-cols-2">
-              <div class="col-span-2 sm:col-span-1">
-                <label
-                  for="name"
-                  class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
-                  >Products</label
-                >
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Product Name"
-                  v-model="selectItem.product"
-                />
-              </div>
-              <div class="col-span-2 sm:col-span-1">
-                <label
-                  for="name"
-                  class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
-                  >Link</label
-                >
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Link Product Name"
-                  v-model="selectItem.link"
-                />
-              </div>
-              <div class="col-span-2 sm:col-span-1">
-                <label
-                  for="price"
-                  class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
-                  >Price</label
-                >
-                <input
-                  type="number"
-                  name="price"
-                  id="price"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="$2999"
-                  v-model="selectItem.price"
-                />
-              </div>
-              <div class="col-span-2 sm:col-span-1">
-                <label
-                  for="price"
-                  class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
-                  >Schedule For</label
-                >
-                <input
-                  type="datetime"
-                  name="schedulefor"
-                  id="schedulefor"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="datetime"
-                  v-model="selectItem.scheduleFor"
-                />
-              </div>
+          <div class="grid gap-4 mb-4 grid-cols-2">
+            <div class="col-span-2 sm:col-span-1">
+              <label
+                for="name"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
+                >Products</label
+              >
+              <input
+                type="text"
+                name="name"
+                id="name"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Product Name"
+                v-model="selectItem.product"
+              />
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+              <label
+                for="name"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
+                >Link</label
+              >
+              <input
+                type="text"
+                name="name"
+                id="name"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Link Product Name"
+                v-model="selectItem.link"
+              />
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+              <label
+                for="price"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
+                >Price</label
+              >
+              <input
+                type="number"
+                name="price"
+                id="price"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="$2999"
+                v-model="selectItem.price"
+              />
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+              <label
+                for="price"
+                class="block mb-2 text-xs lg:text-sm font-medium text-gray-900 dark:text-white"
+                >Schedule For</label
+              >
+              <input
+                type="datetime"
+                name="schedulefor"
+                id="schedulefor"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xs lg:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="datetime"
+                v-model="selectItem.scheduleFor"
+              />
             </div>
           </div>
+
           <button
             @click="handleSaveProduct()"
             type="submit"
@@ -311,8 +310,8 @@ const columns = [
   {
     slot: "price",
     label: "Price",
-    headerClass: "w-3/10 pl-8 pr-12.5",
-    cellClass: "w-3/10 pl-8 pr-12.5 h-7 my-2",
+    headerClass: "w-3/10 pl-8 pr-12.5 min-w-30.75",
+    cellClass: "w-3/10 pl-8 pr-12.5 h-7 my-2 min-w-30.75",
   },
   {
     slot: "scheduledFor",
@@ -481,3 +480,5 @@ const handleSaveProduct = () => {
   editModal.value = false;
 };
 </script>
+
+<style lang="scss" scoped></style>
