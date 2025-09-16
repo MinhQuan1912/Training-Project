@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-background-02 pt-3 px-3 pb-3 sm:pb-8 flex flex-col gap-4 rounded-2xl sm:rounded-4xl"
+    class="bg-background-02 pt-3 px-3 pb-3 sm:pb-8 flex flex-col gap-4 rounded-2xl sm:rounded-4xl @container"
   >
     <div
       class="py-2.5 sm:px-3 text-xl font-semibold leading-[145%] text-primary"
@@ -8,9 +8,9 @@
       Countries
     </div>
 
-    <div class="sm:px-3 flex flex-col gap-2.5 sm:gap-5 w-full @container">
+    <div class="sm:px-3 flex flex-col gap-2.5 sm:gap-5 w-full">
       <div
-        class="flex gap-1 @xs:gap-4 flex-col @xs:flex-row"
+        class="flex gap-1 @3xs:gap-4 flex-col @3xs:flex-row"
         v-for="(country, index) in countries"
         :key="index"
       >
@@ -33,7 +33,7 @@
 
           <div class="bg-background-pop rounded-xs h-3 w-full">
             <div
-              class="bg-gradient-to-r from-stroke-subtle to-secondary opacity-30 h-full rounded-xs"
+              class="bg-gradient-to-r from-gray-200/[.30] to-gray-500/[.30] h-full rounded-xs"
               :style="{ width: country.percent }"
             ></div>
           </div>
@@ -53,22 +53,22 @@ const countries = ref([
   {
     img: "/images/country2.png",
     content: "Sweden",
-    percent: "10.7%",
+    percent: "50%",
   },
   {
     img: "/images/country3.png",
     content: "Canada",
-    percent: "10.7%",
+    percent: "40%",
   },
   {
     img: "/images/country4.png",
     content: "UK",
-    percent: "10.7%",
+    percent: "30%",
   },
   {
     img: "/images/country5.png",
     content: "German",
-    percent: "10.7%",
+    percent: "25.7%",
   },
 ]);
 </script>

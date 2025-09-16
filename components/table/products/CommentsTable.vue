@@ -631,6 +631,33 @@ const columns = [
   },
 ];
 
+// const columns = computed(() => [
+//   {
+//     slot: "comments",
+//     label: "Comments",
+//     headerClass: "w-3/5 pl-5 pr-6 min-w-115",
+//     cellClass: (item) => {
+//       console.log("Comments cellClass item:", item); // Debug
+//       return [
+//         "pl-5 flex flex-col text-sm lg:text-base pr-4 lg:pr-6 lg:w-3/5 lg:min-w-115",
+//         item.activeIndex ? "w-full" : "",
+//       ];
+//     },
+//   },
+//   {
+//     slot: "product",
+//     label: "Product",
+//     headerClass: "w-3/25 min-w-49",
+//     cellClass: (item) => {
+//       console.log("Product cellClass item:", item); // Debug
+//       return [
+//         "w-3/25 min-w-49 rounded-r-2xl flex items-center whitespace-nowrap text-sm lg:text-base",
+//         item.activeIndex ? "max-lg:hidden m-0" : "",
+//       ];
+//     },
+//   },
+// ]);
+
 const classTableTr = {
   padding: "pb-4 lg:pb-8 px-2 lg:px-4",
   header: "text-left flex items-center text-tertiary text-xs p-2 lg:p-4",
