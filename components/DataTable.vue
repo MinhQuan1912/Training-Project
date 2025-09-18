@@ -1,23 +1,14 @@
 <template>
-  <div class="overflow-x-auto overflow-y-hidden" :class="classTableTr.padding">
+  <div class="overflow-x-auto lg:overflow-x-visible overflow-y-hidden" :class="classTableTr.padding">
     <table class="table-auto w-full overflow-x-auto">
       <thead :class="tHeadClass">
         <tr :class="classTableTr.header" @click="toggleAllChecked">
           <th :class="classTableTr.thInput">
-            <input
-              type="checkbox"
-              id="myCheckbox"
-              class="original-checkbox"
-              v-model="allChecked"
-              @click="toggleAllChecked"
-            />
+            <input type="checkbox" id="myCheckbox" class="original-checkbox" v-model="allChecked"
+              @click="toggleAllChecked" />
             <label for="myCheckbox" class="custom-checkbox"></label>
           </th>
-          <th
-            v-for="(column, index) in columns"
-            :key="index"
-            :class="column.headerClass"
-          >
+          <th v-for="(column, index) in columns" :key="index" :class="column.headerClass">
             <slot :name="`header-${column.slot}`">
               {{ column.label }}
             </slot>
@@ -25,44 +16,24 @@
         </tr>
       </thead>
       <tbody :class="tBodyClass">
-        <tr
-          v-for="(item, itemIndex) in items"
-          v-if="items.length > 0"
-          :key="itemIndex"
-          class="group"
-          :class="[
-            classTableTr.body,
-            {
-              'bg-background-pop rounded-2xl': item.checked === true,
-            },
-          ]"
-          :index="itemIndex"
-          @click="
-            selectRowTable
-              ? handleRowClick(item, itemIndex)
-              : emit('row-click', itemIndex)
-          "
-        >
+        <tr v-for="(item, itemIndex) in items" v-if="items.length > 0" :key="itemIndex" class="group" :class="[
+          classTableTr.body,
+          {
+            'bg-background-pop rounded-2xl': item.checked === true,
+          },
+        ]" :index="itemIndex" @click="
+          selectRowTable
+            ? handleRowClick(item, itemIndex)
+            : emit('row-click', itemIndex)
+          ">
           <td :class="classTableTr.tdInput">
-            <input
-              type="checkbox"
-              :id="'checkbox-' + itemIndex"
-              class="original-checkbox group-hover:border-tertiary"
-              v-model="item.checked"
-              :value="item"
-            />
-            <label
-              :for="'checkbox-' + itemIndex"
-              class="custom-checkbox group-hover:border-tertiary"
-              @click.stop="$emit('row-click', itemIndex)"
-            ></label>
+            <input type="checkbox" :id="'checkbox-' + itemIndex" class="original-checkbox group-hover:border-tertiary"
+              v-model="item.checked" :value="item" />
+            <label :for="'checkbox-' + itemIndex" class="custom-checkbox group-hover:border-tertiary"
+              @click.stop="$emit('row-click', itemIndex)"></label>
           </td>
-          <td
-            v-for="(column, columIndex) in columns"
-            :key="columIndex"
-            :class="column.cellClass"
-            :colspan="column.colspan"
-          >
+          <td v-for="(column, columIndex) in columns" :key="columIndex" :class="column.cellClass"
+            :colspan="column.colspan">
             <slot :name="`column-${column.slot}`" :item="item"> </slot>
           </td>
         </tr>
@@ -151,12 +122,12 @@ watch(
   border-radius: 6px;
 }
 
-.original-checkbox:checked + .custom-checkbox {
+.original-checkbox:checked+.custom-checkbox {
   background: white;
   border-color: white;
 }
 
-.original-checkbox:checked + .custom-checkbox::after {
+.original-checkbox:checked+.custom-checkbox::after {
   content: "";
   position: absolute;
   top: 50%;

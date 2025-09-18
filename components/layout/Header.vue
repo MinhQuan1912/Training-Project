@@ -3,10 +3,10 @@
     class="fixed top-0 right-3 left-3 md:right-5 md:left-5 lg:left-22 2xl:left-85 z-10 bg-black flex gap-4 justify-between items-center py-3 lg:py-5">
     <div class="flex justify-between w-full items-center">
       <h4 class="text-2xl lg:text-[32px] font-semibold text-primary leading-[145%]">
-        <span v-if="!showCreateProduct">{{ pageTitle }}</span>
+        <span v-if="route.path === '/product/create-product'">{{ pageTitle }}</span>
         <span v-else>New product</span>
       </h4>
-      <div v-if="showCreateProduct" class="hidden m:flex gap-3 items-center">
+      <div v-if="route.path === '/product/create-product'" class="hidden m:flex gap-3 items-center">
         <button @click="saveDraft"
           class="h-9 lg:h-12 py-3.5 px-7 flex justify-center items-center rounded-full text-[15px] leading-6 text-secondary font-semibold bg-background-02 cursor-pointer">Save
           draft</button>
@@ -14,16 +14,17 @@
           addition-class="addition !h-9 lg:!h-12" text-class=" font-semibold" />
       </div>
     </div>
-    <div v-if="!showCreateProduct" class="hidden lg:flex justify-evenly items-center h-12 gap-2 xl:gap-3">
+    <div v-if="route.path !== '/product/create-product'"
+      class="hidden lg:flex justify-evenly items-center h-12 gap-2 xl:gap-3">
       <div class="w-78.75 rounded-full bg-background-02 hidden lg:flex items-center text-secondary">
         <div class="p-3 pr-2">
           <icons-search />
         </div>
         <input type="text" placeholder="Search anything... " />
       </div>
-      <button class="create-button" @click="toCreateProduct">
+      <nuxt-link to="/product/create-product" class="create-button">
         <p class="text-sm font-semibold leading-[100%]">Create</p>
-      </button>
+      </nuxt-link>
       <div class="header-button">
         <icons-bell />
       </div>
@@ -72,7 +73,7 @@ const openSideBar = () => {
   showSideBar.value = true
 }
 const saveDraft = () => {
-  
+
   showSaveModal.value = true
 }
 watch(

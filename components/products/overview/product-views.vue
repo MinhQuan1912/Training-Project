@@ -1,5 +1,5 @@
 <template>
-    <canvas ref="chartRef" class=""></canvas>
+    <canvas ref="chartRef" class="w-full"></canvas>
 </template>
 
 <script setup lang="ts">

@@ -50,7 +50,7 @@
             <p class="font-semibold text-primary">{{ (item as productList).name }}</p>
             <p class="lg:group-hover/setting:hidden text-sm text-secondary line-clamp-2 opacity-80">{{
               (item as
-              productList).type }}
+                productList).type }}
             </p>
             <div
               class="hidden lg:group-hover/setting:flex gap-2 h-6 relative -left-1 text-sm leading-[100%] font-semibold text-secondary transition-all duration-200 ease">
@@ -130,7 +130,8 @@
   </div>
   <!-- Edit modal -->
   <modal-edit :isOpen="selectedEditId ? true : false" @close="toggleEditModal(null)" @save="saveEditModal">
-    <form class="flex gap-x-4 gap-y-4 flex-wrap max-h-85 sm:max-h-none overflow-y-auto sm:overflow-y-visible" v-if="editProduct">
+    <form class="flex gap-x-4 gap-y-4 flex-wrap max-h-85 sm:max-h-none overflow-y-auto sm:overflow-y-visible"
+      v-if="editProduct">
       <div class="flex gap-4 flex-col sm:flex-row w-full ">
         <div class="flex flex-col gap-4 w-full sm:w-[calc(50%-8px)] ">
           <div class="flex flex-col gap-1 xs:gap-2 w-full">
@@ -146,14 +147,15 @@
           </div>
           <div class="flex flex-col gap-1 xs:gap-2 w-full">
             <div class="text-base xl:text-lg">Product price</div>
-            <input type="number" step="any" class="!border-[1.5px] border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
+            <input type="number" step="any"
+              class="!border-[1.5px] border-black rounded-xl p-2 text-sm xs:text-xl h-8 xs:h-12"
               v-model="editProduct.price">
           </div>
         </div>
         <div class="flex flex-col gap-2 w-full sm:w-[calc(50%-8px)]">
           <div class="text-base xl:text-lg">Product image</div>
           <upload-image v-model:preview="editProduct.image" image-id="preview" fit-class="object-cover"
-            addition-class="h-full aspect-square bg-white" />
+            addition-class="h-full aspect-square" />
         </div>
       </div>
       <div class="flex flex-col gap-1 xs:gap-2 w-full">
