@@ -76,7 +76,7 @@ import { useSideBar } from "~/composable/useSideBar";
 
 const colorMode = useColorMode();
 type Menu = {
-  label: string;
+  label?: string;
   icon?: Component;
   to?: string;
   title?: string;
@@ -89,7 +89,12 @@ const menu = ref<Menu[]>([
     label: "Product",
     icon: markRaw(IconsProduct),
     subMenu: [
-      { label: "Overview", title: "Product Overview", to: "/product" },
+      {
+        label: "Overview", title: "Product Overview", to: "/product",
+        subMenu: [{
+          to: '/product/create-product'
+        }]
+      },
       { label: "Drafts", title: "Drafts", to: "/product/drafts" },
       { label: "Released", title: "Released", to: "/product/released" },
       { label: "Comments", title: "Comments", to: "/product/comments" },
@@ -126,12 +131,13 @@ const handleOpenSubmenu = (index: number) => {
     }
   }
 };
-const isActive = (item: Menu) => {
+const isActive = (item: Menu): boolean => {
+
   if (item.to && route.path === item.to) {
     return true;
   }
-  if (item.subMenu?.some((sub) => sub.to === route.path)) {
-    return true;
+  if (item.subMenu) {
+    return item.subMenu.some((sub) => isActive(sub))
   }
   return false;
 };
@@ -147,13 +153,18 @@ watch(
     }
   }
 )
+const findMenuIndex = (menus: Menu[], path: string): number => {
+  return menus.findIndex(m => {
+    if (m.to && path.startsWith(m.to)) return true
+    if (m.subMenu) return findMenuIndex(m.subMenu, path) !== -1
+    return false
+  })
+}
 watchEffect(() => {
   if (isTablet.value) {
     openIndexs.value = []
   } else {
-    const index = menu.value.findIndex(m =>
-      m.subMenu?.some(sub => sub.to === route.path)
-    )
+    const index = findMenuIndex(menu.value, route.path)
     openIndexs.value = [index]
   }
 

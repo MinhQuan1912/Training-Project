@@ -1,30 +1,18 @@
 <template>
   <div class="flex items-center justify-between h-12">
-    <h6
-      class="xs:px-5 flex items-center xs:text-xl leading-[145%] font-semibold text-primary"
-    >
+    <h6 class="xs:px-5 flex items-center xs:text-xl leading-[145%] font-semibold text-primary">
       Product activity
     </h6>
-    <select-dropdown
-      v-model:selected-option="selectedOption"
-      :data="options"
-      addition-class="w-40 h-12 !pr-0 xs:!pr-3"
-      text-class="text-secondary"
-    />
+    <select-dropdown v-model:selected-option="selectedOption" :data="options" addition-class="w-40 h-12 !pr-0 xs:!pr-3"
+      text-class="text-secondary" />
   </div>
-  <data-table
-    :items="filterActivities"
-    :columns="columns"
-    :class-table-tr="{
-      padding: 'xs:px-5 pt-4',
-      header: 'flex gap-6 justify-between items-center',
-      body: 'flex gap-6 border-t border-stroke-subtle w-full h-17',
-      thInput: 'hidden',
-      tdInput: 'hidden',
-    }"
-    t-body-class="block overflow-y-auto max-h-34"
-    t-head-class="block"
-  >
+  <data-table :items="filterActivities" :columns="columns" :class-table-tr="{
+    padding: 'xs:px-5 pt-4',
+    header: 'flex justify-between items-center',
+    body: 'flex border-t border-stroke-subtle w-full h-17',
+    thInput: 'hidden',
+    tdInput: 'hidden',
+  }" t-body-class="block overflow-y-auto max-h-34 scrollbar-track-transparent" t-head-class="block">
     <!-- Week -->
     <template #column-week="{ item }">
       <div class="text-primary text-sm leading-[150%]">
@@ -111,15 +99,15 @@ const columns = [
   {
     label: "Likes",
     slot: "likes",
-    headerClass: "flex-1 min-w-37.5 px-4 py-5 text-left text-xs leading-[160%] text-tertiary",
-    cellClass: "min-w-37.5 p-4 flex-1 flex items-center",
+    headerClass: "flex-1 min-w-37.5 px-4 pr-3 py-5 text-left text-xs leading-[160%] text-tertiary",
+    cellClass: "min-w-37.5 p-4 pr-3 flex-1 flex items-center",
   },
   {
     label: "Comments",
     slot: "comments",
     headerClass:
-      "flex-1 py-5 text-left text-xs leading-[160%] text-tertiary hidden 2xl:table-cell",
-    cellClass: "p-4 flex-1 hidden 2xl:table-cell items-center",
+      "flex-1 px-4 pr-3 py-5 text-left text-xs leading-[160%] text-tertiary hidden 2xl:table-cell",
+    cellClass: "p-4 pr-3 flex-1 hidden 2xl:table-cell items-center",
   },
 ];
 const productActivityList = ref<activityRow[]>([
@@ -183,9 +171,7 @@ watchEffect(() => {
     if (index === 0) return;
     const prev = arr[index - 1];
     const calcGrowthRate = (currVal: number, prevVal: number) => {
-      return prevVal === 0
-        ? 0
-        : Math.round(((currVal - prevVal) / prevVal) * 100);
+      return prevVal === 0 ? 0 : Math.round(((currVal - prevVal) / prevVal) * 100)
     };
     if (prev) {
       item.product.growthRate = calcGrowthRate(

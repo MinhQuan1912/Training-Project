@@ -12,7 +12,7 @@
           ${{ price }}
         </div>
       </div>
-      <div class="flex items-center justify-between gap-2 mb-2 group-hover:opacity-0 py-1">
+      <div class="flex items-center justify-between gap-2 mb-2 md:group-hover:opacity-0 py-1">
         <div class="flex items-center gap-2">
           <icons-clock class=" text-secondary" />
           <span class="text-secondary text-xs leading-[1.6] tracking-[0.048px]">{{

@@ -3,87 +3,53 @@
     <!-- Overview -->
     <div class="product-overview">
       <div class="w-full flex justify-between h-12">
-        <div
-          class="xs:px-5 flex items-center text-primary text-base xs:text-xl leading-[145%] font-semibold"
-        >
+        <div class="xs:px-5 flex items-center text-primary text-base xs:text-xl leading-[145%] font-semibold">
           <p>Overview</p>
         </div>
         <div class="hidden sm:flex gap-1">
-          <div
-            v-for="(tab, tabIdx) in overviewTab"
-            :key="tabIdx"
+          <div v-for="(tab, tabIdx) in overviewTab" :key="tabIdx"
             class="cursor-pointer px-6 py-4.25 border-[1.5px] rounded-[48px] font-semibold text-sm leading-[100%] transition-all duration-300 ease"
             :class="{
               'text-primary border-stroke': activeOverviewTab === tab,
               'text-secondary border-transparent': activeOverviewTab !== tab,
-            }"
-            @click="activeOverviewTab = tab"
-          >
+            }" @click="activeOverviewTab = tab">
             {{ tab }}
           </div>
         </div>
         <div class="flex sm:hidden items-center">
-          <select-dropdown
-            :data="overviewTab"
-            v-model:selected-option="activeOverviewTab"
-            addition-class="h-12"
-          />
+          <select-dropdown :data="overviewTab" v-model:selected-option="activeOverviewTab" addition-class="h-12" />
         </div>
       </div>
       <div
-        class="xs:p-3 lg:p-5 text-primary gap-4 lg:gap-8 4xl:gap-16 flex flex-col m:grid grid-cols-3 3xl:grid-cols-4"
-      >
-        <div
-          v-for="(item, idx) in overViewList"
-          :key="idx"
-          class="overview-item"
-          :class="{ '!hidden 3xl:!flex': item.label === 'Sales' }"
-        >
-          <div
-            class="w-10 h-10 sm:w-16 sm:h-16 bg-background-surface1 flex justify-center items-center rounded-full"
-          >
+        class="xs:p-3 lg:p-5 text-primary gap-4 lg:gap-8 4xl:gap-16 flex flex-col m:grid grid-cols-3 3xl:grid-cols-4">
+        <div v-for="(item, idx) in overViewList" :key="idx" class="overview-item"
+          :class="{ '!hidden 3xl:!flex': item.label === 'Sales' }">
+          <div class="w-10 h-10 sm:w-16 sm:h-16 bg-background-surface1 flex justify-center items-center rounded-full">
             <component :is="item.icon" />
           </div>
           <div class="flex gap-4 4xl:gap-10 items-center w-1/2 m:w-auto">
             <div class="flex flex-col">
               <div class="flex gap-2 items-center h-6 sm:mb-2">
                 <p class="font-semibold leading-[150%]">{{ item.label }}</p>
-                <tooltip :text="item.label"
-                  ><icons-helping class="w-4 h-4 sm:w-6 sm:h-6"
-                /></tooltip>
+                <tooltip :text="item.label"><icons-helping class="w-4 h-4 sm:w-6 sm:h-6" /></tooltip>
               </div>
-              <h2
-                class="flex text-4xl sm:text-[60px] font-medium leading-[125%] sm:mb-3"
-              >
-                <span
-                  class="text-tertiary text-[32px] font-semibold leading-[145%] mr-2.5 sm:pt-2"
-                  >$</span
-                >
+              <h2 class="flex text-4xl sm:text-[60px] font-medium leading-[125%] sm:mb-3">
+                <span class="text-tertiary text-[32px] font-semibold leading-[145%] mr-2.5 sm:pt-2">$</span>
                 {{ isMobile ? item.revenue : formatNum(item.revenue) }}
               </h2>
               <div class="flex gap-2 items-center">
                 <badge-trend :growth-rate="item.chart.growthRate" />
-                <span class="text-tertiary text-sm leading-[150%]"
-                  >vs last year</span
-                >
+                <span class="text-tertiary text-sm leading-[150%]">vs last year</span>
               </div>
             </div>
             <div class="w-16 h-14 xl:w-23.5 xl:h-20 hidden m:block">
-              <products-overview-line-chart
-                :date="item.chart.data.date"
-                :value="item.chart.data.value"
-                :growth="item.chart.growthRate"
-              />
+              <products-overview-line-chart :date="item.chart.data.date" :value="item.chart.data.value"
+                :growth="item.chart.growthRate" />
             </div>
           </div>
-          <div
-            class="flex m:hidden justify-center items-center ml-3 xs:ml-0 w-15 h-15 xs:w-35 xs:h-25 sm:w-50"
-          >
-            <products-overview-line-chart
-              :date="item.chart.data.date"
-              :value="item.chart.data.value"
-              :growth="item.chart.growthRate"
-            />
+          <div class="flex m:hidden justify-center items-center ml-3 xs:ml-0 w-15 h-15 xs:w-35 xs:h-25 sm:w-50">
+            <products-overview-line-chart :date="item.chart.data.date" :value="item.chart.data.value"
+              :growth="item.chart.growthRate" />
           </div>
         </div>
       </div>
@@ -94,12 +60,8 @@
         <products-overview-product-activity />
       </div>
       <!-- Product Views -->
-      <div
-        class="product-overview xs:!pb-6 !gap-3 w-full m:w-78 3xl:w-135 m:h-76"
-      >
-        <h6
-          class="h-9.5 xs:h-12 xs:px-3 xs:py-2.5 text-base xs:text-xl leading-[145%] text-primary font-semibold"
-        >
+      <div class="product-overview xs:!pb-6 !gap-3 w-full m:w-78 3xl:w-135 m:h-76">
+        <h6 class="h-9.5 xs:h-12 xs:px-3 xs:py-2.5 text-base xs:text-xl leading-[145%] text-primary font-semibold">
           Product Views
         </h6>
         <div class="h-full">

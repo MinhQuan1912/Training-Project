@@ -60,7 +60,7 @@ import { useSideBar } from '~/composable/useSideBar';
 const { showSideBar } = useSideBar()
 const { showCreateProduct } = useCreateProduct()
 type Menu = {
-    label: string;
+    label?: string;
     icon?: Component;
     to?: string;
     title?: string;
